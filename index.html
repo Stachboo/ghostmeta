@@ -1,17 +1,46 @@
 <!DOCTYPE html>
-<html lang="fr" class="dark">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>GhostMeta | Supprimez la localisation de vos photos</title>
-    <meta name="description" content="Protégez votre vie privée sur Vinted et LeBonCoin." />
-    <meta name="theme-color" content="#09090b" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>GhostMeta | Supprimez les métadonnées de vos photos (Vinted, eBay, Leboncoin)</title>
+    <meta name="description" content="Protégez votre vie privée. Supprimez gratuitement les coordonnées GPS, dates et infos techniques de vos photos avant de les publier. 100% local, aucune photo n'est envoyée sur serveur." />
+    <meta name="keywords" content="métadonnées, EXIF, GPS photo, Vinted, Leboncoin, vie privée, GhostMeta, nettoyer photo, anonymat" />
+    <meta name="author" content="GhostMeta" />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="GhostMeta - Nettoyez vos photos avant de publier" />
+    <meta property="og:description" content="Suppression de métadonnées EXIF/GPS en un clic. 100% anonyme et local." />
+    <meta property="og:url" content="https://ghostmeta.vercel.app" />
+    <meta property="og:site_name" content="GhostMeta" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GhostMeta | Protection Vie Privée Photo" />
+    <meta name="twitter:description" content="Ne laissez plus vos photos trahir votre adresse. Nettoyage GPS local." />
+
+    <meta name="application-name" content="GhostMeta" />
+    <meta name="description-ai" content="An open-source, local-first tool to strip EXIF and GPS metadata from images (JPEG, PNG, WebP, HEIC) to ensure user privacy on marketplaces." />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "GhostMeta",
+      "operatingSystem": "All",
+      "applicationCategory": "SecurityApplication",
+      "description": "Local metadata and GPS stripper for marketplace photos (Vinted, eBay, Leboncoin).",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "EUR"
+      }
+    }
+    </script>
   </head>
-  <body class="bg-background text-foreground antialiased">
+  <body class="bg-[#0a0a0c]">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

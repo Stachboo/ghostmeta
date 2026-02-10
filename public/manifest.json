@@ -1,18 +1,15 @@
 {
-  "name": "GhostMeta",
   "short_name": "GhostMeta",
-  "description": "Supprimez la localisation de vos photos Vinted.",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#09090b",
-  "theme_color": "#09090b",
-  "orientation": "portrait",
+  "name": "GhostMeta - Privacy Tool",
   "icons": [
     {
-      "src": "/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
     }
-  ]
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0a0a0c",
+  "background_color": "#0a0a0c"
 }
