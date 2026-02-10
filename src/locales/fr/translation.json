@@ -1,27 +1,42 @@
 {
   "hero": {
-    "title": "Nettoyez vos photos avant la vente.",
-    "subtitle": "Protection totale. Zéro donnée partagée. Optimisé pour Vinted, Leboncoin, eBay.",
-    "cta": "Commencer maintenant 🚀",
+    "title_start": "Supprimez les",
+    "title_color": "métadonnées",
+    "title_end": "de vos photos",
+    "subtitle": "Protégez votre vie privée avant de publier sur Vinted, Leboncoin ou eBay.",
+    "cta": "Commencer maintenant",
     "secure_badge": "100% Local & Sécurisé"
   },
   "marketing": {
     "vinted_title": "Vos photos Vinted révèlent votre adresse.",
-    "vinted_text_1": "Chaque photo prise avec votre smartphone embarque vos coordonnées GPS exactes.",
-    "vinted_text_2": "GhostMeta supprime toutes les métadonnées en un clic. Rien n'est envoyé sur internet.",
+    "vinted_text_1": "Chaque photo prise avec votre iPhone ou Android embarque vos coordonnées GPS exactes, la date et l'heure, et le modèle de votre téléphone.",
+    "vinted_text_2": "Quand un acheteur vous demande plus de photos par WhatsApp, il reçoit tout.",
+    "vinted_text_3": "Nettoyez vos photos avant de les poster. GhostMeta supprime toutes les métadonnées en un clic. Rien n'est envoyé sur internet.",
     "batch_lock_title": "Mode Batch verrouillé",
-    "batch_lock_desc": "Le Pack Pro débloque le traitement par lots et l'export ZIP."
+    "batch_lock_desc": "En mode gratuit, nettoyez vos photos une par une (illimité). Le Pack Pro débloque le traitement par lots et l'export ZIP."
   },
   "upload": {
     "drop_title": "Glissez vos photos ici",
     "drop_subtitle": "JPG, PNG, HEIC • Traitement 100% local",
     "browse": "ou cliquez pour parcourir",
-    "processing": "Analyse...",
+    "processing": "Analyse en cours...",
     "cleaning": "Nettoyage...",
     "success": "Terminé !",
     "error_type": "Format non supporté",
-    "download_all": "Tout télécharger",
+    "download_all": "Tout télécharger (ZIP)",
     "delete_all": "Tout supprimer"
+  },
+  "pro": {
+    "badge": "MODE PRO",
+    "active": "PRO ACTIF",
+    "price": "Pack Pro — 9€",
+    "unlock": "Débloquer — 9€",
+    "title": "Passez à la vitesse supérieure",
+    "desc": "Débloquez le traitement par lots illimité.",
+    "benefit_1": "Upload illimité (vs 3 photos)",
+    "benefit_2": "Priorité de traitement",
+    "benefit_3": "Support dédié",
+    "btn_action": "Débloquer le Mode Pro"
   },
   "info": {
     "why_title": "Pourquoi vos photos vous",
@@ -54,18 +69,6 @@
     "q6": "Les plateformes ne nettoient-elles pas déjà les métadonnées ?",
     "a6": "Pas toujours, et souvent après avoir stocké l'original sur leurs serveurs."
   },
-  "pro": {
-    "badge": "MODE PRO",
-    "active": "PRO ACTIF",
-    "price": "Pack Pro — 9€",
-    "title": "Passez à la vitesse supérieure",
-    "desc": "Débloquez le traitement par lots illimité.",
-    "benefit_1": "Upload illimité",
-    "benefit_2": "Priorité de traitement",
-    "benefit_3": "Support dédié",
-    "btn_action": "Débloquer le Mode Pro",
-    "unlock": "Débloquer — 9€"
-  },
   "footer": {
     "rights": "Tous droits réservés",
     "privacy_btn": "Politique de confidentialité",
@@ -73,18 +76,18 @@
   },
   "legal": {
     "privacy_title": "Politique de Confidentialité",
-    "updated": "MàJ : Février 2026",
+    "updated": "Dernière mise à jour : Février 2026",
     "notice_title": "Mentions Légales",
     "privacy_sections": {
-      "1": { "title": "1. Local-Only", "content": "Traitement 100% local." },
-      "2": { "title": "2. Données", "content": "Aucune collecte de données." },
-      "3": { "title": "3. Stockage", "content": "LocalStorage uniquement." },
+      "1": { "title": "1. Architecture Local-Only", "content": "Traitement 100% local via WebAssembly. Aucune donnée ne quitte votre appareil." },
+      "2": { "title": "2. Données", "content": "Aucune collecte de données personnelles." },
+      "3": { "title": "3. Stockage", "content": "LocalStorage uniquement. Pas de cookies traceurs." },
       "4": { "title": "4. Contact", "content": "contact@ghostmeta.fr" }
     },
     "notice_sections": {
-      "1": { "title": "1. Éditeur", "content": "Édité à titre personnel." },
-      "2": { "title": "2. Hébergement", "content": "Vercel Inc., USA." },
-      "3": { "title": "3. Responsabilité", "content": "Utilisateur seul responsable." }
+      "1": { "title": "1. Éditeur", "content": "Édité à titre personnel. Anonymat préservé selon LCEN Art 6-III-2." },
+      "2": { "title": "2. Hébergement", "content": "Vercel Inc., 340 S Lemon Ave #4133 Walnut, CA 91789, USA." },
+      "3": { "title": "3. Responsabilité", "content": "L'utilisateur est seul responsable des fichiers traités." }
     }
   }
 }

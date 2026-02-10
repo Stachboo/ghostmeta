@@ -93,7 +93,6 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* BOUTON LANGUE */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
@@ -128,7 +127,7 @@ export default function Home() {
             )}
             <div className="hidden md:flex items-center gap-1.5 text-xs text-muted-foreground">
               <Lock className="w-3 h-3" />
-              <span>{t('hero.local_badge')}</span>
+              <span>{t('hero.secure_badge')}</span>
             </div>
           </div>
         </div>
@@ -149,7 +148,6 @@ export default function Home() {
               transition={{ duration: 0.4 }}
               className="text-center mb-8"
             >
-              {/* RESTAURATION DU TITRE VERT NÉON */}
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-3">
                 {t('hero.title_start')} <span className="text-[#00ff41]">{t('hero.title_color')}</span>
                 <br className="hidden sm:block" /> {t('hero.title_end')}
@@ -357,8 +355,11 @@ export default function Home() {
                 <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-3">
                   {t('marketing.vinted_text_1')}
                 </p>
-                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-3">
                   {t('marketing.vinted_text_2')}
+                </p>
+                 <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                  {t('marketing.vinted_text_3')}
                 </p>
               </div>
             </div>

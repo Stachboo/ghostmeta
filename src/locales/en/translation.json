@@ -4,12 +4,14 @@
     "title_color": "metadata",
     "title_end": "from your photos",
     "subtitle": "Protect your privacy before posting on Vinted, eBay, or Depop.",
-    "local_badge": "100% Local Processing"
+    "cta": "Start Now",
+    "secure_badge": "100% Local & Secure"
   },
   "marketing": {
     "vinted_title": "Your listing photos reveal your home address.",
-    "vinted_text_1": "Every photo taken with your smartphone embeds your exact GPS coordinates, date, time, and phone model.",
-    "vinted_text_2": "GhostMeta removes all metadata in one click. Nothing is sent to the internet.",
+    "vinted_text_1": "Every photo taken with your iPhone or Android embeds your exact GPS coordinates, date, time, and phone model.",
+    "vinted_text_2": "When a buyer asks for more photos via WhatsApp, they get everything.",
+    "vinted_text_3": "Clean your photos before posting. GhostMeta removes all metadata in one click. Nothing is sent to the internet.",
     "batch_lock_title": "Batch Mode Locked",
     "batch_lock_desc": "In free mode, clean photos one by one (unlimited). The Pro Pack unlocks batch processing and ZIP export."
   },
