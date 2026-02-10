@@ -89,7 +89,23 @@
   },
   "footer": {
     "rights": "All rights reserved",
-    "privacy": "Privacy Policy",
-    "legal": "Legal Notice"
+    "privacy_btn": "Privacy Policy",
+    "legal_btn": "Legal Notice"
+  },
+  "legal": {
+    "privacy_title": "Privacy Policy",
+    "updated": "Last updated: February 2026",
+    "notice_title": "Legal Notice",
+    "privacy_sections": {
+      "1": { "title": "1. Local-Only", "content": "100% local processing." },
+      "2": { "title": "2. Data", "content": "No data collection." },
+      "3": { "title": "3. Storage", "content": "LocalStorage only." },
+      "4": { "title": "4. Contact", "content": "contact@ghostmeta.fr" }
+    },
+    "notice_sections": {
+      "1": { "title": "1. Editor", "content": "Published independently." },
+      "2": { "title": "2. Hosting", "content": "Vercel Inc., USA." },
+      "3": { "title": "3. Liability", "content": "User is solely responsible." }
+    }
   }
 }
