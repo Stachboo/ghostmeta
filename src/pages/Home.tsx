@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
-import { useTranslation } from 'react-i18next'; // <--- Import Traduction
+import { useTranslation } from 'react-i18next';
 import {
   ShieldCheck,
   Zap,
@@ -25,7 +25,7 @@ import { useImageProcessor } from '@/hooks/useImageProcessor';
 const HERO_BG_URL = 'https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se-img-1_1770726687000_na1fn_Z2hvc3RtZXRhLWhlcm8tYmc.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80';
 
 export default function Home() {
-  const { t } = useTranslation(); // <--- Hook Traduction
+  const { t } = useTranslation();
   const {
     images,
     isProcessing,
@@ -87,7 +87,7 @@ export default function Home() {
             {proActive ? (
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono bg-[#00ff41]/10 text-[#00ff41] border border-[#00ff41]/20">
                 <Zap className="w-3 h-3" />
-                {t('pro.badge')}
+                {t('pro.active')}
               </span>
             ) : (
               <Button
@@ -218,7 +218,7 @@ export default function Home() {
                 disabled={isProcessing}
               >
                 <Trash2 className="w-4 h-4 mr-1.5" />
-                <span className="text-xs">Delete All</span>
+                <span className="text-xs">{t('upload.delete_all')}</span>
               </Button>
             </motion.div>
 
@@ -256,8 +256,86 @@ export default function Home() {
                 ))}
               </AnimatePresence>
             </div>
+
+            {/* Free user batch notice - PRESERVED & TRANSLATED */}
+            {!proActive && images.length > 1 && stats.cleaned === 0 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="mt-6 p-5 rounded-lg border border-[#ffb000]/20 bg-[#ffb000]/5"
+              >
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="flex items-start gap-3">
+                    <Zap className="w-5 h-5 text-[#ffb000] mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-sm font-semibold text-[#ffb000]">{t('marketing.batch_lock_title')}</p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {t('marketing.batch_lock_desc')}
+                      </p>
+                    </div>
+                  </div>
+                  <Button
+                    onClick={() => setShowProModal(true)}
+                    size="sm"
+                    className="bg-[#ffb000] hover:bg-[#e6a000] text-black font-bold h-9 flex-shrink-0"
+                  >
+                    <Zap className="w-3.5 h-3.5 mr-1.5" />
+                    {t('pro.unlock')}
+                  </Button>
+                </div>
+              </motion.div>
+            )}
           </section>
         )}
+
+        {/* Scroll indicator */}
+        {images.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="flex justify-center py-4"
+          >
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-muted-foreground/40"
+            >
+              <ChevronDown className="w-6 h-6" />
+            </motion.div>
+          </motion.div>
+        )}
+
+        {/* Argumentaire Vinted - PRESERVED & TRANSLATED */}
+        <section className="container py-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto p-6 sm:p-8 rounded-xl border border-[#ffb000]/20 bg-[#ffb000]/5 relative overflow-hidden"
+          >
+            <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-[#ffb000]/30" />
+            <div className="absolute top-3 right-3 w-5 h-5 border-t-2 border-r-2 border-[#ffb000]/30" />
+            <div className="absolute bottom-3 left-3 w-5 h-5 border-b-2 border-l-2 border-[#ffb000]/30" />
+            <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-[#ffb000]/30" />
+
+            <div className="flex items-start gap-4">
+              <AlertTriangle className="w-8 h-8 text-[#ffb000] flex-shrink-0 mt-1" />
+              <div>
+                <h2 className="text-xl sm:text-2xl font-bold text-[#ffb000] mb-3">
+                  {t('marketing.vinted_title')}
+                </h2>
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-3">
+                  {t('marketing.vinted_text_1')}
+                </p>
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                  {t('marketing.vinted_text_2')}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </section>
 
         {/* Info sections */}
         <div className="container py-12">

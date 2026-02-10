@@ -5,6 +5,13 @@
     "cta": "Start Now",
     "secure_badge": "100% Local & Secure"
   },
+  "marketing": {
+    "vinted_title": "Your listing photos reveal your home address.",
+    "vinted_text_1": "Every photo taken with your iPhone or Android embeds your exact GPS coordinates, date, time, and phone model.",
+    "vinted_text_2": "Clean your photos before posting. GhostMeta removes all metadata in one click. Nothing is sent to the internet.",
+    "batch_lock_title": "Batch Mode Locked",
+    "batch_lock_desc": "In free mode, clean photos one by one (unlimited). The Pro Pack unlocks batch processing and ZIP export."
+  },
   "upload": {
     "drop_title": "Drop your photos here",
     "drop_subtitle": "JPG, PNG, HEIC • 100% Local Processing",
@@ -13,23 +20,20 @@
     "cleaning": "Cleaning...",
     "success": "Done!",
     "error_type": "Format not supported",
-    "download_all": "Download All"
-  },
-  "features": {
-    "privacy": "GPS & Exif Removal",
-    "crop": "Smart Auto-Crop",
-    "speed": "Lightning Fast Processing"
+    "download_all": "Download All",
+    "delete_all": "Delete All"
   },
   "pro": {
     "badge": "PRO MODE",
+    "active": "PRO ACTIVE",
+    "price": "Pro Pack — 9€",
     "title": "Upgrade to Pro Speed",
     "desc": "Unlock unlimited batch processing.",
     "benefit_1": "Unlimited Uploads (vs 3 photos)",
     "benefit_2": "Priority Processing",
     "benefit_3": "Dedicated Support",
-    "price": "9.99€ / lifetime",
     "btn_action": "Unlock Pro Mode",
-    "restore": "Restore Purchases"
+    "unlock": "Unlock — 9€"
   },
   "footer": {
     "rights": "All rights reserved",

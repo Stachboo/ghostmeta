@@ -5,6 +5,13 @@
     "cta": "Commencer maintenant",
     "secure_badge": "100% Local & Sécurisé"
   },
+  "marketing": {
+    "vinted_title": "Vos photos Vinted révèlent votre adresse.",
+    "vinted_text_1": "Chaque photo prise avec votre iPhone ou Android embarque vos coordonnées GPS exactes, la date et l'heure, et le modèle de votre téléphone.",
+    "vinted_text_2": "Nettoyez vos photos avant de les poster. GhostMeta supprime toutes les métadonnées en un clic. Rien n'est envoyé sur internet.",
+    "batch_lock_title": "Mode Batch verrouillé",
+    "batch_lock_desc": "En mode gratuit, nettoyez vos photos une par une (illimité). Le Pack Pro débloque le traitement par lots et l'export ZIP."
+  },
   "upload": {
     "drop_title": "Glissez vos photos ici",
     "drop_subtitle": "JPG, PNG, HEIC • Traitement 100% local",
@@ -13,23 +20,20 @@
     "cleaning": "Nettoyage...",
     "success": "Terminé !",
     "error_type": "Format non supporté",
-    "download_all": "Tout télécharger"
-  },
-  "features": {
-    "privacy": "Anonymisation GPS & Exif",
-    "crop": "Recadrage Intelligent",
-    "speed": "Traitement Ultra-Rapide"
+    "download_all": "Tout télécharger",
+    "delete_all": "Tout supprimer"
   },
   "pro": {
     "badge": "MODE PRO",
+    "active": "PRO ACTIF",
+    "price": "Pack Pro — 9€",
     "title": "Passez à la vitesse supérieure",
     "desc": "Débloquez le traitement par lots illimité.",
     "benefit_1": "Upload illimité (vs 3 photos)",
     "benefit_2": "Priorité de traitement",
     "benefit_3": "Support dédié",
-    "price": "9.99€ / à vie",
     "btn_action": "Débloquer le Mode Pro",
-    "restore": "Restaurer les achats"
+    "unlock": "Débloquer — 9€"
   },
   "footer": {
     "rights": "Tous droits réservés",
