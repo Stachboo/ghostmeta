@@ -3,10 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Analytics } from '@vercel/analytics/react';
 
-// Chargement différé des composants pour booster la performance mobile
+// Imports dynamiques basés uniquement sur tes fichiers réels
 const Home = lazy(() => import('./pages/Home'));
-const About = lazy(() => import('./pages/About'));
-const Privacy = lazy(() => import('./pages/Privacy'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 const queryClient = new QueryClient();
 
@@ -14,12 +13,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        {/* Suspense affiche un écran vide ou un loader pendant le chargement flash */}
         <Suspense fallback={<div className="bg-[#0a0a0c] min-h-screen" />}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/privacy" element={<Privacy />} />
+            {/* Capture toutes les autres routes pour afficher NotFound */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
