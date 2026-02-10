@@ -1,41 +1,25 @@
-/**
- * GhostMeta Logo SVG Component
- * GHOST PROTOCOL — #00ff41 (vert néon)
- * Style : fantôme géométrique angulaire (stealth aircraft)
- */
+import { motion } from 'framer-motion';
+
+const LOGO_URL = "https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se_1770726694646_na1fn_Z2hvc3RtZXRhLWxvZ28.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvOGh1WW4yZHlXcHg5a3pIUGJNemlwai9zYW5kYm94L1NlN2wyYXhQUVBhWkZVenV1dm85U2VfMTc3MDcyNjY5NDY0Nl9uYTFmbl9aMmh2YzNSdFpYUmhMV3h2WjI4LnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=g3GN0ry94-z5uFdw0X5eAqB6VBY0XTMD-SNTqxSbFGtLlngbWezdkm5hXFs3ih1GQY3v-G8TdhyDkptk4wvdXkAkTBCnJQzdL5IEGD2NviJfh0R25bGWN7Ek0ETAjrFSk5dyARaqaaMC~6QvPO8piNhDuRUvTf3HyF-1rRL2SZxs7Z6mUPnGRzOSVehBmsylgRIFtzWpsXJV91c2kJvEo4uPQ~glPIiunVZR4muq14gIG3kKQHy4LqxI682AOdG-ryR3XOTmTVudVsNU4vrxN~e53I84Pum-R4k2fy1YXQ5NoCdRCdWnwz3JtxFOO2mwdZGxHeG3SR14ApiTTk1kGw__";
 
 interface GhostLogoProps {
   size?: number;
-  className?: string;
   glow?: boolean;
 }
 
-export default function GhostLogo({ size = 40, className = '', glow = false }: GhostLogoProps) {
+export default function GhostLogo({ size = 32, glow = false }: GhostLogoProps) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 64 64"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      style={glow ? { filter: 'drop-shadow(0 0 8px rgba(0, 255, 65, 0.5))' } : undefined}
-    >
-      {/* Ghost body - angular stealth shape */}
-      <path
-        d="M32 4L12 20V48L18 56L24 48L32 56L40 48L46 56L52 48V20L32 4Z"
-        stroke="#00ff41"
-        strokeWidth="2.5"
-        fill="rgba(0, 255, 65, 0.08)"
-        strokeLinejoin="bevel"
+    <div className="relative flex items-center justify-center">
+      {glow && (
+        <div className="absolute inset-0 bg-[#00ff41] blur-xl opacity-20 rounded-full" />
+      )}
+      <motion.img 
+        src={LOGO_URL} 
+        alt="GhostMeta Logo" 
+        style={{ width: size, height: size }}
+        className="relative z-10"
+        whileHover={{ scale: 1.05 }}
       />
-      {/* Left eye */}
-      <rect x="22" y="26" width="7" height="5" rx="1" fill="#00ff41" />
-      {/* Right eye */}
-      <rect x="35" y="26" width="7" height="5" rx="1" fill="#00ff41" />
-      {/* Inner detail lines */}
-      <line x1="20" y1="38" x2="44" y2="38" stroke="#00ff41" strokeWidth="0.8" opacity="0.4" />
-      <line x1="22" y1="42" x2="42" y2="42" stroke="#00ff41" strokeWidth="0.8" opacity="0.3" />
-    </svg>
+    </div>
   );
 }
