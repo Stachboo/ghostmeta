@@ -1,16 +1,17 @@
 {
   "hero": {
-    "title": "Clean your photos before selling.",
-    "subtitle": "Total protection. Zero data shared. Optimized for Vinted, eBay, Depop.",
-    "cta": "Start Now",
-    "secure_badge": "100% Local & Secure"
+    "title_start": "Remove",
+    "title_color": "metadata",
+    "title_end": "from your photos",
+    "subtitle": "Protect your privacy before posting on Vinted, eBay, or Depop.",
+    "local_badge": "100% Local Processing"
   },
   "marketing": {
     "vinted_title": "Your listing photos reveal your home address.",
-    "vinted_text_1": "Every photo taken with your smartphone embeds your exact GPS coordinates.",
+    "vinted_text_1": "Every photo taken with your smartphone embeds your exact GPS coordinates, date, time, and phone model.",
     "vinted_text_2": "GhostMeta removes all metadata in one click. Nothing is sent to the internet.",
     "batch_lock_title": "Batch Mode Locked",
-    "batch_lock_desc": "The Pro Pack unlocks batch processing and ZIP export."
+    "batch_lock_desc": "In free mode, clean photos one by one (unlimited). The Pro Pack unlocks batch processing and ZIP export."
   },
   "upload": {
     "drop_title": "Drop your photos here",
@@ -20,8 +21,20 @@
     "cleaning": "Cleaning...",
     "success": "Done!",
     "error_type": "Format not supported",
-    "download_all": "Download All",
+    "download_all": "Download All (ZIP)",
     "delete_all": "Delete All"
+  },
+  "pro": {
+    "badge": "PRO MODE",
+    "active": "PRO ACTIVE",
+    "price": "Pro Pack — 9€",
+    "unlock": "Unlock — 9€",
+    "title": "Upgrade to Pro Speed",
+    "desc": "Unlock unlimited batch processing.",
+    "benefit_1": "Unlimited Uploads",
+    "benefit_2": "Priority Processing",
+    "benefit_3": "Dedicated Support",
+    "btn_action": "Unlock Pro Mode"
   },
   "info": {
     "why_title": "Why your photos",
@@ -53,18 +66,6 @@
     "a5": "To support development while keeping the tool ad-free.",
     "q6": "Don't platforms clean metadata already?",
     "a6": "Not always, and often only after storing the original on their servers."
-  },
-  "pro": {
-    "badge": "PRO MODE",
-    "active": "PRO ACTIVE",
-    "price": "Pro Pack — 9€",
-    "title": "Upgrade to Pro Speed",
-    "desc": "Unlock unlimited batch processing.",
-    "benefit_1": "Unlimited Uploads",
-    "benefit_2": "Priority Processing",
-    "benefit_3": "Dedicated Support",
-    "btn_action": "Unlock Pro Mode",
-    "unlock": "Unlock — 9€"
   },
   "footer": {
     "rights": "All rights reserved",

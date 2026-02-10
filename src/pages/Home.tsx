@@ -29,10 +29,9 @@ const HERO_BG_URL = 'https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dy
 export default function Home() {
   const { t, i18n } = useTranslation();
   
-  // Fonction de changement de langue manuelle
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
-    localStorage.setItem('i18nextLng', lng); // Sauvegarde la préférence
+    localStorage.setItem('i18nextLng', lng);
   };
 
   const {
@@ -94,7 +93,7 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* BOUTON LANGUE ICI */}
+            {/* BOUTON LANGUE */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
@@ -129,7 +128,7 @@ export default function Home() {
             )}
             <div className="hidden md:flex items-center gap-1.5 text-xs text-muted-foreground">
               <Lock className="w-3 h-3" />
-              <span>{t('hero.secure_badge')}</span>
+              <span>{t('hero.local_badge')}</span>
             </div>
           </div>
         </div>
@@ -150,8 +149,10 @@ export default function Home() {
               transition={{ duration: 0.4 }}
               className="text-center mb-8"
             >
+              {/* RESTAURATION DU TITRE VERT NÉON */}
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-3">
-                {t('hero.title')}
+                {t('hero.title_start')} <span className="text-[#00ff41]">{t('hero.title_color')}</span>
+                <br className="hidden sm:block" /> {t('hero.title_end')}
               </h1>
               <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto">
                 {t('hero.subtitle')}
