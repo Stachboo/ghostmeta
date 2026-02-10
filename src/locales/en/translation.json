@@ -1,0 +1,44 @@
+{
+  "footer": {
+    "rights": "All rights reserved",
+    "privacy_btn": "Privacy Policy",
+    "legal_btn": "Legal Notice"
+  },
+  "legal": {
+    "privacy_title": "Privacy Policy",
+    "updated": "Last updated: February 2026",
+    "privacy_sections": {
+      "1": {
+        "title": "1. Local-Only Architecture (Privacy by Design)",
+        "content": "GhostMeta uses an exclusively local processing architecture via WebAssembly. No images, metadata, or personal data are ever transmitted to our servers. Everything happens within your browser."
+      },
+      "2": {
+        "title": "2. Data Collection (Minimization)",
+        "content": "We do not collect any personal data related to your images. Only anonymous visit statistics are recorded."
+      },
+      "3": {
+        "title": "3. Local Storage & Cookies",
+        "content": "We do not use tracking cookies. LocalStorage is strictly used to remember your Pro status and preferences."
+      },
+      "4": {
+        "title": "4. Contact",
+        "content": "For any questions: contact@ghostmeta.fr"
+      }
+    },
+    "notice_title": "Legal Notice",
+    "notice_sections": {
+      "1": {
+        "title": "1. Editor",
+        "content": "The GhostMeta service is published by an individual. In accordance with digital economy laws, anonymity is preserved as hosting details are provided."
+      },
+      "2": {
+        "title": "2. Hosting",
+        "content": "Hosted by: Vercel Inc., 340 S Lemon Ave #4133 Walnut, CA 91789, USA."
+      },
+      "3": {
+        "title": "3. Liability",
+        "content": "The user is solely responsible for the files they process. The service is provided 'as is' without warranty."
+      }
+    }
+  }
+}
