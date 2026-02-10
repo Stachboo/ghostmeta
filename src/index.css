@@ -1,215 +1,46 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
-
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --font-sans: 'Space Grotesk', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  /* GhostMeta brand colors — GHOST PROTOCOL */
-  --color-neon: oklch(0.87 0.29 142.5);
-  --color-amber: oklch(0.82 0.189 84);
-  --color-ghost-red: oklch(0.637 0.237 25.331);
-  --color-ghost-cyan: oklch(0.715 0.143 215.221);
-  --color-ghost-surface: oklch(0.208 0.042 265.755);
-  --color-ghost-deep: oklch(0.145 0.028 264.182);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+@layer base {
+  :root {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+ 
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+ 
+    --popover: 224 71% 4%;
+    --popover-foreground: 213 31% 91%;
+ 
+    --primary: 142 71% 45%;    /* Neon Green */
+    --primary-foreground: 144 100% 97%;
+ 
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+ 
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+ 
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+ 
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 142 71% 45%;
+ 
+    --radius: 0.5rem;
+  }
 }
-
-:root {
-  --radius: 0.5rem;
-  --background: oklch(0.145 0.028 264.182);
-  --foreground: oklch(0.929 0.013 255.508);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.929 0.013 255.508);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.929 0.013 255.508);
-  --primary: oklch(0.87 0.29 142.5);
-  --primary-foreground: oklch(0.145 0.028 264.182);
-  --secondary: oklch(0.253 0.032 265.755);
-  --secondary-foreground: oklch(0.85 0.013 255.508);
-  --muted: oklch(0.253 0.032 265.755);
-  --muted-foreground: oklch(0.65 0.02 255.508);
-  --accent: oklch(0.253 0.032 265.755);
-  --accent-foreground: oklch(0.929 0.013 255.508);
-  --destructive: oklch(0.637 0.237 25.331);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.3 0.03 265.755);
-  --input: oklch(0.3 0.03 265.755);
-  --ring: oklch(0.87 0.29 142.5);
-  --chart-1: oklch(0.87 0.29 142.5);
-  --chart-2: oklch(0.82 0.189 84);
-  --chart-3: oklch(0.637 0.237 25.331);
-  --chart-4: oklch(0.715 0.143 215.221);
-  --chart-5: oklch(0.85 0.013 255.508);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.929 0.013 255.508);
-  --sidebar-primary: oklch(0.87 0.29 142.5);
-  --sidebar-primary-foreground: oklch(0.145 0.028 264.182);
-  --sidebar-accent: oklch(0.253 0.032 265.755);
-  --sidebar-accent-foreground: oklch(0.929 0.013 255.508);
-  --sidebar-border: oklch(0.3 0.03 265.755);
-  --sidebar-ring: oklch(0.87 0.29 142.5);
-}
-
+ 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-  }
-  button:not(:disabled),
-  [role="button"]:not([aria-disabled="true"]),
-  [type="button"]:not(:disabled),
-  [type="submit"]:not(:disabled),
-  [type="reset"]:not(:disabled),
-  a[href],
-  select:not(:disabled),
-  input[type="checkbox"]:not(:disabled),
-  input[type="radio"]:not(:disabled) {
-    @apply cursor-pointer;
-  }
-}
-
-@layer components {
-  .container {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .flex {
-    min-height: 0;
-    min-width: 0;
-  }
-
-  @media (min-width: 640px) {
-    .container {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .container {
-      padding-left: 2rem;
-      padding-right: 2rem;
-      max-width: 1280px;
-    }
-  }
-
-  /* GhostMeta custom utilities — GHOST PROTOCOL */
-  .ghost-glow {
-    box-shadow: 0 0 20px #00ff4126,
-                0 0 60px #00ff410d;
-  }
-
-  .ghost-glow-strong {
-    box-shadow: 0 0 30px #00ff414d,
-                0 0 80px #00ff411a;
-  }
-
-  .threat-glow {
-    box-shadow: 0 0 20px oklch(0.637 0.237 25.331 / 0.2),
-                0 0 60px oklch(0.637 0.237 25.331 / 0.05);
-  }
-
-  .amber-glow {
-    box-shadow: 0 0 20px #ffb00033,
-                0 0 60px #ffb0000d;
-  }
-
-  .tactical-card {
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-  }
-
-  .tactical-card-sm {
-    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-  }
-
-  .scanline {
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      #00ff4108 50%,
-      transparent 100%
-    );
-    background-size: 100% 4px;
-    pointer-events: none;
-  }
-
-  @keyframes scan {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
-  }
-
-  @keyframes pulse-green {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-
-  @keyframes pulse-red {
-    0%, 100% { box-shadow: 0 0 0 0 oklch(0.637 0.237 25.331 / 0.4); }
-    50% { box-shadow: 0 0 0 8px oklch(0.637 0.237 25.331 / 0); }
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-  }
-
-  .animate-scan {
-    animation: scan 2s linear infinite;
-  }
-
-  .animate-pulse-green {
-    animation: pulse-green 2s ease-in-out infinite;
-  }
-
-  .animate-pulse-red {
-    animation: pulse-red 1.5s ease-in-out infinite;
-  }
-
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
   }
 }
