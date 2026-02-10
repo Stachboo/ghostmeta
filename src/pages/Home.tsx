@@ -257,7 +257,7 @@ export default function Home() {
               </AnimatePresence>
             </div>
 
-            {/* Free user batch notice - PRESERVED & TRANSLATED */}
+            {/* Free user batch notice */}
             {!proActive && images.length > 1 && stats.cleaned === 0 && (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -307,7 +307,7 @@ export default function Home() {
           </motion.div>
         )}
 
-        {/* Argumentaire Vinted - PRESERVED & TRANSLATED */}
+        {/* Argumentaire Vinted */}
         <section className="container py-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
