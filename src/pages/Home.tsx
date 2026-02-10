@@ -11,9 +11,11 @@ import {
   ChevronDown,
   Shield,
   AlertTriangle,
+  Globe
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import GhostLogo from '@/components/GhostLogo';
 import DropZone from '@/components/DropZone';
 import ImageCard from '@/components/ImageCard';
@@ -25,7 +27,14 @@ import { useImageProcessor } from '@/hooks/useImageProcessor';
 const HERO_BG_URL = 'https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se-img-1_1770726687000_na1fn_Z2hvc3RtZXRhLWhlcm8tYmc.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80';
 
 export default function Home() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  
+  // Fonction de changement de langue manuelle
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    localStorage.setItem('i18nextLng', lng); // Sauvegarde la préférence
+  };
+
   const {
     images,
     isProcessing,
@@ -79,11 +88,29 @@ export default function Home() {
         <div className="container flex items-center justify-between h-14">
           <div className="flex items-center gap-2.5">
             <GhostLogo size={32} glow />
-            <span className="text-lg font-bold tracking-tight text-foreground">
+            <span className="text-lg font-bold tracking-tight text-foreground hidden sm:inline-block">
               Ghost<span className="text-[#00ff41]">Meta</span>
             </span>
           </div>
+
           <div className="flex items-center gap-3">
+            {/* BOUTON LANGUE ICI */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
+                  <Globe className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => changeLanguage('fr')}>
+                  🇫🇷 Français
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => changeLanguage('en')}>
+                  🇺🇸 English
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             {proActive ? (
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono bg-[#00ff41]/10 text-[#00ff41] border border-[#00ff41]/20">
                 <Zap className="w-3 h-3" />
@@ -100,7 +127,7 @@ export default function Home() {
                 {t('pro.price')}
               </Button>
             )}
-            <div className="hidden sm:flex items-center gap-1.5 text-xs text-muted-foreground">
+            <div className="hidden md:flex items-center gap-1.5 text-xs text-muted-foreground">
               <Lock className="w-3 h-3" />
               <span>{t('hero.secure_badge')}</span>
             </div>

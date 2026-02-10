@@ -7,10 +7,10 @@
   },
   "marketing": {
     "vinted_title": "Your listing photos reveal your home address.",
-    "vinted_text_1": "Every photo taken with your iPhone or Android embeds your exact GPS coordinates, date, time, and phone model.",
-    "vinted_text_2": "Clean your photos before posting. GhostMeta removes all metadata in one click. Nothing is sent to the internet.",
+    "vinted_text_1": "Every photo taken with your smartphone embeds your exact GPS coordinates.",
+    "vinted_text_2": "GhostMeta removes all metadata in one click. Nothing is sent to the internet.",
     "batch_lock_title": "Batch Mode Locked",
-    "batch_lock_desc": "In free mode, clean photos one by one (unlimited). The Pro Pack unlocks batch processing and ZIP export."
+    "batch_lock_desc": "The Pro Pack unlocks batch processing and ZIP export."
   },
   "upload": {
     "drop_title": "Drop your photos here",
@@ -23,13 +23,44 @@
     "download_all": "Download All",
     "delete_all": "Delete All"
   },
+  "info": {
+    "why_title": "Why your photos",
+    "why_title_highlight": "betray you",
+    "why_desc": "Every photo contains invisible trackers (EXIF, GPS).",
+    "geo_title": "GPS Geolocation",
+    "geo_desc": "Your exact home address is embedded in the file.",
+    "meta_title": "Time Profiling",
+    "meta_desc": "Date, time, and phone model are recorded.",
+    "privacy_title": "Privacy First",
+    "privacy_desc": "Your photos never leave your device.",
+    "how_title": "How it",
+    "how_highlight": "works",
+    "step_1": "Select photos",
+    "step_2": "Instant cleaning",
+    "step_3": "Download",
+    "arch_title": "Architecture",
+    "arch_highlight": "Zero-Knowledge",
+    "faq_title": "Frequently Asked Questions",
+    "q1": "Are my photos sent to a server?",
+    "a1": "No. All processing happens locally in your browser.",
+    "q2": "Which image formats are supported?",
+    "a2": "We support JPEG, PNG, WEBP, and HEIC.",
+    "q3": "What metadata is removed?",
+    "a3": "Everything: GPS, EXIF, XMP, IPTC, and embedded thumbnails.",
+    "q4": "Is image quality affected?",
+    "a4": "No, the image is cleaned without destructive re-compression.",
+    "q5": "Why is Batch Mode paid?",
+    "a5": "To support development while keeping the tool ad-free.",
+    "q6": "Don't platforms clean metadata already?",
+    "a6": "Not always, and often only after storing the original on their servers."
+  },
   "pro": {
     "badge": "PRO MODE",
     "active": "PRO ACTIVE",
     "price": "Pro Pack — 9€",
     "title": "Upgrade to Pro Speed",
     "desc": "Unlock unlimited batch processing.",
-    "benefit_1": "Unlimited Uploads (vs 3 photos)",
+    "benefit_1": "Unlimited Uploads",
     "benefit_2": "Priority Processing",
     "benefit_3": "Dedicated Support",
     "btn_action": "Unlock Pro Mode",
@@ -45,15 +76,15 @@
     "updated": "Last updated: February 2026",
     "notice_title": "Legal Notice",
     "privacy_sections": {
-      "1": { "title": "1. Local-Only Architecture", "content": "100% local processing via WebAssembly. No data ever leaves your device." },
-      "2": { "title": "2. Data", "content": "No personal data collection." },
-      "3": { "title": "3. Storage", "content": "LocalStorage only. No tracking cookies." },
+      "1": { "title": "1. Local-Only", "content": "100% local processing." },
+      "2": { "title": "2. Data", "content": "No data collection." },
+      "3": { "title": "3. Storage", "content": "LocalStorage only." },
       "4": { "title": "4. Contact", "content": "contact@ghostmeta.fr" }
     },
     "notice_sections": {
-      "1": { "title": "1. Editor", "content": "Published independently. Anonymity preserved under digital economy laws." },
-      "2": { "title": "2. Hosting", "content": "Vercel Inc., 340 S Lemon Ave #4133 Walnut, CA 91789, USA." },
-      "3": { "title": "3. Liability", "content": "User is solely responsible for processed files." }
+      "1": { "title": "1. Editor", "content": "Published independently." },
+      "2": { "title": "2. Hosting", "content": "Vercel Inc., USA." },
+      "3": { "title": "3. Liability", "content": "User is solely responsible." }
     }
   }
 }
