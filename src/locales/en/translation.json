@@ -3,22 +3,13 @@
     "title_start": "Remove",
     "title_color": "metadata",
     "title_end": "from your photos",
-    "subtitle": "Protect your privacy before posting on Vinted, eBay, or Depop.",
-    "cta": "Start Now",
-    "secure_badge": "100% Local & Secure"
-  },
-  "marketing": {
-    "vinted_title": "Your listing photos reveal your home address.",
-    "vinted_text_1": "Every photo taken with your iPhone or Android embeds your exact GPS coordinates, date, time, and phone model.",
-    "vinted_text_2": "When a buyer asks for more photos via WhatsApp, they get everything.",
-    "vinted_text_3": "Clean your photos before posting. GhostMeta removes all metadata in one click. Nothing is sent to the internet.",
-    "batch_lock_title": "Batch Mode Locked",
-    "batch_lock_desc": "In free mode, clean photos one by one (unlimited). The Pro Pack unlocks batch processing and ZIP export."
+    "subtitle": "Protect your privacy before posting on Vinted, eBay, or Depop. 100% Local Processing.",
+    "secure_badge": "100% Local"
   },
   "upload": {
     "drop_title": "Drop your photos here",
-    "drop_subtitle": "JPG, PNG, HEIC • 100% Local Processing",
-    "browse": "or click to browse",
+    "drop_subtitle": "JPEG · PNG · WebP · HEIC — 100% Local Processing",
+    "browse": "or browse your files",
     "processing": "Analyzing...",
     "cleaning": "Cleaning...",
     "success": "Done!",
@@ -26,38 +17,47 @@
     "download_all": "Download All (ZIP)",
     "delete_all": "Delete All"
   },
-  "pro": {
-    "badge": "PRO MODE",
-    "active": "PRO ACTIVE",
-    "price": "Pro Pack — 9€",
-    "unlock": "Unlock — 9€",
-    "title": "Upgrade to Pro Speed",
-    "desc": "Unlock unlimited batch processing.",
-    "benefit_1": "Unlimited Uploads",
-    "benefit_2": "Priority Processing",
-    "benefit_3": "Dedicated Support",
-    "btn_action": "Unlock Pro Mode"
+  "marketing": {
+    "vinted_title": "Your Vinted photos reveal your address.",
+    "vinted_text_1": "Every photo taken with your iPhone or Android embeds your exact GPS coordinates, date and time, and your phone model.",
+    "vinted_text_2": "When a buyer asks for \"more photos\" via WhatsApp, they get everything.",
+    "vinted_text_3": "Clean your photos before posting. GhostMeta removes all metadata in one click, directly in your browser. Nothing is sent to the internet.",
+    "batch_lock_title": "Batch Mode Locked",
+    "batch_lock_desc": "In free mode, clean photos one by one (unlimited). The Pro Pack unlocks batch processing and ZIP export."
   },
   "info": {
     "why_title": "Why your photos",
     "why_title_highlight": "betray you",
-    "why_desc": "Every photo contains invisible trackers (EXIF, GPS).",
+    "why_desc": "Every smartphone photo contains invisible metadata. When you post on Vinted, eBay or Depop, this data can reveal your exact address, habits, and equipment.",
     "geo_title": "GPS Geolocation",
-    "geo_desc": "Your exact home address is embedded in the file.",
+    "geo_desc": "Exact home coordinates embedded in every smartphone photo.",
     "meta_title": "Time Profiling",
-    "meta_desc": "Date, time, and phone model are recorded.",
-    "privacy_title": "Privacy First",
-    "privacy_desc": "Your photos never leave your device.",
+    "meta_desc": "Dates and times revealing your presence and absence routines.",
+    "hard_title": "Device Fingerprinting",
+    "hard_desc": "Device model, lens, and serial numbers identifying your equipment.",
     "how_title": "How it",
     "how_highlight": "works",
-    "step_1": "Select photos",
-    "step_2": "Instant cleaning",
-    "step_3": "Download",
+    "how_subtitle": "Three steps. Zero upload. Your photos stay on your device.",
+    "step_1_title": "Drop your photos",
+    "step_1_desc": "Drag & drop or select your images. JPEG, PNG, WebP and HEIC supported.",
+    "step_2_title": "Threat Scan",
+    "step_2_desc": "GhostMeta analyzes every image and identifies sensitive metadata (GPS, date, device).",
+    "step_3_title": "Neutralization",
+    "step_3_desc": "One click to remove all metadata. Download your clean images.",
     "arch_title": "Architecture",
     "arch_highlight": "Zero-Knowledge",
+    "arch_subtitle": "Your photos never leave your device. All processing is done locally in your browser.",
+    "arch_bad_title": "Other tools",
+    "arch_bad_1": "Upload to a remote server",
+    "arch_bad_2": "Photos accessible by third parties",
+    "arch_bad_3": "Risk of data recovery",
+    "arch_good_title": "GhostMeta",
+    "arch_good_1": "No upload — 100% local",
+    "arch_good_2": "No one sees your photos",
+    "arch_good_3": "Works even offline",
     "faq_title": "Frequently Asked Questions",
     "q1": "Are my photos sent to a server?",
-    "a1": "No. All processing happens locally in your browser.",
+    "a1": "No. All processing happens locally in your browser via WebAssembly.",
     "q2": "Which image formats are supported?",
     "a2": "We support JPEG, PNG, WEBP, and HEIC.",
     "q3": "What metadata is removed?",
@@ -69,25 +69,27 @@
     "q6": "Don't platforms clean metadata already?",
     "a6": "Not always, and often only after storing the original on their servers."
   },
+  "pro": {
+    "active": "PRO ACTIVE",
+    "price_btn": "Pro Pack — 9€",
+    "title": "Pro Pack — 9€",
+    "subtitle": "One-time payment. No subscription. No account.",
+    "free_title": "Free",
+    "free_1": "Unlimited cleaning (one by one)",
+    "free_2": "Metadata scan",
+    "free_3": "Single download",
+    "free_4": "JPEG, PNG, WebP, HEIC support",
+    "pro_title": "Pro Pack",
+    "pro_price": "9€ once",
+    "pro_1": "Up to 100 images simultaneously",
+    "pro_2": "Batch Mode (all at once)",
+    "pro_3": "One-click ZIP export",
+    "pro_4": "Everything free, in batch",
+    "unlock": "Unlock Pro Pack"
+  },
   "footer": {
     "rights": "All rights reserved",
-    "privacy_btn": "Privacy Policy",
-    "legal_btn": "Legal Notice"
-  },
-  "legal": {
-    "privacy_title": "Privacy Policy",
-    "updated": "Last updated: February 2026",
-    "notice_title": "Legal Notice",
-    "privacy_sections": {
-      "1": { "title": "1. Local-Only", "content": "100% local processing." },
-      "2": { "title": "2. Data", "content": "No data collection." },
-      "3": { "title": "3. Storage", "content": "LocalStorage only." },
-      "4": { "title": "4. Contact", "content": "contact@ghostmeta.fr" }
-    },
-    "notice_sections": {
-      "1": { "title": "1. Editor", "content": "Published independently." },
-      "2": { "title": "2. Hosting", "content": "Vercel Inc., USA." },
-      "3": { "title": "3. Liability", "content": "User is solely responsible." }
-    }
+    "privacy": "Privacy Policy",
+    "legal": "Legal Notice"
   }
 }

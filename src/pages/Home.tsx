@@ -11,16 +11,22 @@ import {
   ChevronDown,
   Shield,
   AlertTriangle,
-  Globe
+  Globe,
+  Smartphone,
+  Clock,
+  MapPin,
+  CheckCircle2,
+  XCircle,
+  Server
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import GhostLogo from '@/components/GhostLogo';
 import DropZone from '@/components/DropZone';
 import ImageCard from '@/components/ImageCard';
 import ProModal from '@/components/ProModal';
-import InfoSection from '@/components/InfoSection';
 import Footer from '@/components/Footer';
 import { useImageProcessor } from '@/hooks/useImageProcessor';
 
@@ -122,7 +128,7 @@ export default function Home() {
                 className="text-xs border-[#00ff41]/30 text-[#00ff41] hover:bg-[#00ff41]/10 h-8"
               >
                 <Zap className="w-3.5 h-3.5 mr-1" />
-                {t('pro.price')}
+                {t('pro.price_btn')}
               </Button>
             )}
             <div className="hidden md:flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -334,31 +340,31 @@ export default function Home() {
         )}
 
         {/* Argumentaire Vinted */}
-        <section className="container py-10">
+        <section className="container py-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto p-6 sm:p-8 rounded-xl border border-[#ffb000]/20 bg-[#ffb000]/5 relative overflow-hidden"
+            className="max-w-4xl mx-auto p-6 sm:p-10 rounded-xl border border-[#ffb000]/20 bg-[#ffb000]/5 relative overflow-hidden"
           >
             <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-[#ffb000]/30" />
             <div className="absolute top-3 right-3 w-5 h-5 border-t-2 border-r-2 border-[#ffb000]/30" />
             <div className="absolute bottom-3 left-3 w-5 h-5 border-b-2 border-l-2 border-[#ffb000]/30" />
             <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-[#ffb000]/30" />
 
-            <div className="flex items-start gap-4">
-              <AlertTriangle className="w-8 h-8 text-[#ffb000] flex-shrink-0 mt-1" />
-              <div>
-                <h2 className="text-xl sm:text-2xl font-bold text-[#ffb000] mb-3">
+            <div className="flex flex-col sm:flex-row items-start gap-6">
+              <AlertTriangle className="w-10 h-10 text-[#ffb000] flex-shrink-0 mt-1" />
+              <div className="space-y-4">
+                <h2 className="text-2xl font-bold text-[#ffb000]">
                   {t('marketing.vinted_title')}
                 </h2>
-                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-3">
+                <p className="text-muted-foreground text-base leading-relaxed">
                   {t('marketing.vinted_text_1')}
                 </p>
-                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-3">
+                <p className="text-muted-foreground text-base leading-relaxed">
                   {t('marketing.vinted_text_2')}
                 </p>
-                 <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                 <p className="text-[#00ff41] font-medium text-base leading-relaxed">
                   {t('marketing.vinted_text_3')}
                 </p>
               </div>
@@ -366,10 +372,158 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Info sections */}
-        <div className="container py-12">
-          <InfoSection />
-        </div>
+        {/* POURQUOI / WHY Section */}
+        <section className="container py-16 text-center">
+            <div className="mb-12">
+                <h2 className="text-3xl font-bold mb-4">
+                    {t('info.why_title')} <span className="text-red-500">{t('info.why_title_highlight')}</span>
+                </h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                    {t('info.why_desc')}
+                </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                {/* Carte 1 */}
+                <div className="p-6 rounded-xl bg-card border border-border/50 text-left">
+                    <MapPin className="w-8 h-8 text-red-500 mb-4" />
+                    <h3 className="font-bold text-lg mb-2">{t('info.geo_title')}</h3>
+                    <p className="text-sm text-muted-foreground">{t('info.geo_desc')}</p>
+                </div>
+                {/* Carte 2 */}
+                <div className="p-6 rounded-xl bg-card border border-border/50 text-left">
+                    <Clock className="w-8 h-8 text-amber-500 mb-4" />
+                    <h3 className="font-bold text-lg mb-2">{t('info.meta_title')}</h3>
+                    <p className="text-sm text-muted-foreground">{t('info.meta_desc')}</p>
+                </div>
+                {/* Carte 3 */}
+                <div className="p-6 rounded-xl bg-card border border-border/50 text-left">
+                    <Smartphone className="w-8 h-8 text-blue-500 mb-4" />
+                    <h3 className="font-bold text-lg mb-2">{t('info.hard_title')}</h3>
+                    <p className="text-sm text-muted-foreground">{t('info.hard_desc')}</p>
+                </div>
+            </div>
+        </section>
+
+        {/* COMMENT / HOW Section */}
+        <section className="container py-16 text-center">
+            <h2 className="text-3xl font-bold mb-4">
+                {t('info.how_title')} <span className="text-[#00ff41]">{t('info.how_highlight')}</span>
+            </h2>
+            <p className="text-muted-foreground mb-12">{t('info.how_subtitle')}</p>
+            
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto text-left">
+                 {/* Step 1 */}
+                 <div className="border border-[#00ff41]/20 bg-[#00ff41]/5 p-6 rounded-lg relative">
+                    <span className="text-4xl font-bold text-[#00ff41] opacity-20 absolute top-4 right-4">01</span>
+                    <h3 className="text-[#00ff41] font-bold mb-2">{t('info.step_1_title')}</h3>
+                    <p className="text-sm text-muted-foreground">{t('info.step_1_desc')}</p>
+                 </div>
+                 {/* Step 2 */}
+                 <div className="border border-[#ffb000]/20 bg-[#ffb000]/5 p-6 rounded-lg relative">
+                    <span className="text-4xl font-bold text-[#ffb000] opacity-20 absolute top-4 right-4">02</span>
+                    <h3 className="text-[#ffb000] font-bold mb-2">{t('info.step_2_title')}</h3>
+                    <p className="text-sm text-muted-foreground">{t('info.step_2_desc')}</p>
+                 </div>
+                 {/* Step 3 */}
+                 <div className="border border-[#00ff41]/20 bg-[#00ff41]/5 p-6 rounded-lg relative">
+                    <span className="text-4xl font-bold text-[#00ff41] opacity-20 absolute top-4 right-4">03</span>
+                    <h3 className="text-[#00ff41] font-bold mb-2">{t('info.step_3_title')}</h3>
+                    <p className="text-sm text-muted-foreground">{t('info.step_3_desc')}</p>
+                 </div>
+            </div>
+        </section>
+
+        {/* ARCHITECTURE Section */}
+        <section className="container py-16">
+            <div className="text-center mb-10">
+                <h2 className="text-3xl font-bold mb-2">
+                    {t('info.arch_title')} <span className="text-[#00ff41]">{t('info.arch_highlight')}</span>
+                </h2>
+                <p className="text-muted-foreground">{t('info.arch_subtitle')}</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                {/* Bad */}
+                <div className="border border-red-500/20 bg-red-500/5 p-6 rounded-xl">
+                    <h3 className="text-red-500 font-bold mb-4 flex items-center gap-2">
+                        <Server className="w-5 h-5" /> {t('info.arch_bad_title')}
+                    </h3>
+                    <ul className="space-y-3 text-sm text-muted-foreground">
+                        <li className="flex items-center gap-2"><XCircle className="w-4 h-4 text-red-500" /> {t('info.arch_bad_1')}</li>
+                        <li className="flex items-center gap-2"><XCircle className="w-4 h-4 text-red-500" /> {t('info.arch_bad_2')}</li>
+                        <li className="flex items-center gap-2"><XCircle className="w-4 h-4 text-red-500" /> {t('info.arch_bad_3')}</li>
+                    </ul>
+                </div>
+
+                {/* Good */}
+                <div className="border border-[#00ff41]/20 bg-[#00ff41]/5 p-6 rounded-xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[#00ff41]/5 blur-3xl opacity-20 pointer-events-none" />
+                    <h3 className="text-[#00ff41] font-bold mb-4 flex items-center gap-2">
+                        <ShieldCheck className="w-5 h-5" /> {t('info.arch_good_title')}
+                    </h3>
+                    <ul className="space-y-3 text-sm text-muted-foreground">
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#00ff41]" /> {t('info.arch_good_1')}</li>
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#00ff41]" /> {t('info.arch_good_2')}</li>
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#00ff41]" /> {t('info.arch_good_3')}</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        {/* PRICING Section */}
+        <section className="container py-16 text-center">
+            <h2 className="text-3xl font-bold mb-2 flex items-center justify-center gap-2">
+                <Zap className="w-6 h-6 text-[#00ff41]" /> {t('pro.title')}
+            </h2>
+            <p className="text-muted-foreground mb-10">{t('pro.subtitle')}</p>
+
+            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
+                {/* Gratuit */}
+                <div className="p-6 rounded-xl border border-border bg-card">
+                    <h3 className="font-bold text-xl mb-4">{t('pro.free_title')}</h3>
+                    <ul className="space-y-3 text-sm text-muted-foreground mb-6">
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> {t('pro.free_1')}</li>
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> {t('pro.free_2')}</li>
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> {t('pro.free_3')}</li>
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> {t('pro.free_4')}</li>
+                    </ul>
+                </div>
+
+                {/* Pro */}
+                <div className="p-6 rounded-xl border border-[#00ff41]/30 bg-[#00ff41]/5 relative">
+                    <div className="absolute top-4 right-4 text-xs font-bold bg-[#00ff41] text-black px-2 py-1 rounded">PRO</div>
+                    <h3 className="font-bold text-xl mb-1">{t('pro.pro_title')}</h3>
+                    <p className="text-2xl font-bold text-[#00ff41] mb-4">{t('pro.pro_price')}</p>
+                    <ul className="space-y-3 text-sm text-muted-foreground mb-8">
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#00ff41]" /> {t('pro.pro_1')}</li>
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#00ff41]" /> {t('pro.pro_2')}</li>
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#00ff41]" /> {t('pro.pro_3')}</li>
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#00ff41]" /> {t('pro.pro_4')}</li>
+                    </ul>
+                    <Button onClick={() => setShowProModal(true)} className="w-full bg-[#00ff41] hover:bg-[#00dd38] text-black font-bold">
+                        {t('pro.unlock')}
+                    </Button>
+                </div>
+            </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="max-w-2xl mx-auto py-16 space-y-6">
+            <h2 className="text-2xl font-bold text-center">{t('info.faq_title')}</h2>
+            <Accordion type="single" collapsible className="w-full">
+            {[1, 2, 3, 4, 5, 6].map((num) => (
+                <AccordionItem key={num} value={`item-${num}`}>
+                <AccordionTrigger className="text-left">
+                    {t(`info.q${num}`)}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                    {t(`info.a${num}`)}
+                </AccordionContent>
+                </AccordionItem>
+            ))}
+            </Accordion>
+        </section>
       </main>
 
       <Footer />
