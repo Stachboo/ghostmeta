@@ -2,8 +2,8 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    "./index.html",           // Regarde le fichier HTML à la racine
-    "./src/**/*.{ts,tsx}",    // Regarde tous les composants dans src
+    "./index.html",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
