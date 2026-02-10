@@ -1,4 +1,36 @@
 {
+  "hero": {
+    "title": "Nettoyez vos photos avant la vente.",
+    "subtitle": "Protection totale. Zéro donnée partagée. Optimisé pour Vinted, Leboncoin, eBay.",
+    "cta": "Commencer maintenant",
+    "secure_badge": "100% Local & Sécurisé"
+  },
+  "upload": {
+    "drop_title": "Glissez vos photos ici",
+    "drop_subtitle": "JPG, PNG, HEIC • Traitement 100% local",
+    "browse": "ou cliquez pour parcourir",
+    "processing": "Analyse en cours...",
+    "cleaning": "Nettoyage...",
+    "success": "Terminé !",
+    "error_type": "Format non supporté",
+    "download_all": "Tout télécharger"
+  },
+  "features": {
+    "privacy": "Anonymisation GPS & Exif",
+    "crop": "Recadrage Intelligent",
+    "speed": "Traitement Ultra-Rapide"
+  },
+  "pro": {
+    "badge": "MODE PRO",
+    "title": "Passez à la vitesse supérieure",
+    "desc": "Débloquez le traitement par lots illimité.",
+    "benefit_1": "Upload illimité (vs 3 photos)",
+    "benefit_2": "Priorité de traitement",
+    "benefit_3": "Support dédié",
+    "price": "9.99€ / à vie",
+    "btn_action": "Débloquer le Mode Pro",
+    "restore": "Restaurer les achats"
+  },
   "footer": {
     "rights": "Tous droits réservés",
     "privacy_btn": "Politique de confidentialité",
@@ -7,38 +39,17 @@
   "legal": {
     "privacy_title": "Politique de Confidentialité",
     "updated": "Dernière mise à jour : Février 2026",
-    "privacy_sections": {
-      "1": {
-        "title": "1. Architecture Local-Only (Privacy by Design)",
-        "content": "GhostMeta utilise une architecture de traitement exclusivement locale via WebAssembly. Aucune image, aucune métadonnée et aucune donnée personnelle n'est transmise à nos serveurs. Tout se passe dans votre navigateur."
-      },
-      "2": {
-        "title": "2. Données collectées (Minimisation)",
-        "content": "Nous ne collectons aucune donnée personnelle liée à vos images. Seules des statistiques anonymes de visite sont comptabilisées."
-      },
-      "3": {
-        "title": "3. Stockage Local & Cookies",
-        "content": "Nous n'utilisons pas de cookies traceurs. Le LocalStorage est utilisé uniquement pour mémoriser votre statut Pro et vos préférences."
-      },
-      "4": {
-        "title": "4. Contact",
-        "content": "Pour toute question : contact@ghostmeta.fr"
-      }
-    },
     "notice_title": "Mentions Légales",
+    "privacy_sections": {
+      "1": { "title": "1. Architecture Local-Only", "content": "Traitement 100% local via WebAssembly. Aucune donnée ne quitte votre appareil." },
+      "2": { "title": "2. Données", "content": "Aucune collecte de données personnelles." },
+      "3": { "title": "3. Stockage", "content": "LocalStorage uniquement. Pas de cookies traceurs." },
+      "4": { "title": "4. Contact", "content": "contact@ghostmeta.fr" }
+    },
     "notice_sections": {
-      "1": {
-        "title": "1. Éditeur",
-        "content": "Le service GhostMeta est édité à titre personnel (Personne Physique) conformément à l'article 6-III-2 de la LCEN, qui permet de préserver l'anonymat dès lors que les coordonnées de l'hébergeur sont fournies."
-      },
-      "2": {
-        "title": "2. Hébergement",
-        "content": "Le site est hébergé par : Vercel Inc., 340 S Lemon Ave #4133 Walnut, CA 91789, USA."
-      },
-      "3": {
-        "title": "3. Responsabilité",
-        "content": "L'utilisateur est seul responsable des fichiers qu'il traite. Le service est fourni 'tel quel' sans garantie."
-      }
+      "1": { "title": "1. Éditeur", "content": "Édité à titre personnel. Anonymat préservé selon LCEN Art 6-III-2." },
+      "2": { "title": "2. Hébergement", "content": "Vercel Inc., 340 S Lemon Ave #4133 Walnut, CA 91789, USA." },
+      "3": { "title": "3. Responsabilité", "content": "L'utilisateur est seul responsable des fichiers traités." }
     }
   }
 }
