@@ -15,7 +15,11 @@
     "success": "Done!",
     "error_type": "Format not supported",
     "download_all": "Download All (ZIP)",
-    "delete_all": "Delete All"
+    "delete_all": "Delete All",
+    "limit_title": "Daily Limit Reached",
+    "limit_desc": "The free server is limited to 1 clean every 12 hours. Please come back later or support the project.",
+    "donate_btn": "Support Developer (PayPal)",
+    "pro_soon": "Pro Pack Coming Soon!"
   },
   "marketing": {
     "vinted_title": "Your Vinted photos reveal your address.",
@@ -71,21 +75,21 @@
   },
   "pro": {
     "active": "PRO ACTIVE",
-    "price_btn": "Pro Pack — 9€",
-    "title": "Pro Pack — 9€",
-    "subtitle": "One-time payment. No subscription. No account.",
+    "price_btn": "Donate ❤️",
+    "title": "Support the project",
+    "subtitle": "GhostMeta is free. Your donations keep the servers running.",
     "free_title": "Free",
-    "free_1": "Unlimited cleaning (one by one)",
+    "free_1": "1 clean every 12h",
     "free_2": "Metadata scan",
     "free_3": "Single download",
-    "free_4": "JPEG, PNG, WebP, HEIC support",
+    "free_4": "100% Local & Private",
     "pro_title": "Pro Pack",
-    "pro_price": "9€ once",
+    "pro_price": "Soon",
     "pro_1": "Up to 100 images simultaneously",
     "pro_2": "Batch Mode (all at once)",
     "pro_3": "One-click ZIP export",
-    "pro_4": "Everything free, in batch",
-    "unlock": "Unlock Pro Pack"
+    "pro_4": "No time limit",
+    "unlock": "Coming Soon"
   },
   "footer": {
     "rights": "All rights reserved",

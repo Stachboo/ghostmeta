@@ -1,250 +1,162 @@
-/**
- * GhostMeta - useImageProcessor Hook (Corrected Version)
- * ──────────────────────────────────────────────────────
- * Gestion robuste de la file d'attente :
- * - Gratuit : Traitement séquentiel (1 par 1) pour tout le lot.
- * - Pro : Traitement parallèle (3 par 3) pour tout le lot.
- */
+import { useState, useCallback } from 'react';
+import { GhostMeta } from '@/lib/ghostmeta';
+import { toast } from 'sonner';
 
-import { useState, useCallback, useRef } from 'react';
-import {
-  ProcessedImage,
-  createProcessedImage,
-  extractMetadata,
-  stripMetadata,
-  isSupportedImage,
-  isHeicFile,
-} from '@/lib/image-processor';
-import JSZip from 'jszip';
-import { saveAs } from 'file-saver'; // Assurez-vous d'avoir installé : pnpm add file-saver @types/file-saver
+export interface ImageFile {
+  id: string;
+  file: File;
+  preview: string;
+  status: 'pending' | 'processing' | 'cleaned' | 'error';
+  metadata?: any;
+}
 
-// Configuration de la parallélisation
-const BATCH_SIZE_PRO = 3;
-const BATCH_SIZE_FREE = 1;
+interface ProcessingStats {
+  total: number;
+  cleaned: number;
+  threatsFound: number;
+}
 
 export function useImageProcessor() {
-  const [images, setImages] = useState<ProcessedImage[]>([]);
+  const [images, setImages] = useState<ImageFile[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState({ current: 0, total: 0 });
-  const processingRef = useRef(false);
+  const [limitReached, setLimitReached] = useState(false); // New state for 12h limit
 
-  // Vérification du statut Pro
-  const isPro = useCallback((): boolean => {
-    try {
-      const token = localStorage.getItem('ghostmeta_pro');
-      if (!token) return false;
-      const data = JSON.parse(token);
-      return data.active === true;
-    } catch {
-      return false;
-    }
-  }, []);
+  const addFiles = useCallback((fileList: FileList | File[]) => {
+    const newImages: ImageFile[] = [];
+    const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/heic'];
+    let rejectedCount = 0;
 
-  // Ajout de fichiers
-  const addFiles = useCallback((files: FileList | File[]) => {
-    const fileArray = Array.from(files);
-    const supported = fileArray.filter(isSupportedImage);
-    const newImages = supported.map(createProcessedImage);
-
-    newImages.forEach((img) => {
-      if (!isHeicFile(img.originalFile)) {
-        img.previewUrl = URL.createObjectURL(img.originalFile);
+    Array.from(fileList).forEach((file) => {
+      if (validTypes.includes(file.type) || file.name.toLowerCase().endsWith('.heic')) {
+        newImages.push({
+          id: Math.random().toString(36).substring(7),
+          file,
+          preview: URL.createObjectURL(file),
+          status: 'pending',
+        });
+      } else {
+        rejectedCount++;
       }
     });
 
     setImages((prev) => [...prev, ...newImages]);
-    return { added: supported.length, rejected: fileArray.length - supported.length };
+    return { added: newImages.length, rejected: rejectedCount };
   }, []);
 
   const removeImage = useCallback((id: string) => {
     setImages((prev) => {
       const img = prev.find((i) => i.id === id);
-      if (img?.previewUrl) URL.revokeObjectURL(img.previewUrl);
+      if (img) URL.revokeObjectURL(img.preview);
       return prev.filter((i) => i.id !== id);
     });
   }, []);
 
   const clearAll = useCallback(() => {
-    setImages((prev) => {
-      prev.forEach((img) => {
-        if (img.previewUrl) URL.revokeObjectURL(img.previewUrl);
-      });
-      return [];
-    });
+    images.forEach((img) => URL.revokeObjectURL(img.preview));
+    setImages([]);
     setProgress({ current: 0, total: 0 });
-  }, []);
+    setLimitReached(false);
+  }, [images]);
 
-  // Utilitaire pour accéder à l'état frais dans les boucles async
-  const getCurrentImages = (): Promise<ProcessedImage[]> => {
-    return new Promise((resolve) => {
-      setImages((prev) => {
-        resolve([...prev]);
-        return prev;
-      });
-    });
+  // Check if user is allowed to clean (12h limit)
+  const checkLimit = () => {
+    const lastClean = localStorage.getItem('lastCleanTime');
+    if (!lastClean) return true;
+
+    const twelveHours = 12 * 60 * 60 * 1000;
+    const timeDiff = Date.now() - parseInt(lastClean);
+
+    if (timeDiff < twelveHours) {
+      return false;
+    }
+    return true;
   };
 
-  // Moteur de Scan (Métadonnées)
-  const scanAll = useCallback(async () => {
-    if (processingRef.current) return;
-    processingRef.current = true;
-    setIsProcessing(true);
-
-    const currentImages = await getCurrentImages();
-    const toScan = currentImages.filter((img) => img.status === 'pending');
-    
-    // Le scan est rapide, on autorise un peu de parallélisme pour tous
-    const CONCURRENCY = 3; 
-    setProgress({ current: 0, total: toScan.length });
-
-    for (let i = 0; i < toScan.length; i += CONCURRENCY) {
-      const batch = toScan.slice(i, i + CONCURRENCY);
-      await Promise.all(
-        batch.map(async (img) => {
-          setImages(prev => prev.map(p => p.id === img.id ? { ...p, status: 'scanning' } : p));
-          try {
-            const metadata = await extractMetadata(img.originalFile);
-            setImages(prev => prev.map(p => p.id === img.id ? { ...p, status: 'scanned', metadata } : p));
-          } catch {
-            setImages(prev => prev.map(p => p.id === img.id ? { ...p, status: 'error', error: 'Échec scan' } : p));
-          }
-          setProgress(prev => ({ ...prev, current: prev.current + 1 }));
-        })
-      );
-    }
-    processingRef.current = false;
-    setIsProcessing(false);
-  }, []);
-
-  // Moteur de Nettoyage (Le coeur du correctif)
   const cleanAll = useCallback(async () => {
-    if (processingRef.current) return;
-    processingRef.current = true;
-    setIsProcessing(true);
-
-    const currentImages = await getCurrentImages();
-    const userIsPro = isPro();
-    
-    // On prend TOUTES les images qui ne sont pas finies ou en erreur
-    const toProcess = currentImages.filter(
-      (img) => img.status !== 'cleaned' && img.status !== 'error'
-    );
-
-    // DÉTERMINATION DE LA VITESSE DE TRAITEMENT
-    // Gratuit = 1 par 1 (Séquentiel)
-    // Pro = 3 par 3 (Parallèle)
-    const batchSize = userIsPro ? BATCH_SIZE_PRO : BATCH_SIZE_FREE;
-    
-    setProgress({ current: 0, total: toProcess.length });
-
-    // Boucle principale qui traite TOUT le tableau
-    for (let i = 0; i < toProcess.length; i += batchSize) {
-      const chunk = toProcess.slice(i, i + batchSize);
-      
-      await Promise.all(
-        chunk.map(async (img) => {
-          // 1. Scan (si pas encore fait)
-          if (img.status === 'pending') {
-             setImages(prev => prev.map(p => p.id === img.id ? { ...p, status: 'scanning' } : p));
-             try {
-               const metadata = await extractMetadata(img.originalFile);
-               setImages(prev => prev.map(p => p.id === img.id ? { ...p, metadata } : p));
-             } catch (e) { console.error(e); }
-          }
-
-          // 2. Clean
-          setImages(prev => prev.map(p => p.id === img.id ? { ...p, status: 'cleaning' } : p));
-          
-          try {
-            const cleanedBlob = await stripMetadata(img.originalFile);
-            setImages(prev => prev.map(p => p.id === img.id ? { 
-              ...p, 
-              status: 'cleaned', 
-              cleanedBlob, 
-              cleanedSize: cleanedBlob.size 
-            } : p));
-          } catch (err) {
-            const errorMsg = err instanceof Error ? err.message : 'Échec nettoyage';
-            setImages(prev => prev.map(p => p.id === img.id ? { ...p, status: 'error', error: errorMsg } : p));
-          }
-          
-          setProgress(prev => ({ ...prev, current: prev.current + 1 }));
-        })
-      );
+    // 1. Check 12h Limit
+    if (!checkLimit()) {
+      setLimitReached(true);
+      return;
     }
 
-    processingRef.current = false;
-    setIsProcessing(false);
-  }, [isPro]);
+    setIsProcessing(true);
+    setProgress({ current: 0, total: images.length });
+    
+    // 2. Process
+    const processedImages = [...images];
+    let cleanedCount = 0;
 
-  // Exportation
-  const downloadImage = useCallback((id: string) => {
-    // Logique simplifiée : on récupère l'image dans l'état courant
-    // Note: Dans une vraie app React, utiliser useRef pour l'état images serait plus sûr ici,
-    // mais pour l'instant on fait confiance au closure ou on force une re-lecture si besoin.
-    // L'implémentation originale utilisait setImages pour lire l'état, ce qui est une astuce valide.
-    setImages((prev) => {
-      const image = prev.find((i) => i.id === id);
-      if (image?.cleanedBlob) {
-        const originalName = image.originalName || 'image';
-        const baseName = originalName.substring(0, originalName.lastIndexOf('.')) || originalName;
-        // On force .png si le blob est PNG, sinon on garde l'extension ou .jpg
-        const type = image.cleanedBlob.type;
-        const ext = type === 'image/png' ? '.png' : '.jpg';
+    for (let i = 0; i < processedImages.length; i++) {
+      if (processedImages[i].status === 'cleaned') continue;
+
+      try {
+        processedImages[i].status = 'processing';
+        setImages([...processedImages]);
+
+        const cleanedBlob = await GhostMeta.clean(processedImages[i].file);
         
-        saveAs(image.cleanedBlob, `${baseName}_ghost${ext}`);
+        processedImages[i].file = new File([cleanedBlob], processedImages[i].file.name, {
+          type: processedImages[i].file.type,
+        });
+        processedImages[i].status = 'cleaned';
+        cleanedCount++;
+      } catch (error) {
+        console.error(error);
+        processedImages[i].status = 'error';
       }
-      return prev;
-    });
-  }, []);
+
+      setProgress({ current: i + 1, total: images.length });
+      setImages([...processedImages]);
+    }
+
+    // 3. Record Time if successful
+    if (cleanedCount > 0) {
+      localStorage.setItem('lastCleanTime', Date.now().toString());
+      toast.success("Nettoyage terminé !");
+    }
+
+    setIsProcessing(false);
+  }, [images]);
+
+  const downloadImage = useCallback((id: string) => {
+    const img = images.find((i) => i.id === id);
+    if (!img || img.status !== 'cleaned') return;
+    
+    const url = URL.createObjectURL(img.file);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `clean_${img.file.name}`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, [images]);
 
   const downloadAllZip = useCallback(async () => {
-    const currentImages = await getCurrentImages();
-    const cleaned = currentImages.filter((img) => img.status === 'cleaned' && img.cleanedBlob);
-    if (cleaned.length === 0) return;
-
-    if (cleaned.length === 1) {
-       // Si une seule image, téléchargement direct
-       const img = cleaned[0];
-       const baseName = img.originalName.replace(/\.[^.]+$/, '');
-       const ext = img.cleanedBlob!.type === 'image/png' ? '.png' : '.jpg';
-       saveAs(img.cleanedBlob!, `${baseName}_ghost${ext}`);
-       return;
-    }
-
-    const zip = new JSZip();
-    cleaned.forEach((img) => {
-      if (img.cleanedBlob) {
-        const baseName = img.originalName.replace(/\.[^.]+$/, '');
-        const ext = img.cleanedBlob.type === 'image/png' ? '.png' : '.jpg';
-        zip.file(`${baseName}_ghost${ext}`, img.cleanedBlob);
-      }
-    });
-
-    const blob = await zip.generateAsync({ type: 'blob' });
-    saveAs(blob, `ghostmeta_batch_${Date.now()}.zip`);
+     // ZIP logic implemented in component or here if needed
+     // For now, simpler to keep single download or implement JSZip later
+     toast.info("Téléchargement ZIP bientôt disponible");
   }, []);
+
+  const stats: ProcessingStats = {
+    total: images.length,
+    cleaned: images.filter((i) => i.status === 'cleaned').length,
+    threatsFound: images.length, // Simulated for now as we strip blind
+  };
+
+  const isPro = () => false; // Toujours faux pour l'instant (Mode Gratuit Limité)
 
   return {
     images,
     isProcessing,
     progress,
-    stats: {
-        total: images.length,
-        pending: images.filter(i => i.status === 'pending').length,
-        scanning: images.filter(i => i.status === 'scanning').length,
-        scanned: images.filter(i => i.status === 'scanned').length,
-        cleaning: images.filter(i => i.status === 'cleaning').length,
-        cleaned: images.filter(i => i.status === 'cleaned').length,
-        errors: images.filter(i => i.status === 'error').length,
-        threatsFound: images.filter(i => i.metadata?.threats?.length).length,
-        criticalThreats: images.filter(i => i.metadata?.threatLevel === 'critical').length,
-    },
+    stats,
+    limitReached,
     isPro,
     addFiles,
     removeImage,
     clearAll,
-    scanAll,
     cleanAll,
     downloadImage,
     downloadAllZip,

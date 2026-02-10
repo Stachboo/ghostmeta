@@ -17,7 +17,8 @@ import {
   MapPin,
   CheckCircle2,
   XCircle,
-  Server
+  Server,
+  Heart
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -32,10 +33,9 @@ import { useImageProcessor } from '@/hooks/useImageProcessor';
 
 // --- IMAGES OFFICIELLES ---
 const HERO_BG_URL = "https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se-img-1_1770726687000_na1fn_Z2hvc3RtZXRhLWhlcm8tYmc.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvOGh1WW4yZHlXcHg5a3pIUGJNemlwai9zYW5kYm94L1NlN2wyYXhQUVBhWkZVenV1dm85U2UtaW1nLTFfMTc3MDcyNjY4NzAwMF9uYTFmbl9aMmh2YzNSdFpYUmhMV2hsY204dFltYy5wbmc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xOTIwLGhfMTkyMC9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=JNX4ezXkHI9~cHMpVXQz9jegOhIM61IQKqOqxFbJiTM9xxzwPGMmVr535OKijZfVicM-2wpovao0YeFfjmA3nikymInRSjxrBU5VfNsGGzM3dI1J9kItLwfbQNgLSDq-cZnwyd0GkwbmVX3CP0UIyjIDfG7Y8Lam6l~U8BI7~jMeMgqIjlTdHFAousFa2uaM34DfbGoeTzefpmfq7ncbuVjECuEY3c82y7M-OKKfPdDZ8HVogC6m3ERW5810TN6Ygdd996YxKryBFIsuNsZ1v~r2SDFobD9y3FQ-80jgvM1pRyqZnV9~P16AdkSKjDzsNsg~bhhhnNC3uMAkH7MP9g__";
-
 const TABLET_SCAN_URL = "https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se-img-3_1770726694000_na1fn_Z2hvc3RtZXRhLXNjYW4tZWZmZWN0.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvOGh1WW4yZHlXcHg5a3pIUGJNemlwai9zYW5kYm94L1NlN2wyYXhQUVBhWkZVenV1dm85U2UtaW1nLTNfMTc3MDcyNjY5NDAwMF9uYTFmbl9aMmh2YzNSdFpYUmhMWE5qWVc0dFpXWm1aV04wLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=twLze8fBhWRAeXA-ZduyhqoPb4UAc9XaJ8940DzoFSplumzcXlv7qB1BDpnxjzN5qLTTWHal5ajaLp37nzQUO6ba4Tw-wLUQdGgNPYi1d3Zxta8LGHMs0fRqvPWCZDLfp3Uytvzim94eBHn~vPONftZw-bFBz~NYFgRbyvfw4tf311h1gQgtLFLxSvh2VgZu1n~BfhE~9O1yaDo2IXBIvXjlhOUxRBVUQcVWt2p236Pyp6JHG0i3W9b1lj3zFR1Ff2aAjKUJyqdhvCz0I8V1wi28cmSczwI7l81M1uJALrImbArl~rM05CkadftAjadb5TyIuZNgAB8IipZ99iYL8g__";
-
 const SHIELD_URL = "https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se_1770726694647_na1fn_Z2hvc3RtZXRhLXNoaWVsZA.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvOGh1WW4yZHlXcHg5a3pIUGJNemlwai9zYW5kYm94L1NlN2wyYXhQUVBhWkZVenV1dm85U2VfMTc3MDcyNjY5NDY0N19uYTFmbl9aMmh2YzNSdFpYUmhMWE5vYVdWc1pBLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=j-RcYfWc8jgkoKUBcYlVfFcQ8Y6DZFThE30fFX8gFxpri7UDVcfN5~FBw7mI6qyTsk3nczlyirg9boGlgwzRHcCv2ju6PMb3mh~5oOeBcOs8r-H5HQzRhTJXWunKH5KKGhKrz5RqABOgpVxmi8sxYXWsMGOcLMtB4HWCkqrnAn-fRnEbqFGOGEYZDbkROSa5JS3h63CqOCmf-nUjngooWogsKL07whYqTphVu17RXCQ7wBlDB5LMNb1LJM4I8gdmUix6sLTSD634maL8H~U9FWY8Dvfdf9Lu7qfXH6gHZ36a-8ov3zsUPISR8L6fu2yMOkAqiFp1lSRk05EBI4Ypaw__";
+const PAYPAL_LINK = "https://paypal.me/abdus84";
 
 export default function Home() {
   const { t, i18n } = useTranslation();
@@ -50,6 +50,7 @@ export default function Home() {
     isProcessing,
     progress,
     stats,
+    limitReached,
     isPro,
     addFiles,
     removeImage,
@@ -60,7 +61,15 @@ export default function Home() {
   } = useImageProcessor();
 
   const [showProModal, setShowProModal] = useState(false);
-  const proActive = isPro();
+  
+  // Fonction pour gérer le clic sur "Pro" ou "Donation"
+  const handleDonation = () => {
+    window.open(PAYPAL_LINK, '_blank');
+  };
+
+  const handleCleanAll = useCallback(() => {
+    cleanAll();
+  }, [cleanAll]);
 
   const handleFilesAdded = useCallback(
     (files: FileList | File[]) => {
@@ -79,14 +88,6 @@ export default function Home() {
     },
     [addFiles, t]
   );
-
-  const handleCleanAll = useCallback(() => {
-    if (!proActive && images.length > 1) {
-      setShowProModal(true);
-      return;
-    }
-    cleanAll();
-  }, [proActive, images.length, cleanAll]);
 
   const progressPercent =
     progress.total > 0 ? Math.round((progress.current / progress.total) * 100) : 0;
@@ -120,22 +121,17 @@ export default function Home() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {proActive ? (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono bg-[#00ff41]/10 text-[#00ff41] border border-[#00ff41]/20">
-                <Zap className="w-3 h-3" />
-                {t('pro.active')}
-              </span>
-            ) : (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowProModal(true)}
-                className="text-xs border-[#00ff41]/30 text-[#00ff41] hover:bg-[#00ff41]/10 h-8"
-              >
-                <Zap className="w-3.5 h-3.5 mr-1" />
-                {t('pro.price_btn')}
-              </Button>
-            )}
+            {/* Bouton Donation remplace Pro */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleDonation}
+              className="text-xs border-[#ff0055]/30 text-[#ff0055] hover:bg-[#ff0055]/10 h-8"
+            >
+              <Heart className="w-3.5 h-3.5 mr-1 fill-current" />
+              {t('pro.price_btn')}
+            </Button>
+            
             <div className="hidden md:flex items-center gap-1.5 text-xs text-muted-foreground">
               <Lock className="w-3 h-3" />
               <span>{t('hero.secure_badge')}</span>
@@ -178,8 +174,29 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ALERTE LIMITE DEPASSEE */}
+        {limitReached && (
+          <section className="container pb-6">
+             <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="max-w-2xl mx-auto p-6 rounded-lg border border-red-500/50 bg-red-500/10 text-center"
+             >
+                <div className="flex flex-col items-center gap-3">
+                  <Clock className="w-10 h-10 text-red-500" />
+                  <h3 className="text-xl font-bold text-red-500">{t('upload.limit_title')}</h3>
+                  <p className="text-muted-foreground">{t('upload.limit_desc')}</p>
+                  <Button onClick={handleDonation} className="mt-2 bg-[#ff0055] hover:bg-[#d40047] text-white">
+                    <Heart className="w-4 h-4 mr-2 fill-white" />
+                    {t('upload.donate_btn')}
+                  </Button>
+                </div>
+             </motion.div>
+          </section>
+        )}
+
         {/* Images & Controls */}
-        {images.length > 0 && (
+        {images.length > 0 && !limitReached && (
           <section className="container pb-12">
             {/* Stats bar */}
             <motion.div
@@ -293,36 +310,6 @@ export default function Home() {
                 ))}
               </AnimatePresence>
             </div>
-
-            {/* Free user batch notice */}
-            {!proActive && images.length > 1 && stats.cleaned === 0 && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="mt-6 p-5 rounded-lg border border-[#ffb000]/20 bg-[#ffb000]/5"
-              >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                  <div className="flex items-start gap-3">
-                    <Zap className="w-5 h-5 text-[#ffb000] mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="text-sm font-semibold text-[#ffb000]">{t('marketing.batch_lock_title')}</p>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        {t('marketing.batch_lock_desc')}
-                      </p>
-                    </div>
-                  </div>
-                  <Button
-                    onClick={() => setShowProModal(true)}
-                    size="sm"
-                    className="bg-[#ffb000] hover:bg-[#e6a000] text-black font-bold h-9 flex-shrink-0"
-                  >
-                    <Zap className="w-3.5 h-3.5 mr-1.5" />
-                    {t('pro.unlock')}
-                  </Button>
-                </div>
-              </motion.div>
-            )}
           </section>
         )}
 
@@ -377,7 +364,7 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* POURQUOI / WHY Section (AVEC LA TABLETTE ET LES CARTES) */}
+        {/* POURQUOI / WHY Section */}
         <section className="container py-16 text-center">
             <div className="mb-12">
                 <h2 className="text-3xl font-bold mb-4">
@@ -387,7 +374,6 @@ export default function Home() {
                     {t('info.why_desc')}
                 </p>
                 
-                {/* L'IMAGE DE LA TABLETTE EST ICI */}
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -443,7 +429,7 @@ export default function Home() {
             </div>
         </section>
 
-        {/* ARCHITECTURE Section (AVEC LE BOUCLIER) */}
+        {/* ARCHITECTURE Section */}
         <section className="container py-16">
             <div className="text-center mb-10">
                 <h2 className="text-3xl font-bold mb-2">
@@ -453,7 +439,6 @@ export default function Home() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-center">
-                {/* Bad */}
                 <div className="border border-red-500/20 bg-red-500/5 p-6 rounded-xl h-full">
                     <h3 className="text-red-500 font-bold mb-4 flex items-center gap-2">
                         <Server className="w-5 h-5" /> {t('info.arch_bad_title')}
@@ -465,7 +450,6 @@ export default function Home() {
                     </ul>
                 </div>
 
-                {/* Good (AVEC LE BOUCLIER AU MILIEU) */}
                 <div className="relative">
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
                          <img src={SHIELD_URL} alt="" className="w-48 h-48 object-contain" />
@@ -485,7 +469,7 @@ export default function Home() {
             </div>
         </section>
 
-        {/* PRICING Section */}
+        {/* PRICING Section (Modifiée pour Donation / Coming Soon) */}
         <section className="container py-16 text-center">
             <h2 className="text-3xl font-bold mb-2 flex items-center justify-center gap-2">
                 <Zap className="w-6 h-6 text-[#00ff41]" /> {t('pro.title')}
@@ -504,9 +488,9 @@ export default function Home() {
                     </ul>
                 </div>
 
-                {/* Pro */}
-                <div className="p-6 rounded-xl border border-[#00ff41]/30 bg-[#00ff41]/5 relative">
-                    <div className="absolute top-4 right-4 text-xs font-bold bg-[#00ff41] text-black px-2 py-1 rounded">PRO</div>
+                {/* Pro (Verrouillé) */}
+                <div className="p-6 rounded-xl border border-dashed border-[#00ff41]/20 bg-[#00ff41]/5 relative opacity-80">
+                    <div className="absolute top-4 right-4 text-xs font-bold bg-[#00ff41]/20 text-[#00ff41] px-2 py-1 rounded">{t('pro.unlock')}</div>
                     <h3 className="font-bold text-xl mb-1">{t('pro.pro_title')}</h3>
                     <p className="text-2xl font-bold text-[#00ff41] mb-4">{t('pro.pro_price')}</p>
                     <ul className="space-y-3 text-sm text-muted-foreground mb-8">
@@ -515,8 +499,9 @@ export default function Home() {
                         <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#00ff41]" /> {t('pro.pro_3')}</li>
                         <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#00ff41]" /> {t('pro.pro_4')}</li>
                     </ul>
-                    <Button onClick={() => setShowProModal(true)} className="w-full bg-[#00ff41] hover:bg-[#00dd38] text-black font-bold">
-                        {t('pro.unlock')}
+                    <Button onClick={handleDonation} className="w-full bg-[#ff0055] hover:bg-[#d40047] text-white font-bold">
+                        <Heart className="w-4 h-4 mr-2 fill-white" />
+                        {t('pro.price_btn')}
                     </Button>
                 </div>
             </div>
