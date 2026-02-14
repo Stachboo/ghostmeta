@@ -18,7 +18,7 @@ export function useImageProcessor() {
   const [images, setImages] = useState<ProcessedImage[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState({ current: 0, total: 0 });
-  const [limitReached, setLimitReached] = useState(false);
+  // SUPPRIMÉ : const [limitReached, setLimitReached] = useState(false);
   const scanningRef = useRef(false);
 
   const scanImage = async (img: ProcessedImage): Promise<ProcessedImage> => {
@@ -60,7 +60,7 @@ export function useImageProcessor() {
     setImages(prev => [...prev, ...newImages]);
 
     if (newImages.length > 0) {
-      scanNewImages(newImages);
+      scanNewImages(newImages); // On lance le scan mais on n'attend pas la fin pour rendre la main
     }
 
     return { added: newImages.length, rejected: rejectedCount };
@@ -80,21 +80,13 @@ export function useImageProcessor() {
     });
     setImages([]);
     setProgress({ current: 0, total: 0 });
-    setLimitReached(false);
+    // SUPPRIMÉ : setLimitReached(false);
   }, [images]);
 
-  const checkLimit = () => {
-    const lastClean = localStorage.getItem('lastCleanTime');
-    if (!lastClean) return true;
-    const twelveHours = 12 * 60 * 60 * 1000;
-    return (Date.now() - parseInt(lastClean)) >= twelveHours;
-  };
+  // SUPPRIMÉ : const checkLimit = () => { ... }
 
   const cleanAll = useCallback(async () => {
-    if (!checkLimit()) {
-      setLimitReached(true);
-      return;
-    }
+    // SUPPRIMÉ : La vérification checkLimit() qui bloquait tout
 
     const toClean = images.filter(i => i.status !== 'cleaned' && i.status !== 'error');
     if (toClean.length === 0) return;
@@ -132,7 +124,7 @@ export function useImageProcessor() {
     }
 
     if (cleanedCount > 0) {
-      localStorage.setItem('lastCleanTime', Date.now().toString());
+      // SUPPRIMÉ : localStorage.setItem('lastCleanTime', ...);
       toast.success("Nettoyage terminé !");
     }
 
@@ -157,6 +149,7 @@ export function useImageProcessor() {
     const cleaned = images.filter(i => i.status === 'cleaned' && i.cleanedBlob);
     if (cleaned.length === 0) return;
 
+    // Import dynamique pour alléger le chargement initial
     const JSZip = (await import('jszip')).default;
     const { saveAs } = await import('file-saver');
 
@@ -175,14 +168,14 @@ export function useImageProcessor() {
     threatsFound: images.reduce((acc, i) => acc + (i.metadata?.threats?.length || 0), 0),
   };
 
-  const isPro = () => false;
+  const isPro = () => true; // On passe tout le monde en "Pro" (Illimité)
 
   return {
     images,
     isProcessing,
     progress,
     stats,
-    limitReached,
+    // SUPPRIMÉ : limitReached,
     isPro,
     addFiles,
     removeImage,
