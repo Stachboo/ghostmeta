@@ -31,7 +31,7 @@ import ProModal from '@/components/ProModal';
 import Footer from '@/components/Footer';
 import { useImageProcessor } from '@/hooks/useImageProcessor';
 
-// --- IMAGES OFFICIELLES ---
+// --- IMAGES OFFICIELLES (INCHANGÉES) ---
 const HERO_BG_URL = "https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se-img-1_1770726687000_na1fn_Z2hvc3RtZXRhLWhlcm8tYmc.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvOGh1WW4yZHlXcHg5a3pIUGJNemlwai9zYW5kYm94L1NlN2wyYXhQUVBhWkZVenV1dm85U2UtaW1nLTFfMTc3MDcyNjY4NzAwMF9uYTFmbl9aMmh2YzNSdFpYUmhMV2hsY204dFltYy5wbmc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xOTIwLGhfMTkyMC9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=JNX4ezXkHI9~cHMpVXQz9jegOhIM61IQKqOqxFbJiTM9xxzwPGMmVr535OKijZfVicM-2wpovao0YeFfjmA3nikymInRSjxrBU5VfNsGGzM3dI1J9kItLwfbQNgLSDq-cZnwyd0GkwbmVX3CP0UIyjIDfG7Y8Lam6l~U8BI7~jMeMgqIjlTdHFAousFa2uaM34DfbGoeTzefpmfq7ncbuVjECuEY3c82y7M-OKKfPdDZ8HVogC6m3ERW5810TN6Ygdd996YxKryBFIsuNsZ1v~r2SDFobD9y3FQ-80jgvM1pRyqZnV9~P16AdkSKjDzsNsg~bhhhnNC3uMAkH7MP9g__";
 const TABLET_SCAN_URL = "https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se-img-3_1770726694000_na1fn_Z2hvc3RtZXRhLXNjYW4tZWZmZWN0.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvOGh1WW4yZHlXcHg5a3pIUGJNemlwai9zYW5kYm94L1NlN2wyYXhQUVBhWkZVenV1dm85U2UtaW1nLTNfMTc3MDcyNjY5NDAwMF9uYTFmbl9aMmh2YzNSdFpYUmhMWE5qWVc0dFpXWm1aV04wLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=twLze8fBhWRAeXA-ZduyhqoPb4UAc9XaJ8940DzoFSplumzcXlv7qB1BDpnxjzN5qLTTWHal5ajaLp37nzQUO6ba4Tw-wLUQdGgNPYi1d3Zxta8LGHMs0fRqvPWCZDLfp3Uytvzim94eBHn~vPONftZw-bFBz~NYFgRbyvfw4tf311h1gQgtLFLxSvh2VgZu1n~BfhE~9O1yaDo2IXBIvXjlhOUxRBVUQcVWt2p236Pyp6JHG0i3W9b1lj3zFR1Ff2aAjKUJyqdhvCz0I8V1wi28cmSczwI7l81M1uJALrImbArl~rM05CkadftAjadb5TyIuZNgAB8IipZ99iYL8g__";
 const SHIELD_URL = "https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se_1770726694647_na1fn_Z2hvc3RtZXRhLXNoaWVsZA.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvOGh1WW4yZHlXcHg5a3pIUGJNemlwai9zYW5kYm94L1NlN2wyYXhQUVBhWkZVenV1dm85U2VfMTc3MDcyNjY5NDY0N19uYTFmbl9aMmh2YzNSdFpYUmhMWE5vYVdWc1pBLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=j-RcYfWc8jgkoKUBcYlVfFcQ8Y6DZFThE30fFX8gFxpri7UDVcfN5~FBw7mI6qyTsk3nczlyirg9boGlgwzRHcCv2ju6PMb3mh~5oOeBcOs8r-H5HQzRhTJXWunKH5KKGhKrz5RqABOgpVxmi8sxYXWsMGOcLMtB4HWCkqrnAn-fRnEbqFGOGEYZDbkROSa5JS3h63CqOCmf-nUjngooWogsKL07whYqTphVu17RXCQ7wBlDB5LMNb1LJM4I8gdmUix6sLTSD634maL8H~U9FWY8Dvfdf9Lu7qfXH6gHZ36a-8ov3zsUPISR8L6fu2yMOkAqiFp1lSRk05EBI4Ypaw__";
@@ -45,13 +45,12 @@ export default function Home() {
     localStorage.setItem('i18nextLng', lng);
   };
 
+  // --- MODIFICATION ICI : On ne récupère plus 'limitReached' ---
   const {
     images,
     isProcessing,
     progress,
     stats,
-    limitReached,
-    isPro,
     addFiles,
     removeImage,
     clearAll,
@@ -62,7 +61,6 @@ export default function Home() {
 
   const [showProModal, setShowProModal] = useState(false);
   
-  // Fonction pour gérer le clic sur "Pro" ou "Donation"
   const handleDonation = () => {
     window.open(PAYPAL_LINK, '_blank');
   };
@@ -121,7 +119,7 @@ export default function Home() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Bouton Donation remplace Pro */}
+            {/* Bouton Donation */}
             <Button
               variant="outline"
               size="sm"
@@ -174,29 +172,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ALERTE LIMITE DEPASSEE */}
-        {limitReached && (
-          <section className="container pb-6">
-             <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="max-w-2xl mx-auto p-6 rounded-lg border border-red-500/50 bg-red-500/10 text-center"
-             >
-                <div className="flex flex-col items-center gap-3">
-                  <Clock className="w-10 h-10 text-red-500" />
-                  <h3 className="text-xl font-bold text-red-500">{t('upload.limit_title')}</h3>
-                  <p className="text-muted-foreground">{t('upload.limit_desc')}</p>
-                  <Button onClick={handleDonation} className="mt-2 bg-[#ff0055] hover:bg-[#d40047] text-white">
-                    <Heart className="w-4 h-4 mr-2 fill-white" />
-                    {t('upload.donate_btn')}
-                  </Button>
-                </div>
-             </motion.div>
-          </section>
-        )}
+        {/* --- MODIFICATION ICI : Suppression de l'ALERTE LIMITE --- */}
 
-        {/* Images & Controls */}
-        {images.length > 0 && !limitReached && (
+        {/* Images & Controls - MODIFICATION ICI : On affiche TOUJOURS si images > 0 (plus de !limitReached) */}
+        {images.length > 0 && (
           <section className="container pb-12">
             {/* Stats bar */}
             <motion.div
@@ -356,7 +335,7 @@ export default function Home() {
                 <p className="text-muted-foreground text-base leading-relaxed">
                   {t('marketing.vinted_text_2')}
                 </p>
-                 <p className="text-[#00ff41] font-medium text-base leading-relaxed">
+                  <p className="text-[#00ff41] font-medium text-base leading-relaxed">
                   {t('marketing.vinted_text_3')}
                 </p>
               </div>
@@ -411,21 +390,21 @@ export default function Home() {
             <p className="text-muted-foreground mb-12">{t('info.how_subtitle')}</p>
             
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto text-left">
-                 <div className="border border-[#00ff41]/20 bg-[#00ff41]/5 p-6 rounded-lg relative">
+                  <div className="border border-[#00ff41]/20 bg-[#00ff41]/5 p-6 rounded-lg relative">
                     <span className="text-4xl font-bold text-[#00ff41] opacity-20 absolute top-4 right-4">01</span>
                     <h3 className="text-[#00ff41] font-bold mb-2">{t('info.step_1_title')}</h3>
                     <p className="text-sm text-muted-foreground">{t('info.step_1_desc')}</p>
-                 </div>
-                 <div className="border border-[#ffb000]/20 bg-[#ffb000]/5 p-6 rounded-lg relative">
+                  </div>
+                  <div className="border border-[#ffb000]/20 bg-[#ffb000]/5 p-6 rounded-lg relative">
                     <span className="text-4xl font-bold text-[#ffb000] opacity-20 absolute top-4 right-4">02</span>
                     <h3 className="text-[#ffb000] font-bold mb-2">{t('info.step_2_title')}</h3>
                     <p className="text-sm text-muted-foreground">{t('info.step_2_desc')}</p>
-                 </div>
-                 <div className="border border-[#00ff41]/20 bg-[#00ff41]/5 p-6 rounded-lg relative">
+                  </div>
+                  <div className="border border-[#00ff41]/20 bg-[#00ff41]/5 p-6 rounded-lg relative">
                     <span className="text-4xl font-bold text-[#00ff41] opacity-20 absolute top-4 right-4">03</span>
                     <h3 className="text-[#00ff41] font-bold mb-2">{t('info.step_3_title')}</h3>
                     <p className="text-sm text-muted-foreground">{t('info.step_3_desc')}</p>
-                 </div>
+                  </div>
             </div>
         </section>
 
@@ -452,7 +431,7 @@ export default function Home() {
 
                 <div className="relative">
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-                         <img src={SHIELD_URL} alt="" className="w-48 h-48 object-contain" />
+                          <img src={SHIELD_URL} alt="" className="w-48 h-48 object-contain" />
                     </div>
                     <div className="border border-[#00ff41]/20 bg-[#00ff41]/5 p-6 rounded-xl relative overflow-hidden h-full z-10">
                         <div className="absolute inset-0 bg-[#00ff41]/5 blur-3xl opacity-20 pointer-events-none" />
