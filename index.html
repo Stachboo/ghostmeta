@@ -2,33 +2,29 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <meta name="google-site-verification" content="4JCTraWdjsFziypnfPi-KEOKnnjbAX1_5f1Rxh9VA4g" />
-
     <title>GhostMeta | Supprimez les métadonnées de vos photos</title>
-    <meta name="description" content="Protégez votre vie privée en supprimant les données EXIF et GPS de vos images localement." />
-    <meta name="robots" content="index, follow" />
+    <meta name="description" content="Supprimez les métadonnées GPS, EXIF et IPTC de vos photos avant de les publier sur Vinted, Leboncoin ou eBay. 100% local, gratuit, aucun upload." />
+    <meta name="keywords" content="métadonnées, EXIF, GPS, supprimer, photos, Vinted, Leboncoin, vie privée, HEIC, JPEG, PNG" />
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "GhostMeta",
-      "url": "https://ghostmeta.vercel.app/",
-      "operatingSystem": "All",
-      "applicationCategory": "SecurityApplication",
-      "description": "Local metadata and GPS stripper for marketplace photos.",
-      "offers": {
-        "@type": "Offer",
-        "price": "0.00",
-        "priceCurrency": "EUR"
-      }
-    }
-    </script>
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ghostmeta.vercel.app/" />
+    <meta property="og:title" content="GhostMeta — Supprimez les métadonnées de vos photos" />
+    <meta property="og:description" content="Protégez votre vie privée. Supprimez GPS, EXIF, XMP de vos photos en un clic. 100% local, rien n'est envoyé." />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GhostMeta — Supprimez les métadonnées de vos photos" />
+    <meta name="twitter:description" content="Protégez votre vie privée. Supprimez GPS, EXIF, XMP en un clic. 100% local." />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://ghostmeta.vercel.app/" />
   </head>
-  <body class="bg-[#0a0a0c]">
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

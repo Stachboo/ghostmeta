@@ -7,6 +7,7 @@
 
 import { ProcessedImage, formatFileSize, ThreatItem } from '@/lib/image-processor';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import {
   MapPin,
   Calendar,
@@ -58,20 +59,20 @@ function getSeverityStyles(severity: ThreatItem['severity']) {
   }
 }
 
-function StatusBadge({ status, threatLevel }: { status: ProcessedImage['status']; threatLevel?: string }) {
+function StatusBadge({ status, threatLevel, t }: { status: ProcessedImage['status']; threatLevel?: string; t: (key: string) => string }) {
   switch (status) {
     case 'pending':
       return (
         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-mono bg-slate-500/10 text-slate-400 border border-slate-500/20">
           <Shield className="w-3 h-3" />
-          EN ATTENTE
+          {t('card.pending')}
         </span>
       );
     case 'scanning':
       return (
         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
           <Loader2 className="w-3 h-3 animate-spin" />
-          SCAN...
+          {t('card.scanning')}
         </span>
       );
     case 'scanned':
@@ -79,7 +80,7 @@ function StatusBadge({ status, threatLevel }: { status: ProcessedImage['status']
         return (
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-mono bg-red-500/15 text-red-400 border border-red-500/25 animate-pulse-red">
             <ShieldAlert className="w-3 h-3" />
-            CRITIQUE
+            {t('card.critical')}
           </span>
         );
       }
@@ -87,35 +88,35 @@ function StatusBadge({ status, threatLevel }: { status: ProcessedImage['status']
         return (
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-mono bg-[#ffb000]/15 text-[#ffb000] border border-[#ffb000]/25">
             <AlertTriangle className="w-3 h-3" />
-            EXPOSÉ
+            {t('card.exposed')}
           </span>
         );
       }
       return (
         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-mono bg-[#00ff41]/10 text-[#00ff41] border border-[#00ff41]/20">
           <ShieldCheck className="w-3 h-3" />
-          PROPRE
+          {t('card.clean')}
         </span>
       );
     case 'cleaning':
       return (
         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-mono bg-[#00ff41]/10 text-[#00ff41] border border-[#00ff41]/20">
           <Loader2 className="w-3 h-3 animate-spin" />
-          PURGE...
+          {t('card.purging')}
         </span>
       );
     case 'cleaned':
       return (
         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-mono bg-[#00ff41]/15 text-[#00ff41] border border-[#00ff41]/30">
           <CheckCircle2 className="w-3 h-3" />
-          NEUTRALISÉ
+          {t('card.neutralized')}
         </span>
       );
     case 'error':
       return (
         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-mono bg-red-500/10 text-red-400 border border-red-500/20">
           <AlertTriangle className="w-3 h-3" />
-          ERREUR
+          {t('card.error')}
         </span>
       );
     default:
@@ -124,6 +125,7 @@ function StatusBadge({ status, threatLevel }: { status: ProcessedImage['status']
 }
 
 export default function ImageCard({ image, onRemove, onDownload, index }: ImageCardProps) {
+  const { t } = useTranslation();
   const { metadata, status } = image;
 
   return (
@@ -165,11 +167,11 @@ export default function ImageCard({ image, onRemove, onDownload, index }: ImageC
         </div>
 
         <div className="flex items-center gap-2 flex-shrink-0">
-          <StatusBadge status={status} threatLevel={metadata?.threatLevel} />
+          <StatusBadge status={status} threatLevel={metadata?.threatLevel} t={t} />
           <button
             onClick={() => onRemove(image.id)}
             className="p-1.5 rounded hover:bg-destructive/10 text-muted-foreground/50 hover:text-destructive transition-colors"
-            aria-label="Supprimer"
+            aria-label={t('card.remove')}
           >
             <X className="w-4 h-4" />
           </button>
@@ -202,7 +204,7 @@ export default function ImageCard({ image, onRemove, onDownload, index }: ImageC
         <div className="px-4 py-3">
           <div className="flex items-center gap-2 text-[#00ff41] text-xs font-mono">
             <ShieldCheck className="w-4 h-4" />
-            <span>Aucune métadonnée sensible détectée</span>
+            <span>{t('card.no_threats')}</span>
           </div>
         </div>
       )}
@@ -213,7 +215,7 @@ export default function ImageCard({ image, onRemove, onDownload, index }: ImageC
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-[#00ff41] text-xs">
               <ShieldCheck className="w-4 h-4" />
-              <span className="font-medium">Métadonnées supprimées avec succès</span>
+              <span className="font-medium">{t('card.cleaned_success')}</span>
             </div>
             <Button
               size="sm"
@@ -222,7 +224,7 @@ export default function ImageCard({ image, onRemove, onDownload, index }: ImageC
               className="h-8 text-xs border-[#00ff41]/30 text-[#00ff41] hover:bg-[#00ff41]/10 hover:text-[#00ff41]"
             >
               <Download className="w-3.5 h-3.5 mr-1.5" />
-              Télécharger
+              {t('card.download')}
             </Button>
           </div>
         </div>
