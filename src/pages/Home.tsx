@@ -91,6 +91,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      {/* Header */}
       <header className="sticky top-0 z-50 border-b border-border/30 bg-background/80 backdrop-blur-xl">
         <div className="container flex items-center justify-between h-14">
           <div className="flex items-center gap-2.5">
@@ -122,42 +123,168 @@ export default function Home() {
               <Heart className="w-3.5 h-3.5 mr-1 fill-current" />
               {t('pro.price_btn')}
             </Button>
+            
+            <div className="hidden md:flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Lock className="w-3 h-3" />
+              <span>{t('hero.secure_badge')}</span>
+            </div>
           </div>
         </div>
       </header>
 
       <main className="flex-1">
+        {/* Hero section */}
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <img src={HERO_BG_URL} alt="GhostMeta Background" className="w-full h-full object-cover opacity-15" />
+            <img src={HERO_BG_URL} alt="GhostMeta Protection Background" className="w-full h-full object-cover opacity-15" />
             <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/70 to-background" />
           </div>
+
           <div className="container relative z-10 pt-8 sm:pt-12 pb-6">
-            <div className="text-center mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="text-center mb-8"
+            >
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-3">
                 {t('hero.title_start')} <span className="text-[#00ff41]">{t('hero.title_color')}</span>
-                <br className="hidden sm:block" /> {t('hero.title_end')}
+                <br className="hidden sm:block" /> anonymisez vos photos Vinted & Leboncoin
               </h1>
-              <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto">{t('hero.subtitle')}</p>
-            </div>
+              <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto">
+                {t('hero.subtitle')}
+              </p>
+            </motion.div>
+
             <div className="max-w-2xl mx-auto">
-              <DropZone onFilesAdded={handleFilesAdded} hasImages={images.length > 0} isProcessing={isProcessing} />
+              <DropZone
+                onFilesAdded={handleFilesAdded}
+                hasImages={images.length > 0}
+                isProcessing={isProcessing}
+              />
             </div>
           </div>
         </section>
 
-        {/* Action bar & List (simplifié pour la clarté) */}
+        {/* Images & Controls */}
         {images.length > 0 && (
           <section className="container pb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="grid grid-cols-3 gap-3 mb-5"
+            >
+              <div className="flex items-center gap-2.5 p-3 rounded-lg bg-card border border-border">
+                <Shield className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                <div><p className="text-lg font-bold text-foreground leading-none">{stats.total}</p></div>
+              </div>
+              <div className="flex items-center gap-2.5 p-3 rounded-lg bg-card border border-border">
+                <AlertTriangle className="w-5 h-5 text-[#ffb000] flex-shrink-0" />
+                <div><p className="text-lg font-bold text-[#ffb000] leading-none">{stats.threatsFound}</p></div>
+              </div>
+              <div className="flex items-center gap-2.5 p-3 rounded-lg bg-card border border-border">
+                <ShieldCheck className="w-5 h-5 text-[#00ff41] flex-shrink-0" />
+                <div><p className="text-lg font-bold text-[#00ff41] leading-none">{stats.cleaned}</p></div>
+              </div>
+            </motion.div>
+
             <div className="space-y-3">
-              {images.map((image, index) => (
-                <ImageCard key={image.id} image={image} onRemove={removeImage} onDownload={downloadImage} index={index} />
-              ))}
+              <AnimatePresence mode="popLayout">
+                {images.map((image, index) => (
+                  <ImageCard key={image.id} image={image} onRemove={removeImage} onDownload={downloadImage} index={index} />
+                ))}
+              </AnimatePresence>
             </div>
           </section>
         )}
 
-        {/* Section Guides de Sécurité - LES 5 PAGES ICI */}
+        {/* Argumentaire Vinted */}
+        <section className="container py-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto p-6 sm:p-10 rounded-xl border border-[#ffb000]/20 bg-[#ffb000]/5 relative overflow-hidden"
+          >
+            <div className="flex flex-col sm:flex-row items-start gap-6">
+              <AlertTriangle className="w-10 h-10 text-[#ffb000] flex-shrink-0 mt-1" />
+              <div className="space-y-4">
+                <h2 className="text-2xl font-bold text-[#ffb000]">Pourquoi anonymiser vos photos Vinted & Leboncoin ?</h2>
+                <p className="text-muted-foreground text-base leading-relaxed">{t('marketing.vinted_text_1')}</p>
+                <p className="text-muted-foreground text-base leading-relaxed">{t('marketing.vinted_text_2')}</p>
+                <p className="text-[#00ff41] font-medium text-base leading-relaxed">{t('marketing.vinted_text_3')}</p>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Pourquoi / Why Section */}
+        <section className="container py-16 text-center">
+            <div className="mb-12">
+                <h2 className="text-3xl font-bold mb-4">Comment protéger votre vie privée en ligne ?</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto mb-8">{t('info.why_desc')}</p>
+                <img src={TABLET_SCAN_URL} alt="Analyse des données EXIF" className="max-w-3xl mx-auto mb-12 rounded-xl border border-white/10 shadow-2xl" />
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div className="p-6 rounded-xl bg-card border border-border/50 text-left">
+                    <MapPin className="w-8 h-8 text-red-500 mb-4" /><h3 className="font-bold text-lg mb-2">Nettoyage Coordonnées GPS</h3>
+                    <p className="text-sm text-muted-foreground">{t('info.geo_desc')}</p>
+                </div>
+                <div className="p-6 rounded-xl bg-card border border-border/50 text-left">
+                    <Clock className="w-8 h-8 text-amber-500 mb-4" /><h3 className="font-bold text-lg mb-2">Suppression Métadonnées EXIF</h3>
+                    <p className="text-sm text-muted-foreground">{t('info.meta_desc')}</p>
+                </div>
+                <div className="p-6 rounded-xl bg-card border border-border/50 text-left">
+                    <Smartphone className="w-8 h-8 text-blue-500 mb-4" /><h3 className="font-bold text-lg mb-2">Anonymisation Appareil</h3>
+                    <p className="text-sm text-muted-foreground">{t('info.hard_desc')}</p>
+                </div>
+            </div>
+        </section>
+
+        {/* Comment / How Section */}
+        <section className="container py-16 text-center">
+            <h2 className="text-3xl font-bold mb-4">Comment fonctionne GhostMeta ?</h2>
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto text-left">
+                  <div className="border border-[#00ff41]/20 bg-[#00ff41]/5 p-6 rounded-lg relative">
+                    <span className="text-4xl font-bold text-[#00ff41] opacity-20 absolute top-4 right-4">01</span>
+                    <h3 className="text-[#00ff41] font-bold mb-2">Sélectionnez vos images</h3>
+                    <p className="text-sm text-muted-foreground">{t('info.step_1_desc')}</p>
+                  </div>
+                  <div className="border border-[#ffb000]/20 bg-[#ffb000]/5 p-6 rounded-lg relative">
+                    <span className="text-4xl font-bold text-[#ffb000] opacity-20 absolute top-4 right-4">02</span>
+                    <h3 className="text-[#ffb000] font-bold mb-2">Traitement Local Sécurisé</h3>
+                    <p className="text-sm text-muted-foreground">{t('info.step_2_desc')}</p>
+                  </div>
+                  <div className="border border-[#00ff41]/20 bg-[#00ff41]/5 p-6 rounded-lg relative">
+                    <span className="text-4xl font-bold text-[#00ff41] opacity-20 absolute top-4 right-4">03</span>
+                    <h3 className="text-[#00ff41] font-bold mb-2">Téléchargez vos photos propres</h3>
+                    <p className="text-sm text-muted-foreground">{t('info.step_3_desc')}</p>
+                  </div>
+            </div>
+        </section>
+
+        {/* Architecture Section */}
+        <section className="container py-16">
+            <div className="text-center mb-10"><h2 className="text-3xl font-bold mb-2">Sécurité Cloud vs Protection Locale</h2></div>
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-center">
+                <div className="border border-red-500/20 bg-red-500/5 p-6 rounded-xl h-full">
+                    <h3 className="text-red-500 font-bold mb-4 flex items-center gap-2"><Server className="w-5 h-5" /> Cloud (Autres outils)</h3>
+                    <ul className="space-y-3 text-sm text-muted-foreground">
+                        <li className="flex items-center gap-2"><XCircle className="w-4 h-4 text-red-500" /> {t('info.arch_bad_1')}</li>
+                        <li className="flex items-center gap-2"><XCircle className="w-4 h-4 text-red-500" /> {t('info.arch_bad_2')}</li>
+                    </ul>
+                </div>
+                <div className="border border-[#00ff41]/20 bg-[#00ff41]/5 p-6 rounded-xl relative overflow-hidden h-full z-10">
+                    <h3 className="text-[#00ff41] font-bold mb-4 flex items-center gap-2"><ShieldCheck className="w-5 h-5" /> GhostMeta (Browser-Only)</h3>
+                    <ul className="space-y-3 text-sm text-muted-foreground">
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#00ff41]" /> {t('info.arch_good_1')}</li>
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#00ff41]" /> {t('info.arch_good_2')}</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        {/* Section Guides de Sécurité - LES 5 PAGES ICI SANS DOUBLON */}
         <section className="container py-16 border-t border-border/30">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold mb-8 text-[#00ff41]">Guides de Sécurité & Confidentialité</h2>
@@ -184,6 +311,19 @@ export default function Home() {
               </Link>
             </div>
           </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="max-w-2xl mx-auto py-16 space-y-6">
+            <h2 className="text-2xl font-bold text-center">Questions Fréquentes</h2>
+            <Accordion type="single" collapsible className="w-full">
+            {[1, 2, 3, 4, 5, 6].map((num) => (
+                <AccordionItem key={num} value={`item-${num}`}>
+                <AccordionTrigger className="text-left">{t(`info.q${num}`)}</AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">{t(`info.a${num}`)}</AccordionContent>
+                </AccordionItem>
+            ))}
+            </Accordion>
         </section>
       </main>
 
