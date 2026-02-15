@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
+        <Route path="/blog/:slug" element={<Suspense fallback={<div>Loading...</div>}><BlogPage /></Suspense>} />
         </Routes>
       </Suspense>
       <Analytics />
