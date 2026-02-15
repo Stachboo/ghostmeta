@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+const BlogPage = lazy(() => import("./pages/BlogPage"));
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
