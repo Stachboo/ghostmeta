@@ -11,13 +11,23 @@
     <meta name="description" content="Protégez votre adresse : supprimez GPS et métadonnées cachées de vos photos Vinted, Leboncoin et eBay. Protection 100% locale et gratuite." />
     <meta name="keywords" content="Vinted, Leboncoin, eBay, supprimer EXIF, localisation photo, anonymiser photo, sécurité vendeur, métadonnées, GPS" />
 
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="fr" href="https://ghostmeta.online/" />
+    <link rel="alternate" hreflang="en" href="https://ghostmeta.online/?lng=en" />
+    <link rel="alternate" hreflang="x-default" href="https://ghostmeta.online/" />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://ghostmeta.online/" />
     <meta property="og:title" content="Protégez votre adresse sur Vinted et Leboncoin" />
     <meta property="og:description" content="Outil gratuit pour supprimer la localisation GPS de vos photos de vente. Ne publiez rien sans nettoyer !" />
     <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:image" content="https://ghostmeta.online/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="GhostMeta — Sécurité Vinted & Leboncoin" />
     <meta name="twitter:description" content="Supprimez GPS et EXIF en 1 clic. 100% Gratuit & Local." />
@@ -25,6 +35,7 @@
 
     <link rel="canonical" href="https://ghostmeta.online/" />
 
+    <!-- JSON-LD : SoftwareApplication -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -33,7 +44,7 @@
       "url": "https://ghostmeta.online",
       "applicationCategory": "SecurityApplication",
       "operatingSystem": "Web Browser",
-      "description": "Outil gratuit pour supprimer les métadonnées EXIF et GPS des photos avant de les poster sur Vinted, Leboncoin ou les réseaux sociaux. Protection de la vie privée locale.",
+      "description": "Outil gratuit pour supprimer les métadonnées EXIF et GPS des photos avant de les poster sur Vinted, Leboncoin ou les réseaux sociaux.",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -46,6 +57,91 @@
         "@type": "Person",
         "name": "GhostMeta Team"
       }
+    }
+    </script>
+
+    <!-- JSON-LD : FAQPage (Featured Snippets) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Mes photos sont-elles envoyées sur un serveur ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non. Tout le traitement se fait localement dans votre navigateur via l'API Canvas. Aucune donnée ne transite par un serveur."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quels formats d'images sont supportés ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GhostMeta supporte JPEG, PNG, WebP et HEIC (iPhone)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quelles métadonnées sont supprimées ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Toutes les métadonnées embarquées : GPS, EXIF, XMP, IPTC. L'image est reconstruite pixel par pixel pour garantir un fichier propre."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "La qualité de l'image est-elle affectée ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "L'image est recompressée à 92% de qualité (JPEG) pour un bon compromis poids/qualité. Les images de plus de 4096px sont redimensionnées."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Les plateformes comme Vinted ne nettoient-elles pas déjà les métadonnées ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pas toujours, et souvent après avoir stocké l'original sur leurs serveurs. GhostMeta vous protège avant même l'upload."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- JSON-LD : HowTo -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Comment supprimer les métadonnées GPS de vos photos Vinted",
+      "description": "Guide en 3 étapes pour anonymiser vos photos avant de les publier sur Vinted, Leboncoin ou eBay.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Déposez vos photos",
+          "text": "Glissez-déposez ou sélectionnez vos images. JPEG, PNG, WebP et HEIC supportés."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Scan des menaces",
+          "text": "GhostMeta analyse chaque image et identifie les métadonnées sensibles (GPS, date, appareil)."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Neutralisation et téléchargement",
+          "text": "Un clic pour supprimer toutes les métadonnées. Téléchargez vos images propres."
+        }
+      ],
+      "tool": {
+        "@type": "HowToTool",
+        "name": "GhostMeta (navigateur web)"
+      },
+      "totalTime": "PT30S"
     }
     </script>
   </head>

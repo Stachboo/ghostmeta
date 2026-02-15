@@ -31,10 +31,9 @@ import ProModal from '@/components/ProModal';
 import Footer from '@/components/Footer';
 import { useImageProcessor } from '@/hooks/useImageProcessor';
 
-// --- IMAGES OFFICIELLES (INCHANGÉES) ---
-const HERO_BG_URL = "https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se-img-1_1770726687000_na1fn_Z2hvc3RtZXRhLWhlcm8tYmc.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvOGh1WW4yZHlXcHg5a3pIUGJNemlwai9zYW5kYm94L1NlN2wyYXhQUVBhWkZVenV1dm85U2UtaW1nLTFfMTc3MDcyNjY4NzAwMF9uYTFmbl9aMmh2YzNSdFpYUmhMV2hsY204dFltYy5wbmc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xOTIwLGhfMTkyMC9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=JNX4ezXkHI9~cHMpVXQz9jegOhIM61IQKqOqxFbJiTM9xxzwPGMmVr535OKijZfVicM-2wpovao0YeFfjmA3nikymInRSjxrBU5VfNsGGzM3dI1J9kItLwfbQNgLSDq-cZnwyd0GkwbmVX3CP0UIyjIDfG7Y8Lam6l~U8BI7~jMeMgqIjlTdHFAousFa2uaM34DfbGoeTzefpmfq7ncbuVjECuEY3c82y7M-OKKfPdDZ8HVogC6m3ERW5810TN6Ygdd996YxKryBFIsuNsZ1v~r2SDFobD9y3FQ-80jgvM1pRyqZnV9~P16AdkSKjDzsNsg~bhhhnNC3uMAkH7MP9g__";
-const TABLET_SCAN_URL = "https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se-img-3_1770726694000_na1fn_Z2hvc3RtZXRhLXNjYW4tZWZmZWN0.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvOGh1WW4yZHlXcHg5a3pIUGJNemlwai9zYW5kYm94L1NlN2wyYXhQUVBhWkZVenV1dm85U2UtaW1nLTNfMTc3MDcyNjY5NDAwMF9uYTFmbl9aMmh2YzNSdFpYUmhMWE5qWVc0dFpXWm1aV04wLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=twLze8fBhWRAeXA-ZduyhqoPb4UAc9XaJ8940DzoFSplumzcXlv7qB1BDpnxjzN5qLTTWHal5ajaLp37nzQUO6ba4Tw-wLUQdGgNPYi1d3Zxta8LGHMs0fRqvPWCZDLfp3Uytvzim94eBHn~vPONftZw-bFBz~NYFgRbyvfw4tf311h1gQgtLFLxSvh2VgZu1n~BfhE~9O1yaDo2IXBIvXjlhOUxRBVUQcVWt2p236Pyp6JHG0i3W9b1lj3zFR1Ff2aAjKUJyqdhvCz0I8V1wi28cmSczwI7l81M1uJALrImbArl~rM05CkadftAjadb5TyIuZNgAB8IipZ99iYL8g__";
-const SHIELD_URL = "https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se_1770726694647_na1fn_Z2hvc3RtZXRhLXNoaWVsZA.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvOGh1WW4yZHlXcHg5a3pIUGJNemlwai9zYW5kYm94L1NlN2wyYXhQUVBhWkZVenV1dm85U2VfMTc3MDcyNjY5NDY0N19uYTFmbl9aMmh2YzNSdFpYUmhMWE5vYVdWc1pBLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=j-RcYfWc8jgkoKUBcYlVfFcQ8Y6DZFThE30fFX8gFxpri7UDVcfN5~FBw7mI6qyTsk3nczlyirg9boGlgwzRHcCv2ju6PMb3mh~5oOeBcOs8r-H5HQzRhTJXWunKH5KKGhKrz5RqABOgpVxmi8sxYXWsMGOcLMtB4HWCkqrnAn-fRnEbqFGOGEYZDbkROSa5JS3h63CqOCmf-nUjngooWogsKL07whYqTphVu17RXCQ7wBlDB5LMNb1LJM4I8gdmUix6sLTSD634maL8H~U9FWY8Dvfdf9Lu7qfXH6gHZ36a-8ov3zsUPISR8L6fu2yMOkAqiFp1lSRk05EBI4Ypaw__";
+const HERO_BG_URL = "/hero-bg.webp";
+const TABLET_SCAN_URL = "/scan-effect.webp";
+const SHIELD_URL = "/shield.webp";
 const PAYPAL_LINK = "https://paypal.me/abdus84";
 
 export default function Home() {
@@ -45,7 +44,6 @@ export default function Home() {
     localStorage.setItem('i18nextLng', lng);
   };
 
-  // --- MODIFICATION ICI : On ne récupère plus 'limitReached' ---
   const {
     images,
     isProcessing,
@@ -119,7 +117,6 @@ export default function Home() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Bouton Donation */}
             <Button
               variant="outline"
               size="sm"
@@ -139,10 +136,10 @@ export default function Home() {
       </header>
 
       <main className="flex-1">
-        {/* Hero section */}
+        {/* Hero section : OPTIMISATION H1 */}
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <img src={HERO_BG_URL} alt="" className="w-full h-full object-cover opacity-15" />
+            <img src={HERO_BG_URL} alt="GhostMeta Background Protection" className="w-full h-full object-cover opacity-15" />
             <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/70 to-background" />
           </div>
 
@@ -153,6 +150,7 @@ export default function Home() {
               transition={{ duration: 0.4 }}
               className="text-center mb-8"
             >
+              {/* H1 OPTIMISÉ SEO */}
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-3">
                 {t('hero.title_start')} <span className="text-[#00ff41]">{t('hero.title_color')}</span>
                 <br className="hidden sm:block" /> {t('hero.title_end')}
@@ -172,12 +170,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* --- MODIFICATION ICI : Suppression de l'ALERTE LIMITE --- */}
-
-        {/* Images & Controls - MODIFICATION ICI : On affiche TOUJOURS si images > 0 (plus de !limitReached) */}
+        {/* Images & Controls */}
         {images.length > 0 && (
           <section className="container pb-12">
-            {/* Stats bar */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -203,7 +198,6 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Action bar */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -255,7 +249,6 @@ export default function Home() {
               </Button>
             </motion.div>
 
-            {/* Progress bar */}
             <AnimatePresence>
               {isProcessing && (
                 <motion.div
@@ -275,7 +268,6 @@ export default function Home() {
               )}
             </AnimatePresence>
 
-            {/* Image list */}
             <div className="space-y-3">
               <AnimatePresence mode="popLayout">
                 {images.map((image, index) => (
@@ -292,7 +284,6 @@ export default function Home() {
           </section>
         )}
 
-        {/* Scroll indicator */}
         {images.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -310,7 +301,7 @@ export default function Home() {
           </motion.div>
         )}
 
-        {/* Argumentaire Vinted */}
+        {/* Argumentaire Vinted : OPTIMISATION H2 */}
         <section className="container py-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -327,7 +318,7 @@ export default function Home() {
               <AlertTriangle className="w-10 h-10 text-[#ffb000] flex-shrink-0 mt-1" />
               <div className="space-y-4">
                 <h2 className="text-2xl font-bold text-[#ffb000]">
-                  {t('marketing.vinted_title')}
+                  Pourquoi anonymiser vos photos Vinted & Leboncoin ?
                 </h2>
                 <p className="text-muted-foreground text-base leading-relaxed">
                   {t('marketing.vinted_text_1')}
@@ -335,7 +326,7 @@ export default function Home() {
                 <p className="text-muted-foreground text-base leading-relaxed">
                   {t('marketing.vinted_text_2')}
                 </p>
-                  <p className="text-[#00ff41] font-medium text-base leading-relaxed">
+                <p className="text-[#00ff41] font-medium text-base leading-relaxed">
                   {t('marketing.vinted_text_3')}
                 </p>
               </div>
@@ -343,11 +334,11 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* POURQUOI / WHY Section */}
+        {/* POURQUOI / WHY Section : OPTIMISATION H2/H3 */}
         <section className="container py-16 text-center">
             <div className="mb-12">
                 <h2 className="text-3xl font-bold mb-4">
-                    {t('info.why_title')} <span className="text-red-500">{t('info.why_title_highlight')}</span>
+                  Comment protéger votre vie privée en ligne ?
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
                     {t('info.why_desc')}
@@ -359,50 +350,50 @@ export default function Home() {
                   viewport={{ once: true }}
                   className="max-w-3xl mx-auto mb-12 rounded-xl overflow-hidden border border-white/10 shadow-2xl"
                 >
-                  <img src={TABLET_SCAN_URL} alt="Scan Analysis" className="w-full h-auto object-cover" />
+                  <img src={TABLET_SCAN_URL} alt="Analyse des données EXIF et GPS" className="w-full h-auto object-cover" />
                 </motion.div>
             </div>
             
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 <div className="p-6 rounded-xl bg-card border border-border/50 text-left">
                     <MapPin className="w-8 h-8 text-red-500 mb-4" />
-                    <h3 className="font-bold text-lg mb-2">{t('info.geo_title')}</h3>
+                    <h3 className="font-bold text-lg mb-2">Nettoyage Coordonnées GPS</h3>
                     <p className="text-sm text-muted-foreground">{t('info.geo_desc')}</p>
                 </div>
                 <div className="p-6 rounded-xl bg-card border border-border/50 text-left">
                     <Clock className="w-8 h-8 text-amber-500 mb-4" />
-                    <h3 className="font-bold text-lg mb-2">{t('info.meta_title')}</h3>
+                    <h3 className="font-bold text-lg mb-2">Suppression Métadonnées EXIF</h3>
                     <p className="text-sm text-muted-foreground">{t('info.meta_desc')}</p>
                 </div>
                 <div className="p-6 rounded-xl bg-card border border-border/50 text-left">
                     <Smartphone className="w-8 h-8 text-blue-500 mb-4" />
-                    <h3 className="font-bold text-lg mb-2">{t('info.hard_title')}</h3>
+                    <h3 className="font-bold text-lg mb-2">Anonymisation Appareil</h3>
                     <p className="text-sm text-muted-foreground">{t('info.hard_desc')}</p>
                 </div>
             </div>
         </section>
 
-        {/* COMMENT / HOW Section */}
+        {/* COMMENT / HOW Section : OPTIMISATION H2 */}
         <section className="container py-16 text-center">
             <h2 className="text-3xl font-bold mb-4">
-                {t('info.how_title')} <span className="text-[#00ff41]">{t('info.how_highlight')}</span>
+              Comment fonctionne GhostMeta ?
             </h2>
             <p className="text-muted-foreground mb-12">{t('info.how_subtitle')}</p>
             
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto text-left">
                   <div className="border border-[#00ff41]/20 bg-[#00ff41]/5 p-6 rounded-lg relative">
                     <span className="text-4xl font-bold text-[#00ff41] opacity-20 absolute top-4 right-4">01</span>
-                    <h3 className="text-[#00ff41] font-bold mb-2">{t('info.step_1_title')}</h3>
+                    <h3 className="text-[#00ff41] font-bold mb-2">Sélectionnez vos images</h3>
                     <p className="text-sm text-muted-foreground">{t('info.step_1_desc')}</p>
                   </div>
                   <div className="border border-[#ffb000]/20 bg-[#ffb000]/5 p-6 rounded-lg relative">
                     <span className="text-4xl font-bold text-[#ffb000] opacity-20 absolute top-4 right-4">02</span>
-                    <h3 className="text-[#ffb000] font-bold mb-2">{t('info.step_2_title')}</h3>
+                    <h3 className="text-[#ffb000] font-bold mb-2">Traitement Local 100% Sécurisé</h3>
                     <p className="text-sm text-muted-foreground">{t('info.step_2_desc')}</p>
                   </div>
                   <div className="border border-[#00ff41]/20 bg-[#00ff41]/5 p-6 rounded-lg relative">
                     <span className="text-4xl font-bold text-[#00ff41] opacity-20 absolute top-4 right-4">03</span>
-                    <h3 className="text-[#00ff41] font-bold mb-2">{t('info.step_3_title')}</h3>
+                    <h3 className="text-[#00ff41] font-bold mb-2">Téléchargez vos photos propres</h3>
                     <p className="text-sm text-muted-foreground">{t('info.step_3_desc')}</p>
                   </div>
             </div>
@@ -412,7 +403,7 @@ export default function Home() {
         <section className="container py-16">
             <div className="text-center mb-10">
                 <h2 className="text-3xl font-bold mb-2">
-                    {t('info.arch_title')} <span className="text-[#00ff41]">{t('info.arch_highlight')}</span>
+                    Sécurité Cloud vs Protection Locale
                 </h2>
                 <p className="text-muted-foreground">{t('info.arch_subtitle')}</p>
             </div>
@@ -420,7 +411,7 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-center">
                 <div className="border border-red-500/20 bg-red-500/5 p-6 rounded-xl h-full">
                     <h3 className="text-red-500 font-bold mb-4 flex items-center gap-2">
-                        <Server className="w-5 h-5" /> {t('info.arch_bad_title')}
+                        <Server className="w-5 h-5" /> Les autres outils (Cloud)
                     </h3>
                     <ul className="space-y-3 text-sm text-muted-foreground">
                         <li className="flex items-center gap-2"><XCircle className="w-4 h-4 text-red-500" /> {t('info.arch_bad_1')}</li>
@@ -431,12 +422,12 @@ export default function Home() {
 
                 <div className="relative">
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-                          <img src={SHIELD_URL} alt="" className="w-48 h-48 object-contain" />
+                          <img src={SHIELD_URL} alt="Bouclier de protection GhostMeta" className="w-48 h-48 object-contain" />
                     </div>
                     <div className="border border-[#00ff41]/20 bg-[#00ff41]/5 p-6 rounded-xl relative overflow-hidden h-full z-10">
                         <div className="absolute inset-0 bg-[#00ff41]/5 blur-3xl opacity-20 pointer-events-none" />
                         <h3 className="text-[#00ff41] font-bold mb-4 flex items-center gap-2">
-                            <ShieldCheck className="w-5 h-5" /> {t('info.arch_good_title')}
+                            <ShieldCheck className="w-5 h-5" /> GhostMeta (Technologie Browser-Only)
                         </h3>
                         <ul className="space-y-3 text-sm text-muted-foreground">
                             <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#00ff41]" /> {t('info.arch_good_1')}</li>
@@ -448,17 +439,16 @@ export default function Home() {
             </div>
         </section>
 
-        {/* PRICING Section (Modifiée pour Donation / Coming Soon) */}
+        {/* PRICING Section */}
         <section className="container py-16 text-center">
             <h2 className="text-3xl font-bold mb-2 flex items-center justify-center gap-2">
-                <Zap className="w-6 h-6 text-[#00ff41]" /> {t('pro.title')}
+                <Zap className="w-6 h-6 text-[#00ff41]" /> Tarification GhostMeta
             </h2>
             <p className="text-muted-foreground mb-10">{t('pro.subtitle')}</p>
 
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
-                {/* Gratuit */}
                 <div className="p-6 rounded-xl border border-border bg-card">
-                    <h3 className="font-bold text-xl mb-4">{t('pro.free_title')}</h3>
+                    <h3 className="font-bold text-xl mb-4">Version Gratuite Illimitée</h3>
                     <ul className="space-y-3 text-sm text-muted-foreground mb-6">
                         <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> {t('pro.free_1')}</li>
                         <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> {t('pro.free_2')}</li>
@@ -467,11 +457,10 @@ export default function Home() {
                     </ul>
                 </div>
 
-                {/* Pro (Verrouillé) */}
                 <div className="p-6 rounded-xl border border-dashed border-[#00ff41]/20 bg-[#00ff41]/5 relative opacity-80">
-                    <div className="absolute top-4 right-4 text-xs font-bold bg-[#00ff41]/20 text-[#00ff41] px-2 py-1 rounded">{t('pro.unlock')}</div>
-                    <h3 className="font-bold text-xl mb-1">{t('pro.pro_title')}</h3>
-                    <p className="text-2xl font-bold text-[#00ff41] mb-4">{t('pro.pro_price')}</p>
+                    <div className="absolute top-4 right-4 text-xs font-bold bg-[#00ff41]/20 text-[#00ff41] px-2 py-1 rounded">Soutenir le projet</div>
+                    <h3 className="font-bold text-xl mb-1">Pack Pro (Bientôt disponible)</h3>
+                    <p className="text-2xl font-bold text-[#00ff41] mb-4">Don libre</p>
                     <ul className="space-y-3 text-sm text-muted-foreground mb-8">
                         <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#00ff41]" /> {t('pro.pro_1')}</li>
                         <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#00ff41]" /> {t('pro.pro_2')}</li>
@@ -480,7 +469,7 @@ export default function Home() {
                     </ul>
                     <Button onClick={handleDonation} className="w-full bg-[#ff0055] hover:bg-[#d40047] text-white font-bold">
                         <Heart className="w-4 h-4 mr-2 fill-white" />
-                        {t('pro.price_btn')}
+                        Soutenir GhostMeta
                     </Button>
                 </div>
             </div>
@@ -488,7 +477,7 @@ export default function Home() {
 
         {/* FAQ */}
         <section className="max-w-2xl mx-auto py-16 space-y-6">
-            <h2 className="text-2xl font-bold text-center">{t('info.faq_title')}</h2>
+            <h2 className="text-2xl font-bold text-center">Questions Fréquentes sur la Sécurité Photo</h2>
             <Accordion type="single" collapsible className="w-full">
             {[1, 2, 3, 4, 5, 6].map((num) => (
                 <AccordionItem key={num} value={`item-${num}`}>
