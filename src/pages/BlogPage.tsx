@@ -14,7 +14,7 @@ export default function BlogPage() {
         </h1>
         <p className="text-amber-500 font-mono text-sm mb-8">STATUS: SKELETON_PAGE_ACTIVE</p>
         <div className="h-40 border border-dashed border-white/10 flex items-center justify-center text-muted-foreground italic">
-          Contenu vide - En attente de rédaction
+          Contenu en cours de rédaction...
         </div>
         <Link to="/" className="mt-8 inline-block text-sm text-[#00ff41] hover:underline">
           ← Retour à l'accueil

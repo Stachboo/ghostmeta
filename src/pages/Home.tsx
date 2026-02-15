@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
@@ -490,6 +491,19 @@ export default function Home() {
                 </AccordionItem>
             ))}
             </Accordion>
+        </section>
+        <section className="container py-16 border-t border-border/30"> 
+          <div className="max-w-4xl mx-auto"> 
+            <h2 className="text-2xl font-bold mb-8 text-[#00ff41]">Guides de Sécurité Photo</h2> 
+            <div className="grid sm:grid-cols-2 gap-4"> 
+              <Link to="/blog/vinted-securite-photo-guide" className="p-4 rounded-lg bg-card border border-border hover:border-[#00ff41]/50 transition-all"> 
+                <h3 className="font-bold text-sm">Sécurité Vinted : Le Guide</h3> 
+              </Link> 
+              <Link to="/blog/supprimer-exif-iphone-android" className="p-4 rounded-lg bg-card border border-border hover:border-[#00ff41]/50 transition-all"> 
+                <h3 className="font-bold text-sm">Tuto GPS : iPhone & Android</h3> 
+              </Link> 
+            </div> 
+          </div> 
         </section>
       </main>
 
