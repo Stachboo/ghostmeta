@@ -235,9 +235,6 @@ importers:
       baseline-browser-mapping:
         specifier: ^2.9.19
         version: 2.9.19
-      esbuild:
-        specifier: ^0.25.0
-        version: 0.25.10
       pnpm:
         specifier: ^10.15.1
         version: 10.18.1
