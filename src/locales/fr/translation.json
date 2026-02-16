@@ -52,27 +52,27 @@
       "vinted-securite-photo-guide": {
         "title": "Vinted : Le guide ultime pour sécuriser vos photos",
         "desc": "Pourquoi et comment nettoyer vos images avant de vendre.",
-        "content": "<p>Vos photos contiennent des coordonnées GPS et des signatures d'appareil qui peuvent être utilisées pour vous identifier.</p><h4>Comment se protéger ?</h4><p>Utilisez GhostMeta pour purger ces données avant chaque mise en ligne sur Vinted.</p>"
+        "content": "<h4>Le danger invisible des tags EXIF</h4><p>Quand vous vendez sur Vinted, chaque vêtement pris en photo dans votre chambre peut trahir votre position exacte. Les fichiers JPEG stockent des tags EXIF contenant vos coordonnées GPS précises à 3 mètres près.</p><h4>Le piège du 'Envoi par WhatsApp'</h4><p>Beaucoup de vendeuses envoient des photos supplémentaires par message privé. Contrairement à la plateforme Vinted qui compresse légèrement, l'envoi direct livre le fichier original brut avec toutes vos données personnelles.</p><h4>La solution GhostMeta</h4><p>En passant vos photos dans GhostMeta avant l'upload, vous neutralisez ces signatures numériques. Notre outil reconstruit l'image pixel par pixel pour garantir qu'aucune donnée fantôme ne subsiste.</p>"
       },
       "supprimer-exif-iphone-android": {
         "title": "Supprimer les EXIF sur iPhone et Android",
         "desc": "Guide technique pour mobile.",
-        "content": "<p>Les smartphones modernes intègrent des métadonnées invisibles à chaque cliché.</p><h4>La solution locale</h4><p>GhostMeta traite vos photos directement dans votre navigateur, sans jamais envoyer vos fichiers sur un serveur.</p>"
+        "content": "<h4>Sur iPhone (iOS)</h4><p>Apple permet désormais de masquer la localisation lors du partage, mais cela ne supprime pas les données du fichier stocké. Pour une purge réelle, il est conseillé d'utiliser un outil de traitement local.</p><h4>Sur Android</h4><p>Le système Android est particulièrement bavard. En plus du GPS, il stocke le numéro de série de l'optique et les réglages de capture (ISO, vitesse), créant une véritable empreinte matérielle.</p><h4>Pourquoi le traitement local ?</h4><p>Utiliser une application cloud pour nettoyer ses photos revient à donner ses données à un tiers pour qu'il les cache aux autres. GhostMeta effectue le nettoyage dans votre RAM, sans aucun transfert de fichier.</p>"
       },
       "comprendre-donnees-exif-gps": {
         "title": "Comprendre les données EXIF et GPS",
         "desc": "Tout savoir sur les métadonnées cachées.",
-        "content": "<p>L'EXIF (Exchangeable Image File Format) est une carte d'identité de votre photo.</p>"
+        "content": "<h4>Qu'est-ce que l'EXIF ?</h4><p>Créé en 1995, l'Exchangeable Image File Format est une norme qui attache des métadonnées aux images. Ce qui était utile pour les photographes pro est devenu un cauchemar pour la vie privée avec l'arrivée des smartphones GPS.</p><h4>Les tags les plus sensibles</h4><ul><li><strong>GPS Altitude/Latitude :</strong> Votre position précise.</li><li><strong>DateTimeOriginal :</strong> L'heure exacte qui permet de déduire vos routines.</li><li><strong>Make/Model :</strong> La valeur de votre matériel, cible potentielle pour les vols.</li></ul>"
       },
       "nettoyage-photo-local-vs-cloud": {
         "title": "Nettoyage Photo : Local vs Cloud",
         "desc": "Pourquoi le traitement local est plus sûr.",
-        "content": "<p>Le traitement en ligne classique expose vos photos à des fuites de données.</p>"
+        "content": "<h4>La faille du Cloud</h4><p>Les sites de nettoyage gratuits en ligne sont souvent des 'aspirateurs à données'. En envoyant votre photo sur leurs serveurs, vous leur donnez accès à l'original avant nettoyage.</p><h4>La philosophie Zero-Knowledge</h4><p>GhostMeta utilise l'API Canvas de votre navigateur. Cela signifie que votre processeur fait le travail et que votre connexion internet n'est jamais utilisée pour transférer vos images. C'est la seule méthode 100% anonyme.</p>"
       },
       "ghostmeta-manifeste-confidentialite": {
         "title": "GhostMeta : Manifeste pour la Confidentialité",
         "desc": "Nos engagements pour votre vie privée.",
-        "content": "<p>Nous croyons en un web où l'utilisateur garde le contrôle total de ses données.</p>"
+        "content": "<h4>La vie privée n'est pas une option</h4><p>Nous avons créé GhostMeta parce que les outils existants étaient soit trop complexes, soit trop intrusifs. Notre manifeste repose sur la gratuité du service de base et la transparence totale du code.</p><h4>Notre engagement</h4><p>Aucun tracker, aucun cookie publicitaire, et un traitement qui restera à jamais local.</p>"
       }
     }
   },

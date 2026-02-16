@@ -52,27 +52,27 @@
       "vinted-securite-photo-guide": {
         "title": "Vinted: The ultimate guide to securing your photos",
         "desc": "Why and how to clean your images before selling.",
-        "content": "<p>Your photos contain GPS coordinates and device signatures that can be used to identify you.</p><h4>How to protect yourself?</h4><p>Use GhostMeta to purge this data before every upload on Vinted.</p>"
+        "content": "<h4>The Invisible Danger of EXIF Tags</h4><p>When you sell on Vinted, every item photographed in your bedroom can betray your exact location. JPEG files store EXIF tags containing your GPS coordinates accurate within 3 meters.</p><h4>The 'Send via WhatsApp' Trap</h4><p>Many sellers send extra photos via private message. Unlike the Vinted platform which compresses slightly, direct sending delivers the raw original file with all your personal data.</p><h4>The GhostMeta Solution</h4><p>By processing your photos in GhostMeta before uploading, you neutralize these digital signatures. Our tool rebuilds the image pixel by pixel to ensure no ghost data remains.</p>"
       },
       "supprimer-exif-iphone-android": {
         "title": "Remove EXIF on iPhone and Android",
         "desc": "Technical guide for mobile devices.",
-        "content": "<p>Modern smartphones embed invisible metadata in every shot.</p><h4>The local solution</h4><p>GhostMeta processes your photos directly in your browser, never sending your files to a server.</p>"
+        "content": "<h4>On iPhone (iOS)</h4><p>Apple now allows hiding location when sharing, but it doesn't remove data from the stored file. For actual purging, use a local processing tool.</p><h4>On Android</h4><p>Android systems are particularly verbose. Besides GPS, they store lens serial numbers and capture settings (ISO, speed), creating a real hardware fingerprint.</p><h4>Why Local Processing?</h4><p>Using a cloud app to clean photos is like giving your data to a third party so they can hide it from others. GhostMeta cleans in your RAM, without any file transfer.</p>"
       },
       "comprendre-donnees-exif-gps": {
         "title": "Understanding EXIF and GPS Data",
         "desc": "Everything you need to know about hidden metadata.",
-        "content": "<p>EXIF (Exchangeable Image File Format) is your photo's ID card.</p>"
+        "content": "<h4>What is EXIF?</h4><p>Created in 1995, Exchangeable Image File Format is a standard for attaching metadata to images. What was useful for pro photographers became a privacy nightmare with GPS smartphones.</p><h4>Most Sensitive Tags</h4><ul><li><strong>GPS Altitude/Latitude:</strong> Your precise location.</li><li><strong>DateTimeOriginal:</strong> The exact time revealing your routines.</li><li><strong>Make/Model:</strong> Your equipment value, a potential target for theft.</li></ul>"
       },
       "nettoyage-photo-local-vs-cloud": {
         "title": "Photo Cleaning: Local vs Cloud",
         "desc": "Why local processing is safer.",
-        "content": "<p>Traditional online processing exposes your photos to data leaks.</p>"
+        "content": "<h4>The Cloud Flaw</h4><p>Free online cleaning sites are often 'data vacuums'. By sending your photo to their servers, you grant them access to the original before cleaning.</p><h4>Zero-Knowledge Philosophy</h4><p>GhostMeta uses your browser's Canvas API. This means your CPU does the work and your internet connection is never used to transfer images. It's the only 100% anonymous method.</p>"
       },
       "ghostmeta-manifeste-confidentialite": {
         "title": "GhostMeta: Privacy Manifesto",
         "desc": "Our commitment to your privacy.",
-        "content": "<p>We believe in a web where users keep total control over their data.</p>"
+        "content": "<h4>Privacy is Not an Option</h4><p>We created GhostMeta because existing tools were either too complex or too intrusive. Our manifesto is based on free basic service and total code transparency.</p><h4>Our Commitment</h4><p>No trackers, no ad cookies, and processing that will forever remain local.</p>"
       }
     }
   },
