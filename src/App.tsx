@@ -1,23 +1,34 @@
-import React, { Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Analytics } from '@vercel/analytics/react';
 
+// Imports dynamiques
 const Home = lazy(() => import('./pages/Home'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-const BlogPage = lazy(() => import('./pages/BlogPage'));
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <BrowserRouter>
-      <Suspense fallback={<div className="bg-[#0a0a0c] min-h-screen" />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/blog/:slug" element={<BlogPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Suspense fallback={<div className="bg-[#0a0a0c] min-h-screen" />}>
+          <Routes>
+            {/* Page d'accueil */}
+            <Route path="/" element={<Home />} />
+            
+            {/* Route du Blog (Gère tes 5 articles SEO) */}
+            <Route path="/blog/:slug" element={<BlogPost />} />
+
+            {/* Capture 404 (L'étoile est importante) */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
       <Analytics />
-    </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
