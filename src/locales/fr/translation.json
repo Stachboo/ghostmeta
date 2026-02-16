@@ -1,162 +1,183 @@
 {
-  "common": {
-    "back_home": "Retour à l'accueil"
-  },
-  "hero": {
-    "title_start": "Supprimez les",
-    "title_color": "métadonnées",
-    "title_end": "de vos photos",
-    "subtitle": "Protégez votre vie privée avant de publier sur Vinted, Leboncoin ou eBay. Traitement 100% local.",
-    "secure_badge": "100% Local"
-  },
-  "upload": {
-    "drop_title": "Glissez vos photos ici",
-    "drop_subtitle": "JPEG · PNG · WebP · HEIC — Traitement 100% local",
-    "browse": "ou parcourez vos fichiers",
-    "processing": "Analyse en cours...",
-    "cleaning": "Nettoyage...",
-    "success": "Terminé !",
-    "error_type": "Format non supporté",
-    "download_all": "Tout télécharger (ZIP)",
-    "delete_all": "Tout supprimer",
-    "limit_title": "Limite atteinte",
-    "limit_desc": "En mode gratuit, le nettoyage est limité à 1 session toutes les 12 heures. Revenez plus tard ou soutenez le projet.",
-    "donate_btn": "Soutenir le développeur (PayPal)",
-    "pro_soon": "Le Pack Pro arrive bientôt !"
-  },
-  "card": {
-    "pending": "EN ATTENTE",
-    "scanning": "SCAN...",
-    "critical": "CRITIQUE",
-    "exposed": "EXPOSÉ",
-    "clean": "PROPRE",
-    "purging": "PURGE...",
-    "neutralized": "NEUTRALISÉ",
-    "error": "ERREUR",
-    "no_threats": "Aucune métadonnée sensible détectée",
-    "cleaned_success": "Métadonnées supprimées avec succès",
-    "download": "Télécharger",
-    "remove": "Supprimer"
-  },
-  "marketing": {
-    "vinted_title": "Vos photos Vinted révèlent votre adresse.",
-    "vinted_text_1": "Chaque photo prise avec votre iPhone ou Android embarque vos coordonnées GPS exactes, la date et l'heure de prise de vue, et le modèle de votre téléphone.",
-    "vinted_text_2": "Quand un acheteur vous demande \"plus de photos\" par WhatsApp, il reçoit tout.",
-    "vinted_text_3": "Nettoyez vos photos avant de les poster. GhostMeta supprime toutes les métadonnées en un clic, directement dans votre navigateur. Rien n'est envoyé sur internet.",
-    "batch_lock_title": "Mode Batch verrouillé",
-    "batch_lock_desc": "En mode gratuit, nettoyez vos photos une par une (illimité). Le Pack Pro débloque le traitement par lots et l'export ZIP."
-  },
-  "blog": {
-    "section_title": "Expertise & Confidentialité",
-    "posts": {
-      "vinted-securite-photo-guide": {
-        "title": "Vinted : Le guide ultime pour sécuriser vos photos",
-        "desc": "Pourquoi et comment nettoyer vos images avant de vendre.",
-        "content": "<h4>Le danger invisible des tags EXIF</h4><p>Quand vous vendez sur Vinted, chaque vêtement pris en photo dans votre chambre peut trahir votre position exacte. Les fichiers JPEG stockent des tags EXIF contenant vos coordonnées GPS précises à 3 mètres près.</p><h4>Le piège du 'Envoi par WhatsApp'</h4><p>Beaucoup de vendeuses envoient des photos supplémentaires par message privé. Contrairement à la plateforme Vinted qui compresse légèrement, l'envoi direct livre le fichier original brut avec toutes vos données personnelles.</p><h4>La solution GhostMeta</h4><p>En passant vos photos dans GhostMeta avant l'upload, vous neutralisez ces signatures numériques. Notre outil reconstruit l'image pixel par pixel pour garantir qu'aucune donnée fantôme ne subsiste.</p>"
-      },
-      "supprimer-exif-iphone-android": {
-        "title": "Supprimer les EXIF sur iPhone et Android",
-        "desc": "Guide technique pour mobile.",
-        "content": "<h4>Sur iPhone (iOS)</h4><p>Apple permet désormais de masquer la localisation lors du partage, mais cela ne supprime pas les données du fichier stocké. Pour une purge réelle, il est conseillé d'utiliser un outil de traitement local.</p><h4>Sur Android</h4><p>Le système Android est particulièrement bavard. En plus du GPS, il stocke le numéro de série de l'optique et les réglages de capture (ISO, vitesse), créant une véritable empreinte matérielle.</p><h4>Pourquoi le traitement local ?</h4><p>Utiliser une application cloud pour nettoyer ses photos revient à donner ses données à un tiers pour qu'il les cache aux autres. GhostMeta effectue le nettoyage dans votre RAM, sans aucun transfert de fichier.</p>"
-      },
-      "comprendre-donnees-exif-gps": {
-        "title": "Comprendre les données EXIF et GPS",
-        "desc": "Tout savoir sur les métadonnées cachées.",
-        "content": "<h4>Qu'est-ce que l'EXIF ?</h4><p>Créé en 1995, l'Exchangeable Image File Format est une norme qui attache des métadonnées aux images. Ce qui était utile pour les photographes pro est devenu un cauchemar pour la vie privée avec l'arrivée des smartphones GPS.</p><h4>Les tags les plus sensibles</h4><ul><li><strong>GPS Altitude/Latitude :</strong> Votre position précise.</li><li><strong>DateTimeOriginal :</strong> L'heure exacte qui permet de déduire vos routines.</li><li><strong>Make/Model :</strong> La valeur de votre matériel, cible potentielle pour les vols.</li></ul>"
-      },
-      "nettoyage-photo-local-vs-cloud": {
-        "title": "Nettoyage Photo : Local vs Cloud",
-        "desc": "Pourquoi le traitement local est plus sûr.",
-        "content": "<h4>La faille du Cloud</h4><p>Les sites de nettoyage gratuits en ligne sont souvent des 'aspirateurs à données'. En envoyant votre photo sur leurs serveurs, vous leur donnez accès à l'original avant nettoyage.</p><h4>La philosophie Zero-Knowledge</h4><p>GhostMeta utilise l'API Canvas de votre navigateur. Cela signifie que votre processeur fait le travail et que votre connexion internet n'est jamais utilisée pour transférer vos images. C'est la seule méthode 100% anonyme.</p>"
-      },
-      "ghostmeta-manifeste-confidentialite": {
-        "title": "GhostMeta : Manifeste pour la Confidentialité",
-        "desc": "Nos engagements pour votre vie privée.",
-        "content": "<h4>La vie privée n'est pas une option</h4><p>Nous avons créé GhostMeta parce que les outils existants étaient soit trop complexes, soit trop intrusifs. Notre manifeste repose sur la gratuité du service de base et la transparence totale du code.</p><h4>Notre engagement</h4><p>Aucun tracker, aucun cookie publicitaire, et un traitement qui restera à jamais local.</p>"
-      }
-    }
-  },
-  "info": {
-    "why_title": "Pourquoi vos photos vous",
-    "why_title_highlight": "trahissent",
-    "why_desc": "Chaque photo prise avec un smartphone contient des métadonnées invisibles. Quand vous publiez sur Vinted, Leboncoin ou eBay, ces données peuvent révéler votre adresse exacte, vos habitudes et votre équipement.",
-    "geo_title": "Géolocalisation GPS",
-    "geo_desc": "Coordonnées exactes de votre domicile intégrées dans chaque photo prise avec un smartphone.",
-    "meta_title": "Profilage temporel",
-    "meta_desc": "Dates et heures de prise de vue révélant vos routines de présence et d'absence.",
-    "hard_title": "Fingerprinting matériel",
-    "hard_desc": "Modèle d'appareil, objectif et numéros de série identifiant votre équipement.",
-    "how_title": "Comment ça",
-    "how_highlight": "fonctionne",
-    "how_subtitle": "Trois étapes. Zéro upload. Vos photos restent sur votre appareil.",
-    "step_1_title": "Déposez vos photos",
-    "step_1_desc": "Glissez-déposez ou sélectionnez vos images. JPEG, PNG, WebP et HEIC supportés.",
-    "step_2_title": "Scan des menaces",
-    "step_2_desc": "GhostMeta analyse chaque image et identifie les métadonnées sensibles (GPS, date, appareil).",
-    "step_3_title": "Neutralisation",
-    "step_3_desc": "Un clic pour supprimer toutes les métadonnées. Téléchargez vos images propres.",
-    "arch_title": "Architecture",
-    "arch_highlight": "Zero-Knowledge",
-    "arch_subtitle": "Vos photos ne quittent jamais votre appareil. Tout le traitement est effectué localement dans votre navigateur.",
-    "arch_bad_title": "Autres outils",
-    "arch_bad_1": "Upload vers un serveur distant",
-    "arch_bad_2": "Photos accessibles par des tiers",
-    "arch_bad_3": "Risque de récupération de données",
-    "arch_good_title": "GhostMeta",
-    "arch_good_1": "Aucun upload — 100% local",
-    "arch_good_2": "Personne ne voit vos photos",
-    "arch_good_3": "Fonctionne même hors-ligne",
-    "faq_title": "Questions fréquentes",
-    "q1": "Mes photos sont-elles envoyées sur un serveur ?",
-    "a1": "Non. Tout le traitement se fait localement dans votre navigateur via l'API Canvas. Aucune donnée ne transite par un serveur.",
-    "q2": "Quels formats d'images sont supportés ?",
-    "a2": "Nous supportons JPEG, PNG, WEBP et HEIC.",
-    "q3": "Quelles métadonnées sont supprimées ?",
-    "a3": "Toutes les métadonnées embarquées : GPS, EXIF, XMP, IPTC. L'image est reconstruite pixel par pixel pour garantir un fichier propre.",
-    "q4": "La qualité de l'image est-elle affectée ?",
-    "a4": "L'image est recompressée à 92% de qualité (JPEG) pour un bon compromis poids/qualité. Les images de plus de 4096px sont redimensionnées pour éviter les crashs mémoire sur mobile.",
-    "q5": "Pourquoi le Mode Batch est-il payant ?",
-    "a5": "Pour soutenir le développement de l'outil tout en restant sans pub intrusive.",
-    "q6": "Les plateformes ne nettoient-elles pas déjà les métadonnées ?",
-    "a6": "Pas toujours, et souvent après avoir stocké l'original sur leurs serveurs."
-  },
-  "pro": {
-    "active": "PRO ACTIF",
-    "price_btn": "Faire un don ❤️",
-    "title": "Soutenez le projet",
-    "subtitle": "GhostMeta est gratuit. Vos dons permettent de payer les serveurs et le café.",
-    "free_title": "Gratuit",
-    "free_1": "1 nettoyage toutes les 12h",
-    "free_2": "Scan des métadonnées",
-    "free_3": "Téléchargement unitaire",
-    "free_4": "100% Local & Privé",
-    "pro_title": "Pack Pro",
-    "pro_price": "Bientôt",
-    "pro_1": "Jusqu'à 100 images simultanément",
-    "pro_2": "Mode Batch (tout d'un coup)",
-    "pro_3": "Export ZIP en un clic",
-    "pro_4": "Pas de limite de temps",
-    "unlock": "Bientôt disponible"
-  },
-  "footer": {
-    "rights": "Tous droits réservés",
-    "privacy_btn": "Politique de confidentialité",
-    "legal_btn": "Mentions légales"
-  },
-  "legal": {
-    "privacy_title": "Politique de Confidentialité",
-    "updated": "Dernière mise à jour : Février 2026",
-    "notice_title": "Mentions Légales",
-    "privacy_sections": {
-      "1": { "title": "1. Architecture Local-Only", "content": "Traitement 100% local via l'API Canvas du navigateur. Aucune donnée ne quitte votre appareil." },
-      "2": { "title": "2. Données", "content": "Aucune collecte de données personnelles." },
-      "3": { "title": "3. Stockage", "content": "LocalStorage uniquement. Pas de cookies traceurs." },
-      "4": { "title": "4. Contact", "content": "contact@ghostmeta.fr" }
+    "common": {
+        "back_home": "Retour à l'accueil"
     },
-    "notice_sections": {
-      "1": { "title": "1. Éditeur", "content": "Édité à titre personnel. Anonymat préservé selon LCEN Art 6-III-2." },
-      "2": { "title": "2. Hébergement", "content": "Vercel Inc., 340 S Lemon Ave #4133 Walnut, CA 91789, USA." },
-      "3": { "title": "3. Responsabilité", "content": "L'utilisateur est seul responsable des fichiers traités." }
+    "hero": {
+        "title_start": "Supprimez les",
+        "title_color": "métadonnées",
+        "title_end": "de vos photos",
+        "subtitle": "Protégez votre vie privée avant de publier sur Vinted, Leboncoin ou eBay. Traitement 100% local.",
+        "secure_badge": "100% Local"
+    },
+    "upload": {
+        "drop_title": "Glissez vos photos ici",
+        "drop_subtitle": "JPEG · PNG · WebP · HEIC — Traitement 100% local",
+        "browse": "ou parcourez vos fichiers",
+        "processing": "Analyse en cours...",
+        "cleaning": "Nettoyage...",
+        "success": "Terminé !",
+        "error_type": "Format non supporté",
+        "download_all": "Tout télécharger (ZIP)",
+        "delete_all": "Tout supprimer",
+        "limit_title": "Limite atteinte",
+        "limit_desc": "En mode gratuit, le nettoyage est limité à 1 session toutes les 12 heures. Revenez plus tard ou soutenez le projet.",
+        "donate_btn": "Soutenir le développeur (PayPal)",
+        "pro_soon": "Le Pack Pro arrive bientôt !"
+    },
+    "card": {
+        "pending": "EN ATTENTE",
+        "scanning": "SCAN...",
+        "critical": "CRITIQUE",
+        "exposed": "EXPOSÉ",
+        "clean": "PROPRE",
+        "purging": "PURGE...",
+        "neutralized": "NEUTRALISÉ",
+        "error": "ERREUR",
+        "no_threats": "Aucune métadonnée sensible détectée",
+        "cleaned_success": "Métadonnées supprimées avec succès",
+        "download": "Télécharger",
+        "remove": "Supprimer"
+    },
+    "marketing": {
+        "vinted_title": "Vos photos Vinted révèlent votre adresse.",
+        "vinted_text_1": "Chaque photo prise avec votre iPhone ou Android embarque vos coordonnées GPS exactes, la date et l'heure de prise de vue, et le modèle de votre téléphone.",
+        "vinted_text_2": "Quand un acheteur vous demande \"plus de photos\" par WhatsApp, il reçoit tout.",
+        "vinted_text_3": "Nettoyez vos photos avant de les poster. GhostMeta supprime toutes les métadonnées en un clic, directement dans votre navigateur. Rien n'est envoyé sur internet.",
+        "batch_lock_title": "Mode Batch verrouillé",
+        "batch_lock_desc": "En mode gratuit, nettoyez vos photos une par une (illimité). Le Pack Pro débloque le traitement par lots et l'export ZIP."
+    },
+    "blog": {
+        "section_title": "Expertise & Confidentialité",
+        "posts": {
+            "vinted-securite-photo-guide": {
+                "title": "Vendre sur Vinted : Comment protéger son adresse et sa vie privée",
+                "desc": "Votre simple photo peut révéler votre domicile. Découvrez comment nettoyer vos données EXIF avant de vendre en ligne.",
+                "content": "<h4>Le danger invisible : les métadonnées cachées</h4><p>Quand vous prenez une photo avec votre smartphone, l'appareil enregistre automatiquement des <strong>données EXIF</strong>. Parmi elles : vos <strong>coordonnées GPS exactes</strong>, la date, l'heure, et le modèle de votre téléphone. Ces informations sont invisibles à l'œil nu mais lisibles par n'importe qui avec un outil gratuit.</p><h4>Pourquoi c'est un risque réel pour les vendeurs</h4><p>Un acheteur malveillant peut extraire l'adresse de votre domicile à partir d'une simple photo de vêtement prise dans votre salon. Cela expose les vendeurs à des risques de harcèlement ou de cambriolages ciblés. <strong>Vinted ne garantit pas la suppression systématique de ces données.</strong></p><h4>Le guide en 3 étapes pour vendre en sécurité</h4><p><strong>01. Prenez vos photos normalement</strong> sans changer vos habitudes de prise de vue.<br /><strong>02. Nettoyez-les avec GhostMeta</strong> : Glissez vos images sur notre outil. Le traitement est <strong>100% local</strong> : vos photos ne quittent jamais votre navigateur.<br /><strong>03. Publiez en toute sérénité</strong> : Vos images sont purgées de toute trace GPS ou matérielle.</p><h4>Les bons réflexes pour votre confidentialité</h4><ul><li><strong>Utilisez un pseudonyme</strong> neutre pour ne pas être identifié.</li><li><strong>Privilégiez les points relais</strong> plutôt que l'envoi depuis votre domicile.</li><li><strong>Vérifiez l'arrière-plan</strong> : ne photographiez pas de courrier, de plaques de rue ou de vues identifiables depuis votre fenêtre.</li></ul><p>En intégrant le nettoyage GhostMeta dans votre routine, vos photos restent attractives, mais votre vie privée reste <strong>privée</strong>.</p>"
+            },
+            "supprimer-exif-iphone-android": {
+                "title": "Supprimer les EXIF sur iPhone et Android",
+                "desc": "Guide technique pour mobile.",
+                "content": "<h4>Sur iPhone (iOS)</h4><p>Apple permet désormais de masquer la localisation lors du partage, mais cela ne supprime pas les données du fichier stocké. Pour une purge réelle, il est conseillé d'utiliser un outil de traitement local.</p><h4>Sur Android</h4><p>Le système Android est particulièrement bavard. En plus du GPS, il stocke le numéro de série de l'optique et les réglages de capture (ISO, vitesse), créant une véritable empreinte matérielle.</p><h4>Pourquoi le traitement local ?</h4><p>Utiliser une application cloud pour nettoyer ses photos revient à donner ses données à un tiers pour qu'il les cache aux autres. GhostMeta effectue le nettoyage dans votre RAM, sans aucun transfert de fichier.</p>"
+            },
+            "comprendre-donnees-exif-gps": {
+                "title": "Comprendre les données EXIF et GPS",
+                "desc": "Tout savoir sur les métadonnées cachées.",
+                "content": "<h4>Qu'est-ce que l'EXIF ?</h4><p>Créé en 1995, l'Exchangeable Image File Format est une norme qui attache des métadonnées aux images. Ce qui était utile pour les photographes pro est devenu un cauchemar pour la vie privée avec l'arrivée des smartphones GPS.</p><h4>Les tags les plus sensibles</h4><ul><li><strong>GPS Altitude/Latitude :</strong> Votre position précise.</li><li><strong>DateTimeOriginal :</strong> L'heure exacte qui permet de déduire vos routines.</li><li><strong>Make/Model :</strong> La valeur de votre matériel, cible potentielle pour les vols.</li></ul>"
+            },
+            "nettoyage-photo-local-vs-cloud": {
+                "title": "Nettoyage Photo : Local vs Cloud",
+                "desc": "Pourquoi le traitement local est plus sûr.",
+                "content": "<h4>La faille du Cloud</h4><p>Les sites de nettoyage gratuits en ligne sont souvent des 'aspirateurs à données'. En envoyant votre photo sur leurs serveurs, vous leur donnez accès à l'original avant nettoyage.</p><h4>La philosophie Zero-Knowledge</h4><p>GhostMeta utilise l'API Canvas de votre navigateur. Cela signifie que votre processeur fait le travail et que votre connexion internet n'est jamais utilisée pour transférer vos images. C'est la seule méthode 100% anonyme.</p>"
+            },
+            "ghostmeta-manifeste-confidentialite": {
+                "title": "GhostMeta : Manifeste pour la Confidentialité",
+                "desc": "Nos engagements pour votre vie privée.",
+                "content": "<h4>La vie privée n'est pas une option</h4><p>Nous avons créé GhostMeta parce que les outils existants étaient soit trop complexes, soit trop intrusifs. Notre manifeste repose sur la gratuité du service de base et la transparence totale du code.</p><h4>Notre engagement</h4><p>Aucun tracker, aucun cookie publicitaire, et un traitement qui restera à jamais local.</p>"
+            }
+        }
+    },
+    "info": {
+        "why_title": "Pourquoi vos photos vous",
+        "why_title_highlight": "trahissent",
+        "why_desc": "Chaque photo prise avec un smartphone contient des métadonnées invisibles. Quand vous publiez sur Vinted, Leboncoin ou eBay, ces données peuvent révéler votre adresse exacte, vos habitudes et votre équipement.",
+        "geo_title": "Géolocalisation GPS",
+        "geo_desc": "Coordonnées exactes de votre domicile intégrées dans chaque photo prise avec un smartphone.",
+        "meta_title": "Profilage temporel",
+        "meta_desc": "Dates et heures de prise de vue révélant vos routines de présence et d'absence.",
+        "hard_title": "Fingerprinting matériel",
+        "hard_desc": "Modèle d'appareil, objectif et numéros de série identifiant votre équipement.",
+        "how_title": "Comment ça",
+        "how_highlight": "fonctionne",
+        "how_subtitle": "Trois étapes. Zéro upload. Vos photos restent sur votre appareil.",
+        "step_1_title": "Déposez vos photos",
+        "step_1_desc": "Glissez-déposez ou sélectionnez vos images. JPEG, PNG, WebP et HEIC supportés.",
+        "step_2_title": "Scan des menaces",
+        "step_2_desc": "GhostMeta analyse chaque image et identifie les métadonnées sensibles (GPS, date, appareil).",
+        "step_3_title": "Neutralisation",
+        "step_3_desc": "Un clic pour supprimer toutes les métadonnées. Téléchargez vos images propres.",
+        "arch_title": "Architecture",
+        "arch_highlight": "Zero-Knowledge",
+        "arch_subtitle": "Vos photos ne quittent jamais votre appareil. Tout le traitement est effectué localement dans votre navigateur.",
+        "arch_bad_title": "Autres outils",
+        "arch_bad_1": "Upload vers un serveur distant",
+        "arch_bad_2": "Photos accessibles par des tiers",
+        "arch_bad_3": "Risque de récupération de données",
+        "arch_good_title": "GhostMeta",
+        "arch_good_1": "Aucun upload — 100% local",
+        "arch_good_2": "Personne ne voit vos photos",
+        "arch_good_3": "Fonctionne même hors-ligne",
+        "faq_title": "Questions fréquentes",
+        "q1": "Mes photos sont-elles envoyées sur un serveur ?",
+        "a1": "Non. Tout le traitement se fait localement dans votre navigateur via l'API Canvas. Aucune donnée ne transite par un serveur.",
+        "q2": "Quels formats d'images sont supportés ?",
+        "a2": "Nous supportons JPEG, PNG, WEBP et HEIC.",
+        "q3": "Quelles métadonnées sont supprimées ?",
+        "a3": "Toutes les métadonnées embarquées : GPS, EXIF, XMP, IPTC. L'image est reconstruite pixel par pixel pour garantir un fichier propre.",
+        "q4": "La qualité de l'image est-elle affectée ?",
+        "a4": "L'image est recompressée à 92% de qualité (JPEG) pour un bon compromis poids/qualité. Les images de plus de 4096px sont redimensionnées pour éviter les crashs mémoire sur mobile.",
+        "q5": "Pourquoi le Mode Batch est-il payant ?",
+        "a5": "Pour soutenir le développement de l'outil tout en restant sans pub intrusive.",
+        "q6": "Les plateformes ne nettoient-elles pas déjà les métadonnées ?",
+        "a6": "Pas toujours, et souvent après avoir stocké l'original sur leurs serveurs."
+    },
+    "pro": {
+        "active": "PRO ACTIF",
+        "price_btn": "Faire un don ❤️",
+        "title": "Soutenez le projet",
+        "subtitle": "GhostMeta est gratuit. Vos dons permettent de payer les serveurs et le café.",
+        "free_title": "Gratuit",
+        "free_1": "1 nettoyage toutes les 12h",
+        "free_2": "Scan des métadonnées",
+        "free_3": "Téléchargement unitaire",
+        "free_4": "100% Local & Privé",
+        "pro_title": "Pack Pro",
+        "pro_price": "Bientôt",
+        "pro_1": "Jusqu'à 100 images simultanément",
+        "pro_2": "Mode Batch (tout d'un coup)",
+        "pro_3": "Export ZIP en un clic",
+        "pro_4": "Pas de limite de temps",
+        "unlock": "Bientôt disponible"
+    },
+    "footer": {
+        "rights": "Tous droits réservés",
+        "privacy_btn": "Politique de confidentialité",
+        "legal_btn": "Mentions légales"
+    },
+    "legal": {
+        "privacy_title": "Politique de Confidentialité",
+        "updated": "Dernière mise à jour : Février 2026",
+        "notice_title": "Mentions Légales",
+        "privacy_sections": {
+            "1": {
+                "title": "1. Architecture Local-Only",
+                "content": "Traitement 100% local via l'API Canvas du navigateur. Aucune donnée ne quitte votre appareil."
+            },
+            "2": {
+                "title": "2. Données",
+                "content": "Aucune collecte de données personnelles."
+            },
+            "3": {
+                "title": "3. Stockage",
+                "content": "LocalStorage uniquement. Pas de cookies traceurs."
+            },
+            "4": {
+                "title": "4. Contact",
+                "content": "contact@ghostmeta.fr"
+            }
+        },
+        "notice_sections": {
+            "1": {
+                "title": "1. Éditeur",
+                "content": "Édité à titre personnel. Anonymat préservé selon LCEN Art 6-III-2."
+            },
+            "2": {
+                "title": "2. Hébergement",
+                "content": "Vercel Inc., 340 S Lemon Ave #4133 Walnut, CA 91789, USA."
+            },
+            "3": {
+                "title": "3. Responsabilité",
+                "content": "L'utilisateur est seul responsable des fichiers traités."
+            }
+        }
     }
-  }
 }
