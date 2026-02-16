@@ -72,18 +72,6 @@ export default function BlogPost() {
             prose-headings:text-white prose-strong:text-[#00ff41] prose-a:text-[#00ff41] hover:prose-a:underline"
             dangerouslySetInnerHTML={{ __html: t(`blog.posts.${slug}.content`) }}
           />
-
-          <div className="pt-12 border-t border-white/10">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-6 rounded-xl bg-white/5 border border-white/10">
-              <div>
-                <h3 className="text-white font-bold mb-1">GhostMeta Privacy System</h3>
-                <p className="text-sm text-muted-foreground">Protégez votre anonymat numérique dès maintenant.</p>
-              </div>
-              <Button onClick={() => navigate('/')} className="bg-[#00ff41] text-black font-bold ghost-glow">
-                Essayer l'outil gratuit
-              </Button>
-            </div>
-          </div>
         </motion.article>
       </main>
       <Footer />
