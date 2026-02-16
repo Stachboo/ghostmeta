@@ -1,3 +1,4 @@
+cat <<EOF > src/locales/en/translation.json
 {
   "common": {
     "back_home": "Back to Home"
@@ -49,31 +50,11 @@
   "blog": {
     "section_title": "Expertise & Privacy",
     "posts": {
-      "vinted-securite-photo-guide": {
-        "title": "Vinted: The ultimate guide to securing your photos",
-        "desc": "Why and how to clean your images before selling.",
-        "content": "<p>Your photos contain GPS coordinates and device signatures that can be used to identify you.</p><h4>How to protect yourself?</h4><p>Use GhostMeta to purge this data before every upload on Vinted.</p>"
-      },
-      "supprimer-exif-iphone-android": {
-        "title": "Remove EXIF on iPhone and Android",
-        "desc": "Technical guide for mobile devices.",
-        "content": "<p>Modern smartphones embed invisible metadata in every shot.</p><h4>The local solution</h4><p>GhostMeta processes your photos directly in your browser, never sending your files to a server.</p>"
-      },
-      "comprendre-donnees-exif-gps": {
-        "title": "Understanding EXIF and GPS Data",
-        "desc": "Everything you need to know about hidden metadata.",
-        "content": "<p>EXIF (Exchangeable Image File Format) is your photo's ID card.</p>"
-      },
-      "nettoyage-photo-local-vs-cloud": {
-        "title": "Photo Cleaning: Local vs Cloud",
-        "desc": "Why local processing is safer.",
-        "content": "<p>Traditional online processing exposes your photos to data leaks.</p>"
-      },
-      "ghostmeta-manifeste-confidentialite": {
-        "title": "GhostMeta: Privacy Manifesto",
-        "desc": "Our commitment to your privacy.",
-        "content": "<p>We believe in a web where users keep total control over their data.</p>"
-      }
+      "vinted-securite-photo-guide": { "title": "Vinted: Ultimate Safety Guide", "desc": "Clean images before selling.", "content": "Drafting..." },
+      "supprimer-exif-iphone-android": { "title": "Remove EXIF on Mobile", "desc": "Technical guide.", "content": "Drafting..." },
+      "comprendre-donnees-exif-gps": { "title": "Understanding EXIF Data", "desc": "Hidden secrets.", "content": "Drafting..." },
+      "nettoyage-photo-local-vs-cloud": { "title": "Local vs Cloud Cleaning", "desc": "Safety first.", "content": "Drafting..." },
+      "ghostmeta-manifeste-confidentialite": { "title": "GhostMeta Manifesto", "desc": "Our commitment.", "content": "Drafting..." }
     }
   },
   "info": {
@@ -86,35 +67,15 @@
     "meta_desc": "Dates and times revealing your presence and absence routines.",
     "hard_title": "Device Fingerprinting",
     "hard_desc": "Device model, lens, and serial numbers identifying your equipment.",
-    "how_title": "How it",
-    "how_highlight": "works",
-    "how_subtitle": "Three steps. Zero upload. Your photos stay on your device.",
-    "step_1_title": "Drop your photos",
-    "step_1_desc": "Drag & drop or select your images. JPEG, PNG, WebP and HEIC supported.",
-    "step_2_title": "Threat Scan",
-    "step_2_desc": "GhostMeta analyzes every image and identifies sensitive metadata (GPS, date, device).",
-    "step_3_title": "Neutralization",
-    "step_3_desc": "One click to remove all metadata. Download your clean images.",
-    "arch_title": "Architecture",
-    "arch_highlight": "Zero-Knowledge",
-    "arch_subtitle": "Your photos never leave your device. All processing is done locally in your browser.",
-    "arch_bad_title": "Other tools",
-    "arch_bad_1": "Upload to a remote server",
-    "arch_bad_2": "Photos accessible by third parties",
-    "arch_bad_3": "Risk of data recovery",
-    "arch_good_title": "GhostMeta",
-    "arch_good_1": "No upload — 100% local",
-    "arch_good_2": "No one sees your photos",
-    "arch_good_3": "Works even offline",
     "faq_title": "Frequently Asked Questions",
     "q1": "Are my photos sent to a server?",
-    "a1": "No. All processing happens locally in your browser via the Canvas API. No data leaves your device.",
+    "a1": "No. All processing happens locally in your browser. No data leaves your device.",
     "q2": "Which image formats are supported?",
     "a2": "We support JPEG, PNG, WEBP, and HEIC.",
     "q3": "What metadata is removed?",
-    "a3": "All embedded metadata: GPS, EXIF, XMP, IPTC. The image is rebuilt pixel by pixel to guarantee a clean file.",
+    "a3": "All embedded metadata: GPS, EXIF, XMP, IPTC.",
     "q4": "Is image quality affected?",
-    "a4": "The image is recompressed at 92% quality (JPEG) for an optimal size/quality balance. Images over 4096px are resized to prevent memory crashes on mobile.",
+    "a4": "92% quality recompression for JPEG to balance size and quality.",
     "q5": "Why is Batch Mode paid?",
     "a5": "To support development while keeping the tool ad-free.",
     "q6": "Don't platforms clean metadata already?",
@@ -133,8 +94,8 @@
     "pro_title": "Pro Pack",
     "pro_price": "Soon",
     "pro_1": "Up to 100 images simultaneously",
-    "pro_2": "Batch Mode (all at once)",
-    "pro_3": "One-click ZIP export",
+    "pro_2": "Batch Mode",
+    "pro_3": "ZIP export",
     "pro_4": "No time limit",
     "unlock": "Coming Soon"
   },
@@ -148,15 +109,16 @@
     "updated": "Last updated: February 2026",
     "notice_title": "Legal Notice",
     "privacy_sections": {
-      "1": { "title": "1. Local-Only Architecture", "content": "100% local processing via the browser Canvas API. No data leaves your device." },
+      "1": { "title": "1. Local-Only", "content": "No data leaves your device." },
       "2": { "title": "2. Data", "content": "No personal data collection." },
-      "3": { "title": "3. Storage", "content": "LocalStorage only. No tracking cookies." },
+      "3": { "title": "3. Storage", "content": "LocalStorage only." },
       "4": { "title": "4. Contact", "content": "contact@ghostmeta.fr" }
     },
     "notice_sections": {
-      "1": { "title": "1. Editor", "content": "Published independently." },
+      "1": { "title": "1. Editor", "content": "Independent publication." },
       "2": { "title": "2. Hosting", "content": "Vercel Inc., USA." },
-      "3": { "title": "3. Liability", "content": "User is solely responsible." }
+      "3": { "title": "3. Liability", "content": "User responsibility." }
     }
   }
 }
+EOF

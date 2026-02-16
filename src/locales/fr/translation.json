@@ -1,3 +1,4 @@
+cat <<EOF > src/locales/fr/translation.json
 {
   "common": {
     "back_home": "Retour à l'accueil"
@@ -52,27 +53,27 @@
       "vinted-securite-photo-guide": {
         "title": "Vinted : Le guide ultime pour sécuriser vos photos",
         "desc": "Pourquoi et comment nettoyer vos images avant de vendre.",
-        "content": "<p>Vos photos contiennent des coordonnées GPS et des signatures d'appareil qui peuvent être utilisées pour vous identifier.</p><h4>Comment se protéger ?</h4><p>Utilisez GhostMeta pour purger ces données avant chaque mise en ligne sur Vinted.</p>"
+        "content": "Contenu en cours de rédaction..."
       },
       "supprimer-exif-iphone-android": {
         "title": "Supprimer les EXIF sur iPhone et Android",
         "desc": "Guide technique pour mobile.",
-        "content": "<p>Les smartphones modernes intègrent des métadonnées invisibles à chaque cliché.</p><h4>La solution locale</h4><p>GhostMeta traite vos photos directement dans votre navigateur, sans jamais envoyer vos fichiers sur un serveur.</p>"
+        "content": "Contenu en cours de rédaction..."
       },
       "comprendre-donnees-exif-gps": {
         "title": "Comprendre les données EXIF et GPS",
         "desc": "Tout savoir sur les métadonnées cachées.",
-        "content": "<p>L'EXIF (Exchangeable Image File Format) est une carte d'identité de votre photo.</p>"
+        "content": "Contenu en cours de rédaction..."
       },
       "nettoyage-photo-local-vs-cloud": {
         "title": "Nettoyage Photo : Local vs Cloud",
         "desc": "Pourquoi le traitement local est plus sûr.",
-        "content": "<p>Le traitement en ligne classique expose vos photos à des fuites de données.</p>"
+        "content": "Contenu en cours de rédaction..."
       },
       "ghostmeta-manifeste-confidentialite": {
         "title": "GhostMeta : Manifeste pour la Confidentialité",
         "desc": "Nos engagements pour votre vie privée.",
-        "content": "<p>Nous croyons en un web où l'utilisateur garde le contrôle total de ses données.</p>"
+        "content": "Contenu en cours de rédaction..."
       }
     }
   },
@@ -86,26 +87,6 @@
     "meta_desc": "Dates et heures de prise de vue révélant vos routines de présence et d'absence.",
     "hard_title": "Fingerprinting matériel",
     "hard_desc": "Modèle d'appareil, objectif et numéros de série identifiant votre équipement.",
-    "how_title": "Comment ça",
-    "how_highlight": "fonctionne",
-    "how_subtitle": "Trois étapes. Zéro upload. Vos photos restent sur votre appareil.",
-    "step_1_title": "Déposez vos photos",
-    "step_1_desc": "Glissez-déposez ou sélectionnez vos images. JPEG, PNG, WebP et HEIC supportés.",
-    "step_2_title": "Scan des menaces",
-    "step_2_desc": "GhostMeta analyse chaque image et identifie les métadonnées sensibles (GPS, date, appareil).",
-    "step_3_title": "Neutralisation",
-    "step_3_desc": "Un clic pour supprimer toutes les métadonnées. Téléchargez vos images propres.",
-    "arch_title": "Architecture",
-    "arch_highlight": "Zero-Knowledge",
-    "arch_subtitle": "Vos photos ne quittent jamais votre appareil. Tout le traitement est effectué localement dans votre navigateur.",
-    "arch_bad_title": "Autres outils",
-    "arch_bad_1": "Upload vers un serveur distant",
-    "arch_bad_2": "Photos accessibles par des tiers",
-    "arch_bad_3": "Risque de récupération de données",
-    "arch_good_title": "GhostMeta",
-    "arch_good_1": "Aucun upload — 100% local",
-    "arch_good_2": "Personne ne voit vos photos",
-    "arch_good_3": "Fonctionne même hors-ligne",
     "faq_title": "Questions fréquentes",
     "q1": "Mes photos sont-elles envoyées sur un serveur ?",
     "a1": "Non. Tout le traitement se fait localement dans votre navigateur via l'API Canvas. Aucune donnée ne transite par un serveur.",
@@ -155,8 +136,9 @@
     },
     "notice_sections": {
       "1": { "title": "1. Éditeur", "content": "Édité à titre personnel. Anonymat préservé selon LCEN Art 6-III-2." },
-      "2": { "title": "2. Hébergement", "content": "Vercel Inc., 340 S Lemon Ave #4133 Walnut, CA 91789, USA." },
+      "2": { "title": "2. Hébergement", "content": "Vercel Inc., USA." },
       "3": { "title": "3. Responsabilité", "content": "L'utilisateur est seul responsable des fichiers traités." }
     }
   }
 }
+EOF
