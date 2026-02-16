@@ -32,9 +32,8 @@ import ProModal from '@/components/ProModal';
 import Footer from '@/components/Footer';
 import { useImageProcessor } from '@/hooks/useImageProcessor';
 
-// --- IMAGES OFFICIELLES (CDN STABLE) ---
 const HERO_BG_URL = "https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se-img-1_1770726687000_na1fn_Z2hvc3RtZXRhLWhlcm8tYmc.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvOGh1WW4yZHlXcHg5a3pIUGJNemlwai9zYW5kYm94L1NlN2wyYXhQUVBhWkZVenV1dm85U2UtaW1nLTFfMTc3MDcyNjY4NzAwMF9uYTFmbl9aMmh2YzNSdFpYUmhMV2hsY204dFltYy5wbmc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xOTIwLGhfMTkyMC9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=JNX4ezXkHI9~cHMpVXQz9jegOhIM61IQKqOqxFbJiTM9xxzwPGMmVr535OKijZfVicM-2wpovao0YeFfjmA3nikymInRSjxrBU5VfNsGGzM3dI1J9kItLwfbQNgLSDq-cZnwyd0GkwbmVX3CP0UIyjIDfG7Y8Lam6l~U8BI7~jMeMgqIjlTdHFAousFa2uaM34DfbGoeTzefpmfq7ncbuVjECuEY3c82y7M-OKKfPdDZ8HVogC6m3ERW5810TN6Ygdd996YxKryBFIsuNsZ1v~r2SDFobD9y3FQ-80jgvM1pRyqZnV9~P16AdkSKjDzsNsg~bhhhnNC3uMAkH7MP9g__";
-const TABLET_SCAN_URL = "https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se-img-3_1770726694000_na1fn_Z2hvc3RtZXRhLXNjYW4tZWZmZWN0.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvOGh1WW4yZHlXcHg5a3pIUGJNemlwai9zYW5kYm94L1NlN2wyYXhQUVBhWkZVenV1dm85U2UtaW1nLTNfMTc3MDcyNjY5NDAwMF9uYTFmbl9aMmh2YzNSdFpYUmhMWE5qWVc0dFpXWm1aV04wLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=twLze8fBhWRAeXA-ZduyhqoPb4UAc9XaJ8940DzoFSplumzcXlv7qB1BDpnxjzN5qLTTWHal5ajaLp37nzQUO6ba4Tw-wLUQdGgNPYi1d3Zxta8LGHMs0fRqvPWCZDLfp3Uytvzim94eBHn~vPONftZw-bFBz~NYFgRbyvfw4tf311h1gQgtLFLxSvh2VgZu1n~BfhE~9O1yaDo2IXBIvXjlhOUxRBVUQcVWt2p236Pyp6JHG0i3W9b1lj3zFR1Ff2aAjKUJyqdhvCz0I8V1wi28cmSczwI7l81M1uJALrImbArl~rM05CkadftAjadb5TyIuZNgAB8IipZ99iYL8g__";
+const TABLET_SCAN_URL = "https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se-img-3_1770726694000_na1fn_Z2hvc3RtZXRhLXNjYW4tZWZmZWN0.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvOGh1WW4yZHlXcHg5a3pIUGJNemlwai9zYW5kYm94L1NlN2wyYXhQUVBhWkZVenV1dm85U2UtaW1nLTNfMTc3MDcyNjY4NzAwMF9uYTFmbl9aMmh2YzNSdFpYUmhMWE5qWVc0dFpXWm1aV04wLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=twLze8fBhWRAeXA-ZduyhqoPb4UAc9XaJ8940DzoFSplumzcXlv7qB1BDpnxjzN5qLTTWHal5ajaLp37nzQUO6ba4Tw-wLUQdGgNPYi1d3Zxta8LGHMs0fRqvPWCZDLfp3Uytvzim94eBHn~vPONftZw-bFBz~NYFgRbyvfw4tf311h1gQgtLFLxSvh2VgZu1n~BfhE~9O1yaDo2IXBIvXjlhOUxRBVUQcVWt2p236Pyp6JHG0i3W9b1lj3zFR1Ff2aAjKUJyqdhvCz0I8V1wi28cmSczwI7l81M1uJALrImbArl~rM05CkadftAjadb5TyIuZNgAB8IipZ99iYL8g__";
 const SHIELD_URL = "https://private-us-east-1.manuscdn.com/sessionFile/8huYn2dyWpx9kzHPbMzipj/sandbox/Se7l2axPQPaZFUzuuvo9Se_1770726694647_na1fn_Z2hvc3RtZXRhLXNoaWVsZA.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvOGh1WW4yZHlXcHg5a3pIUGJNemlwai9zYW5kYm94L1NlN2wyYXhQUVBhWkZVenV1dm85U2VfMTc3MDcyNjY5NDY0N19uYTFmbl9aMmh2YzNSdFpYUmhMWE5vYVdWc1pBLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=j-RcYfWc8jgkoKUBcYlVfFcQ8Y6DZFThE30fFX8gFxpri7UDVcfN5~FBw7mI6qyTsk3nczlyirg9boGlgwzRHcCv2ju6PMb3mh~5oOeBcOs8r-H5HQzRhTJXWunKH5KKGhKrz5RqABOgpVxmi8sxYXWsMGOcLMtB4HWCkqrnAn-fRnEbqFGOGEYZDbkROSa5JS3h63CqOCmf-nUjngooWogsKL07whYqTphVu17RXCQ7wBlDB5LMNb1LJM4I8gdmUix6sLTSD634maL8H~U9FWY8Dvfdf9Lu7qfXH6gHZ36a-8ov3zsUPISR8L6fu2yMOkAqiFp1lSRk05EBI4Ypaw__";
 const PAYPAL_LINK = "https://paypal.me/abdus84";
 
@@ -92,7 +91,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background font-sans">
-      {/* Header */}
       <header className="sticky top-0 z-50 border-b border-border/30 bg-background/80 backdrop-blur-xl">
         <div className="container flex items-center justify-between h-14">
           <div className="flex items-center gap-2.5">
@@ -134,14 +132,14 @@ export default function Home() {
               <span>{t('hero.secure_badge')}</span>
             </div>
           </div>
-        </header>
+        </div>
+      </header>
 
       <main className="flex-1">
-        {/* Hero section */}
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img src={HERO_BG_URL} alt="" fetchpriority="high" className="w-full h-full object-cover opacity-15" />
-            <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/70 to-background" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/70 to-background"></div>
           </div>
 
           <div className="container relative z-10 pt-8 sm:pt-12 pb-6">
@@ -170,10 +168,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Images & Controls */}
         {images.length > 0 && (
           <section className="container pb-12">
-            {/* Stats bar */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -199,7 +195,6 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Action bar */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -215,7 +210,7 @@ export default function Home() {
                   >
                     {isProcessing ? (
                       <span className="flex items-center gap-2">
-                        <span className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                        <span className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin"></span>
                         {t('upload.cleaning')}
                       </span>
                     ) : (
@@ -251,7 +246,6 @@ export default function Home() {
               </Button>
             </motion.div>
 
-            {/* Progress bar */}
             <AnimatePresence>
               {isProcessing && (
                 <motion.div
@@ -271,7 +265,6 @@ export default function Home() {
               )}
             </AnimatePresence>
 
-            {/* Image list */}
             <div className="space-y-3">
               <AnimatePresence mode="popLayout">
                 {images.map((image, index) => (
@@ -288,7 +281,6 @@ export default function Home() {
           </section>
         )}
 
-        {/* Scroll indicator */}
         {images.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -306,7 +298,6 @@ export default function Home() {
           </motion.div>
         )}
 
-        {/* Argumentaire Vinted */}
         <section className="container py-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -314,10 +305,10 @@ export default function Home() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto p-6 sm:p-10 rounded-xl border border-[#ffb000]/20 bg-[#ffb000]/5 relative overflow-hidden"
           >
-            <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-[#ffb000]/30" />
-            <div className="absolute top-3 right-3 w-5 h-5 border-t-2 border-r-2 border-[#ffb000]/30" />
-            <div className="absolute bottom-3 left-3 w-5 h-5 border-b-2 border-l-2 border-[#ffb000]/30" />
-            <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-[#ffb000]/30" />
+            <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-[#ffb000]/30"></div>
+            <div className="absolute top-3 right-3 w-5 h-5 border-t-2 border-r-2 border-[#ffb000]/30"></div>
+            <div className="absolute bottom-3 left-3 w-5 h-5 border-b-2 border-l-2 border-[#ffb000]/30"></div>
+            <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-[#ffb000]/30"></div>
 
             <div className="flex flex-col sm:flex-row items-start gap-6">
               <AlertTriangle className="w-10 h-10 text-[#ffb000] flex-shrink-0 mt-1" />
@@ -339,7 +330,6 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* POURQUOI / WHY Section */}
         <section className="container py-16 text-center">
             <div className="mb-12">
                 <h2 className="text-3xl font-bold mb-4">
@@ -377,7 +367,6 @@ export default function Home() {
             </div>
         </section>
 
-        {/* ARCHITECTURE Section */}
         <section className="container py-16">
             <div className="text-center mb-10">
                 <h2 className="text-3xl font-bold mb-2">
@@ -401,7 +390,7 @@ export default function Home() {
                           <img src={SHIELD_URL} alt="" className="w-48 h-48 object-contain" />
                     </div>
                     <div className="border border-[#00ff41]/20 bg-[#00ff41]/5 p-6 rounded-xl relative overflow-hidden h-full z-10">
-                        <div className="absolute inset-0 bg-[#00ff41]/5 blur-3xl opacity-20 pointer-events-none" />
+                        <div className="absolute inset-0 bg-[#00ff41]/5 blur-3xl opacity-20 pointer-events-none"></div>
                         <h3 className="text-[#00ff41] font-bold mb-4 flex items-center gap-2">
                             <ShieldCheck className="w-5 h-5" /> {t('info.arch_good_title')}
                         </h3>
@@ -414,7 +403,6 @@ export default function Home() {
             </div>
         </section>
 
-        {/* SILO SEO Section (VÉRIFIÉE : 5 LIENS SANS DOUBLON) */}
         <section className="container py-16 border-t border-border/30">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold mb-8 text-[#00ff41]">{t('blog.section_title')}</h2>
@@ -443,7 +431,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* PRICING Section (RESTAURÉE) */}
         <section className="container py-16 text-center">
             <h2 className="text-3xl font-bold mb-2 flex items-center justify-center gap-2">
                 <Zap className="w-6 h-6 text-[#00ff41]" /> {t('pro.title')}
@@ -470,7 +457,6 @@ export default function Home() {
             </div>
         </section>
 
-        {/* FAQ (RESTAURÉE) */}
         <section className="max-w-2xl mx-auto py-16 space-y-6">
             <h2 className="text-2xl font-bold text-center">{t('info.faq_title')}</h2>
             <Accordion type="single" collapsible className="w-full">
