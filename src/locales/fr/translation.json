@@ -1,4 +1,7 @@
 {
+  "common": {
+    "back_home": "Retour à l'accueil"
+  },
   "hero": {
     "title_start": "Supprimez les",
     "title_color": "métadonnées",
@@ -42,6 +45,36 @@
     "vinted_text_3": "Nettoyez vos photos avant de les poster. GhostMeta supprime toutes les métadonnées en un clic, directement dans votre navigateur. Rien n'est envoyé sur internet.",
     "batch_lock_title": "Mode Batch verrouillé",
     "batch_lock_desc": "En mode gratuit, nettoyez vos photos une par une (illimité). Le Pack Pro débloque le traitement par lots et l'export ZIP."
+  },
+  "blog": {
+    "section_title": "Expertise & Confidentialité",
+    "posts": {
+      "vinted-securite-photo-guide": {
+        "title": "Vinted : Le guide ultime pour sécuriser vos photos",
+        "desc": "Pourquoi et comment nettoyer vos images avant de vendre.",
+        "content": "<p>Vos photos contiennent des coordonnées GPS et des signatures d'appareil qui peuvent être utilisées pour vous identifier.</p><h4>Comment se protéger ?</h4><p>Utilisez GhostMeta pour purger ces données avant chaque mise en ligne sur Vinted.</p>"
+      },
+      "supprimer-exif-iphone-android": {
+        "title": "Supprimer les EXIF sur iPhone et Android",
+        "desc": "Guide technique pour mobile.",
+        "content": "<p>Les smartphones modernes intègrent des métadonnées invisibles à chaque cliché.</p><h4>La solution locale</h4><p>GhostMeta traite vos photos directement dans votre navigateur, sans jamais envoyer vos fichiers sur un serveur.</p>"
+      },
+      "comprendre-donnees-exif-gps": {
+        "title": "Comprendre les données EXIF et GPS",
+        "desc": "Tout savoir sur les métadonnées cachées.",
+        "content": "<p>L'EXIF (Exchangeable Image File Format) est une carte d'identité de votre photo.</p>"
+      },
+      "nettoyage-photo-local-vs-cloud": {
+        "title": "Nettoyage Photo : Local vs Cloud",
+        "desc": "Pourquoi le traitement local est plus sûr.",
+        "content": "<p>Le traitement en ligne classique expose vos photos à des fuites de données.</p>"
+      },
+      "ghostmeta-manifeste-confidentialite": {
+        "title": "GhostMeta : Manifeste pour la Confidentialité",
+        "desc": "Nos engagements pour votre vie privée.",
+        "content": "<p>Nous croyons en un web où l'utilisateur garde le contrôle total de ses données.</p>"
+      }
+    }
   },
   "info": {
     "why_title": "Pourquoi vos photos vous",
