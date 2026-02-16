@@ -1,4 +1,7 @@
 {
+  "common": {
+    "back_home": "Back to Home"
+  },
   "hero": {
     "title_start": "Remove",
     "title_color": "metadata",
@@ -42,6 +45,36 @@
     "vinted_text_3": "Clean your photos before posting. GhostMeta removes all metadata in one click, directly in your browser. Nothing is sent to the internet.",
     "batch_lock_title": "Batch Mode Locked",
     "batch_lock_desc": "In free mode, clean photos one by one (unlimited). The Pro Pack unlocks batch processing and ZIP export."
+  },
+  "blog": {
+    "section_title": "Expertise & Privacy",
+    "posts": {
+      "vinted-securite-photo-guide": {
+        "title": "Vinted: The ultimate guide to securing your photos",
+        "desc": "Why and how to clean your images before selling.",
+        "content": "<p>Your photos contain GPS coordinates and device signatures that can be used to identify you.</p><h4>How to protect yourself?</h4><p>Use GhostMeta to purge this data before every upload on Vinted.</p>"
+      },
+      "supprimer-exif-iphone-android": {
+        "title": "Remove EXIF on iPhone and Android",
+        "desc": "Technical guide for mobile devices.",
+        "content": "<p>Modern smartphones embed invisible metadata in every shot.</p><h4>The local solution</h4><p>GhostMeta processes your photos directly in your browser, never sending your files to a server.</p>"
+      },
+      "comprendre-donnees-exif-gps": {
+        "title": "Understanding EXIF and GPS Data",
+        "desc": "Everything you need to know about hidden metadata.",
+        "content": "<p>EXIF (Exchangeable Image File Format) is your photo's ID card.</p>"
+      },
+      "nettoyage-photo-local-vs-cloud": {
+        "title": "Photo Cleaning: Local vs Cloud",
+        "desc": "Why local processing is safer.",
+        "content": "<p>Traditional online processing exposes your photos to data leaks.</p>"
+      },
+      "ghostmeta-manifeste-confidentialite": {
+        "title": "GhostMeta: Privacy Manifesto",
+        "desc": "Our commitment to your privacy.",
+        "content": "<p>We believe in a web where users keep total control over their data.</p>"
+      }
+    }
   },
   "info": {
     "why_title": "Why your photos",
