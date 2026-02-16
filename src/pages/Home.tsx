@@ -138,7 +138,7 @@ export default function Home() {
       <main className="flex-1">
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <img src={HERO_BG_URL} alt="" fetchpriority="high" className="w-full h-full object-cover opacity-15" />
+            <img src={HERO_BG_URL} alt="" fetchpriority="high" className="w-full h-full object-cover opacity-100" />
             <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/70 to-background"></div>
           </div>
 
