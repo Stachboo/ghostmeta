@@ -1,5 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle, ArrowLeft } from "lucide-react";
+import { AlertCircle, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function NotFound() {
@@ -26,13 +27,13 @@ export default function NotFound() {
             La page que vous recherchez n'existe pas ou a été déplacée.
           </p>
 
-          <button
+          <Button
             onClick={() => navigate("/")}
-            className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-black transition-all duration-300 bg-[#00ff41] rounded-full hover:bg-[#00dd38] hover:shadow-[0_0_20px_rgba(0,255,65,0.4)]"
+            className="bg-[#00ff41] hover:bg-[#00ff41]/80 text-black font-semibold tracking-wide"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <Home className="w-4 h-4 mr-2" />
             Retour à l'accueil
-          </button>
+          </Button>
         </CardContent>
       </Card>
     </div>
