@@ -146,7 +146,7 @@ export default function ImageCard({ image, onRemove, onDownload, index }: ImageC
         <div className="flex items-center gap-3 min-w-0">
           <div className="w-10 h-10 rounded bg-muted/50 flex-shrink-0 overflow-hidden border border-border/30">
             {image.previewUrl ? (
-              <img src={image.previewUrl} alt="" className="w-full h-full object-cover" />
+              <img src={image.previewUrl} alt="Aperçu du fichier en cours de nettoyage" className="w-full h-full object-cover" />
             ) : (
               <div className="w-full h-full flex items-center justify-center">
                 <ImageIcon className="w-5 h-5 text-muted-foreground/50" />
