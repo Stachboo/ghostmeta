@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-const LOGO_URL = "/logo.webp";
+const LOGO_URL = "/logo_optimized.webp";
 
 interface GhostLogoProps {
   size?: number;
