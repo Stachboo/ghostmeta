@@ -179,5 +179,19 @@
                 "content": "L'utilisateur est seul responsable des fichiers traités."
             }
         }
-    }
+    },
+"trust": {
+    "section_label": "Transparence Technique",
+    "zero_upload": "Zéro Upload",
+    "zero_upload_sub": "Aucun fichier envoyé",
+    "local": "100% Local",
+    "local_sub": "Navigateur uniquement",
+    "zero_storage": "Zéro Stockage",
+    "zero_storage_sub": "Aucune donnée conservée",
+    "network_zero": "0 requête externe",
+    "network_alert": "{{count}} requête(s) détectée(s)",
+    "network_monitored": "Moniteur actif",
+    "network_verified": "Réseau vérifié"
+  }
 }
+

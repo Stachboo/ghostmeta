@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ServerOff, Cpu, DatabaseZap, Activity } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface BadgeProps {
   icon: React.ReactNode;
@@ -8,10 +9,9 @@ interface BadgeProps {
   sublabel: string;
   color: 'green' | 'amber';
   dynamic?: boolean;
-  value?: string;
 }
 
-function TrustBadge({ icon, label, sublabel, color, dynamic = false, value }: BadgeProps) {
+function TrustBadge({ icon, label, sublabel, color, dynamic = false }: BadgeProps) {
   const borderColor = color === 'green' ? 'border-[#00ff41]/20' : 'border-[#ffb000]/20';
   const bgColor = color === 'green' ? 'bg-[#00ff41]/5' : 'bg-[#ffb000]/5';
   const iconColor = color === 'green' ? 'text-[#00ff41]' : 'text-[#ffb000]';
@@ -44,18 +44,15 @@ function TrustBadge({ icon, label, sublabel, color, dynamic = false, value }: Ba
 
       {/* Text */}
       <div className="min-w-0">
-        <p className={`text-xs font-bold tracking-wide truncate ${iconColor}`}>
-          {dynamic && value ? value : label}
-        </p>
-        <p className="text-[10px] text-gray-500 tracking-widest uppercase truncate">
-          {sublabel}
-        </p>
+        <p className={`text-xs font-bold tracking-wide truncate ${iconColor}`}>{label}</p>
+        <p className="text-[10px] text-gray-500 tracking-widest uppercase truncate">{sublabel}</p>
       </div>
     </motion.div>
   );
 }
 
 export default function TrustStrip() {
+  const { t } = useTranslation();
   const [externalRequests, setExternalRequests] = useState(0);
   const [monitoring, setMonitoring] = useState(false);
 
@@ -102,11 +99,12 @@ export default function TrustStrip() {
     return () => observer.disconnect();
   }, []);
 
-  const networkStatus = externalRequests === 0 ? 'green' : 'amber';
+  const networkColor = externalRequests === 0 ? 'green' : 'amber';
   const networkLabel =
     externalRequests === 0
-      ? '0 requête externe'
-      : `${externalRequests} requête(s) détectée(s)`;
+      ? t('trust.network_zero')
+      : t('trust.network_alert', { count: externalRequests });
+  const networkSublabel = monitoring ? t('trust.network_monitored') : t('trust.network_verified');
 
   return (
     <section className="container py-6">
@@ -115,7 +113,7 @@ export default function TrustStrip() {
         <div className="flex items-center gap-2 mb-4">
           <div className="h-px flex-1 bg-[#00ff41]/10" />
           <span className="text-[10px] font-bold tracking-[3px] uppercase text-gray-600">
-            Transparence Technique
+            {t('trust.section_label')}
           </span>
           <div className="h-px flex-1 bg-[#00ff41]/10" />
         </div>
@@ -124,29 +122,28 @@ export default function TrustStrip() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <TrustBadge
             icon={<ServerOff size={16} />}
-            label="Zéro Upload"
-            sublabel="Aucun fichier envoyé"
+            label={t('trust.zero_upload')}
+            sublabel={t('trust.zero_upload_sub')}
             color="green"
           />
           <TrustBadge
             icon={<Cpu size={16} />}
-            label="100% Local"
-            sublabel="Navigateur uniquement"
+            label={t('trust.local')}
+            sublabel={t('trust.local_sub')}
             color="green"
           />
           <TrustBadge
             icon={<DatabaseZap size={16} />}
-            label="Zéro Stockage"
-            sublabel="Aucune donnée conservée"
+            label={t('trust.zero_storage')}
+            sublabel={t('trust.zero_storage_sub')}
             color="amber"
           />
           <TrustBadge
             icon={<Activity size={16} />}
             label={networkLabel}
-            sublabel={monitoring ? 'Moniteur actif' : 'Réseau vérifié'}
-            color={networkStatus}
+            sublabel={networkSublabel}
+            color={networkColor}
             dynamic={monitoring}
-            value={networkLabel}
           />
         </div>
       </div>

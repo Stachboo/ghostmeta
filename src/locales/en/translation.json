@@ -158,5 +158,19 @@
       "2": { "title": "2. Hosting", "content": "Vercel Inc., USA." },
       "3": { "title": "3. Liability", "content": "User is solely responsible." }
     }
+  },
+"trust": {
+    "section_label": "Technical Transparency",
+    "zero_upload": "Zero Upload",
+    "zero_upload_sub": "No file sent",
+    "local": "100% Local",
+    "local_sub": "Browser only",
+    "zero_storage": "Zero Storage",
+    "zero_storage_sub": "No data retained",
+    "network_zero": "0 external request",
+    "network_alert": "{{count}} request(s) detected",
+    "network_monitored": "Monitor active",
+    "network_verified": "Network verified"
   }
 }
+
