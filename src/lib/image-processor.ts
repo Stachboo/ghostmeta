@@ -3,13 +3,16 @@
  * ─────────────────────────────────────
  * Traitement sécurisé avec gestion mémoire (Max 4K resolution).
  * Évite les crashs sur mobile (iOS/Android) avec les photos > 12MP.
+ *
+ * PERF : heic2any (~1.2MB) est chargé dynamiquement UNIQUEMENT si un
+ * fichier .heic/.heif est détecté. Les visiteurs non-iPhone ne le
+ * téléchargent jamais.
  */
 
 import ExifReader from 'exifreader';
-import heic2any from 'heic2any';
 
 // SEUIL DE SÉCURITÉ : Toute image > 4096px sera redimensionnée pour éviter le crash mémoire
-const MAX_DIMENSION = 4096; 
+const MAX_DIMENSION = 4096;
 
 export interface MetadataInfo {
   gps?: { latitude: number; longitude: number; altitude?: number; };
@@ -62,7 +65,7 @@ export async function extractMetadata(file: File): Promise<MetadataInfo> {
 
   try {
     const tags = ExifReader.load(buffer, { expanded: true });
-    
+
     if (tags.exif) Object.assign(raw, tags.exif);
     if (tags.iptc) Object.assign(raw, tags.iptc);
     if (tags.xmp) Object.assign(raw, tags.xmp);
@@ -88,8 +91,8 @@ export async function extractMetadata(file: File): Promise<MetadataInfo> {
 
     const dateTag = tags.exif?.DateTimeOriginal || tags.exif?.DateTime || tags.exif?.DateTimeDigitized;
     if (dateTag) {
-      const dateStr = typeof dateTag === 'object' && 'description' in dateTag 
-        ? (dateTag as { description: string }).description 
+      const dateStr = typeof dateTag === 'object' && 'description' in dateTag
+        ? (dateTag as { description: string }).description
         : String(dateTag);
       metadata.dateTime = dateStr;
       threats.push({ type: 'datetime', severity: 'warning', label: 'Date de prise de vue', value: dateStr });
@@ -121,7 +124,9 @@ export async function extractMetadata(file: File): Promise<MetadataInfo> {
 
 async function convertHeicToJpeg(file: File): Promise<Blob> {
   try {
-    const result = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.90 }); // Qualité 90% suffisante pour HEIC
+    // Import dynamique — heic2any (~1.2MB) n'est chargé que si nécessaire
+    const { default: heic2any } = await import('heic2any');
+    const result = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.90 });
     return Array.isArray(result) ? result[0] : result;
   } catch (error) {
     throw new Error('Format HEIC non supporté par ce navigateur.');
@@ -131,7 +136,7 @@ async function convertHeicToJpeg(file: File): Promise<Blob> {
 export async function stripMetadata(file: File): Promise<Blob> {
   let sourceFile = file;
 
-  // 1. Conversion HEIC si nécessaire
+  // 1. Conversion HEIC si nécessaire (lazy load heic2any)
   if (isHeicFile(file)) {
     try {
       const jpegBlob = await convertHeicToJpeg(file);
@@ -145,11 +150,11 @@ export async function stripMetadata(file: File): Promise<Blob> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     const url = URL.createObjectURL(sourceFile);
-    
+
     // Timeout de sécurité : si l'image met > 10s à charger, on coupe
     const timer = setTimeout(() => {
-        URL.revokeObjectURL(url);
-        reject(new Error('Délai dépassé (Image trop lourde ?)'));
+      URL.revokeObjectURL(url);
+      reject(new Error('Délai dépassé (Image trop lourde ?)'));
     }, 10000);
 
     img.onload = () => {
@@ -160,14 +165,14 @@ export async function stripMetadata(file: File): Promise<Blob> {
         let height = img.naturalHeight;
 
         if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
-           const ratio = width / height;
-           if (width > height) {
-               width = MAX_DIMENSION;
-               height = Math.round(MAX_DIMENSION / ratio);
-           } else {
-               height = MAX_DIMENSION;
-               width = Math.round(MAX_DIMENSION * ratio);
-           }
+          const ratio = width / height;
+          if (width > height) {
+            width = MAX_DIMENSION;
+            height = Math.round(MAX_DIMENSION / ratio);
+          } else {
+            height = MAX_DIMENSION;
+            width = Math.round(MAX_DIMENSION * ratio);
+          }
         }
 
         const canvas = document.createElement('canvas');
@@ -182,7 +187,7 @@ export async function stripMetadata(file: File): Promise<Blob> {
 
         const outputType = sourceFile.type === 'image/png' ? 'image/png' : 'image/jpeg';
         // Compression légère pour Vinted (0.92 est le sweet spot qualité/poids)
-        const quality = outputType === 'image/png' ? 1 : 0.92; 
+        const quality = outputType === 'image/png' ? 1 : 0.92;
 
         canvas.toBlob(
           (blob) => {
