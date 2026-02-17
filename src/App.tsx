@@ -25,36 +25,8 @@ function HideLoader() {
   return null;
 }
 
-/**
- * LoadingFallback — Affiché par Suspense pendant la résolution du chunk.
- * Design cohérent avec le loader HTML (#0a0a0c / #00ff41) pour éviter
- * tout flash visuel pendant la fenêtre de chargement.
- */
-function LoadingFallback() {
-  return (
-    <div
-      style={{ backgroundColor: '#0a0a0c' }}
-      className="min-h-screen flex flex-col items-center justify-center"
-    >
-      <div
-        className="text-sm font-bold tracking-[4px] uppercase mb-5 animate-pulse"
-        style={{ color: '#00ff41' }}
-      >
-        INITIALISATION...
-      </div>
-      <div className="w-[200px] h-[3px] rounded-full overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
-        <div
-          className="h-full rounded-full"
-          style={{
-            backgroundColor: '#00ff41',
-            boxShadow: '0 0 10px #00ff41',
-            animation: 'loading 1.5s infinite ease-in-out',
-          }}
-        />
-      </div>
-    </div>
-  );
-}
+
+
 
 function App() {
   return (
