@@ -1,57 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ghostmeta.online/</loc>
-    <lastmod>2026-02-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://ghostmeta.online/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ghostmeta.online/"/>
+    <loc>https://www.ghostmeta.online/</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/"/>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://ghostmeta.online/blog/vinted-securite-photo-guide</loc>
-    <lastmod>2026-02-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://ghostmeta.online/blog/vinted-securite-photo-guide"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ghostmeta.online/blog/vinted-securite-photo-guide"/>
+    <loc>https://www.ghostmeta.online/blog/vinted-securite-photo-guide</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/blog/vinted-securite-photo-guide"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/blog/vinted-securite-photo-guide"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://ghostmeta.online/blog/supprimer-exif-iphone-android</loc>
-    <lastmod>2026-02-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://ghostmeta.online/blog/supprimer-exif-iphone-android"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ghostmeta.online/blog/supprimer-exif-iphone-android"/>
+    <loc>https://www.ghostmeta.online/blog/supprimer-exif-iphone-android</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/blog/supprimer-exif-iphone-android"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/blog/supprimer-exif-iphone-android"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://ghostmeta.online/blog/comprendre-donnees-exif-gps</loc>
-    <lastmod>2026-02-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://ghostmeta.online/blog/comprendre-donnees-exif-gps"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ghostmeta.online/blog/comprendre-donnees-exif-gps"/>
+    <loc>https://www.ghostmeta.online/blog/comprendre-donnees-exif-gps</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/blog/comprendre-donnees-exif-gps"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/blog/comprendre-donnees-exif-gps"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://ghostmeta.online/blog/nettoyage-photo-local-vs-cloud</loc>
-    <lastmod>2026-02-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://ghostmeta.online/blog/nettoyage-photo-local-vs-cloud"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ghostmeta.online/blog/nettoyage-photo-local-vs-cloud"/>
+    <loc>https://www.ghostmeta.online/blog/nettoyage-photo-local-vs-cloud</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/blog/nettoyage-photo-local-vs-cloud"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/blog/nettoyage-photo-local-vs-cloud"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://ghostmeta.online/blog/ghostmeta-manifeste-confidentialite</loc>
-    <lastmod>2026-02-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://ghostmeta.online/blog/ghostmeta-manifeste-confidentialite"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ghostmeta.online/blog/ghostmeta-manifeste-confidentialite"/>
+    <loc>https://www.ghostmeta.online/blog/ghostmeta-manifeste-confidentialite</loc>
+    <lastmod>2026-02-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/blog/ghostmeta-manifeste-confidentialite"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/blog/ghostmeta-manifeste-confidentialite"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

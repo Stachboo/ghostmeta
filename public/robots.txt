@@ -10,4 +10,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://ghostmeta.online/sitemap.xml
+Sitemap: https://www.ghostmeta.online/sitemap.xml
