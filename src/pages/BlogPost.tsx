@@ -7,19 +7,23 @@ import GhostLogo from '@/components/GhostLogo';
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
-  const postExists = t(`blog.posts.${slug}.title`) !== `blog.posts.${slug}.title`;
+  // Vérification robuste de l'existence de l'article
+  const titleKey = `blog.posts.${slug}.title`;
+  const contentKey = `blog.posts.${slug}.content`;
+  const postExists = i18n.exists(titleKey);
 
   if (!postExists) {
     return (
       <div className="min-h-screen bg-[#0a0a0c] flex flex-col items-center justify-center p-4">
         <GhostLogo size={60} glow />
-        <h1 className="mt-8 text-2xl font-bold text-white">System Error: Post Not Found</h1>
+        <h1 className="mt-8 text-2xl font-bold text-white">404: POST_NOT_FOUND</h1>
+        <p className="text-muted-foreground mt-2 font-mono text-xs">ID: {slug}</p>
         <button 
           onClick={() => navigate('/')} 
-          className="mt-6 inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-black transition-all duration-300 bg-[#00ff41] rounded-full hover:bg-[#00dd38] hover:shadow-[0_0_20px_rgba(0,255,65,0.4)]"
+          className="mt-6 inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-black transition-all duration-300 bg-[#00ff41] rounded-full hover:bg-[#00dd38]"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Return to Base
@@ -38,7 +42,7 @@ export default function BlogPost() {
           </Link>
           <button 
             onClick={() => navigate('/')} 
-            className="inline-flex items-center justify-center px-4 py-1.5 text-xs font-bold text-black transition-all duration-300 bg-[#00ff41] rounded-full hover:bg-[#00dd38] hover:shadow-[0_0_15px_rgba(0,255,65,0.4)]"
+            className="inline-flex items-center justify-center px-4 py-1.5 text-xs font-bold text-black transition-all duration-300 bg-[#00ff41] rounded-full hover:bg-[#00dd38]"
           >
             <ArrowLeft className="w-3.5 h-3.5 mr-1.5" /> {t('common.back_home')}
           </button>
@@ -49,6 +53,7 @@ export default function BlogPost() {
         <motion.article 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          key={slug}
           className="space-y-8"
         >
           <div className="space-y-4">
@@ -58,7 +63,7 @@ export default function BlogPost() {
               <span className="flex items-center gap-1 text-amber-500"><Shield className="w-3 h-3" /> Encrypted Content</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
-              {t(`blog.posts.${slug}.title`)}
+              {t(titleKey)}
             </h1>
             <p className="text-xl text-muted-foreground italic border-l-4 border-[#00ff41] pl-4">
               {t(`blog.posts.${slug}.desc`)}
@@ -70,10 +75,11 @@ export default function BlogPost() {
             <div className="absolute inset-0 bg-grid-white/[0.02]" />
           </div>
 
+          {/* Rendu du contenu HTML */}
           <div 
             className="prose prose-invert prose-green max-w-none text-muted-foreground leading-relaxed
             prose-headings:text-white prose-strong:text-[#00ff41] prose-a:text-[#00ff41] hover:prose-a:underline"
-            dangerouslySetInnerHTML={{ __html: t(`blog.posts.${slug}.content`) }}
+            dangerouslySetInnerHTML={{ __html: t(contentKey) }}
           />
         </motion.article>
       </main>
