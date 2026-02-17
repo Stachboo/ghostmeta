@@ -1,0 +1,191 @@
+{
+  "common": {
+    "back_home": "Back to Home"
+  },
+  "hero": {
+    "title_start": "Remove",
+    "title_color": "metadata",
+    "title_end": "from your photos",
+    "subtitle": "Protect your privacy before posting on Vinted, eBay, or Depop. 100% Local Processing.",
+    "secure_badge": "100% Local"
+  },
+  "upload": {
+    "drop_title": "Drop your photos here",
+    "drop_subtitle": "JPEG · PNG · WebP · HEIC — 100% Local Processing",
+    "browse": "or browse your files",
+    "processing": "Analyzing...",
+    "cleaning": "Cleaning...",
+    "success": "Done!",
+    "error_type": "Format not supported",
+    "download_all": "Download All (ZIP)",
+    "delete_all": "Delete All",
+    "limit_title": "Limit Reached",
+    "limit_desc": "In free mode, cleaning is limited to 1 session every 12 hours. Come back later or support the project.",
+    "donate_btn": "Support Developer (PayPal)",
+    "pro_soon": "Pro Pack Coming Soon!"
+  },
+  "card": {
+    "pending": "PENDING",
+    "scanning": "SCAN...",
+    "critical": "CRITICAL",
+    "exposed": "EXPOSED",
+    "clean": "CLEAN",
+    "purging": "PURGE...",
+    "neutralized": "NEUTRALIZED",
+    "error": "ERROR",
+    "no_threats": "No sensitive metadata detected",
+    "cleaned_success": "Metadata successfully removed",
+    "download": "Download",
+    "remove": "Remove"
+  },
+  "marketing": {
+    "vinted_title": "Your Vinted photos reveal your address.",
+    "vinted_text_1": "Every photo taken with your iPhone or Android embeds your exact GPS coordinates, date and time, and your phone model.",
+    "vinted_text_2": "When a buyer asks for \"more photos\" via WhatsApp, they get everything.",
+    "vinted_text_3": "Clean your photos before posting. GhostMeta removes all metadata in one click, directly in your browser. Nothing is sent to the internet.",
+    "batch_lock_title": "Batch Mode Locked",
+    "batch_lock_desc": "In free mode, clean photos one by one (unlimited). The Pro Pack unlocks batch processing and ZIP export."
+  },
+  "blog": {
+    "section_title": "Expertise & Privacy",
+    "posts": {
+      "vinted-securite-photo-guide": {
+        "title": "Vinted: The ultimate guide to securing your photos",
+        "desc": "Why and how to clean your images before selling."
+      },
+      "supprimer-exif-iphone-android": {
+        "title": "Remove EXIF on iPhone and Android",
+        "desc": "Technical guide for mobile devices."
+      },
+      "comprendre-donnees-exif-gps": {
+        "title": "Understanding EXIF and GPS Data",
+        "desc": "Everything you need to know about hidden metadata."
+      },
+      "nettoyage-photo-local-vs-cloud": {
+        "title": "Photo Cleaning: Local vs Cloud",
+        "desc": "Why local processing is safer."
+      },
+      "ghostmeta-manifeste-confidentialite": {
+        "title": "GhostMeta: Privacy Manifesto",
+        "desc": "Our commitment to your privacy."
+      }
+    }
+  },
+  "info": {
+    "why_title": "Why your photos",
+    "why_title_highlight": "betray you",
+    "why_desc": "Every smartphone photo contains invisible metadata. When you post on Vinted, eBay or Depop, this data can reveal your exact address, habits, and equipment.",
+    "geo_title": "GPS Geolocation",
+    "geo_desc": "Exact home coordinates embedded in every smartphone photo.",
+    "meta_title": "Time Profiling",
+    "meta_desc": "Dates and times revealing your presence and absence routines.",
+    "hard_title": "Device Fingerprinting",
+    "hard_desc": "Device model, lens, and serial numbers identifying your equipment.",
+    "how_title": "How it",
+    "how_highlight": "works",
+    "how_subtitle": "Three steps. Zero upload. Your photos stay on your device.",
+    "step_1_title": "Drop your photos",
+    "step_1_desc": "Drag & drop or select your images. JPEG, PNG, WebP and HEIC supported.",
+    "step_2_title": "Threat Scan",
+    "step_2_desc": "GhostMeta analyzes every image and identifies sensitive metadata (GPS, date, device).",
+    "step_3_title": "Neutralization",
+    "step_3_desc": "One click to remove all metadata. Download your clean images.",
+    "arch_title": "Architecture",
+    "arch_highlight": "Zero-Knowledge",
+    "arch_subtitle": "Your photos never leave your device. All processing is done locally in your browser.",
+    "arch_bad_title": "Other tools",
+    "arch_bad_1": "Upload to a remote server",
+    "arch_bad_2": "Photos accessible by third parties",
+    "arch_bad_3": "Risk of data recovery",
+    "arch_good_title": "GhostMeta",
+    "arch_good_1": "No upload — 100% local",
+    "arch_good_2": "No one sees your photos",
+    "arch_good_3": "Works even offline",
+    "faq_title": "Frequently Asked Questions",
+    "q1": "Are my photos sent to a server?",
+    "a1": "No. All processing happens locally in your browser via the Canvas API. No data leaves your device.",
+    "q2": "Which image formats are supported?",
+    "a2": "We support JPEG, PNG, WEBP, and HEIC.",
+    "q3": "What metadata is removed?",
+    "a3": "All embedded metadata: GPS, EXIF, XMP, IPTC. The image is rebuilt pixel by pixel to guarantee a clean file.",
+    "q4": "Is image quality affected?",
+    "a4": "The image is recompressed at 92% quality (JPEG) for an optimal size/quality balance. Images over 4096px are resized to prevent memory crashes on mobile.",
+    "q5": "Why is Batch Mode paid?",
+    "a5": "To support development while keeping the tool ad-free.",
+    "q6": "Don't platforms clean metadata already?",
+    "a6": "Not always, and often only after storing the original on their servers."
+  },
+  "pro": {
+    "active": "PRO ACTIVE",
+    "price_btn": "Donate ❤️",
+    "title": "Support the project",
+    "subtitle": "GhostMeta is free. Your donations keep the servers running.",
+    "free_title": "Free",
+    "free_1": "1 clean every 12h",
+    "free_2": "Metadata scan",
+    "free_3": "Single download",
+    "free_4": "100% Local & Private",
+    "pro_title": "Pro Pack",
+    "pro_price": "Soon",
+    "pro_1": "Up to 100 images simultaneously",
+    "pro_2": "Batch Mode (all at once)",
+    "pro_3": "One-click ZIP export",
+    "pro_4": "No time limit",
+    "unlock": "Coming Soon"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "privacy_btn": "Privacy Policy",
+    "legal_btn": "Legal Notice"
+  },
+  "legal": {
+    "privacy_title": "Privacy Policy",
+    "updated": "Last updated: February 2026",
+    "notice_title": "Legal Notice",
+    "privacy_sections": {
+      "1": {
+        "title": "1. Local-Only Architecture",
+        "content": "100% local processing via the browser Canvas API. No data leaves your device."
+      },
+      "2": {
+        "title": "2. Data",
+        "content": "No personal data collection."
+      },
+      "3": {
+        "title": "3. Storage",
+        "content": "LocalStorage only. No tracking cookies."
+      },
+      "4": {
+        "title": "4. Contact",
+        "content": "contact@ghostmeta.fr"
+      }
+    },
+    "notice_sections": {
+      "1": {
+        "title": "1. Editor",
+        "content": "Published independently."
+      },
+      "2": {
+        "title": "2. Hosting",
+        "content": "Vercel Inc., USA."
+      },
+      "3": {
+        "title": "3. Liability",
+        "content": "User is solely responsible."
+      }
+    }
+  },
+  "trust": {
+    "section_label": "Technical Transparency",
+    "zero_upload": "Zero Upload",
+    "zero_upload_sub": "No file sent",
+    "local": "100% Local",
+    "local_sub": "Browser only",
+    "zero_storage": "Zero Storage",
+    "zero_storage_sub": "No data retained",
+    "network_zero": "0 external request",
+    "network_alert": "{{count}} request(s) detected",
+    "network_monitored": "Monitor active",
+    "network_verified": "Network verified"
+  }
+}

@@ -1,7 +1,14 @@
-node_modules
-dist
+# Ignorer l'environnement Python
+.venv/
+venv/
+__pycache__/
+
+# Ignorer la sécurité
+credentials.json
 .env
+
+# Ignorer les dossiers système/build
+node_modules/
 .DS_Store
-*.log
-.vercel
-.env*.local
+dist/
+build/
