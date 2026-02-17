@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <meta name="google-site-verification" content="19xcI1MYz04aeZ_uVhUOshrPNhyMoyS0-u15Mba2pL0" />
 
     <title>GhostMeta | Nettoyeur Photo pour Vinted & Leboncoin (Gratuit)</title>
@@ -14,6 +14,10 @@
     <link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/" />
     <link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/?lng=en" />
     <link rel="alternate" hreflang="x-default" href="https://www.ghostmeta.online/" />
+
+    <!-- PRELOAD CRITIQUE : hero-bg.avif est le LCP element -->
+    <!-- Sans preload, le navigateur découvre cette image trop tard (dans le JS) -->
+    <link rel="preload" as="image" href="/hero-bg.avif" type="image/avif" fetchpriority="high" />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.ghostmeta.online/" />
@@ -110,6 +114,15 @@
     }
     </script>
 
+    <!-- Microsoft Clarity — Heatmaps & Session Recording -->
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "viz5ob22ep");
+    </script>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -160,6 +173,11 @@
           justify-content: center;
           z-index: 9999;
           font-family: ui-sans-serif, system-ui, sans-serif;
+          transition: opacity 0.4s ease-out, visibility 0.4s;
+        }
+        .initial-loader.loader-hidden {
+          opacity: 0;
+          visibility: hidden;
         }
         .loader-text {
           color: #22c55e;
@@ -198,8 +216,9 @@
           100% { transform: translateX(250%); }
         }
       </style>
-      
-      <div class="initial-loader">
+
+      <!-- ID = "global-loader" pour que HideLoader dans App.tsx puisse le cibler -->
+      <div class="initial-loader" id="global-loader">
         <div class="loader-text">INITIALISATION DU SYSTÈME...</div>
         <div class="loader-bar-container">
           <div class="loader-bar"></div>
