@@ -14,6 +14,7 @@ import DropZone from '@/components/DropZone';
 import ImageCard from '@/components/ImageCard';
 import ProModal from '@/components/ProModal';
 import Footer from '@/components/Footer';
+import TrustStrip from '@/components/TrustStrip';
 import { useImageProcessor } from '@/hooks/useImageProcessor';
 
 const HERO_BG = "/hero-bg.avif";
@@ -177,6 +178,8 @@ export default function Home() {
             </div>
           </section>
         )}
+
+        <TrustStrip /> 
 
         {/* SECTION VINTED */}
         <section className="container py-12">
