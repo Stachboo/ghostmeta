@@ -9,3 +9,10 @@ createRoot(document.getElementById("root")!).render(
     <App />
   </HelmetProvider>
 );
+
+// Enregistrement du Service Worker (requis par Chrome pour beforeinstallprompt)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {/* silently fail */});
+  });
+}
