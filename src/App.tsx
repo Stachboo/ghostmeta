@@ -2,6 +2,7 @@ import { Suspense, lazy, useLayoutEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import ErrorBoundary from './components/ErrorBoundary';
+import PWAInstallPrompt from './components/PWAInstallPrompt';
 
 // Imports dynamiques (Optimisation pour charger le site vite)
 const Home = lazy(() => import('./pages/Home'));
@@ -80,6 +81,9 @@ function App() {
           </Routes>
         </Suspense>
       </ErrorBoundary>
+
+      {/* PWA Install Prompt — hors Suspense pour ne pas bloquer sur le lazy loading */}
+      <PWAInstallPrompt />
 
       {/* Analytics — hors ErrorBoundary pour ne pas perdre les events en cas d'erreur */}
       <Analytics />
