@@ -239,6 +239,14 @@
         <p>Vos photos contiennent des données GPS qui révèlent votre adresse exacte. Les acheteurs malveillants peuvent extraire ces coordonnées en quelques secondes.</p>
       </div>
     </div>
+    <!-- Capture beforeinstallprompt AVANT le chargement de React (évite la race condition) -->
+    <script>
+      window.__pwaPromptEvent = null;
+      window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        window.__pwaPromptEvent = e;
+      });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

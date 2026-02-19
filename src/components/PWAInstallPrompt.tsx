@@ -42,12 +42,21 @@ export default function PWAInstallPrompt() {
     setIsIOSDevice(ios);
 
     if (!ios) {
-      // Android/Chrome : capturer l'event
+      // Vérifier si l'event a déjà été capturé par le script inline de index.html
+      // (beforeinstallprompt peut fire AVANT que React monte)
+      const precaptured = (window as any).__pwaPromptEvent as BeforeInstallPromptEvent | null;
+      if (precaptured) {
+        deferredPrompt.current = precaptured;
+        (window as any).__pwaPromptEvent = null;
+        const timer = setTimeout(() => setVisible(true), 4000);
+        return () => clearTimeout(timer);
+      }
+
+      // Sinon écouter l'event (cas où il fire après React)
       const handler = (e: Event) => {
         e.preventDefault();
         deferredPrompt.current = e as BeforeInstallPromptEvent;
-        const timer = setTimeout(() => setVisible(true), 4000);
-        return () => clearTimeout(timer);
+        setTimeout(() => setVisible(true), 4000);
       };
       window.addEventListener('beforeinstallprompt', handler);
       return () => window.removeEventListener('beforeinstallprompt', handler);
