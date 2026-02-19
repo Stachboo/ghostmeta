@@ -1,11 +1,12 @@
 /**
  * PWAInstallPrompt — Bottom bar d'installation PWA
  * ──────────────────────────────────────────────────
- * - Android/Chrome : écoute `beforeinstallprompt` → bouton natif
- * - iOS Safari     : détecte userAgent → guide manuel (3 étapes)
- * - Ne s'affiche pas si déjà en mode standalone (app installée)
- * - Mémorise le refus en localStorage (clé ghostmeta_pwa_dismissed)
- * - Apparaît après 4s avec animation slide-up (Framer Motion)
+ * - Toujours affiché sur mobile après 5s (non-standalone, non-refusé)
+ * - Android/Chrome : si beforeinstallprompt capturé → install natif 1-clic
+ *                    sinon → guide manuel (⋮ → Ajouter à l'écran d'accueil)
+ * - iOS Safari     : guide manuel (Partager → Sur l'écran d'accueil)
+ * - Mémorise le refus en localStorage (clé ghostmeta_pwa_dismissed_v2)
+ * - Apparaît après 5s avec animation slide-up (Framer Motion)
  */
 
 import { useState, useEffect, useRef } from 'react';
@@ -28,41 +29,50 @@ function isStandalone(): boolean {
     || (navigator as any).standalone === true;
 }
 
+function isMobile(): boolean {
+  return /android|iphone|ipad|ipod|mobile/i.test(navigator.userAgent);
+}
+
 export default function PWAInstallPrompt() {
   const [visible, setVisible] = useState(false);
   const [isIOSDevice, setIsIOSDevice] = useState(false);
   const [showIOSGuide, setShowIOSGuide] = useState(false);
+  const [showAndroidGuide, setShowAndroidGuide] = useState(false);
   const deferredPrompt = useRef<BeforeInstallPromptEvent | null>(null);
 
   useEffect(() => {
     // Ne pas afficher si déjà installé ou déjà refusé
     if (isStandalone() || localStorage.getItem(DISMISSED_KEY)) return;
+    // Ne pas afficher sur desktop
+    if (!isMobile()) return;
 
     const ios = isIOS();
     setIsIOSDevice(ios);
 
     if (!ios) {
-      // Vérifier si l'event a déjà été capturé par le script inline de index.html
-      // (beforeinstallprompt peut fire AVANT que React monte)
+      // Récupérer l'event pré-capturé par le script inline dans index.html
       const precaptured = (window as any).__pwaPromptEvent as BeforeInstallPromptEvent | null;
       if (precaptured) {
         deferredPrompt.current = precaptured;
         (window as any).__pwaPromptEvent = null;
-        const timer = setTimeout(() => setVisible(true), 4000);
-        return () => clearTimeout(timer);
       }
 
-      // Sinon écouter l'event (cas où il fire après React)
+      // Continuer à écouter au cas où l'event arrive après le mount
       const handler = (e: Event) => {
         e.preventDefault();
         deferredPrompt.current = e as BeforeInstallPromptEvent;
-        setTimeout(() => setVisible(true), 4000);
       };
       window.addEventListener('beforeinstallprompt', handler);
-      return () => window.removeEventListener('beforeinstallprompt', handler);
+
+      // Afficher le banner dans TOUS les cas après 5s
+      const timer = setTimeout(() => setVisible(true), 5000);
+      return () => {
+        window.removeEventListener('beforeinstallprompt', handler);
+        clearTimeout(timer);
+      };
     } else {
-      // iOS : afficher après 4s sans event natif
-      const timer = setTimeout(() => setVisible(true), 4000);
+      // iOS : afficher après 5s
+      const timer = setTimeout(() => setVisible(true), 5000);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -71,6 +81,7 @@ export default function PWAInstallPrompt() {
     localStorage.setItem(DISMISSED_KEY, 'true');
     setVisible(false);
     setShowIOSGuide(false);
+    setShowAndroidGuide(false);
   }
 
   async function handleInstall() {
@@ -78,13 +89,16 @@ export default function PWAInstallPrompt() {
       setShowIOSGuide(true);
       return;
     }
-    if (!deferredPrompt.current) return;
-    await deferredPrompt.current.prompt();
-    const { outcome } = await deferredPrompt.current.userChoice;
-    if (outcome === 'accepted') {
-      dismiss();
+    if (deferredPrompt.current) {
+      // Install natif Chrome 1-clic
+      await deferredPrompt.current.prompt();
+      const { outcome } = await deferredPrompt.current.userChoice;
+      if (outcome === 'accepted') dismiss();
+      deferredPrompt.current = null;
+    } else {
+      // Pas d'event natif → guide manuel Android
+      setShowAndroidGuide(true);
     }
-    deferredPrompt.current = null;
   }
 
   return (
@@ -282,6 +296,122 @@ export default function PWAInstallPrompt() {
                 { step: '1', icon: '⬆️', text: 'Appuie sur le bouton Partager dans Safari' },
                 { step: '2', icon: '📲', text: 'Fais défiler et sélectionne « Sur l\'écran d\'accueil »' },
                 { step: '3', icon: '✅', text: 'Appuie sur « Ajouter » en haut à droite' },
+              ].map(({ step, icon, text }) => (
+                <div
+                  key={step}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    padding: '12px 0',
+                    borderBottom: step !== '3' ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '28px',
+                      height: '28px',
+                      borderRadius: '50%',
+                      background: 'rgba(0, 255, 65, 0.12)',
+                      border: '1px solid rgba(0, 255, 65, 0.3)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '11px',
+                      fontWeight: 700,
+                      color: '#00ff41',
+                      flexShrink: 0,
+                    }}
+                  >
+                    {step}
+                  </div>
+                  <span style={{ fontSize: '13px', color: '#9ca3af' }}>
+                    {icon} {text}
+                  </span>
+                </div>
+              ))}
+
+              <button
+                onClick={dismiss}
+                style={{
+                  marginTop: '18px',
+                  width: '100%',
+                  padding: '10px',
+                  borderRadius: '8px',
+                  border: '1px solid rgba(0, 255, 65, 0.2)',
+                  background: 'transparent',
+                  color: 'rgba(255,255,255,0.5)',
+                  cursor: 'pointer',
+                  fontSize: '12px',
+                  letterSpacing: '0.05em',
+                }}
+              >
+                Ne plus afficher
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Android Guide Modal */}
+      <AnimatePresence>
+        {showAndroidGuide && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 10000,
+              background: 'rgba(0,0,0,0.75)',
+              backdropFilter: 'blur(6px)',
+              display: 'flex',
+              alignItems: 'flex-end',
+              padding: '0 16px 16px',
+            }}
+            onClick={e => { if (e.target === e.currentTarget) setShowAndroidGuide(false); }}
+          >
+            <motion.div
+              initial={{ y: 60, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 60, opacity: 0 }}
+              transition={{ type: 'spring', damping: 24, stiffness: 260 }}
+              style={{
+                width: '100%',
+                maxWidth: '480px',
+                margin: '0 auto',
+                background: 'rgba(15, 17, 22, 0.97)',
+                border: '1px solid rgba(0, 255, 65, 0.2)',
+                borderRadius: '16px',
+                padding: '24px 20px 20px',
+                boxShadow: '0 -8px 40px rgba(0, 255, 65, 0.1)',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                <GhostLogo size={28} glow />
+                <span style={{ fontWeight: 700, fontSize: '15px', color: '#e5e7eb' }}>
+                  Installer sur Android
+                </span>
+                <button
+                  onClick={() => setShowAndroidGuide(false)}
+                  style={{
+                    marginLeft: 'auto',
+                    background: 'transparent',
+                    border: 'none',
+                    color: 'rgba(255,255,255,0.4)',
+                    cursor: 'pointer',
+                    fontSize: '16px',
+                  }}
+                >
+                  ✕
+                </button>
+              </div>
+
+              {[
+                { step: '1', icon: '⋮', text: 'Appuie sur les 3 points en haut à droite dans Chrome' },
+                { step: '2', icon: '📲', text: 'Sélectionne « Ajouter à l\'écran d\'accueil »' },
+                { step: '3', icon: '✅', text: 'Appuie sur « Ajouter » pour confirmer' },
               ].map(({ step, icon, text }) => (
                 <div
                   key={step}
