@@ -12,7 +12,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import GhostLogo from './GhostLogo';
 
-const DISMISSED_KEY = 'ghostmeta_pwa_dismissed';
+const DISMISSED_KEY = 'ghostmeta_pwa_dismissed_v2';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
