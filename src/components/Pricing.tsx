@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Check, Zap, Shield, Image, MapPin } from 'lucide-react';
 import { toast } from 'sonner';
@@ -10,17 +10,20 @@ const LEMON_SQUEEZY_YEARLY_ID = import.meta.env.VITE_LEMON_SQUEEZY_YEARLY_ID;
 
 export default function Pricing() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const { user, loading } = useAuth();
 
-  const handleCheckout = (variantId: string) => {
-    if (!user) {
-      navigate('/login');
-      return;
-    }
+  const handleAuth = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin,
+      },
+    });
+  };
 
+  const handleCheckout = (variantId: string) => {
     const baseUrl = `https://ghostmeta.lemonsqueezy.com/checkout/buy/${variantId}`;
-    const checkoutUrl = `${baseUrl}?checkout[custom][user_id]=${user.id}`;
+    const checkoutUrl = `${baseUrl}?checkout[custom][user_id]=${user?.id}`;
     
     window.open(checkoutUrl, '_blank');
   };
@@ -129,7 +132,7 @@ export default function Pricing() {
               </div>
               
               <h3 className="text-2xl font-bold mb-2 text-white">
-                {t('pricing.premium.name', 'FULL ACCESS 226')}
+                {t('pricing.premium.name', 'FULL ACCESS')}
               </h3>
               <div className="flex items-baseline gap-1 mb-2">
                 <span className="text-4xl font-bold text-[#00ff41]">{t('pricing.premium.price', '5€')}</span>
@@ -177,10 +180,10 @@ export default function Pricing() {
                 </div>
               ) : (
                 <Button
-                  onClick={() => navigate('/login')}
-                  variant="outline"
-                  className="w-full h-12 border-zinc-600 text-zinc-300 hover:bg-zinc-800 font-mono"
+                  onClick={handleAuth}
+                  className="w-full h-12 bg-[#00ff41] hover:bg-[#00ff41]/90 text-black font-bold font-mono"
                 >
+                  <Zap className="w-4 h-4 mr-2" />
                   {t('pricing.cta.login', 'SE CONNECTER POUR ACTIVER')}
                 </Button>
               )}
