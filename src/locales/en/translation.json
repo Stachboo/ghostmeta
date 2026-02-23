@@ -2,6 +2,31 @@
   "common": {
     "back_home": "Back to Home"
   },
+  "auth": {
+    "loading": "Initializing...",
+    "login": "Secure Access",
+    "logout": "Logout"
+  },
+  "pricing": {
+    "title": "SYSTEM STATUS: ACCESS LEVELS",
+    "standard": {
+      "name": "STANDARD OPERATOR",
+      "price": "0€",
+      "batch": "1 image per batch",
+      "gps": "1 GPS view only"
+    },
+    "premium": {
+      "name": "FULL ACCESS 226",
+      "price": "5€",
+      "yearly_note": "Or €40/year (2 months free)",
+      "batch": "50 images per batch",
+      "gps": "Unlimited GPS views"
+    },
+    "cta": {
+      "login": "LOGIN TO ACTIVATE",
+      "buy": "GET FULL ACCESS"
+    }
+  },
   "hero": {
     "title_start": "Remove",
     "title_color": "metadata",
