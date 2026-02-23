@@ -2,6 +2,19 @@
   "common": {
     "back_home": "Back to Home"
   },
+  "error": {
+    "system_failure": "SYSTEM_FAILURE",
+    "render_error": "GHOSTMETA — RENDER ERROR",
+    "description": "An unexpected error interrupted the rendering pipeline.",
+    "description_local": "Processing is strictly local.",
+    "stack_trace": "STACK TRACE",
+    "no_stack": "No stack trace available.",
+    "reset": "REINITIALIZE SYSTEM",
+    "footer_note": "All processing remains local — zero network exposure"
+  },
+  "header": {
+    "upgrade": "Upgrade"
+  },
   "auth": {
     "loading": "Initializing...",
     "login": "Secure Access",

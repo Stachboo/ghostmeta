@@ -2,6 +2,19 @@
     "common": {
         "back_home": "Retour à l'accueil"
     },
+    "error": {
+        "system_failure": "ÉCHEC_SYSTÈME",
+        "render_error": "GHOSTMETA — ERREUR D'AFFICHAGE",
+        "description": "Une erreur inattendue a interrompu le pipeline d'affichage.",
+        "description_local": "Traitement strictement local.",
+        "stack_trace": "TRACE DE PILE",
+        "no_stack": "Aucune trace disponible.",
+        "reset": "REDÉMARRER LE SYSTÈME",
+        "footer_note": "Tout le traitement reste local — zéro exposition réseau"
+    },
+    "header": {
+        "upgrade": "Premium"
+    },
     "auth": {
         "loading": "Initialisation...",
         "login": "Accès Sécurisé",
