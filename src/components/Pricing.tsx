@@ -132,7 +132,7 @@ export default function Pricing() {
               </div>
               
               <h3 className="text-2xl font-bold mb-2 text-white">
-                {t('pricing.premium.name', 'FULL ACCESS')}
+                {t('pricing.premium.name', 'ACCÈS COMPLET')}
               </h3>
               <div className="flex items-baseline gap-1 mb-2">
                 <span className="text-4xl font-bold text-[#00ff41]">{t('pricing.premium.price', '5€')}</span>
