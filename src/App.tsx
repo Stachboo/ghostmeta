@@ -7,6 +7,7 @@ import PWAInstallPrompt from './components/PWAInstallPrompt';
 // Imports dynamiques (Optimisation pour charger le site vite)
 const Home = lazy(() => import('./pages/Home'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
+const PricingPage = lazy(() => import('./pages/PricingPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 /**
@@ -73,10 +74,13 @@ function App() {
             {/* 1. La Page d'Accueil */}
             <Route path="/" element={<Home />} />
 
-            {/* 2. Le Blog (Route dynamique) */}
+            {/* 2. Pricing Page */}
+            <Route path="/pricing" element={<PricingPage />} />
+
+            {/* 3. Le Blog (Route dynamique) */}
             <Route path="/blog/:slug" element={<BlogPost />} />
 
-            {/* 3. Page 404 */}
+            {/* 4. Page 404 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

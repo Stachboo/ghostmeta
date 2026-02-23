@@ -2,6 +2,31 @@
     "common": {
         "back_home": "Retour à l'accueil"
     },
+    "auth": {
+        "loading": "Initialisation...",
+        "login": "Accès Sécurisé",
+        "logout": "Déconnexion"
+    },
+    "pricing": {
+        "title": "SYSTEM STATUS: ACCESS LEVELS",
+        "standard": {
+            "name": "STANDARD OPERATOR",
+            "price": "0€",
+            "batch": "1 image par traitement",
+            "gps": "1 vue GPS unique"
+        },
+        "premium": {
+            "name": "FULL ACCESS 226",
+            "price": "5€",
+            "yearly_note": "Ou 40€/an (2 mois offerts)",
+            "batch": "50 images par traitement",
+            "gps": "Vues GPS illimitées"
+        },
+        "cta": {
+            "login": "SE CONNECTER POUR ACTIVER",
+            "buy": "OBTENIR LE FULL ACCESS"
+        }
+    },
     "hero": {
         "title_start": "Supprimez les",
         "title_color": "métadonnées",

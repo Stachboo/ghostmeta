@@ -16,6 +16,7 @@ import ProModal from '@/components/ProModal';
 import Footer from '@/components/Footer';
 import TrustStrip from '@/components/TrustStrip';
 import { useImageProcessor } from '@/hooks/useImageProcessor';
+import AuthButton from '@/components/AuthButton';
 
 const HERO_BG = "/hero-bg.avif";
 const SCAN_EFFECT = "/scan-effect.avif";
@@ -82,6 +83,16 @@ export default function Home() {
               </DropdownMenuContent>
             </DropdownMenu>
             
+            <Link to="/pricing">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="border-[#00ff41]/30 text-[#00ff41] hover:bg-[#00ff41]/10 font-bold h-8 hidden sm:flex"
+              >
+                <Zap className="w-3.5 h-3.5 mr-1" /> Upgrade
+              </Button>
+            </Link>
+            
             <Button 
               variant="outline" 
               size="sm" 
@@ -90,6 +101,8 @@ export default function Home() {
             >
               <Heart className="w-3.5 h-3.5 mr-1 fill-current" /> {t('pro.price_btn')}
             </Button>
+            
+            <AuthButton />
           </div>
         </div>
       </header>
