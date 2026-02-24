@@ -57,9 +57,9 @@ export function useImageProcessor() {
       }
     }
 
-    // Marquer has_viewed_metadata=true après le premier scan d'un utilisateur free
+    // Marquer has_viewed_metadata=true via la fonction SECURITY DEFINER (bypass RLS)
     if (user && !profile?.is_premium && !profile?.has_viewed_metadata) {
-      await supabase.from('profiles').update({ has_viewed_metadata: true }).eq('id', user.id);
+      await supabase.rpc('lock_metadata_view', { user_id: user.id });
       await refreshProfile();
     }
 
