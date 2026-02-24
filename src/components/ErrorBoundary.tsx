@@ -26,12 +26,17 @@ class ErrorBoundary extends Component<Props, State> {
     console.error("[GhostMeta] Component Stack:", info.componentStack);
   }
 
+  handleReset = () => {
+    // Reset de l'état sans recharger la page (préserve la session)
+    this.setState({ hasError: false, error: null });
+  };
+
   render() {
     if (this.state.hasError) {
       return (
         <ErrorFallback 
           error={this.state.error} 
-          onReset={() => window.location.reload()} 
+          onReset={this.handleReset}
         />
       );
     }
