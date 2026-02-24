@@ -20,6 +20,7 @@ export default function AuthButton() {
   const handleSignOut = async () => {
     const { supabase } = await import('@/lib/supabase');
     await supabase.auth.signOut();
+    window.location.reload();
   };
 
   if (loading) {

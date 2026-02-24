@@ -72,6 +72,10 @@ export default function Home() {
 
   const handleFilesAdded = useCallback((files: FileList | File[]) => {
     const result = addFiles(files);
+    if (result.limitReached) {
+      setShowProModal(true);
+      return result;
+    }
     if (result.added > 0) toast.success(`${result.added} image(s)`, { description: t('upload.success') });
     if (result.rejected > 0) toast.error(t('upload.error_type'), { description: 'JPG, PNG, WebP, HEIC' });
     return result;
