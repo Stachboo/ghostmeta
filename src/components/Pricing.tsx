@@ -49,14 +49,6 @@ export default function Pricing() {
     handleCheckout(LEMON_SQUEEZY_YEARLY_ID);
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#121212] flex items-center justify-center">
-        <div className="animate-pulse text-[#00ff41] font-mono">INITIALIZING...</div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-[#121212] text-white py-16 px-4">
       <div className="max-w-5xl mx-auto">
@@ -156,7 +148,7 @@ export default function Pricing() {
                   Advanced EXIF removal
                 </li>
               </ul>
-              {user ? (
+              {!loading && user ? (
                 <div className="space-y-3">
                   <Button
                     onClick={handleMonthlyClick}
@@ -175,11 +167,12 @@ export default function Pricing() {
                 </div>
               ) : (
                 <Button
-                  onClick={handleAuth}
+                  onClick={loading ? undefined : handleAuth}
+                  disabled={loading}
                   className="w-full h-12 bg-[#00ff41] hover:bg-[#00ff41]/90 text-black font-bold font-mono"
                 >
                   <Zap className="w-4 h-4 mr-2" />
-                  {t('pricing.cta.login', 'SE CONNECTER POUR ACTIVER')}
+                  {loading ? '...' : t('pricing.cta.login', 'SE CONNECTER POUR ACTIVER')}
                 </Button>
               )}
             </div>
