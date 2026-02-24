@@ -23,6 +23,7 @@ import {
   AlertTriangle,
   ImageIcon,
   CheckCircle2,
+  Lock,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -31,6 +32,8 @@ interface ImageCardProps {
   onRemove: (id: string) => void;
   onDownload: (id: string) => void;
   index: number;
+  blurMetadata?: boolean;
+  onSignIn?: () => void;
 }
 
 function getThreatIcon(type: ThreatItem['type']) {
@@ -124,7 +127,7 @@ function StatusBadge({ status, threatLevel, t }: { status: ProcessedImage['statu
   }
 }
 
-export default function ImageCard({ image, onRemove, onDownload, index }: ImageCardProps) {
+export default function ImageCard({ image, onRemove, onDownload, index, blurMetadata = false, onSignIn }: ImageCardProps) {
   const { t } = useTranslation();
   const { metadata, status } = image;
 
@@ -192,10 +195,29 @@ export default function ImageCard({ image, onRemove, onDownload, index }: ImageC
               <span className="mt-0.5 flex-shrink-0">{getThreatIcon(threat.type)}</span>
               <div className="min-w-0 flex-1">
                 <span className="font-semibold uppercase tracking-wider text-[10px]">{threat.label}</span>
-                <p className="font-mono text-[11px] mt-0.5 opacity-80 break-all leading-relaxed">{threat.value}</p>
+                <p className={`font-mono text-[11px] mt-0.5 opacity-80 break-all leading-relaxed ${blurMetadata ? 'blur-sm select-none pointer-events-none' : ''}`}>
+                  {threat.value}
+                </p>
               </div>
             </motion.div>
           ))}
+
+          {blurMetadata && (
+            <div className="flex items-center justify-between pt-1.5 px-1">
+              <span className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
+                <Lock className="w-3 h-3" />
+                Données masquées
+              </span>
+              {onSignIn && (
+                <button
+                  onClick={onSignIn}
+                  className="text-[11px] font-semibold text-[#00ff41] hover:underline"
+                >
+                  {t('card.unlock_cta')} &rarr;
+                </button>
+              )}
+            </div>
+          )}
         </div>
       )}
 

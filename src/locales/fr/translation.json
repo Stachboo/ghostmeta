@@ -74,7 +74,8 @@
     "no_threats": "Aucune metadonnee sensible detectee",
     "cleaned_success": "Metadonnees supprimees avec succes",
     "download": "Telecharger",
-    "remove": "Supprimer"
+    "remove": "Supprimer",
+    "unlock_cta": "Debloquer"
   },
   "marketing": {
     "vinted_title": "Vos photos Vinted revelent votre adresse.",

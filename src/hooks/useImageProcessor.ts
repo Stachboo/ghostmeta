@@ -8,6 +8,7 @@ import {
   isSupportedImage,
 } from '@/lib/image-processor';
 import { useAuth } from '@/hooks/useAuth';
+import { supabase } from '@/lib/supabase';
 
 interface ProcessingStats {
   total: number;
@@ -16,7 +17,7 @@ interface ProcessingStats {
 }
 
 export function useImageProcessor() {
-  const { profile } = useAuth();
+  const { profile, user, refreshProfile } = useAuth();
   const [images, setImages] = useState<ProcessedImage[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState({ current: 0, total: 0 });
@@ -56,8 +57,14 @@ export function useImageProcessor() {
       }
     }
 
+    // Marquer has_viewed_metadata=true après le premier scan d'un utilisateur free
+    if (user && !profile?.is_premium && !profile?.has_viewed_metadata) {
+      await supabase.from('profiles').update({ has_viewed_metadata: true }).eq('id', user.id);
+      await refreshProfile();
+    }
+
     isScanningRef.current = false;
-  }, []);
+  }, [user, profile, refreshProfile]);
 
   const addFiles = useCallback((fileList: FileList | File[]) => {
     const imageLimit = getImageLimit();
@@ -206,6 +213,8 @@ export function useImageProcessor() {
     progress,
     stats,
     isPro,
+    isLoggedIn: user !== null,
+    hasViewedMetadata: profile?.has_viewed_metadata === true,
     addFiles,
     removeImage,
     clearAll,

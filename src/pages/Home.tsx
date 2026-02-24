@@ -36,6 +36,9 @@ export default function Home() {
     isProcessing,
     progress,
     stats,
+    isPro,
+    isLoggedIn,
+    hasViewedMetadata,
     addFiles,
     removeImage,
     clearAll,
@@ -43,6 +46,22 @@ export default function Home() {
     downloadImage,
     downloadAllZip,
   } = useImageProcessor();
+
+  // Metadata floutée si : guest OU free user ayant déjà consommé son scan gratuit
+  const blurMetadata = !isLoggedIn || (!isPro() && hasViewedMetadata);
+
+  const handleSignIn = async () => {
+    if (!isLoggedIn) {
+      const { supabase } = await import('@/lib/supabase');
+      await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: window.location.origin },
+      });
+    } else {
+      // Free user ayant épuisé son scan : rediriger vers pricing
+      window.location.href = '/pricing';
+    }
+  };
 
   // Restauré : Mapping pour correspondre à ton JSX 'onClick={handleCleanAll}'
   const handleCleanAll = cleanAll; 
@@ -186,7 +205,7 @@ export default function Home() {
 
             <div className="space-y-3">
               <AnimatePresence mode="popLayout">
-                {images.map((image, index) => <ImageCard key={image.id} image={image} onRemove={removeImage} onDownload={downloadImage} index={index} />)}
+                {images.map((image, index) => <ImageCard key={image.id} image={image} onRemove={removeImage} onDownload={downloadImage} index={index} blurMetadata={blurMetadata} onSignIn={handleSignIn} />)}
               </AnimatePresence>
             </div>
           </section>
