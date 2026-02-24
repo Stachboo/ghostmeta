@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, Calendar, Shield } from 'lucide-react';
 import Footer from '@/components/Footer';
 import GhostLogo from '@/components/GhostLogo';
+import DOMPurify from 'dompurify';
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
@@ -31,6 +32,14 @@ export default function BlogPost() {
       </div>
     );
   }
+
+  // Sanitization du contenu HTML pour prévenir XSS
+  const rawContent = t(contentKey);
+  const sanitizedContent = DOMPurify.sanitize(rawContent, {
+    ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'a', 'blockquote', 'code', 'pre'],
+    ALLOWED_ATTR: ['href', 'target', 'rel', 'class'],
+    ALLOW_DATA_ATTR: false,
+  });
 
   return (
     <div className="min-h-screen bg-[#0a0a0c] text-foreground font-sans">
@@ -75,11 +84,11 @@ export default function BlogPost() {
             <div className="absolute inset-0 bg-grid-white/[0.02]" />
           </div>
 
-          {/* Rendu du contenu HTML */}
+          {/* Rendu du contenu HTML SANITISÉ */}
           <div 
             className="prose prose-invert prose-green max-w-none text-muted-foreground leading-relaxed
             prose-headings:text-white prose-strong:text-[#00ff41] prose-a:text-[#00ff41] hover:prose-a:underline"
-            dangerouslySetInnerHTML={{ __html: t(contentKey) }}
+            dangerouslySetInnerHTML={{ __html: sanitizedContent }}
           />
         </motion.article>
       </main>
