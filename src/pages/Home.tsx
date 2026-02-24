@@ -21,7 +21,7 @@ import AuthButton from '@/components/AuthButton';
 const HERO_BG = "/hero-bg.avif";
 const SCAN_EFFECT = "/scan-effect.avif";
 const SHIELD_IMG = "/shield.avif";
-const PAYPAL_LINK = "https://paypal.me/abdus84";
+const PAYPAL_LINK = import.meta.env.VITE_DONATION_URL || "https://paypal.me/abdus84";
 
 export default function Home() {
   const { t, i18n } = useTranslation();

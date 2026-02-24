@@ -389,11 +389,17 @@ serve(async (req: Request) => {
     // EXTRACT USER ID
     // ------------------------------------------------------------------------
     const userId = meta.custom_data?.user_id;
-    
+
     if (!userId) {
       console.error(`[${requestId}] ERROR: Missing user_id in custom_data`);
       console.log(`[${requestId}] Custom data:`, JSON.stringify(meta.custom_data));
       return new Response('Missing user_id in custom_data', { status: 400 });
+    }
+
+    const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!UUID_REGEX.test(userId)) {
+      console.error(`[${requestId}] ERROR: Invalid user_id format: ${userId}`);
+      return new Response('Invalid user_id format', { status: 400 });
     }
 
     console.log(`[${requestId}] User ID: ${userId}`);
