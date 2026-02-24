@@ -36,8 +36,7 @@
 
     <link rel="canonical" href="https://www.ghostmeta.online/" />
 
-    <!-- Content Security Policy (CSP) - Défense en profondeur contre XSS -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; font-src 'self'; connect-src 'self' https://*.supabase.co https://*.lemonsqueezy.com; frame-src 'self' https://ghostmeta.lemonsqueezy.com;">
+    <!-- CSP géré via vercel.json (HTTP headers) — plus complet et prioritaire -->
 
     <script type="application/ld+json">
     {
@@ -222,14 +221,6 @@
         </div>
       </div>
 
-      <div style="display:none" aria-hidden="true">
-        <h1>GhostMeta — Supprimez les métadonnées GPS de vos photos Vinted & Leboncoin</h1>
-        <p>Protégez votre adresse et votre vie privée avant de publier vos annonces. Outil 100% gratuit et 100% local — aucune image ne quitte votre appareil.</p>
-        <h2>Comment ça marche ?</h2>
-        <p>1. Déposez vos photos (JPEG, PNG, WebP, HEIC). 2. GhostMeta scanne et identifie les métadonnées sensibles (GPS, date, appareil). 3. Un clic pour tout supprimer et télécharger vos images propres.</p>
-        <h2>Pourquoi nettoyer vos photos avant de vendre ?</h2>
-        <p>Vos photos contiennent des données GPS qui révèlent votre adresse exacte. Les acheteurs malveillants peuvent extraire ces coordonnées en quelques secondes.</p>
-      </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

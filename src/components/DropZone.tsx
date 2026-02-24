@@ -29,6 +29,7 @@ export default function DropZone({ onFilesAdded, hasImages, isProcessing }: Drop
       'image/png': [],
       'image/webp': [],
       'image/heic': [],
+      'image/heif': [],
     },
     disabled: isProcessing,
   });

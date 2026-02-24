@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import type { User } from '@supabase/supabase-js';
 
-interface Profile {
+export interface Profile {
   id: string;
   email: string;
   full_name?: string;
   avatar_url?: string;
-  plan?: 'free' | 'premium';
+  is_premium?: boolean;
   created_at: string;
 }
 
@@ -34,13 +34,14 @@ export function useAuth(): UseAuthReturn {
         .single();
 
       if (profileError) {
-        console.warn('Profile fetch error:', profileError);
+        setError(new Error(profileError.message));
         return null;
       }
 
+      setError(null);
       return data as Profile;
     } catch (err) {
-      console.error('Error fetching profile:', err);
+      setError(err instanceof Error ? err : new Error('Erreur réseau'));
       return null;
     }
   };

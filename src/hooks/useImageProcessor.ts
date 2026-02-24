@@ -16,18 +16,19 @@ interface ProcessingStats {
 }
 
 export function useImageProcessor() {
-  const { profile } = useAuth(); // Récupère le profil utilisateur pour vérifier le statut premium
+  const { profile } = useAuth();
   const [images, setImages] = useState<ProcessedImage[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState({ current: 0, total: 0 });
-  const scanningRef = useRef(false);
 
-  // Vérification du statut Pro basée sur le profil Supabase
+  // Queue-based scan: évite de perdre les lots ajoutés pendant un scan en cours
+  const scanQueueRef = useRef<ProcessedImage[][]>([]);
+  const isScanningRef = useRef(false);
+
   const isPro = useCallback(() => {
-    return profile?.plan === 'premium';
+    return profile?.is_premium === true;
   }, [profile]);
 
-  // Limite d'images selon le plan (1 pour free, 50 pour premium)
   const getImageLimit = useCallback(() => {
     return isPro() ? 50 : 1;
   }, [isPro]);
@@ -41,17 +42,21 @@ export function useImageProcessor() {
     }
   };
 
-  const scanNewImages = useCallback(async (newImages: ProcessedImage[]) => {
-    if (scanningRef.current) return;
-    scanningRef.current = true;
+  // Consomme la queue séquentiellement — chaque lot est traité dans l'ordre d'ajout
+  const drainQueue = useCallback(async () => {
+    if (isScanningRef.current) return;
+    isScanningRef.current = true;
 
-    for (const img of newImages) {
-      setImages(prev => prev.map(i => i.id === img.id ? { ...i, status: 'scanning' as const } : i));
-      const scanned = await scanImage(img);
-      setImages(prev => prev.map(i => i.id === img.id ? scanned : i));
+    while (scanQueueRef.current.length > 0) {
+      const batch = scanQueueRef.current.shift()!;
+      for (const img of batch) {
+        setImages(prev => prev.map(i => i.id === img.id ? { ...i, status: 'scanning' as const } : i));
+        const scanned = await scanImage(img);
+        setImages(prev => prev.map(i => i.id === img.id ? scanned : i));
+      }
     }
 
-    scanningRef.current = false;
+    isScanningRef.current = false;
   }, []);
 
   const addFiles = useCallback((fileList: FileList | File[]) => {
@@ -60,25 +65,24 @@ export function useImageProcessor() {
     const remainingSlots = imageLimit - currentCount;
 
     if (remainingSlots <= 0 && !isPro()) {
-      toast.error('Limite atteinte', { 
-        description: `Passez à Pro pour traiter jusqu'à 50 images.`,
+      toast.error('Limite atteinte', {
+        description: 'Passez à Pro pour traiter jusqu\'à 50 images.',
         action: {
           label: 'Voir les prix',
-          onClick: () => window.location.href = '/pricing'
-        }
+          onClick: () => { window.location.href = '/pricing'; },
+        },
       });
-      return { added: 0, rejected: fileList.length };
+      return { added: 0, rejected: Array.from(fileList).length };
     }
 
     const newImages: ProcessedImage[] = [];
     let rejectedCount = 0;
 
-    Array.from(fileList).forEach((file, index) => {
+    Array.from(fileList).forEach((file) => {
       if (!isPro() && newImages.length >= remainingSlots) {
         rejectedCount++;
         return;
       }
-      
       if (isSupportedImage(file)) {
         const processed = createProcessedImage(file);
         processed.previewUrl = URL.createObjectURL(file);
@@ -91,11 +95,12 @@ export function useImageProcessor() {
     setImages(prev => [...prev, ...newImages]);
 
     if (newImages.length > 0) {
-      scanNewImages(newImages);
+      scanQueueRef.current.push(newImages);
+      drainQueue();
     }
 
     return { added: newImages.length, rejected: rejectedCount };
-  }, [scanNewImages, images.length, getImageLimit, isPro]);
+  }, [drainQueue, images.length, getImageLimit, isPro]);
 
   const removeImage = useCallback((id: string) => {
     setImages(prev => {
@@ -106,12 +111,14 @@ export function useImageProcessor() {
   }, []);
 
   const clearAll = useCallback(() => {
-    images.forEach(img => {
-      if (img.previewUrl) URL.revokeObjectURL(img.previewUrl);
+    // Vider la queue avant de supprimer les images pour ne pas scanner des images orphelines
+    scanQueueRef.current = [];
+    setImages(prev => {
+      prev.forEach(img => { if (img.previewUrl) URL.revokeObjectURL(img.previewUrl); });
+      return [];
     });
-    setImages([]);
     setProgress({ current: 0, total: 0 });
-  }, [images]);
+  }, []);
 
   const cleanAll = useCallback(async () => {
     const toClean = images.filter(i => i.status !== 'cleaned' && i.status !== 'error');
@@ -129,7 +136,6 @@ export function useImageProcessor() {
 
       try {
         const cleanedBlob = await stripMetadata(img.originalFile);
-
         setImages(prev => prev.map(x => x.id === img.id ? {
           ...x,
           status: 'cleaned' as const,
@@ -150,7 +156,7 @@ export function useImageProcessor() {
     }
 
     if (cleanedCount > 0) {
-      toast.success("Nettoyage terminé !");
+      toast.success('Nettoyage terminé !');
     }
 
     setIsProcessing(false);
@@ -189,7 +195,7 @@ export function useImageProcessor() {
   const stats: ProcessingStats = {
     total: images.length,
     cleaned: images.filter(i => i.status === 'cleaned').length,
-    threatsFound: images.reduce((acc, i) => acc + (i.metadata?.threats?.length || 0), 0),
+    threatsFound: images.reduce((acc, i) => acc + (i.metadata?.threats?.length ?? 0), 0),
   };
 
   return {

@@ -27,8 +27,11 @@ i18n
       en: { translation: en }
     },
     fallbackLng: 'fr',
+    supportedLngs: SUPPORTED_LANGS,
     detection: {
-      order: ['localStorage', 'navigator'],
+      // querystring en premier : les liens hreflang ?lng=en sont honorés immédiatement
+      order: ['querystring', 'localStorage', 'navigator'],
+      lookupQuerystring: 'lng',
       caches: ['localStorage'],
       lookupLocalStorage: STORAGE_KEY,
     },
