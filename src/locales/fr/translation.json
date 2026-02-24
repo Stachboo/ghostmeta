@@ -41,9 +41,9 @@
     }
   },
   "hero": {
-    "title_start": "Supprimez vos",
+    "title_start": "Retirer les",
     "title_color": "metadonnees",
-    "title_end": "en toute confidentialite",
+    "title_end": "de vos photos",
     "subtitle": "Protegez votre vie privee avant de poster sur Vinted, eBay ou Depop. Traitement 100% Local.",
     "secure_badge": "100% Local"
   },
@@ -134,8 +134,8 @@
     "step_2_desc": "GhostMeta analyse chaque image et identifie les métadonnées sensibles (GPS, date, appareil).",
     "step_3_title": "Neutralisation",
     "step_3_desc": "Un clic pour supprimer toutes les métadonnées. Téléchargez vos images propres.",
-    "arch_title": "Architecture",
-    "arch_highlight": "Zero-Knowledge",
+    "arch_title": "Supprimez vos metadonnees",
+    "arch_highlight": "en toute confidentialite",
     "arch_subtitle": "Vos photos ne quittent jamais votre appareil. Tout le traitement est effectué localement dans votre navigateur.",
     "arch_bad_title": "Autres outils",
     "arch_bad_1": "Upload vers un serveur distant",
