@@ -44,3 +44,30 @@
     @apply bg-background text-foreground;
   }
 }
+
+.highlight-confidential {
+  font-weight: 800;
+  background: linear-gradient(90deg, #00ff66, #00cc44, #00ff66);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.highlight-confidential::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #00ff66, transparent);
+  filter: blur(2px);
+  animation: slideLight 3s linear infinite;
+}
+
+@keyframes slideLight {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
