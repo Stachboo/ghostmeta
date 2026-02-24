@@ -12,8 +12,8 @@ export default function BlogPost() {
   const navigate = useNavigate();
 
   // Vérification robuste de l'existence de l'article
-  const titleKey = `blog.posts.${slug}.title`;
-  const contentKey = `blog.posts.${slug}.content`;
+  const titleKey = \`blog.posts.\${slug}.title\`;
+  const contentKey = \`blog.posts.\${slug}.content\`;
   const postExists = i18n.exists(titleKey);
 
   if (!postExists) {
@@ -23,7 +23,7 @@ export default function BlogPost() {
         <h1 className="mt-8 text-2xl font-bold text-white">404: POST_NOT_FOUND</h1>
         <p className="text-muted-foreground mt-2 font-mono text-xs">ID: {slug}</p>
         <button 
-          onClick={() => navigate('/')} 
+          onClick={() => navigate(/)} 
           className="mt-6 inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-black transition-all duration-300 bg-[#00ff41] rounded-full hover:bg-[#00dd38]"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -34,11 +34,41 @@ export default function BlogPost() {
   }
 
   // Sanitization du contenu HTML pour prévenir XSS
+  // Liste étendue des balises autorisées pour préserver la mise en forme
   const rawContent = t(contentKey);
   const sanitizedContent = DOMPurify.sanitize(rawContent, {
-    ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'a', 'blockquote', 'code', 'pre'],
-    ALLOWED_ATTR: ['href', 'target', 'rel', 'class'],
+    ALLOWED_TAGS: [
+      // Texte de base
+      'p', 'br', 'span', 'div', 'hr',
+      // Titres
+      'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+      // Mise en forme
+      'strong', 'b', 'em', 'i', 'u', 's', 'strike', 'del', 'ins', 'mark', 'small', 'sub', 'sup',
+      // Listes
+      'ul', 'ol', 'li', 'dl', 'dt', 'dd',
+      // Liens
+      'a',
+      // Citations
+      'blockquote', 'q', 'cite',
+      // Code
+      'code', 'pre', 'kbd', 'samp', 'var',
+      // Médias
+      'img', 'figure', 'figcaption',
+      // Tableaux
+      'table', 'thead', 'tbody', 'tfoot', 'tr', 'td', 'th', 'caption', 'colgroup', 'col',
+      // Sections
+      'section', 'article', 'aside', 'header', 'footer', 'main', 'nav', 'details', 'summary',
+      // Divers
+      'abbr', 'address', 'bdi', 'bdo', 'dfn', 'time', 'wbr'
+    ],
+    ALLOWED_ATTR: [
+      'href', 'target', 'rel', 'title', 'alt', 'src', 'width', 'height', 
+      'class', 'id', 'style', 'align', 'valign', 'colspan', 'rowspan',
+      'datetime', 'cite', 'download', 'loading', 'decoding'
+    ],
     ALLOW_DATA_ATTR: false,
+    // Garder le contenu des balises non autorisées (pas juste les supprimer)
+    KEEP_CONTENT: true,
   });
 
   return (
@@ -50,7 +80,7 @@ export default function BlogPost() {
             <span className="font-bold text-white tracking-tight">Ghost<span className="text-[#00ff41]">Meta</span></span>
           </Link>
           <button 
-            onClick={() => navigate('/')} 
+            onClick={() => navigate(/)} 
             className="inline-flex items-center justify-center px-4 py-1.5 text-xs font-bold text-black transition-all duration-300 bg-[#00ff41] rounded-full hover:bg-[#00dd38]"
           >
             <ArrowLeft className="w-3.5 h-3.5 mr-1.5" /> {t('common.back_home')}
@@ -75,7 +105,7 @@ export default function BlogPost() {
               {t(titleKey)}
             </h1>
             <p className="text-xl text-muted-foreground italic border-l-4 border-[#00ff41] pl-4">
-              {t(`blog.posts.${slug}.desc`)}
+              {t(\`blog.posts.\${slug}.desc\`)}
             </p>
           </div>
 
