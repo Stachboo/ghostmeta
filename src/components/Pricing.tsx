@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth, CHECKOUT_PENDING_KEY } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Check, Zap, Shield, Image, MapPin } from 'lucide-react';
@@ -29,7 +29,8 @@ export default function Pricing() {
 
     const baseUrl = `https://ghostmeta.lemonsqueezy.com/checkout/buy/${variantId}`;
     const checkoutUrl = `${baseUrl}?checkout[custom][user_id]=${user.id}&checkout[email]=${encodeURIComponent(user.email || '')}`;
-    
+
+    localStorage.setItem(CHECKOUT_PENDING_KEY, 'true');
     window.open(checkoutUrl, '_blank');
   };
 
