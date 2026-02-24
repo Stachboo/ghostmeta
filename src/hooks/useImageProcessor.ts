@@ -7,6 +7,7 @@ import {
   stripMetadata,
   isSupportedImage,
 } from '@/lib/image-processor';
+import { useAuth } from '@/hooks/useAuth';
 
 interface ProcessingStats {
   total: number;
@@ -15,11 +16,21 @@ interface ProcessingStats {
 }
 
 export function useImageProcessor() {
+  const { profile } = useAuth(); // Récupère le profil utilisateur pour vérifier le statut premium
   const [images, setImages] = useState<ProcessedImage[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState({ current: 0, total: 0 });
-  // SUPPRIMÉ : const [limitReached, setLimitReached] = useState(false);
   const scanningRef = useRef(false);
+
+  // Vérification du statut Pro basée sur le profil Supabase
+  const isPro = useCallback(() => {
+    return profile?.plan === 'premium';
+  }, [profile]);
+
+  // Limite d'images selon le plan (1 pour free, 50 pour premium)
+  const getImageLimit = useCallback(() => {
+    return isPro() ? 50 : 1;
+  }, [isPro]);
 
   const scanImage = async (img: ProcessedImage): Promise<ProcessedImage> => {
     try {
@@ -44,10 +55,30 @@ export function useImageProcessor() {
   }, []);
 
   const addFiles = useCallback((fileList: FileList | File[]) => {
+    const imageLimit = getImageLimit();
+    const currentCount = images.length;
+    const remainingSlots = imageLimit - currentCount;
+
+    if (remainingSlots <= 0 && !isPro()) {
+      toast.error('Limite atteinte', { 
+        description: `Passez à Pro pour traiter jusqu'à 50 images.`,
+        action: {
+          label: 'Voir les prix',
+          onClick: () => window.location.href = '/pricing'
+        }
+      });
+      return { added: 0, rejected: fileList.length };
+    }
+
     const newImages: ProcessedImage[] = [];
     let rejectedCount = 0;
 
-    Array.from(fileList).forEach((file) => {
+    Array.from(fileList).forEach((file, index) => {
+      if (!isPro() && newImages.length >= remainingSlots) {
+        rejectedCount++;
+        return;
+      }
+      
       if (isSupportedImage(file)) {
         const processed = createProcessedImage(file);
         processed.previewUrl = URL.createObjectURL(file);
@@ -60,11 +91,11 @@ export function useImageProcessor() {
     setImages(prev => [...prev, ...newImages]);
 
     if (newImages.length > 0) {
-      scanNewImages(newImages); // On lance le scan mais on n'attend pas la fin pour rendre la main
+      scanNewImages(newImages);
     }
 
     return { added: newImages.length, rejected: rejectedCount };
-  }, [scanNewImages]);
+  }, [scanNewImages, images.length, getImageLimit, isPro]);
 
   const removeImage = useCallback((id: string) => {
     setImages(prev => {
@@ -80,14 +111,9 @@ export function useImageProcessor() {
     });
     setImages([]);
     setProgress({ current: 0, total: 0 });
-    // SUPPRIMÉ : setLimitReached(false);
   }, [images]);
 
-  // SUPPRIMÉ : const checkLimit = () => { ... }
-
   const cleanAll = useCallback(async () => {
-    // SUPPRIMÉ : La vérification checkLimit() qui bloquait tout
-
     const toClean = images.filter(i => i.status !== 'cleaned' && i.status !== 'error');
     if (toClean.length === 0) return;
 
@@ -124,7 +150,6 @@ export function useImageProcessor() {
     }
 
     if (cleanedCount > 0) {
-      // SUPPRIMÉ : localStorage.setItem('lastCleanTime', ...);
       toast.success("Nettoyage terminé !");
     }
 
@@ -149,7 +174,6 @@ export function useImageProcessor() {
     const cleaned = images.filter(i => i.status === 'cleaned' && i.cleanedBlob);
     if (cleaned.length === 0) return;
 
-    // Import dynamique pour alléger le chargement initial
     const JSZip = (await import('jszip')).default;
     const { saveAs } = await import('file-saver');
 
@@ -168,14 +192,11 @@ export function useImageProcessor() {
     threatsFound: images.reduce((acc, i) => acc + (i.metadata?.threats?.length || 0), 0),
   };
 
-  const isPro = () => true; // On passe tout le monde en "Pro" (Illimité)
-
   return {
     images,
     isProcessing,
     progress,
     stats,
-    // SUPPRIMÉ : limitReached,
     isPro,
     addFiles,
     removeImage,
