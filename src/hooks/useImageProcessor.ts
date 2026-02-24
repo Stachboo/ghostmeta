@@ -113,10 +113,12 @@ export function useImageProcessor() {
   const clearAll = useCallback(() => {
     // Vider la queue avant de supprimer les images pour ne pas scanner des images orphelines
     scanQueueRef.current = [];
+    isScanningRef.current = false;
     setImages(prev => {
       prev.forEach(img => { if (img.previewUrl) URL.revokeObjectURL(img.previewUrl); });
       return [];
     });
+    setIsProcessing(false);
     setProgress({ current: 0, total: 0 });
   }, []);
 

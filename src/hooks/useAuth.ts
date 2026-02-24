@@ -78,6 +78,7 @@ export function useAuth(): UseAuthReturn {
           setProfile(profileData);
         } else {
           setProfile(null);
+          setError(null);
         }
         
         setLoading(false);
