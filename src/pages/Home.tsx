@@ -370,23 +370,10 @@ export default function Home() {
             <Zap className="w-6 h-6 text-[#00ff41]" /> {t('pro.title')}
           </h2>
           
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto text-left mt-10">
-            <div className="p-6 rounded-xl border border-border bg-card">
-              <h3 className="font-bold text-xl mb-4">{t('pro.free_title')}</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground mb-6">
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> {t('pro.free_1')}</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> 100% Local & Privé</li>
-              </ul>
-            </div>
-
-            <div className="p-6 rounded-xl border border-dashed border-[#00ff41]/20 bg-[#00ff41]/5 relative opacity-80">
-              <div className="absolute top-4 right-4 text-xs font-bold bg-[#00ff41]/20 text-[#00ff41] px-2 py-1 rounded">{t('pro.unlock')}</div>
-              <h3 className="font-bold text-xl mb-1">{t('pro.pro_title')}</h3>
-              <p className="text-2xl font-bold text-[#00ff41] mb-4">{t('pro.pro_price')}</p>
-              <button onClick={handleDonation} className="w-full flex justify-center hover:opacity-80 transition-opacity cursor-pointer">
-                <img src="/chat-chill.png" alt="Soutenir GhostMeta" className="w-40 h-auto" style={{ mixBlendMode: 'multiply' }} />
-              </button>
-            </div>
+          <div className="flex justify-center mt-10">
+            <button onClick={handleDonation} className="hover:opacity-80 transition-opacity cursor-pointer">
+              <img src="/chat-chill.png" alt="Soutenir GhostMeta" className="w-48 h-auto" />
+            </button>
           </div>
         </section>
 
