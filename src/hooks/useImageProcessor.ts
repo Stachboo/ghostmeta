@@ -72,14 +72,7 @@ export function useImageProcessor() {
     const remainingSlots = imageLimit - currentCount;
 
     if (remainingSlots <= 0 && !isPro()) {
-      toast.error('Limite atteinte', {
-        description: 'Passez à Pro pour traiter jusqu\'à 50 images.',
-        action: {
-          label: 'Voir les prix',
-          onClick: () => { window.location.href = '/pricing'; },
-        },
-      });
-      return { added: 0, rejected: Array.from(fileList).length };
+      return { added: 0, rejected: Array.from(fileList).length, limitReached: true };
     }
 
     const newImages: ProcessedImage[] = [];
