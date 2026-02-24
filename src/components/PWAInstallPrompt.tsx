@@ -158,6 +158,7 @@ export default function PWAInstallPrompt() {
               {/* Bouton Installer */}
               <button
                 onClick={handleInstall}
+                className="transition-opacity hover:opacity-80"
                 style={{
                   flexShrink: 0,
                   padding: '7px 16px',
@@ -170,11 +171,8 @@ export default function PWAInstallPrompt() {
                   background: 'linear-gradient(135deg, #00ff41, #00c8ff)',
                   color: '#0a0a0c',
                   boxShadow: '0 0 12px rgba(0, 255, 65, 0.35)',
-                  transition: 'opacity 0.2s, transform 0.15s',
                   whiteSpace: 'nowrap',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
-                onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
               >
                 + Installer
               </button>
@@ -183,12 +181,11 @@ export default function PWAInstallPrompt() {
               <button
                 onClick={dismiss}
                 aria-label="Fermer"
+                className="border border-white/[0.12] text-white/[0.45] hover:text-[#ff4444] hover:border-red-500/40 transition-colors"
                 style={{
                   flexShrink: 0,
                   background: 'transparent',
-                  border: '1px solid rgba(255,255,255,0.12)',
                   borderRadius: '6px',
-                  color: 'rgba(255,255,255,0.45)',
                   cursor: 'pointer',
                   fontSize: '14px',
                   width: '30px',
@@ -196,15 +193,6 @@ export default function PWAInstallPrompt() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  transition: 'color 0.2s, border-color 0.2s',
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.color = '#ff4444';
-                  e.currentTarget.style.borderColor = 'rgba(255,68,68,0.4)';
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.color = 'rgba(255,255,255,0.45)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
                 }}
               >
                 ✕

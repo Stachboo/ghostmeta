@@ -15,7 +15,6 @@ export default function ProModal({ open, onClose }: ProModalProps) {
   const handlePurchase = () => {
     // Placeholder - A remplacer par le lien Stripe plus tard
     onClose();
-    window.location.reload();
   };
 
   return (
