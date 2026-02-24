@@ -168,12 +168,11 @@ export default function Pricing() {
                 </div>
               ) : (
                 <Button
-                  onClick={loading ? undefined : handleAuth}
-                  disabled={loading}
+                  onClick={handleAuth}
                   className="w-full h-12 bg-[#00ff41] hover:bg-[#00ff41]/90 text-black font-bold font-mono"
                 >
                   <Zap className="w-4 h-4 mr-2" />
-                  {loading ? '...' : t('pricing.cta.login', 'SE CONNECTER POUR ACTIVER')}
+                  {t('pricing.cta.login', 'SE CONNECTER POUR ACTIVER')}
                 </Button>
               )}
             </div>

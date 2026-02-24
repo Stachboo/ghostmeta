@@ -121,7 +121,7 @@ export function useAuth(): UseAuthReturn {
       }
 
       setLoading(false);
-    });
+    }).catch(() => setLoading(false));
 
     // Listen for auth state changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
