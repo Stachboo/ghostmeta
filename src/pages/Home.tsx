@@ -116,15 +116,6 @@ export default function Home() {
               </Button>
             </Link>
             
-            <Button 
-              variant="outline" 
-              size="sm" 
-              onClick={handleDonation} 
-              className="border-[#ff0055]/30 text-[#ff0055] hover:bg-[#ff0055]/10 font-bold h-8"
-            >
-              <Heart className="w-3.5 h-3.5 mr-1 fill-current" /> {t('pro.price_btn')}
-            </Button>
-            
             <AuthButton />
           </div>
         </div>
