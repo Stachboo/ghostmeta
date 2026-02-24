@@ -41,9 +41,9 @@
     }
   },
   "hero": {
-    "title_start": "Remove your",
+    "title_start": "Remove",
     "title_color": "metadata",
-    "title_end": "with complete privacy",
+    "title_end": "from your photos",
     "subtitle": "Protect your privacy before posting on Vinted, eBay, or Depop. 100% Local Processing.",
     "secure_badge": "100% Local"
   },
@@ -134,8 +134,8 @@
     "step_2_desc": "GhostMeta analyzes every image and identifies sensitive metadata (GPS, date, device).",
     "step_3_title": "Neutralization",
     "step_3_desc": "One click to remove all metadata. Download your clean images.",
-    "arch_title": "Architecture",
-    "arch_highlight": "Zero-Knowledge",
+    "arch_title": "Remove your metadata",
+    "arch_highlight": "with complete privacy",
     "arch_subtitle": "Your photos never leave your device. All processing is done locally in your browser.",
     "arch_bad_title": "Other tools",
     "arch_bad_1": "Upload to a remote server",
