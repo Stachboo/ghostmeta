@@ -384,7 +384,7 @@ export default function Home() {
               <h3 className="font-bold text-xl mb-1">{t('pro.pro_title')}</h3>
               <p className="text-2xl font-bold text-[#00ff41] mb-4">{t('pro.pro_price')}</p>
               <button onClick={handleDonation} className="w-full flex justify-center hover:opacity-80 transition-opacity cursor-pointer">
-                <img src="/chat-chill.png" alt="Soutenir GhostMeta" className="w-40 h-auto" />
+                <img src="/chat-chill.png" alt="Soutenir GhostMeta" className="w-40 h-auto" style={{ mixBlendMode: 'multiply' }} />
               </button>
             </div>
           </div>
