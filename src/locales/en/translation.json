@@ -90,125 +90,28 @@
       "vinted-securite-photo-guide": {
         "title": "Vinted: The ultimate guide to securing your photos",
         "desc": "Why and how to clean your images before selling.",
-        "content": "<h4>The Invisible Danger of EXIF Tags</h4><p>When you sell on Vinted, every item photographed in your bedroom can betray your exact location. JPEG files store EXIF tags containing your GPS coordinates accurate within 3 meters.</p><h4>The 'Send via WhatsApp' Trap</h4><p>Many sellers send extra photos via private message. Unlike the Vinted platform which compresses slightly, direct sending delivers the raw original file with all your personal data.</p><h4>The GhostMeta Solution</h4><p>By processing your photos in GhostMeta before uploading, you neutralize these digital signatures. Our tool rebuilds the image pixel by pixel to ensure no ghost data remains.</p>"
+        "content": "<p class='text-lg mb-8'><strong>You just posted an ad on Vinted. The photo is clear, the item well described, the price attractive. But did you know that this simple photo could reveal your exact address to any stranger?</strong> This is not science fiction. It's a technical reality that most sellers ignore — and that some malicious buyers are already exploiting.</p><p class='mb-12'>In this guide, we explain concretely where this risk comes from, why it concerns you if you sell on Vinted, Leboncoin or eBay, and above all how to protect yourself in seconds.</p><div class='p-6 border border-amber-500/30 bg-amber-500/5 rounded-lg mb-12 relative overflow-hidden'><div class='absolute top-0 right-0 p-2 text-[10px] font-mono text-amber-500/50 uppercase'>Security_Alert_042</div><h2 class='text-amber-500 mt-0 mb-4 font-mono'>[CRITICAL_THREAT] The Invisible Danger</h2><p>When you take a photo with your smartphone, the device doesn't just capture the image. It automatically records dozens of technical information called <strong>EXIF data</strong> (Exchangeable Image File Format). Among them:</p><ul class='grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4 list-none p-0'><li class='bg-white/5 p-3 rounded border border-white/5 font-mono text-sm'><span class='text-amber-500'>&gt;</span> GPS_COORDINATES</li><li class='bg-white/5 p-3 rounded border border-white/5 font-mono text-sm'><span class='text-amber-500'>&gt;</span> TIMESTAMP_DATA</li><li class='bg-white/5 p-3 rounded border border-white/5 font-mono text-sm'><span class='text-amber-500'>&gt;</span> HARDWARE_MODEL</li><li class='bg-white/5 p-3 rounded border border-white/5 font-mono text-sm'><span class='text-amber-500'>&gt;</span> OWNER_TAGS</li></ul><p class='mt-6 text-sm italic opacity-80'>This metadata is invisible in your gallery, but anyone can extract it with a simple free tool.</p></div><h3 class='font-mono text-white mb-6 uppercase border-b border-white/10 pb-2 flex items-center gap-2'><span class='w-2 h-2 bg-[#00ff41] animate-pulse rounded-full'></span> Seller Impact Analysis</h3><p>Imagine: you photograph an item in your living room. A malicious buyer downloads your photo, extracts the GPS coordinates, and obtains your address on Google Maps. He now knows <strong>where you live</strong>, when you posted, and what time you're home.</p><p>This scenario is not hypothetical. Cases of burglary, theft, and stalking have already been documented. Vinted security passes through your vigilance.</p><div class='my-16'><h2 class='font-mono text-white mb-8 flex items-center gap-2'><span class='text-[#00ff41]'>[MODULE]</span> How to Sell Securely</h2><div class='grid grid-cols-1 md:grid-cols-3 gap-6'><div class='p-5 border border-[#00ff41]/20 bg-[#00ff41]/5 rounded-xl hover:border-[#00ff41]/50 transition-colors'><div class='text-[#00ff41] font-mono mb-2 text-xs tracking-widest uppercase'>Step_01</div><h4 class='mt-0 text-white'>Brute Capture</h4><p class='text-sm leading-snug'>Photograph your items as usual. Don't change anything to your habits.</p></div><div class='p-5 border border-[#00ff41]/20 bg-[#00ff41]/5 rounded-xl hover:border-[#00ff41]/50 transition-colors'><div class='text-[#00ff41] font-mono mb-2 text-xs tracking-widest uppercase'>Step_02</div><h4 class='mt-0 text-white'>GhostMeta Scan</h4><p class='text-sm leading-snug'>Drag your images to GhostMeta.online. All metadata is neutralized locally.</p></div><div class='p-5 border border-[#00ff41]/20 bg-[#00ff41]/5 rounded-xl hover:border-[#00ff41]/50 transition-colors'><div class='text-[#00ff41] font-mono mb-2 text-xs tracking-widest uppercase'>Step_03</div><h4 class='mt-0 text-white'>Secure Upload</h4><p class='text-sm leading-snug'>Publish with complete serenity on Vinted, Leboncoin or eBay. Your data stays with you.</p></div></div></div><div class='p-8 border border-white/10 bg-white/5 rounded-2xl mb-12'><h2 class='mt-0 font-mono'>Why GhostMeta?</h2><p>Unlike Cloud apps that harvest your data, GhostMeta is designed for absolute anonymity:</p><ul class='space-y-4 mt-6 list-none p-0'><li class='flex items-start gap-3'><span class='text-[#00ff41] font-bold'>✓</span> <div><strong>100% Local</strong> — Your photos never leave your browser.</div></li><li class='flex items-start gap-3'><span class='text-[#00ff41] font-bold'>✓</span> <div><strong>Complete</strong> — Total suppression (EXIF, GPS, XMP, IPTC).</div></li><li class='flex items-start gap-3'><span class='text-[#00ff41] font-bold'>✓</span> <div><strong>Free</strong> — No account, no subscription, no history.</div></li></ul></div>"
       },
       "supprimer-exif-iphone-android": {
         "title": "Remove EXIF on iPhone and Android",
         "desc": "Technical guide for mobile devices.",
-        "content": "<h4>On iPhone (iOS)</h4><p>Apple now allows hiding location when sharing, but it doesn't remove data from the stored file. For actual purging, use a local processing tool.</p><h4>On Android</h4><p>Android systems are particularly verbose. Besides GPS, they store lens serial numbers and capture settings (ISO, speed), creating a real hardware fingerprint.</p><h4>Why Local Processing?</h4><p>Using a cloud app to clean photos is like giving your data to a third party so they can hide it from others. GhostMeta cleans in your RAM, without any file transfer.</p>"
+        "content": "<section class='p-6 border-l-4 border-l-amber-500 bg-amber-500/5 mb-10'><h2 class='font-mono text-xl text-amber-400 tracking-tight mb-4'>[SYSTEM_COMMAND] THREAT_REPORT — GPS POST-MORTEM PERSISTENCE</h2><div class='grid md:grid-cols-2 gap-6'><div><p class='text-sm uppercase tracking-wider text-amber-400/70 mb-2'>EXIF / XMP / IPTC</p><p class='text-gray-300 leading-relaxed text-sm'>EXIF metadata isn't limited to raw GPS. On Android/iOS, XMP dictionaries and <code>OffsetTime</code> fields survive superficial deletions. 30% of GPS tags can be recovered via forensics. The threat: spatio-temporal cross-referencing via EXIF-ITUP dictionaries.</p></div><div class='border border-amber-500/20 p-4 font-mono text-[10px] text-amber-300 bg-black/40'><p>// FORENSICS RESIDUE (REAL CASE)</p><p>&gt; GPSLatitudeRef: 48°51'23.4"N<br/&gt; GPSLongitudeRef: 2°17'42.1"E<br/&gt; MakerNote (Apple): 12 unerased chunks</p></div></div></section><h2 class='font-mono text-xl text-amber-400 mb-6'>[SYSTEM_COMMAND] MOBILE_OS_LIMITS — THE NATIVE DECEPTION</h2><div class='grid md:grid-cols-2 gap-6 mb-12 text-sm'><div><p><strong class='text-amber-500'>Apple 'Hide Location':</strong> only removes main tags. But keeps: <code>GPSImgDirection</code>, <code>GPSTimeStamp</code>, and <code>XMP:GPSAltitude</code>.</p></div><div><p><strong class='text-amber-500'>Google Photos 'Remove Locations':</strong> cloud operation. The local file keeps <code>APP1</code> and <code>APP13</code> markers.</p></div></div><div class='grid grid-cols-1 md:grid-cols-3 gap-4 mb-12'><div class='border border-gray-700 p-4 bg-gray-900/40'><code class='text-xs'>Native iOS Command</code><p class='font-mono text-[10px] mt-2'>/usr/bin/ImageIO -removeProperty kCGImagePropertyGPS</p><p class='text-red-400 text-[10px] mt-1'>⚠️ Ignores XMP, JFIF, TIFF-EP.</p></div><div class='border border-gray-700 p-4 bg-gray-900/40'><code class='text-xs'>Systematic Residue</code><p class='font-mono text-[10px] mt-2'>EXIF:OffsetTimeOriginal + XMP:CreateDate</p><p class='text-[10px] text-gray-500'>Location to ±200km via timezone.</p></div><div class='border border-amber-500/20 bg-amber-500/5 p-4'><code class='text-xs'>DANGER: JSON sidecar</code><p class='text-[10px] mt-2 text-amber-200'>Google Photos creates associated .json files containing precise GPS coordinates. Location removal doesn't erase these sidecars.</p></div></div><h2 class='font-mono text-xl text-green-400 mb-6'>[SYSTEM_COMMAND] GHOSTMETA_SUPERIORITY — TOTAL NEUTRALIZATION</h2><p class='text-gray-300 text-sm mb-10'>GhostMeta operates by <strong>canvas pixel reconstruction</strong> — residual data in thumbnails and non-standard fields are overwritten with pseudo-random <code>AES-256-CTR</code> fill. Forensics tools (exiftool) only find null blocks.</p>"
       },
       "comprendre-donnees-exif-gps": {
         "title": "Understanding EXIF and GPS Data",
         "desc": "Everything you need to know about hidden metadata.",
-        "content": "<h4>What is EXIF?</h4><p>Created in 1995, Exchangeable Image File Format is a standard for attaching metadata to images. What was useful for pro photographers became a privacy nightmare with GPS smartphones.</p><h4>Most Sensitive Tags</h4><ul><li><strong>GPS Altitude/Latitude:</strong> Your precise location.</li><li><strong>DateTimeOriginal:</strong> The exact time revealing your routines.</li><li><strong>Make/Model:</strong> Your equipment value, a potential target for theft.</li></ul>"
+        "content": "<h2 class='font-mono text-xl border-l-4 border-[#00ff41] pl-4 mb-8 text-[#00ff41] uppercase'>[DATA_SHEET] EXIF: The Invisible Archive</h2><p class='mb-12 leading-relaxed text-justify text-sm'>Created in 1995, the Exchangeable Image File Format is a standard for attaching metadata to images. What was useful for professional photographers became a privacy nightmare with GPS smartphones.</p><div class='p-8 border border-[#00ff41]/20 bg-[#00ff41]/5 rounded-3xl mb-12 relative overflow-hidden'><div class='absolute top-4 right-6 text-[10px] text-[#00ff41] font-bold border border-[#00ff41]/30 px-2 py-1'>THREAT_LEVEL: CRITICAL</div><h3 class='text-lg font-bold text-[#00ff41] mb-4 uppercase'>Most Sensitive Tags</h3><ul class='list-none p-0 space-y-4 text-sm text-slate-300'><li class='flex items-start gap-3'><span class='text-[#00ff41] font-bold'>&gt;</span> <div><strong>GPS Altitude/Latitude:</strong> Your precise location (within 3 meters).</div></li><li class='flex items-start gap-3'><span class='text-[#00ff41] font-bold'>&gt;</span> <div><strong>DateTimeOriginal:</strong> The exact time revealing your routines.</div></li><li class='flex items-start gap-3'><span class='text-[#00ff41] font-bold'>&gt;</span> <div><strong>Make/Model:</strong> Your equipment value, a potential theft target.</div></li><li class='flex items-start gap-3'><span class='text-[#00ff41] font-bold'>&gt;</span> <div><strong>Software:</strong> The editing app, exploitable for attacks.</div></li></ul></div><h3 class='text-lg text-[#00ff41] underline underline-offset-8 mb-6 uppercase font-mono'>How It's Exploited</h3><p class='mb-12 text-justify text-slate-400 text-sm'>A photo posted on social networks contains enough data to locate your home, determine your schedules, and evaluate your possessions. Attackers use automated tools to extract this data at scale.</p><div class='grid grid-cols-1 md:grid-cols-2 gap-6 my-12'><div class='border border-white/10 bg-white/5 p-6 rounded-xl'><h4 class='text-[#00ff41] font-bold mb-3 uppercase text-xs'>The EXIF Reader</h4><p class='text-[10px] text-slate-500 leading-relaxed'>Online tools like Jeffrey's Image Metadata Viewer display all metadata in seconds. No technical expertise required.</p></div><div class='border border-white/10 bg-white/5 p-6 rounded-xl'><h4 class='text-[#00ff41] font-bold mb-3 uppercase text-xs'>Batch Extraction</h4><p class='text-[10px] text-slate-500 leading-relaxed'>Scripts can process thousands of images to create movement maps and identify high-value targets.</p></div></div><h2 class='text-xl text-[#00ff41] mb-6 uppercase tracking-widest border-b border-white/10 pb-2 inline-block font-mono'>The GhostMeta Solution</h2><p class='text-slate-300 text-sm mb-10'>GhostMeta doesn't just delete tags — it <strong>rebuilds the image pixel by pixel</strong>. No metadata can survive this reconstruction. Your photos become truly anonymous.</p>"
       },
       "nettoyage-photo-local-vs-cloud": {
         "title": "Photo Cleaning: Local vs Cloud",
         "desc": "Why local processing is safer.",
-        "content": "<h4>The Cloud Flaw</h4><p>Free online cleaning sites are often 'data vacuums'. By sending your photo to their servers, you grant them access to the original before cleaning.</p><h4>Zero-Knowledge Philosophy</h4><p>GhostMeta uses your browser's Canvas API. This means your CPU does the work and your internet connection is never used to transfer images. It's the only 100% anonymous method.</p>"
+        "content": "<h2 class='font-mono text-2xl border-l-4 border-[#00f5b0] pl-4 mb-8'>[SECURITY_AUDIT] The Cloud Anonymity Paradox</h2><div class='text-slate-300 text-lg leading-relaxed mb-12 border-b border-white/10 pb-6'>Sending a photo to a server to \"anonymize\" it is like revealing your identity to the guard before asking him to mask your face. Every shot transits, is copied to disks, analyzed by proprietary algorithms. Anonymity becomes fiction as soon as you lose control of the flow.</div><div class='grid grid-cols-1 md:grid-cols-2 gap-8 my-12'><div class='bg-slate-900/70 backdrop-blur-md rounded-3xl p-8 border border-red-500/20 shadow-2xl'><h3 class='text-red-400 text-xl font-mono mb-6'>☁️ CLOUD_MINING <span class=\"text-[10px] bg-red-500/10 px-2 py-1 rounded-full\">guaranteed leak</span></h3><ul class='space-y-4 text-sm text-slate-300 list-none p-0'><li class='border-l-2 border-white/10 pl-4'><strong>Data capture</strong> — Upload to third-party servers whose location you don't know.</li><li class='border-l-2 border-white/10 pl-4'><strong>Temporary storage</strong> — Persistent fragments on disks or CDN caches for up to 90 days.</li><li class='border-l-2 border-white/10 pl-4'><strong>Traceability</strong> — IP, timestamp and browser fingerprint are systematically logged.</li></ul></div><div class='bg-slate-900/70 backdrop-blur-md rounded-3xl p-8 border border-[#00f5b0]/20 shadow-2xl'><h3 class='text-[#00f5b0] text-xl font-mono mb-6'>🛡️ LOCAL_BUNKER <span class=\"text-[10px] bg-[#00f5b0]/10 px-2 py-1 rounded-full\">sovereignty</span></h3><ul class='space-y-4 text-sm text-slate-300 list-none p-0'><li class='border-l-2 border-white/10 pl-4'><strong>GhostMeta</strong> — 100% local execution, no pixel leaves your machine.</li><li class='border-l-2 border-white/10 pl-4'><strong>Canvas API</strong> — Processing via local hardware acceleration without network transfer.</li><li class='border-l-2 border-white/10 pl-4'><strong>Zero transfer</strong> — No telemetry, no API key, pure static analysis.</li></ul></div></div><h2 class='font-mono text-xl border-l-4 border-amber-500 pl-4 mt-16 mb-6'>Auditor's Conclusion</h2><div class='bg-gradient-to-br from-[#121b30] to-[#050a18] p-8 rounded-3xl border border-slate-700 text-slate-200 italic leading-relaxed mb-12'><strong>Digital sovereignty begins with local code execution.</strong> As long as you outsource the processing of your sensitive data, you depend on the goodwill of actors whose business model relies on exploiting that data.</div>"
       },
       "ghostmeta-manifeste-confidentialite": {
         "title": "GhostMeta: Privacy Manifesto",
         "desc": "Our commitment to your privacy.",
-        "content": "<h4>Privacy is Not an Option</h4><p>We created GhostMeta because existing tools were either too complex or too intrusive. Our manifesto is based on free basic service and total code transparency.</p><h4>Our Commitment</h4><p>No trackers, no ad cookies, and processing that will forever remain local.</p>"
+        "content": "<header class='mb-16 border-b border-white/10 pb-8'><h2 class='text-4xl font-bold text-[#00ff41] tracking-tighter uppercase mb-2'>GHOSTMETA MANIFESTO</h2><div class='text-[10px] text-[#00ff41]/50 tracking-widest uppercase font-mono'>Digital Sovereignty Protocol v1.0 // Status: ACTIVE</div></header><h2 class='font-mono text-xl border-l-4 border-[#00ff41] pl-4 mb-8 text-[#00ff41] uppercase'>The Programmed Erosion of Anonymity</h2><p class='mb-12 leading-relaxed text-justify text-sm'>We are in 2026. The Internet is an open-air data market. Metadata is a <strong>social engineering weapon</strong>. Latitude, longitude, timestamp: this data forms a targeting grid. Not cleaning it is like painting a target on your back.</p><div class='p-8 border border-[#00ff41]/20 bg-[#00ff41]/5 rounded-3xl mb-12 relative overflow-hidden'><div class='absolute top-4 right-6 text-[10px] text-[#00ff41] font-bold border border-[#00ff41]/30 px-2 py-1'>SYS_LOG: NO_TRACKING</div><h3 class='text-lg font-bold text-[#00ff41] mb-4 uppercase'>Why Free Doesn't Mean Resale</h3><p class='mb-4 text-xs text-slate-300'>GhostMeta rejects the 'You are the Product' model. Privacy is the architectural foundation of our code. We refuse tracking on principle.</p></div><h3 class='text-lg text-[#00ff41] underline underline-offset-8 mb-6 uppercase font-mono'>The Radical Local-Only Choice</h3><p class='mb-12 text-justify text-slate-400 text-sm'>The Cloud is someone else's computer. GhostMeta transforms your browser into a bunker via <strong>WebAssembly</strong>. 100% of processing happens on your CPU. No data leaves your machine. It's the only mathematical guarantee of privacy.</p><div class='grid grid-cols-1 md:grid-cols-2 gap-6 my-12'><div class='border border-white/10 bg-white/5 p-6 rounded-xl'><h4 class='text-[#00ff41] font-bold mb-3 uppercase text-xs'>Tank Aesthetic</h4><p class='text-[10px] text-slate-500 leading-relaxed'>Our interface is cold and industrial. GhostMeta is a digital machine tool. Data protection is a conflict, not a game.</p></div><div class='border border-white/10 bg-white/5 p-6 rounded-xl'><h4 class='text-[#00ff41] font-bold mb-3 uppercase text-xs'>The Right to Obscurity</h4><p class='text-[10px] text-slate-500 leading-relaxed'>Anonymity is the precondition of freedom. Disappearing from algorithmic radars is the ultimate privilege we make accessible.</p></div></div><h2 class='text-xl text-[#00ff41] mb-6 uppercase tracking-widest border-b border-white/10 pb-2 inline-block font-mono'>Zero Compromise, Zero Logs</h2><ul class='list-none p-0 space-y-4 mb-16 text-xs text-slate-300'><li class='flex items-center gap-3'><span class='w-3 h-3 border border-[#00ff41]'></span> Zero third-party cookies.</li><li class='flex items-center gap-3'><span class='w-3 h-3 border border-[#00ff41]'></span> Zero server storage (Stateless).</li><li class='flex items-center gap-3'><span class='w-3 h-3 border border-[#00ff41]'></span> Zero user telemetry.</li></ul><div class='bg-[#00ff41]/10 border-l-4 border-[#00ff41] p-6 italic text-[#00ff41] mb-16 text-sm'>\"Sovereignty is not delegated. It is executed.\"</div>"
       }
     }
-  },
-  "info": {
-    "why_title": "Why your photos",
-    "why_title_highlight": "betray you",
-    "why_desc": "Every smartphone photo contains invisible metadata. When you post on Vinted, eBay or Depop, this data can reveal your exact address, habits, and equipment.",
-    "geo_title": "GPS Geolocation",
-    "geo_desc": "Exact home coordinates embedded in every smartphone photo.",
-    "meta_title": "Time Profiling",
-    "meta_desc": "Dates and times revealing your presence and absence routines.",
-    "hard_title": "Device Fingerprinting",
-    "hard_desc": "Device model, lens, and serial numbers identifying your equipment.",
-    "how_title": "How it",
-    "how_highlight": "works",
-    "how_subtitle": "Three steps. Zero upload. Your photos stay on your device.",
-    "step_1_title": "Drop your photos",
-    "step_1_desc": "Drag & drop or select your images. JPEG, PNG, WebP and HEIC supported.",
-    "step_2_title": "Threat Scan",
-    "step_2_desc": "GhostMeta analyzes every image and identifies sensitive metadata (GPS, date, device).",
-    "step_3_title": "Neutralization",
-    "step_3_desc": "One click to remove all metadata. Download your clean images.",
-    "arch_title": "Architecture",
-    "arch_highlight": "Zero-Knowledge",
-    "arch_subtitle": "Your photos never leave your device. All processing is done locally in your browser.",
-    "arch_bad_title": "Other tools",
-    "arch_bad_1": "Upload to a remote server",
-    "arch_bad_2": "Photos accessible by third parties",
-    "arch_bad_3": "Risk of data recovery",
-    "arch_good_title": "GhostMeta",
-    "arch_good_1": "No upload — 100% local",
-    "arch_good_2": "No one sees your photos",
-    "arch_good_3": "Works even offline",
-    "faq_title": "Frequently Asked Questions",
-    "q1": "Are my photos sent to a server?",
-    "a1": "No. All processing happens locally in your browser via the Canvas API. No data leaves your device.",
-    "q2": "Which image formats are supported?",
-    "a2": "We support JPEG, PNG, WEBP, and HEIC.",
-    "q3": "What metadata is removed?",
-    "a3": "All embedded metadata: GPS, EXIF, XMP, IPTC. The image is rebuilt pixel by pixel to guarantee a clean file.",
-    "q4": "Is image quality affected?",
-    "a4": "The image is recompressed at 92% quality (JPEG) for an optimal size/quality balance. Images over 4096px are resized to prevent memory crashes on mobile.",
-    "q5": "Why is Batch Mode paid?",
-    "a5": "To support development while keeping the tool ad-free.",
-    "q6": "Don't platforms clean metadata already?",
-    "a6": "Not always, and often only after storing the original on their servers."
-  },
-  "pro": {
-    "active": "PRO ACTIVE",
-    "price_btn": "Donate ❤️",
-    "title": "Support the project",
-    "subtitle": "GhostMeta is free. Your donations keep the servers running.",
-    "free_title": "Free",
-    "free_1": "1 clean every 12h",
-    "free_2": "Metadata scan",
-    "free_3": "Single download",
-    "free_4": "100% Local & Private",
-    "pro_title": "Pro Pack",
-    "pro_price": "Soon",
-    "pro_1": "Up to 100 images simultaneously",
-    "pro_2": "Batch Mode (all at once)",
-    "pro_3": "One-click ZIP export",
-    "pro_4": "No time limit",
-    "unlock": "Coming Soon"
-  },
-  "footer": {
-    "rights": "All rights reserved",
-    "privacy_btn": "Privacy Policy",
-    "legal_btn": "Legal Notice"
-  },
-  "legal": {
-    "privacy_title": "Privacy Policy",
-    "updated": "Last updated: February 2026",
-    "notice_title": "Legal Notice",
-    "privacy_sections": {
-      "1": { "title": "1. Local-Only Architecture", "content": "100% local processing via the browser Canvas API. No data leaves your device." },
-      "2": { "title": "2. Data", "content": "No personal data collection." },
-      "3": { "title": "3. Storage", "content": "LocalStorage only. No tracking cookies." },
-      "4": { "title": "4. Contact", "content": "contact@ghostmeta.fr" }
-    },
-    "notice_sections": {
-      "1": { "title": "1. Editor", "content": "Published independently." },
-      "2": { "title": "2. Hosting", "content": "Vercel Inc., USA." },
-      "3": { "title": "3. Liability", "content": "User is solely responsible." }
-    }
-  },
-"trust": {
-    "section_label": "Technical Transparency",
-    "zero_upload": "Zero Upload",
-    "zero_upload_sub": "No file sent",
-    "local": "100% Local",
-    "local_sub": "Browser only",
-    "zero_storage": "Zero Storage",
-    "zero_storage_sub": "No data retained",
-    "network_zero": "0 external request",
-    "network_alert": "{{count}} request(s) detected",
-    "network_monitored": "Monitor active",
-    "network_verified": "Network verified"
   }
 }
-
