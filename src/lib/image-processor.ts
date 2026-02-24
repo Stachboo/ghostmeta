@@ -44,8 +44,16 @@ export interface ProcessedImage {
   error?: string;
 }
 
+/**
+ * Génère un ID unique cryptographiquement sécurisé
+ * Remplace Math.random() par crypto.randomUUID() pour éviter les collisions
+ */
 function generateId(): string {
-  return Math.random().toString(36).substring(2, 11);
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  // Fallback pour les navigateurs anciens (rare)
+  return `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 }
 
 function formatGPSCoord(coord: number, isLat: boolean): string {
@@ -124,7 +132,6 @@ export async function extractMetadata(file: File): Promise<MetadataInfo> {
 
 async function convertHeicToJpeg(file: File): Promise<Blob> {
   try {
-    // Import dynamique — heic2any (~1.2MB) n'est chargé que si nécessaire
     const { default: heic2any } = await import('heic2any');
     const result = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.90 });
     return Array.isArray(result) ? result[0] : result;
@@ -136,7 +143,6 @@ async function convertHeicToJpeg(file: File): Promise<Blob> {
 export async function stripMetadata(file: File): Promise<Blob> {
   let sourceFile = file;
 
-  // 1. Conversion HEIC si nécessaire (lazy load heic2any)
   if (isHeicFile(file)) {
     try {
       const jpegBlob = await convertHeicToJpeg(file);
@@ -146,12 +152,10 @@ export async function stripMetadata(file: File): Promise<Blob> {
     }
   }
 
-  // 2. Nettoyage via Canvas (avec Redimensionnement de sécurité)
   return new Promise((resolve, reject) => {
     const img = new Image();
     const url = URL.createObjectURL(sourceFile);
 
-    // Timeout de sécurité : si l'image met > 10s à charger, on coupe
     const timer = setTimeout(() => {
       URL.revokeObjectURL(url);
       reject(new Error('Délai dépassé (Image trop lourde ?)'));
@@ -160,7 +164,6 @@ export async function stripMetadata(file: File): Promise<Blob> {
     img.onload = () => {
       clearTimeout(timer);
       try {
-        // Calcul des dimensions sécurisées
         let width = img.naturalWidth;
         let height = img.naturalHeight;
 
@@ -182,11 +185,9 @@ export async function stripMetadata(file: File): Promise<Blob> {
         const ctx = canvas.getContext('2d');
         if (!ctx) throw new Error('Memoire insuffisante (Canvas)');
 
-        // Dessin (C'est ici que les métadonnées sont perdues car on ne copie que les pixels)
         ctx.drawImage(img, 0, 0, width, height);
 
         const outputType = sourceFile.type === 'image/png' ? 'image/png' : 'image/jpeg';
-        // Compression légère pour Vinted (0.92 est le sweet spot qualité/poids)
         const quality = outputType === 'image/png' ? 1 : 0.92;
 
         canvas.toBlob(
@@ -221,7 +222,6 @@ export function isHeicFile(file: File): boolean {
 
 export function isSupportedImage(file: File): boolean {
   const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];
-  // On accepte aussi si le type MIME est vide mais que l'extension est bonne (cas fréquent Android)
   const name = file.name.toLowerCase();
   return validTypes.includes(file.type) || /\.(jpg|jpeg|png|webp|heic|heif)$/.test(name);
 }
