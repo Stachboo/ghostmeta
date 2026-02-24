@@ -144,12 +144,8 @@ export async function stripMetadata(file: File): Promise<Blob> {
   let sourceFile = file;
 
   if (isHeicFile(file)) {
-    try {
-      const jpegBlob = await convertHeicToJpeg(file);
-      sourceFile = new File([jpegBlob], file.name.replace(/\.heic$/i, '.jpg'), { type: 'image/jpeg' });
-    } catch (e) {
-      throw e;
-    }
+    const jpegBlob = await convertHeicToJpeg(file);
+    sourceFile = new File([jpegBlob], file.name.replace(/\.(heic|heif)$/i, '.jpg'), { type: 'image/jpeg' });
   }
 
   return new Promise((resolve, reject) => {
@@ -217,7 +213,7 @@ export async function stripMetadata(file: File): Promise<Blob> {
 
 export function isHeicFile(file: File): boolean {
   const name = file.name.toLowerCase();
-  return name.endsWith('.heic') || name.endsWith('.heif') || file.type === 'image/heic';
+  return name.endsWith('.heic') || name.endsWith('.heif') || file.type === 'image/heic' || file.type === 'image/heif';
 }
 
 export function isSupportedImage(file: File): boolean {
