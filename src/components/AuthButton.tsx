@@ -1,30 +1,14 @@
-import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { supabase } from '@/lib/supabase';
+import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { LogIn, LogOut, User } from 'lucide-react';
 
 export default function AuthButton() {
   const { t } = useTranslation();
-  const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Vérifier la session existante
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    // Écouter les changements d'état d'authentification
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
+  const { user, loading } = useAuth(); // Utilise le hook useAuth unifié
 
   const handleSignIn = async () => {
+    const { supabase } = await import('@/lib/supabase');
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
@@ -34,6 +18,7 @@ export default function AuthButton() {
   };
 
   const handleSignOut = async () => {
+    const { supabase } = await import('@/lib/supabase');
     await supabase.auth.signOut();
   };
 
