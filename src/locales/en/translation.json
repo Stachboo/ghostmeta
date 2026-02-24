@@ -74,7 +74,8 @@
     "no_threats": "No sensitive metadata detected",
     "cleaned_success": "Metadata successfully removed",
     "download": "Download",
-    "remove": "Remove"
+    "remove": "Remove",
+    "unlock_cta": "Unlock"
   },
   "marketing": {
     "vinted_title": "Your Vinted photos reveal your address.",

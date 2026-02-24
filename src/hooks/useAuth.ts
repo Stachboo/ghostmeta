@@ -8,6 +8,7 @@ export interface Profile {
   full_name?: string;
   avatar_url?: string;
   is_premium?: boolean;
+  has_viewed_metadata?: boolean;
   created_at: string;
 }
 
