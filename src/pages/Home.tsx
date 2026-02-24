@@ -307,7 +307,8 @@ export default function Home() {
         <section className="container py-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">
-              {t('info.arch_title')} <span className="text-[#00ff41]">{t('info.arch_highlight')}</span>
+              {t('info.arch_title')} <br />
+              <span className="highlight-confidential">{t('info.arch_highlight')}</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
               {t('info.arch_subtitle')}
