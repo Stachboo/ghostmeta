@@ -383,9 +383,9 @@ export default function Home() {
               <div className="absolute top-4 right-4 text-xs font-bold bg-[#00ff41]/20 text-[#00ff41] px-2 py-1 rounded">{t('pro.unlock')}</div>
               <h3 className="font-bold text-xl mb-1">{t('pro.pro_title')}</h3>
               <p className="text-2xl font-bold text-[#00ff41] mb-4">{t('pro.pro_price')}</p>
-              <Button onClick={handleDonation} className="w-full bg-[#ff0055] hover:bg-[#d40047] text-white font-bold">
-                <Heart className="w-4 h-4 mr-2 fill-white" /> {t('pro.price_btn')}
-              </Button>
+              <button onClick={handleDonation} className="w-full flex justify-center hover:opacity-80 transition-opacity cursor-pointer">
+                <img src="/chat-chill.png" alt="Soutenir GhostMeta" className="w-40 h-auto" />
+              </button>
             </div>
           </div>
         </section>
