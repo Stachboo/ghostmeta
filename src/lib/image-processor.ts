@@ -56,7 +56,7 @@ function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 }
 
-function formatGPSCoord(coord: number, isLat: boolean): string {
+export function formatGPSCoord(coord: number, isLat: boolean): string {
   const dir = isLat ? (coord >= 0 ? 'N' : 'S') : (coord >= 0 ? 'E' : 'W');
   const abs = Math.abs(coord);
   const deg = Math.floor(abs);

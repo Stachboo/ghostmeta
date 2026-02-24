@@ -5,6 +5,7 @@
  * Carte tactique affichant une image, ses menaces détectées et son statut.
  */
 
+import { lazy, Suspense, useState } from 'react';
 import { ProcessedImage, formatFileSize, ThreatItem } from '@/lib/image-processor';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
@@ -26,6 +27,10 @@ import {
   Lock,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+
+// Chargement différé : Leaflet (~150KB) n'est téléchargé qu'à l'ouverture du dialog
+const GpsMap = lazy(() => import('@/components/GpsMap'));
 
 interface ImageCardProps {
   image: ProcessedImage;
@@ -130,6 +135,7 @@ function StatusBadge({ status, threatLevel, t }: { status: ProcessedImage['statu
 export default function ImageCard({ image, onRemove, onDownload, index, blurMetadata = false, onSignIn }: ImageCardProps) {
   const { t } = useTranslation();
   const { metadata, status } = image;
+  const [mapOpen, setMapOpen] = useState(false);
 
   return (
     <motion.div
@@ -199,6 +205,16 @@ export default function ImageCard({ image, onRemove, onDownload, index, blurMeta
                   {threat.value}
                 </p>
               </div>
+              {threat.type === 'gps' && !blurMetadata && image.metadata?.gps && (
+                <button
+                  onClick={() => setMapOpen(true)}
+                  className="flex-shrink-0 flex items-center gap-1 px-2 py-1 rounded text-[10px] font-semibold bg-red-500/15 hover:bg-red-500/25 text-red-400 border border-red-500/25 transition-colors whitespace-nowrap"
+                  aria-label="Voir la localisation GPS sur la carte"
+                >
+                  <MapPin className="w-3 h-3" />
+                  Voir sur la carte
+                </button>
+              )}
             </motion.div>
           ))}
 
@@ -272,6 +288,31 @@ export default function ImageCard({ image, onRemove, onDownload, index, blurMeta
             transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
           />
         </div>
+      )}
+
+      {/* Dialog carte GPS */}
+      {image.metadata?.gps && (
+        <Dialog open={mapOpen} onOpenChange={setMapOpen}>
+          <DialogContent className="max-w-2xl bg-[#121212] border-red-500/30 p-5">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2 text-red-400 font-mono text-sm">
+                <MapPin className="w-4 h-4" />
+                LOCALISATION GPS DÉTECTÉE
+              </DialogTitle>
+            </DialogHeader>
+            <Suspense fallback={
+              <div className="flex items-center justify-center h-[380px] text-zinc-500 font-mono text-xs">
+                <Loader2 className="w-4 h-4 animate-spin mr-2" /> Chargement de la carte...
+              </div>
+            }>
+              <GpsMap
+                latitude={image.metadata.gps.latitude}
+                longitude={image.metadata.gps.longitude}
+                filename={image.originalName}
+              />
+            </Suspense>
+          </DialogContent>
+        </Dialog>
       )}
     </motion.div>
   );
