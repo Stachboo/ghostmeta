@@ -139,9 +139,9 @@ export default function Home() {
                 className="matrix-hero-title"
                 aria-label={`${t('hero.title_start')} ${t('hero.title_color')} ${t('hero.title_end')}`}
               >
-                <span className="matrix-outer">{t('hero.title_start')}</span>
-                <span className="matrix-core">{t('hero.title_color')}</span>
-                <span className="matrix-outer">{t('hero.title_end')}</span>
+                <span className="matrix-outer" data-text={t('hero.title_start')}>{t('hero.title_start')}</span>
+                <span className="matrix-core" data-text={t('hero.title_color')}>{t('hero.title_color')}</span>
+                <span className="matrix-outer" data-text={t('hero.title_end')}>{t('hero.title_end')}</span>
               </h1>
               
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-10">{t('hero.subtitle')}</p>
