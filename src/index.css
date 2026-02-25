@@ -72,55 +72,237 @@
   100% { transform: translateX(100%); }
 }
 
-/* ── TITRE HERO : OPTION B "LA MATRICE OPPRESSANTE" ─────────────── */
+/* ══════════════════════════════════════════════════════════════════
+   TITRE HERO — GHOSTMETA "INDUSTRIAL HOLOGRAPHIC" v2
+   Architecture:
+     .matrix-outer  → Holographic Glass  (CSS-only, mix-blend: screen)
+     .matrix-core   → Circuit/Digital 3D (SVG filter #circuit-3d)
+   ══════════════════════════════════════════════════════════════════ */
+
 .matrix-hero-title {
   text-align: center;
   text-transform: uppercase;
-  line-height: 0.9;
-  margin-bottom: 1rem;           /* identique au mb-4 original */
+  line-height: 1;
+  margin-bottom: 1rem;
   font-family: 'Rajdhani', sans-serif;
+  /* No isolation: outer lines must blend with the hero background */
 }
 
+
+/* ── LINE 1 & 3 : Holographic Glass ───────────────────────────────
+   Technique: transparent fill + thin cyan stroke + chromatic
+   aberration via stacked text-shadow (R/B channel split) + bloom
+   SVG filter + screen blending against the dark hero bg.
+   ---------------------------------------------------------------- */
 .matrix-outer {
   display: block;
-  font-size: clamp(0.85rem, 2.5vw, 2rem);
+  font-size: clamp(1rem, 2.8vw, 2.1rem);
   font-weight: 300;
-  color: #888;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
+  letter-spacing: 0.38em;
+  margin-bottom: 6px;
+
+  /* Hollow glass shell — ice-blue stroke, no fill */
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0, 212, 255, 0.92);
+
+  /*
+   * Chromatic aberration: Red channel pushed −2px left,
+   * Blue channel pushed +2px right.
+   * Then 3 glow corona layers in cyan/indigo.
+   * All colors explicit → unaffected by color:transparent.
+   */
+  text-shadow:
+    /* — Chromatic split — */
+    -2px  0px 1px rgba(255,  24,  80, 0.78),   /* R ghost */
+     2px  0px 1px rgba(  0, 160, 255, 0.78),   /* B ghost */
+    -1px  0px 0px rgba(255,  60,  80, 0.45),
+     1px  0px 0px rgba(  0, 130, 255, 0.45),
+    /* — Glow corona — */
+     0   0   6px rgba(  0, 220, 255, 0.52),
+     0   0  20px rgba(  0, 170, 255, 0.26),
+     0   0  42px rgba(  0, 110, 255, 0.12);
+
+  /* Screen blend: cyan corona adds to the hero bg luminance */
+  mix-blend-mode: screen;
+
+  /* SVG bloom filter: spreads edge glow from stroke alpha */
+  filter: url(#holo-bloom);
+
+  /*
+   * Flicker: two layered animations.
+   *   holo-flicker  → hard frame drops (hologram instability)
+   *   chroma-drift  → slow aberration offset wander
+   */
+  animation:
+    holo-flicker  5.5s steps(1, end) infinite,
+    chroma-drift  7s   ease-in-out   infinite;
+
+  will-change: opacity, text-shadow;
 }
 
+/* Hard frame-drop flicker — hologram losing sync */
+@keyframes holo-flicker {
+  0%,  91%, 100% { opacity: 1; }
+  92%            { opacity: 0.55; -webkit-text-stroke-width: 1.6px; }
+  93%            { opacity: 1; }
+  95%            { opacity: 0.82; }
+  96%            { opacity: 1;   -webkit-text-stroke-width: 0.8px; }
+  97%            { opacity: 0.92; }
+  98%            { opacity: 1; }
+}
+
+/* Slow chromatic aberration drift — projection lens wobble */
+@keyframes chroma-drift {
+  0%, 100% {
+    text-shadow:
+      -2px  0px 1px rgba(255,  24,  80, 0.78),
+       2px  0px 1px rgba(  0, 160, 255, 0.78),
+      -1px  0px 0px rgba(255,  60,  80, 0.45),
+       1px  0px 0px rgba(  0, 130, 255, 0.45),
+       0   0   6px rgba(  0, 220, 255, 0.52),
+       0   0  20px rgba(  0, 170, 255, 0.26),
+       0   0  42px rgba(  0, 110, 255, 0.12);
+  }
+  30% {
+    text-shadow:
+      -3px  0px 1px rgba(255,  24,  80, 0.62),
+       1px  0px 1px rgba(  0, 160, 255, 0.88),
+      -1px  0px 0px rgba(255,  60,  80, 0.35),
+       1px  0px 0px rgba(  0, 130, 255, 0.55),
+       0   0   9px rgba(  0, 220, 255, 0.60),
+       0   0  24px rgba(  0, 170, 255, 0.30),
+       0   0  48px rgba(  0, 110, 255, 0.15);
+  }
+  65% {
+    text-shadow:
+      -1px  1px 1px rgba(255,  24,  80, 0.88),
+       3px -1px 1px rgba(  0, 160, 255, 0.62),
+      -1px  0px 0px rgba(255,  60,  80, 0.55),
+       2px  0px 0px rgba(  0, 130, 255, 0.35),
+       0   0   5px rgba(  0, 220, 255, 0.42),
+       0   0  16px rgba(  0, 170, 255, 0.22),
+       0   0  36px rgba(  0, 110, 255, 0.10);
+  }
+}
+
+
+/* ── LINE 2 CORE : Circuit / Digital + Real 3D Extrusion ──────────
+   Technique:
+   1. Radial gradient fill (amber → neon-green) via background-clip.
+   2. 3D extrusion: 9 progressive text-shadow offset layers with
+      explicit RGBA colors (unaffected by color:transparent).
+      Light source simulated top-left → shadow falls ↘.
+   3. SVG filter #circuit-3d: feTurbulence noise → feDisplacementMap
+      micro-warp → feDiffuseLighting engraved circuit surface.
+   ---------------------------------------------------------------- */
 .matrix-core {
   display: block;
-  /* clamp : lisible mobile, massif desktop — gère aussi METADONNEES (11 chars) */
-  font-size: clamp(2.2rem, 9vw, 6.5rem);
+  font-size: clamp(2.4rem, 9.5vw, 7rem);
   font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
 
-  /* Lettres creuses : contour néon, remplissage transparent */
-  color: transparent;
-  -webkit-text-stroke: 2px #39ff14;
-
-  /* Lignes de données qui défilent verticalement à l'intérieur du texte */
-  background-image: linear-gradient(
-    0deg,
-    transparent 0%,
-    rgba(57, 255, 20, 0.2) 50%,
-    #39ff14 51%,
-    rgba(57, 255, 20, 0.2) 52%,
-    transparent 100%
+  /*
+   * Radial fill: hot amber core → neon green → deep green rim.
+   * Mimics a molten/energised metal face.
+   */
+  background: radial-gradient(
+    ellipse 78% 100% at 50% 58%,
+    #ffbf00  0%,
+    #c8ff00 22%,
+    #39ff14 55%,
+    #00b80e 100%
   );
-  background-size: 100% 15px;    /* hauteur d'une "ligne de données" */
   -webkit-background-clip: text;
   background-clip: text;
+  color: transparent;
 
-  /* Halo vert autour des lettres */
-  filter: drop-shadow(0 0 8px rgba(57, 255, 20, 0.8));
+  /*
+   * 3D Extrusion — layered text-shadow approach:
+   *   Layer 0   : top-left specular highlight (whitish)
+   *   Layers 1–9: body depth stepping ↘, each ~10% darker
+   *   Layer 10  : ambient occlusion / contact shadow (black blur)
+   *   Layers 11–13: outer neon glow coronas
+   *
+   * Note: text-shadow uses explicit colors → renders behind the
+   * gradient fill, creating authentic volume rather than flat glow.
+   */
+  text-shadow:
+    /* Specular highlight */
+    -1px -1px  0px rgba(255, 255, 180, 0.65),
+    /* Extrusion body */
+     1px  1px  0px rgba( 42, 168,   0, 0.96),
+     2px  2px  0px rgba( 37, 148,   0, 0.91),
+     3px  3px  0px rgba( 32, 128,   0, 0.86),
+     4px  4px  0px rgba( 27, 110,   0, 0.81),
+     5px  5px  0px rgba( 22,  92,   0, 0.76),
+     6px  6px  1px rgba( 17,  76,   0, 0.71),
+     7px  7px  2px rgba( 12,  60,   0, 0.66),
+     8px  8px  3px rgba(  8,  46,   0, 0.61),
+     9px  9px  4px rgba(  5,  34,   0, 0.56),
+    /* Ambient occlusion */
+    10px 10px 14px rgba(  0,   0,   0, 0.72),
+    11px 11px 22px rgba(  0,   0,   0, 0.50),
+    /* Neon glow coronas */
+     0   0   14px rgba( 57, 255,  20, 0.52),
+     0   0   32px rgba( 57, 255,  20, 0.26),
+     0   0   68px rgba( 57, 255,  20, 0.10);
 
-  /* Défilement vers le haut — multiple de background-size pour boucle parfaite */
-  animation: matrix-scroll 0.8s linear infinite;
+  /*
+   * SVG circuit filter + persistent glow drop-shadow.
+   * The filter sees the full rendered element (gradient + shadows)
+   * and applies circuit texture on top via soft-light blend.
+   */
+  filter:
+    url(#circuit-3d)
+    drop-shadow(0 0 14px rgba(57, 255, 20, 0.42));
+
+  /* Breathing: glow pulses on a slow sine — feels "alive" */
+  animation: core-breathe 3.8s ease-in-out infinite;
+
+  will-change: filter;
 }
 
-@keyframes matrix-scroll {
-  0%   { background-position-y: 0px; }
-  100% { background-position-y: -30px; }  /* = 2 × background-size height */
+@keyframes core-breathe {
+  0%, 100% {
+    filter:
+      url(#circuit-3d)
+      drop-shadow(0  0  14px rgba( 57, 255, 20, 0.42))
+      drop-shadow(0  4px 30px rgba( 57, 255, 20, 0.16));
+  }
+  50% {
+    filter:
+      url(#circuit-3d)
+      drop-shadow(0  0  22px rgba(100, 255, 50, 0.62))
+      drop-shadow(0  6px 50px rgba( 57, 255, 20, 0.28))
+      drop-shadow(0  0  80px rgba( 57, 255, 20, 0.10));
+  }
+}
+
+
+/* ── MOBILE: reduce extrusion depth & filter cost ─────────────────
+   On small screens the large text-shadow stack can clip awkwardly.
+   We trim to 5 extrusion layers and kill the SVG filter (GPU cost).
+   ---------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .matrix-outer {
+    letter-spacing: 0.25em;
+    animation: holo-flicker 5.5s steps(1, end) infinite;
+    /* drop chroma-drift on mobile for perf */
+  }
+
+  .matrix-core {
+    letter-spacing: 0;
+    text-shadow:
+      -1px -1px  0px rgba(255, 255, 180, 0.55),
+       1px  1px  0px rgba( 42, 168,   0, 0.95),
+       2px  2px  0px rgba( 32, 128,   0, 0.85),
+       3px  3px  1px rgba( 17,  76,   0, 0.70),
+       4px  4px  8px rgba(  0,   0,   0, 0.65),
+       0   0   12px rgba( 57, 255,  20, 0.50),
+       0   0   28px rgba( 57, 255,  20, 0.22);
+    /* SVG filter too heavy on low-end mobile — drop to css-only */
+    filter: drop-shadow(0 0 12px rgba(57, 255, 20, 0.45));
+    animation: none;
+  }
 }
