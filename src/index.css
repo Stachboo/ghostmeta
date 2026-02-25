@@ -71,3 +71,56 @@
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
+
+/* ── TITRE HERO : OPTION B "LA MATRICE OPPRESSANTE" ─────────────── */
+.matrix-hero-title {
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 0.9;
+  margin-bottom: 1rem;           /* identique au mb-4 original */
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.matrix-outer {
+  display: block;
+  font-size: clamp(0.85rem, 2.5vw, 2rem);
+  font-weight: 300;
+  color: #888;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.matrix-core {
+  display: block;
+  /* clamp : lisible mobile, massif desktop — gère aussi METADONNEES (11 chars) */
+  font-size: clamp(2.2rem, 9vw, 6.5rem);
+  font-weight: 800;
+
+  /* Lettres creuses : contour néon, remplissage transparent */
+  color: transparent;
+  -webkit-text-stroke: 2px #39ff14;
+
+  /* Lignes de données qui défilent verticalement à l'intérieur du texte */
+  background-image: linear-gradient(
+    0deg,
+    transparent 0%,
+    rgba(57, 255, 20, 0.2) 50%,
+    #39ff14 51%,
+    rgba(57, 255, 20, 0.2) 52%,
+    transparent 100%
+  );
+  background-size: 100% 15px;    /* hauteur d'une "ligne de données" */
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  /* Halo vert autour des lettres */
+  filter: drop-shadow(0 0 8px rgba(57, 255, 20, 0.8));
+
+  /* Défilement vers le haut — multiple de background-size pour boucle parfaite */
+  animation: matrix-scroll 0.8s linear infinite;
+}
+
+@keyframes matrix-scroll {
+  0%   { background-position-y: 0px; }
+  100% { background-position-y: -30px; }  /* = 2 × background-size height */
+}
