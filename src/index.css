@@ -191,7 +191,7 @@
 .matrix-core {
   display: block;
   position: relative; /* contains the ::before specular layer */
-  font-size: clamp(2.4rem, 9.5vw, 7rem);
+  font-size: clamp(3.5rem, 9.5vw, 7rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1;
