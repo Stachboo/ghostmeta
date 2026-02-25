@@ -224,9 +224,16 @@
 
       <!-- ID = "global-loader" pour que HideLoader dans App.tsx puisse le cibler -->
       <div class="initial-loader" id="global-loader">
-        <div class="loader-text">INITIALISATION DU SYSTÈME...</div>
-        <div class="loader-bar-container">
-          <div class="loader-bar"></div>
+        <img
+          src="/icon-512.png"
+          alt=""
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"
+        />
+        <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;">
+          <div class="loader-text">INITIALISATION DU SYSTÈME...</div>
+          <div class="loader-bar-container">
+            <div class="loader-bar"></div>
+          </div>
         </div>
       </div>
 
