@@ -189,7 +189,7 @@
       blended with mix-blend-mode: overlay → top-surface light hit.
    ---------------------------------------------------------------- */
 .matrix-core {
-  display: block;
+  display: inline-block;
   position: relative; /* contains the ::before specular layer */
   font-size: clamp(2.8rem, 9.5vw, 7rem);
   font-weight: 800;
