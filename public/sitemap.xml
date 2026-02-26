@@ -12,6 +12,16 @@
   </url>
 
   <url>
+    <loc>https://www.ghostmeta.online/pricing</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/pricing"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/pricing?lng=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ghostmeta.online/pricing"/>
+  </url>
+
+  <url>
     <loc>https://www.ghostmeta.online/blog/vinted-securite-photo-guide</loc>
     <lastmod>2026-02-17</lastmod>
     <changefreq>weekly</changefreq>
