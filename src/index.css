@@ -226,23 +226,23 @@
    * Glow corona → energy leaking from the hot face.
    */
   text-shadow:
-    0  1px 0 rgba(18,  72,  0, 0.97),
-    0  2px 0 rgba(15,  60,  0, 0.94),
-    0  3px 0 rgba(12,  49,  0, 0.91),
-    0  4px 0 rgba( 9,  39,  0, 0.88),
-    0  5px 0 rgba( 7,  31,  0, 0.85),
-    0  6px 0 rgba( 5,  23,  0, 0.82),
-    0  7px 0 rgba( 3,  16,  0, 0.79),
-    0  8px 0 rgba( 2,  10,  0, 0.76),
-    0  9px  5px rgba(0,   0,  0, 0.74),
-    0 12px 12px rgba(0,   0,  0, 0.52),
-    0 15px 30px rgba(57, 255, 20, 0.62),
-    0  0   40px rgba(57, 255, 20, 0.18);
+    0 0.009em 0       rgba(18,  72,  0, 0.97),
+    0 0.018em 0       rgba(15,  60,  0, 0.94),
+    0 0.027em 0       rgba(12,  49,  0, 0.91),
+    0 0.036em 0       rgba( 9,  39,  0, 0.88),
+    0 0.045em 0       rgba( 7,  31,  0, 0.85),
+    0 0.054em 0       rgba( 5,  23,  0, 0.82),
+    0 0.063em 0       rgba( 3,  16,  0, 0.79),
+    0 0.071em 0       rgba( 2,  10,  0, 0.76),
+    0 0.080em 0.045em rgba(0,    0,  0, 0.74),
+    0 0.107em 0.107em rgba(0,    0,  0, 0.52),
+    0 0.134em 0.268em rgba(57, 255, 20, 0.62),
+    0 0       0.357em rgba(57, 255, 20, 0.18);
 
   /* Breathing glow — CSS drop-shadow only */
   filter:
-    drop-shadow(0  0  12px rgba(57, 255, 20, 0.38))
-    drop-shadow(0  4px 24px rgba(57, 255, 20, 0.14));
+    drop-shadow(0 0       0.107em rgba(57, 255, 20, 0.38))
+    drop-shadow(0 0.036em 0.214em rgba(57, 255, 20, 0.14));
 
   animation: core-breathe 3.8s ease-in-out infinite;
   will-change: filter;
@@ -299,13 +299,13 @@
 @keyframes core-breathe {
   0%, 100% {
     filter:
-      drop-shadow(0  0  12px rgba( 57, 255, 20, 0.38))
-      drop-shadow(0  4px 24px rgba( 57, 255, 20, 0.14));
+      drop-shadow(0 0       0.107em rgba( 57, 255, 20, 0.38))
+      drop-shadow(0 0.036em 0.214em rgba( 57, 255, 20, 0.14));
   }
   50% {
     filter:
-      drop-shadow(0  0  20px rgba(100, 255, 50, 0.58))
-      drop-shadow(0  6px 44px rgba( 57, 255, 20, 0.28));
+      drop-shadow(0 0       0.179em rgba(100, 255, 50, 0.58))
+      drop-shadow(0 0.054em 0.393em rgba( 57, 255, 20, 0.28));
   }
 }
 
