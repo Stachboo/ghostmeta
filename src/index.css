@@ -296,6 +296,15 @@
   filter: none;
 }
 
+/* ── MOBILE: disable chroma-drift (text-shadow animation = CPU paint = jank)
+   holo-flicker conservé (opacity = GPU composited = fluide)
+   ---------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .matrix-outer {
+    animation: holo-flicker 5.5s steps(1, end) infinite;
+  }
+}
+
 @keyframes core-breathe {
   0%, 100% {
     filter:
