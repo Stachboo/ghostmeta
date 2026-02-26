@@ -196,6 +196,10 @@
   letter-spacing: -0.02em;
   line-height: 1;
 
+  /* Reduce font rendering thickness gap between Chrome and Firefox */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   /* Edge bevel catch — chartreuse outline snags the light source */
   -webkit-text-stroke: max(0.009em, 0.5px) #c8ff00;
 
