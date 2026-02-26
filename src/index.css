@@ -196,8 +196,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* Contour fantôme cyan — visible avant le passage du laser */
-  -webkit-text-stroke: max(0.009em, 0.5px) rgba(0, 229, 255, 0.2);
+  /* Lueur fantôme cyan — glow externe, pas de stroke interne = pas de croisements */
+  text-shadow:
+    0 0 1px  rgba(0, 229, 255, 0.55),
+    0 0 6px  rgba(0, 229, 255, 0.20);
 
   /* Faisceau de révélation — gradient vert centré qui sweep */
   background: linear-gradient(90deg,
