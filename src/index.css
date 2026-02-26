@@ -197,7 +197,7 @@
   line-height: 1;
 
   /* Edge bevel catch — chartreuse outline snags the light source */
-  -webkit-text-stroke: 1px #c8ff00;
+  -webkit-text-stroke: max(0.009em, 0.5px) #c8ff00;
 
   /*
    * Multi-layer background clipped to text:
