@@ -30,9 +30,10 @@ self.addEventListener('activate', (event) => {
 
 // Network First — fallback cache si offline
 self.addEventListener('fetch', (event) => {
-  // Ignorer les requêtes non-GET et les extensions Chrome
+  // Ignorer les requêtes non-GET, les extensions Chrome, et les API routes
   if (event.request.method !== 'GET') return;
   if (event.request.url.startsWith('chrome-extension://')) return;
+  if (new URL(event.request.url).pathname.startsWith('/api/')) return;
 
   event.respondWith(
     fetch(event.request)
