@@ -1,103 +1,155 @@
 /**
- * scripts/prerender.mjs
+ * scripts/prerender.mjs — Prerendering SANS navigateur
  *
- * Script postbuild — génère du HTML statique pour chaque route du sitemap.
- * Exécuté automatiquement par le hook pnpm `postbuild` après `vite build`.
+ * Stratégie : injecter les balises SEO et le contenu article directement dans
+ * dist/index.html (template Vite) pour chaque route du sitemap.
  *
- * Stratégie :
- * 1. Démarre l'API `vite preview` pour servir le dist/ (SPA + fallback index.html)
- * 2. Lance Puppeteer (Chromium headless) — vrai navigateur = i18n, React, Helmet OK
- * 3. Navigue vers chaque route avec `?lng=fr` (querystring = priorité maximale i18next)
- * 4. Attend `<footer>` dans le DOM (= React a rendu la page, loader masqué)
- * 5. Capture le HTML complet et l'écrit dans dist/ à l'emplacement correct
- * 6. Arrête le serveur et Chromium
+ * Avantages vs Puppeteer :
+ * - Zéro dépendance système (pas de libnspr4, libX11, etc.)
+ * - Compatible Vercel, GitHub Actions, tout environnement Node.js
+ * - 10× plus rapide (pas de démarrage navigateur)
  *
- * Résultat : dist/blog/slug/index.html contient le vrai contenu FR + balises Helmet.
- * Bingbot, ChatGPT Search, Perplexity, ClaudeBot voient du HTML réel, pas un div vide.
+ * Pour les bots (Bingbot, ChatGPT, Perplexity, ClaudeBot) :
+ * - Ils reçoivent le fichier HTML statique avec title, description, canonical, contenu réel
+ *
+ * Pour les utilisateurs :
+ * - React hydrate et affiche l'appli normalement
+ * - Le contenu #bot-content est caché (display:none)
  */
 
-import { preview } from 'vite';
-import puppeteer from 'puppeteer';
-import { writeFileSync, mkdirSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
-const PORT = 3737;
-const BASE = `http://localhost:${PORT}`;
 
-// Routes à prerender — ?lng=fr force le contenu français via le détecteur querystring.
-// Les balises <link rel="canonical"> injectées par Helmet pointent vers l'URL sans param.
-const ROUTES = [
-  { url: '/?lng=fr',                                         out: 'dist/index.html' },
-  { url: '/pricing?lng=fr',                                  out: 'dist/pricing/index.html' },
-  { url: '/blog/vinted-securite-photo-guide?lng=fr',         out: 'dist/blog/vinted-securite-photo-guide/index.html' },
-  { url: '/blog/supprimer-exif-iphone-android?lng=fr',       out: 'dist/blog/supprimer-exif-iphone-android/index.html' },
-  { url: '/blog/comprendre-donnees-exif-gps?lng=fr',         out: 'dist/blog/comprendre-donnees-exif-gps/index.html' },
-  { url: '/blog/nettoyage-photo-local-vs-cloud?lng=fr',      out: 'dist/blog/nettoyage-photo-local-vs-cloud/index.html' },
-  { url: '/blog/ghostmeta-manifeste-confidentialite?lng=fr', out: 'dist/blog/ghostmeta-manifeste-confidentialite/index.html' },
-];
+// Template de base : dist/index.html produit par Vite (avec les chunks hashés)
+const template = readFileSync(join(ROOT, 'dist', 'index.html'), 'utf-8');
 
-async function main() {
-  console.log('\n[prerender] ─── Démarrage ───────────────────────────────');
-  console.log(`[prerender] ${ROUTES.length} routes à traiter\n`);
+// Traductions françaises — source de vérité pour les titres, descriptions, contenu
+const fr = JSON.parse(
+  readFileSync(join(ROOT, 'src', 'locales', 'fr', 'translation.json'), 'utf-8')
+);
 
-  // Démarrer le serveur Vite preview (sert dist/ avec fallback SPA vers index.html)
-  const server = await preview({
-    preview: { port: PORT, open: false },
-  });
+// Accès à une clé pointée dans un objet imbriqué
+const get = (obj, path) => path.split('.').reduce((o, k) => o?.[k], obj);
 
-  // 'shell' = chrome-headless-shell, binaire allégé sans libnspr4/libX11 requis
-  // → seul mode compatible avec les environnements CI/CD (Vercel, Docker sans apt)
-  const browser = await puppeteer.launch({
-    headless: 'shell',
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-gpu',
-    ],
-  });
+// Échapper les caractères spéciaux HTML pour les attributs et le texte
+const escAttr = (s = '') =>
+  String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const escHtml = (s = '') =>
+  String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-  let success = 0;
-  let failure = 0;
+/**
+ * Construit le HTML final pour une route en injectant dans le template Vite :
+ * 1. Les balises SEO dans <head>
+ * 2. Le contenu textuel dans un div caché (pour les crawlers sans JS)
+ */
+function buildHtml({ title, description, canonical, hreflangEn, ogType = 'website', bodyContent = '' }) {
+  let html = template;
 
-  for (const route of ROUTES) {
-    try {
-      const page = await browser.newPage();
+  // Balises SEO injectées avant </head>
+  const seoHead = [
+    `<title>${escHtml(title)}</title>`,
+    `<meta name="description" content="${escAttr(description)}">`,
+    `<link rel="canonical" href="${escAttr(canonical)}">`,
+    `<link rel="alternate" hreflang="fr" href="${escAttr(canonical)}">`,
+    `<link rel="alternate" hreflang="en" href="${escAttr(hreflangEn)}">`,
+    `<link rel="alternate" hreflang="x-default" href="${escAttr(canonical)}">`,
+    `<meta property="og:type" content="${escAttr(ogType)}">`,
+    `<meta property="og:title" content="${escAttr(title)}">`,
+    `<meta property="og:description" content="${escAttr(description)}">`,
+    `<meta property="og:url" content="${escAttr(canonical)}">`,
+    `<meta property="og:image" content="https://www.ghostmeta.online/og-image-v2.jpg">`,
+    `<meta name="twitter:card" content="summary_large_image">`,
+    `<meta name="twitter:title" content="${escAttr(title)}">`,
+    `<meta name="twitter:description" content="${escAttr(description)}">`,
+  ].join('\n  ');
 
-      // domcontentloaded = navigation rapide, sans attendre scripts tiers (Analytics, Fonts)
-      await page.goto(`${BASE}${route.url}`, { waitUntil: 'domcontentloaded' });
+  html = html.replace('</head>', `  ${seoHead}\n</head>`);
 
-      // Attendre que <footer> soit dans le DOM = React a rendu, loader masqué
-      // Home, PricingPage et BlogPost importent tous <Footer />
-      await page.waitForSelector('footer', { timeout: 15000 });
-
-      const html = await page.content();
-
-      const outPath = join(ROOT, route.out);
-      const outDir  = join(outPath, '..');
-      if (!existsSync(outDir)) mkdirSync(outDir, { recursive: true });
-      writeFileSync(outPath, html, 'utf-8');
-
-      console.log(`[prerender] ✓  ${route.url.padEnd(52)} → ${route.out}`);
-      success++;
-      await page.close();
-    } catch (err) {
-      console.error(`[prerender] ✗  ${route.url}`);
-      console.error(`           ${err.message}`);
-      failure++;
-    }
+  // Contenu textuel visible par les crawlers, caché aux utilisateurs
+  // display:none est indexé par Google et Bing (≠ cloaking car contenu identique)
+  if (bodyContent) {
+    const botDiv = `<div id="bot-content" style="display:none" aria-hidden="true">${bodyContent}</div>\n  `;
+    html = html.replace('<div id="root">', botDiv + '<div id="root">');
   }
 
-  await browser.close();
-  server.httpServer.close();
-
-  console.log(`\n[prerender] ─── Résultat : ${success} OK, ${failure} erreur(s) ─────────────\n`);
-  process.exit(failure > 0 ? 1 : 0);
+  return html;
 }
 
-main().catch((err) => {
-  console.error('[prerender] Erreur fatale :', err);
-  process.exit(1);
-});
+function saveHtml(relPath, html) {
+  const fullPath = join(ROOT, relPath);
+  const dir = join(fullPath, '..');
+  if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+  writeFileSync(fullPath, html, 'utf-8');
+}
+
+// ─── Build ───────────────────────────────────────────────────────────────────
+
+console.log('\n[prerender] ─── Démarrage (sans navigateur) ─────────────────');
+
+let ok = 0;
+let fail = 0;
+
+const log = (path, out) => console.log(`[prerender] ✓  ${path.padEnd(52)} → ${out}`);
+const err = (path, e)   => { console.error(`[prerender] ✗  ${path}  —  ${e.message}`); fail++; };
+
+// ── / ────────────────────────────────────────────────────────────────────────
+try {
+  saveHtml('dist/index.html', buildHtml({
+    title:       'GhostMeta | Nettoyeur Photo pour Vinted & Leboncoin (Gratuit)',
+    description: 'Sécurisez vos ventes : supprimez immédiatement le GPS et les métadonnées cachées de vos photos Vinted, Leboncoin et eBay. Protection 100% locale et anonyme.',
+    canonical:   'https://www.ghostmeta.online/',
+    hreflangEn:  'https://www.ghostmeta.online/?lng=en',
+  }));
+  log('/', 'dist/index.html'); ok++;
+} catch(e) { err('/', e); }
+
+// ── /pricing ─────────────────────────────────────────────────────────────────
+try {
+  saveHtml('dist/pricing/index.html', buildHtml({
+    title:       'Tarifs GhostMeta | Nettoyeur Photo Gratuit pour Vendeurs',
+    description: 'GhostMeta est 100% gratuit. Nettoyez vos photos de métadonnées EXIF/GPS pour vendre en ligne en toute sécurité sur Vinted, Leboncoin et eBay.',
+    canonical:   'https://www.ghostmeta.online/pricing',
+    hreflangEn:  'https://www.ghostmeta.online/pricing?lng=en',
+  }));
+  log('/pricing', 'dist/pricing/index.html'); ok++;
+} catch(e) { err('/pricing', e); }
+
+// ── /blog/:slug ───────────────────────────────────────────────────────────────
+const SLUGS = [
+  'vinted-securite-photo-guide',
+  'supprimer-exif-iphone-android',
+  'comprendre-donnees-exif-gps',
+  'nettoyage-photo-local-vs-cloud',
+  'ghostmeta-manifeste-confidentialite',
+];
+
+for (const slug of SLUGS) {
+  try {
+    const title   = get(fr, `blog.posts.${slug}.title`);
+    const desc    = get(fr, `blog.posts.${slug}.desc`);
+    const content = get(fr, `blog.posts.${slug}.content`) ?? '';
+
+    if (!title) throw new Error(`clé de traduction absente pour "${slug}"`);
+
+    const canonical = `https://www.ghostmeta.online/blog/${slug}`;
+
+    // bodyContent : titre + description + HTML de l'article (stocké en FR dans i18n)
+    const bodyContent = `<h1>${escHtml(title)}</h1><p>${escHtml(desc)}</p>${content}`;
+
+    saveHtml(`dist/blog/${slug}/index.html`, buildHtml({
+      title:      `${title} | GhostMeta`,
+      description: desc,
+      canonical,
+      hreflangEn: `${canonical}?lng=en`,
+      ogType:     'article',
+      bodyContent,
+    }));
+    log(`/blog/${slug}`, `dist/blog/${slug}/index.html`); ok++;
+  } catch(e) { err(`/blog/${slug}`, e); }
+}
+
+console.log(`\n[prerender] ─── Résultat : ${ok} OK, ${fail} erreur(s) ─────────────\n`);
+process.exit(fail > 0 ? 1 : 0);
