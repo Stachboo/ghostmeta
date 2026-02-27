@@ -50,6 +50,21 @@ The hook `src/hooks/useImageProcessor.ts` wraps this pipeline with React state.
 ### Path alias
 `@/*` resolves to `./src/*` (configured in `tsconfig.json` and `vite.config.ts`).
 
+### SEO & Prerendering
+- **react-helmet-async** manages `<head>` tags per page (title, OG, Twitter, hreflang)
+- **Prerender script** (`scripts/prerender.mjs`): Node.js postbuild, generates 7 static HTML files (home, pricing, 5 blog articles)
+- **bot-content**: pre-rendered article content injected as visible `<div id="bot-content">` before `<div id="root">`. React removes it on mount via `useEffect` in `BlogPost.tsx` — crawlers see real content, users see React.
+- **sitemap.xml**: 7 URLs with `hreflang` fr + en + x-default
+- **robots.txt**: explicitly allows all major crawlers (Googlebot, Bingbot, GPTBot, CCBot, ClaudeBot, anthropic-ai, PerplexityBot, Applebot, Bytespider, YandexBot)
+- **llms.txt**: Markdown file for AI crawlers (llmstxt.org format) at `/llms.txt`
+- **JSON-LD**: `BlogPosting` schema on each blog article (in prerender + BlogPost.tsx)
+
+### IndexNow (`api/indexnow.js`)
+- Vercel serverless function that submits all 7 sitemap URLs to the IndexNow API (Bing, Yandex)
+- Key file: `public/ffb631a305804310a69bb3a7eaf4e97d.txt`
+- Protected by `INDEXNOW_SECRET` env var (pass as `Authorization: Bearer` header or `?secret=` query param)
+- Call after deploy: `curl -X POST https://www.ghostmeta.online/api/indexnow?secret=YOUR_SECRET`
+
 ### Code style
 - Prettier: double quotes, 80 chars, semicolons, no arrow parens
 - Strict TypeScript (`strict: true`, incremental builds)
