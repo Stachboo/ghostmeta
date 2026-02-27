@@ -21,14 +21,21 @@ const URLS = [
 ];
 
 export default async function handler(req, res) {
-  // Protection par secret — empêche les appels non autorisés
+  // POST uniquement — bloque GET, PUT, DELETE, etc.
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  // Auth obligatoire — fail closed si INDEXNOW_SECRET non configuré
   const secret = process.env.INDEXNOW_SECRET;
-  if (secret) {
-    const auth = req.headers.authorization?.replace("Bearer ", "");
-    const query = req.query?.secret;
-    if (auth !== secret && query !== secret) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
+  if (!secret) {
+    return res.status(503).json({ error: "Service not configured" });
+  }
+
+  const auth = req.headers.authorization?.replace("Bearer ", "");
+  const query = req.query?.secret;
+  if (auth !== secret && query !== secret) {
+    return res.status(401).json({ error: "Unauthorized" });
   }
 
   try {
@@ -56,10 +63,10 @@ export default async function handler(req, res) {
       urls_submitted: URLS.length,
       urls: URLS,
     });
-  } catch (err) {
+  } catch {
     return res.status(500).json({
       success: false,
-      error: err.message,
+      error: "Internal server error",
     });
   }
 }
