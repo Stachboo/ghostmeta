@@ -28,6 +28,7 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/blog/vinted-securite-photo-guide"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/blog/vinted-securite-photo-guide?lng=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ghostmeta.online/blog/vinted-securite-photo-guide"/>
   </url>
 
   <url>
@@ -37,6 +38,7 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/blog/supprimer-exif-iphone-android"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/blog/supprimer-exif-iphone-android?lng=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ghostmeta.online/blog/supprimer-exif-iphone-android"/>
   </url>
 
   <url>
@@ -46,6 +48,7 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/blog/comprendre-donnees-exif-gps"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/blog/comprendre-donnees-exif-gps?lng=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ghostmeta.online/blog/comprendre-donnees-exif-gps"/>
   </url>
 
   <url>
@@ -55,6 +58,7 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/blog/nettoyage-photo-local-vs-cloud"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/blog/nettoyage-photo-local-vs-cloud?lng=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ghostmeta.online/blog/nettoyage-photo-local-vs-cloud"/>
   </url>
 
   <url>
@@ -64,6 +68,7 @@
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/blog/ghostmeta-manifeste-confidentialite"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/blog/ghostmeta-manifeste-confidentialite?lng=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ghostmeta.online/blog/ghostmeta-manifeste-confidentialite"/>
   </url>
 
 </urlset>
