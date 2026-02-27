@@ -47,10 +47,16 @@ async function main() {
     preview: { port: PORT, open: false },
   });
 
-  // Lancer Chromium headless — --no-sandbox requis en CI/CD (Vercel, Docker)
+  // 'shell' = chrome-headless-shell, binaire allégé sans libnspr4/libX11 requis
+  // → seul mode compatible avec les environnements CI/CD (Vercel, Docker sans apt)
   const browser = await puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    headless: 'shell',
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+    ],
   });
 
   let success = 0;
