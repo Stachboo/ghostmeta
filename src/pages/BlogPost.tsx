@@ -93,6 +93,38 @@ export default function BlogPost() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={postTitle} />
         <meta name="twitter:description" content={postDesc} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: postTitle,
+            description: postDesc,
+            author: {
+              "@type": "Organization",
+              name: "GhostMeta Labs",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "GhostMeta Labs",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://www.ghostmeta.online/icon-192.png",
+              },
+            },
+            datePublished: "2026-02-20",
+            dateModified: "2026-02-20",
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": canonicalUrl,
+            },
+            image: {
+              "@type": "ImageObject",
+              url: "https://www.ghostmeta.online/og-image-v2.jpg",
+              width: 1200,
+              height: 630,
+            },
+          })}
+        </script>
       </Helmet>
       <header className="border-b border-white/10 bg-black/50 backdrop-blur-md sticky top-0 z-50">
         <div className="container h-16 flex items-center justify-between px-4">
