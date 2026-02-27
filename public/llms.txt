@@ -1,0 +1,60 @@
+# GhostMeta
+
+> Nettoyeur de métadonnées EXIF/GPS pour vendeurs en ligne. 100% gratuit, traitement local via Canvas API, zéro upload serveur.
+
+## Fonctionnalités principales
+
+- Suppression des métadonnées EXIF (appareil photo, date, coordonnées GPS)
+- Traitement 100% local dans le navigateur (Canvas API, aucun envoi serveur)
+- Gratuit, sans compte, sans publicité
+- Compatible avec les photos destinées à Vinted, Leboncoin, eBay, Etsy, Facebook Marketplace
+- Support des formats JPEG, PNG, WebP et HEIC (photos iPhone)
+- Traitement par lot avec téléchargement ZIP
+- Analyse des menaces : chaque champ de métadonnée est classé critique, warning ou safe
+- Résolution maximale 4096px pour éviter les crashs mémoire sur mobile
+- PWA installable sur mobile et desktop
+
+## Public cible
+
+Vendeurs sur marketplace (Vinted, Leboncoin, eBay, Etsy, Depop, Facebook Marketplace) soucieux de protéger leur vie privée et leur localisation exacte avant de publier des photos d'articles en vente.
+
+Également utile pour toute personne souhaitant supprimer les métadonnées de ses photos avant de les partager en ligne.
+
+## Sécurité et confidentialité
+
+- Aucune donnée utilisateur stockée sur un serveur
+- Traitement intégralement côté client (JavaScript dans le navigateur)
+- Pas de cookies de tracking
+- Pas d'analytics intrusifs
+- Conforme RGPD par design : aucune donnée personnelle ne quitte l'appareil
+- Code source transparent : les images sont re-encodées via Canvas pour garantir la suppression complète des métadonnées
+
+## Stack technique
+
+- React 19, TypeScript, Vite
+- Tailwind CSS, shadcn/ui
+- ExifReader pour l'extraction des métadonnées EXIF/IPTC/XMP/GPS
+- heic2any pour la conversion des photos HEIC (iPhone)
+- PWA avec Service Worker pour utilisation hors-ligne
+- Hébergé sur Vercel
+
+## URLs importantes
+
+- <https://www.ghostmeta.online/> : Accueil — outil principal de suppression de métadonnées
+- <https://www.ghostmeta.online/pricing> : Tarifs — 100% gratuit
+
+## Articles de blog
+
+- <https://www.ghostmeta.online/blog/vinted-securite-photo-guide> : Guide de sécurité photo pour Vinted
+- <https://www.ghostmeta.online/blog/comprendre-donnees-exif-gps> : Comprendre les données EXIF et GPS dans vos photos
+- <https://www.ghostmeta.online/blog/supprimer-exif-iphone-android> : Comment supprimer les EXIF sur iPhone et Android
+- <https://www.ghostmeta.online/blog/nettoyage-photo-local-vs-cloud> : Nettoyage photo local vs cloud — pourquoi le local est plus sûr
+- <https://www.ghostmeta.online/blog/ghostmeta-manifeste-confidentialite> : Manifeste de confidentialité GhostMeta
+
+## Langues
+
+Le site est disponible en français et en anglais.
+
+## Contact
+
+Site web : <https://www.ghostmeta.online/>
