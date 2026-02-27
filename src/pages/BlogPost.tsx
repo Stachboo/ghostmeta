@@ -1,5 +1,6 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, Calendar, Shield } from 'lucide-react';
 import Footer from '@/components/Footer';
@@ -71,8 +72,28 @@ export default function BlogPost() {
     KEEP_CONTENT: true,
   });
 
+  const postTitle = t(titleKey);
+  const postDesc = t(`blog.posts.${slug}.desc`);
+  const canonicalUrl = `https://www.ghostmeta.online/blog/${slug}`;
+
   return (
     <div className="min-h-screen bg-[#0a0a0c] text-foreground font-sans">
+      <Helmet>
+        <title>{postTitle} | GhostMeta</title>
+        <meta name="description" content={postDesc} />
+        <link rel="canonical" href={canonicalUrl} />
+        <link rel="alternate" hreflang="fr" href={canonicalUrl} />
+        <link rel="alternate" hreflang="en" href={`${canonicalUrl}?lng=en`} />
+        <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={postTitle} />
+        <meta property="og:description" content={postDesc} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content="https://www.ghostmeta.online/og-image-v2.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={postTitle} />
+        <meta name="twitter:description" content={postDesc} />
+      </Helmet>
       <header className="border-b border-white/10 bg-black/50 backdrop-blur-md sticky top-0 z-50">
         <div className="container h-16 flex items-center justify-between px-4">
           <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
@@ -102,10 +123,10 @@ export default function BlogPost() {
               <span className="flex items-center gap-1 text-amber-500"><Shield className="w-3 h-3" /> Encrypted Content</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
-              {t(titleKey)}
+              {postTitle}
             </h1>
             <p className="text-xl text-muted-foreground italic border-l-4 border-[#00ff41] pl-4">
-              {t(`blog.posts.${slug}.desc`)}
+              {postDesc}
             </p>
           </div>
 
