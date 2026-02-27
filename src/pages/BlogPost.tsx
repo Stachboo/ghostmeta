@@ -69,8 +69,8 @@ export default function BlogPost() {
       'abbr', 'address', 'bdi', 'bdo', 'dfn', 'time', 'wbr'
     ],
     ALLOWED_ATTR: [
-      'href', 'target', 'rel', 'title', 'alt', 'src', 'width', 'height', 
-      'class', 'id', 'style', 'align', 'valign', 'colspan', 'rowspan',
+      'href', 'target', 'rel', 'title', 'alt', 'src', 'width', 'height',
+      'class', 'id', 'align', 'valign', 'colspan', 'rowspan',
       'datetime', 'cite', 'download', 'loading', 'decoding'
     ],
     ALLOW_DATA_ATTR: false,
