@@ -14,7 +14,7 @@
  *
  * Pour les utilisateurs :
  * - React hydrate et affiche l'appli normalement
- * - Le contenu #bot-content est caché (display:none)
+ * - Le composant BlogPost.tsx supprime #bot-content au mount (pas de doublon)
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
@@ -45,7 +45,7 @@ const escHtml = (s = '') =>
  * 1. Les balises SEO dans <head>
  * 2. Le contenu textuel dans un div caché (pour les crawlers sans JS)
  */
-function buildHtml({ title, description, canonical, hreflangEn, ogType = 'website', bodyContent = '' }) {
+function buildHtml({ title, description, canonical, hreflangEn, ogType = 'website', bodyContent = '', jsonLd = null }) {
   let html = template;
 
   // Balises SEO injectées avant </head>
@@ -66,12 +66,16 @@ function buildHtml({ title, description, canonical, hreflangEn, ogType = 'websit
     `<meta name="twitter:description" content="${escAttr(description)}">`,
   ].join('\n  ');
 
-  html = html.replace('</head>', `  ${seoHead}\n</head>`);
+  const jsonLdTag = jsonLd
+    ? `\n  <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`
+    : '';
 
-  // Contenu textuel visible par les crawlers, caché aux utilisateurs
-  // display:none est indexé par Google et Bing (≠ cloaking car contenu identique)
+  html = html.replace('</head>', `  ${seoHead}${jsonLdTag}\n</head>`);
+
+  // Contenu visible par défaut pour les crawlers (Bingbot ne rend pas le JS)
+  // React supprime ce div au mount → pas de doublon pour les utilisateurs
   if (bodyContent) {
-    const botDiv = `<div id="bot-content" style="display:none" aria-hidden="true">${bodyContent}</div>\n  `;
+    const botDiv = `<div id="bot-content">${bodyContent}</div>\n  `;
     html = html.replace('<div id="root">', botDiv + '<div id="root">');
   }
 
@@ -146,6 +150,22 @@ for (const slug of SLUGS) {
       hreflangEn: `${canonical}?lng=en`,
       ogType:     'article',
       bodyContent,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: title,
+        description: desc,
+        author: { '@type': 'Organization', name: 'GhostMeta Labs' },
+        publisher: {
+          '@type': 'Organization',
+          name: 'GhostMeta Labs',
+          logo: { '@type': 'ImageObject', url: 'https://www.ghostmeta.online/icon-192.png' },
+        },
+        datePublished: '2026-02-20',
+        dateModified: '2026-02-20',
+        mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+        image: { '@type': 'ImageObject', url: 'https://www.ghostmeta.online/og-image-v2.jpg', width: 1200, height: 630 },
+      },
     }));
     log(`/blog/${slug}`, `dist/blog/${slug}/index.html`); ok++;
   } catch(e) { err(`/blog/${slug}`, e); }
