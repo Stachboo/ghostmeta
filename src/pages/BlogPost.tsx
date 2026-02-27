@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
@@ -11,6 +12,11 @@ export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+
+  // Supprimer le contenu pre-rendu quand React prend le relais
+  useEffect(() => {
+    document.getElementById('bot-content')?.remove();
+  }, []);
 
   // Vérification robuste de l'existence de l'article
   const titleKey = `blog.posts.${slug}.title`;
