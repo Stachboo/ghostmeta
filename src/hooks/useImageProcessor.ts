@@ -58,8 +58,9 @@ export function useImageProcessor() {
     }
 
     // Marquer has_viewed_metadata=true via la fonction SECURITY DEFINER (bypass RLS)
+    // La fonction SQL doit utiliser auth.uid() en interne — on ne passe plus user_id
     if (user && !profile?.is_premium && !profile?.has_viewed_metadata) {
-      await supabase.rpc('lock_metadata_view', { user_id: user.id });
+      await supabase.rpc('lock_metadata_view');
       await refreshProfile();
     }
 
