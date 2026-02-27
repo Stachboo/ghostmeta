@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
+import { useDropzone, FileRejection } from 'react-dropzone';
 import { motion } from 'framer-motion';
 import { Upload, Image as ImageIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
 
 interface DropZoneProps {
   onFilesAdded: (files: File[]) => void;
@@ -22,8 +23,17 @@ export default function DropZone({ onFilesAdded, hasImages, isProcessing }: Drop
     [onFilesAdded]
   );
 
+  const onDropRejected = useCallback((rejections: FileRejection[]) => {
+    for (const r of rejections) {
+      if (r.errors.some(e => e.code === 'file-too-large')) {
+        toast.error(`${r.file.name} : fichier trop volumineux (max 50 MB)`);
+      }
+    }
+  }, []);
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
+    onDropRejected,
     accept: {
       'image/jpeg': [],
       'image/png': [],
@@ -31,6 +41,7 @@ export default function DropZone({ onFilesAdded, hasImages, isProcessing }: Drop
       'image/heic': [],
       'image/heif': [],
     },
+    maxSize: 50 * 1024 * 1024,
     disabled: isProcessing,
   });
 
