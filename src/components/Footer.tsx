@@ -5,13 +5,14 @@
  */
 
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import GhostLogo from './GhostLogo';
 import { useTranslation } from 'react-i18next';
 
 
 export default function Footer() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [showLegal, setShowLegal] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
 
@@ -39,6 +40,12 @@ export default function Footer() {
               </span>
             </div>
             <div className="flex items-center gap-6 text-xs text-muted-foreground">
+              <Link
+                to={i18n.language === 'fr' ? '/fr/securite' : '/en/security'}
+                className="hover:text-[#00ff41] transition-colors"
+              >
+                {t('security.footer_link')}
+              </Link>
               <button
                 onClick={() => setShowPrivacy(true)}
                 className="hover:text-[#00ff41] transition-colors"

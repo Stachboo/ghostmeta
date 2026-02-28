@@ -9,6 +9,7 @@ import ConsentBanner from './components/ConsentBanner';
 const Home = lazy(() => import('./pages/Home'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const PricingPage = lazy(() => import('./pages/PricingPage'));
+const SecurityPage = lazy(() => import('./pages/SecurityPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 /**
@@ -97,7 +98,11 @@ function App() {
             {/* 2. Pricing Page */}
             <Route path="/pricing" element={<PricingPage />} />
 
-            {/* 3. Le Blog (Route dynamique) */}
+            {/* 3. Securite / Security */}
+            <Route path="/fr/securite" element={<SecurityPage />} />
+            <Route path="/en/security" element={<SecurityPage />} />
+
+            {/* 4. Le Blog (Route dynamique) */}
             <Route path="/blog/:slug" element={<BlogPost />} />
 
             {/* 4. Page 404 */}

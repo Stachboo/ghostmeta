@@ -22,6 +22,26 @@
   </url>
 
   <url>
+    <loc>https://www.ghostmeta.online/fr/securite</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/fr/securite"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/en/security"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ghostmeta.online/en/security"/>
+  </url>
+
+  <url>
+    <loc>https://www.ghostmeta.online/en/security</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/en/security"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/fr/securite"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ghostmeta.online/en/security"/>
+  </url>
+
+  <url>
     <loc>https://www.ghostmeta.online/blog/vinted-securite-photo-guide</loc>
     <lastmod>2026-02-17</lastmod>
     <changefreq>weekly</changefreq>
