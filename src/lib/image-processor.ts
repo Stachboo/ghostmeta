@@ -10,9 +10,25 @@
  */
 
 import ExifReader from 'exifreader';
+import DOMPurify from 'dompurify';
 
 // SEUIL DE SÉCURITÉ : Toute image > 4096px sera redimensionnée pour éviter le crash mémoire
 const MAX_DIMENSION = 4096;
+
+/**
+ * SEC-008 : Sanitize les valeurs EXIF avant affichage pour prévenir le XSS.
+ * Defense-in-depth — React échappe déjà le HTML via JSX, mais on sanitize
+ * à la source pour couvrir tout usage futur (innerHTML, attributs, etc.).
+ * ALLOWED_TAGS: [] → supprime TOUT le HTML, ne conserve que le texte brut.
+ */
+function sanitizeExifValue(value: unknown): string {
+  if (value == null) return '';
+  const str = typeof value === 'string' ? value : String(value);
+  // Strip ALL HTML — les valeurs EXIF sont du texte brut, jamais du HTML
+  const clean = DOMPurify.sanitize(str, { ALLOWED_TAGS: [] });
+  // Limite la longueur pour éviter les DoS via des champs EXIF anormalement longs
+  return clean.slice(0, 500);
+}
 
 export interface MetadataInfo {
   gps?: { latitude: number; longitude: number; altitude?: number; };
@@ -99,9 +115,11 @@ export async function extractMetadata(file: File): Promise<MetadataInfo> {
 
     const dateTag = tags.exif?.DateTimeOriginal || tags.exif?.DateTime || tags.exif?.DateTimeDigitized;
     if (dateTag) {
-      const dateStr = typeof dateTag === 'object' && 'description' in dateTag
+      const rawDate = typeof dateTag === 'object' && 'description' in dateTag
         ? (dateTag as { description: string }).description
         : String(dateTag);
+      // SEC-008 : sanitize la valeur EXIF avant stockage/affichage
+      const dateStr = sanitizeExifValue(rawDate);
       metadata.dateTime = dateStr;
       threats.push({ type: 'datetime', severity: 'warning', label: 'Date de prise de vue', value: dateStr });
     }
@@ -111,9 +129,10 @@ export async function extractMetadata(file: File): Promise<MetadataInfo> {
     const software = tags.exif?.Software;
 
     if (make || model || software) {
-      const makeStr = make ? String(make['description'] || make) : undefined;
-      const modelStr = model ? String(model['description'] || model) : undefined;
-      const softStr = software ? String(software['description'] || software) : undefined;
+      // SEC-008 : sanitize chaque valeur EXIF (make, model, software)
+      const makeStr = make ? sanitizeExifValue(make['description'] || make) : undefined;
+      const modelStr = model ? sanitizeExifValue(model['description'] || model) : undefined;
+      const softStr = software ? sanitizeExifValue(software['description'] || software) : undefined;
 
       metadata.camera = { make: makeStr, model: modelStr, software: softStr };
       if (makeStr || modelStr) {
