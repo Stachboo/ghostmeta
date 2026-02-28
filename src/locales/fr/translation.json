@@ -306,11 +306,10 @@
       "title": "Nos engagements"
     },
     "commits": {
-      "c1": { "title": "Pas de compte utilisateur", "desc": "Rien à créer, rien à renseigner. Vous arrivez, vous nettoyez vos photos, vous repartez." },
-      "c2": { "title": "Pas de cookies de tracking", "desc": "Zéro traceur publicitaire. Votre visite reste votre affaire." },
-      "c3": { "title": "Pas de publicité", "desc": "Interface propre. Zéro bannière, zéro pop-up, zéro lien sponsorisé." },
-      "c4": { "title": "Suppression EXIF complète", "desc": "GPS, appareil, date, vignettes, commentaires — tout est retiré. Sans compression." },
-      "c5": { "title": "Compatible RGPD par architecture", "desc": "Zéro donnée collectée = zéro obligation de stockage, zéro risque de violation." }
+      "c1": { "title": "Pas de cookies de tracking", "desc": "Zéro traceur publicitaire. Votre visite reste votre affaire." },
+      "c2": { "title": "Pas de publicité", "desc": "Interface propre. Zéro bannière, zéro pop-up, zéro lien sponsorisé." },
+      "c3": { "title": "Suppression EXIF complète", "desc": "GPS, appareil, date, vignettes, commentaires — tout est retiré. Sans compression." },
+      "c4": { "title": "Compatible RGPD par architecture", "desc": "Zéro donnée collectée = zéro obligation de stockage, zéro risque de violation." }
     },
     "faq": {
       "title": "Questions fréquentes",
@@ -322,10 +321,8 @@
       "a3": "Oui. Une fois la page GhostMeta chargée dans votre navigateur, vous pouvez couper votre connexion internet et continuer à supprimer les métadonnées de vos photos. Le traitement ne dépend d'aucun serveur distant.",
       "q4": "Quelles métadonnées sont supprimées ?",
       "a4": "Toutes les données EXIF : coordonnées GPS, modèle d'appareil photo ou de téléphone, date et heure de prise de vue, paramètres de l'objectif, orientation, vignettes embarquées, commentaires et autres champs personnalisés.",
-      "q5": "Est-ce vraiment gratuit ?",
-      "a5": "Oui, sans limite de nombre de photos ni de taille de fichier. GhostMeta est un outil gratuit de suppression de métadonnées, accessible à tous.",
-      "q6": "La qualité de mes photos est-elle affectée ?",
-      "a6": "Non. GhostMeta retire les métadonnées sans toucher aux données de l'image elle-même. Pas de recompression, pas de redimensionnement. Votre photo en ressort visuellement identique, avec un poids de fichier légèrement réduit."
+      "q5": "La qualité de mes photos est-elle affectée ?",
+      "a5": "Non. GhostMeta retire les métadonnées sans toucher aux données de l'image elle-même. Pas de recompression, pas de redimensionnement. Votre photo en ressort visuellement identique, avec un poids de fichier légèrement réduit."
     },
     "cta": {
       "button": "Essayez GhostMeta maintenant",

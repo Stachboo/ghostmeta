@@ -12,7 +12,7 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import {
   Shield, Code2, Scale, CheckCircle, HelpCircle, ChevronDown,
-  UserX, Cookie, EyeOff, ShieldCheck, FileCheck, ArrowRight,
+  Cookie, EyeOff, ShieldCheck, FileCheck, ArrowRight,
   Cloud, Lock, Terminal, Monitor, Smartphone, Server, ChevronRight,
 } from 'lucide-react';
 import GhostLogo from '@/components/GhostLogo';
@@ -285,7 +285,7 @@ function ComparisonTable() {
 }
 
 /* ═══════ COMMITMENT CARDS ═══════ */
-const COMMIT_ICONS = [UserX, Cookie, EyeOff, ShieldCheck, FileCheck] as const;
+const COMMIT_ICONS = [Cookie, EyeOff, ShieldCheck, FileCheck] as const;
 
 function CommitCards() {
   const { t } = useTranslation();
@@ -372,7 +372,7 @@ export default function SecurityPage() {
   const canonicalEn = 'https://www.ghostmeta.online/en/security';
   const canonical = isFr ? canonicalFr : canonicalEn;
 
-  const faqItems = Array.from({ length: 6 }, (_, i) => ({
+  const faqItems = Array.from({ length: 5 }, (_, i) => ({
     q: t(`security.faq.q${i + 1}`),
     a: t(`security.faq.a${i + 1}`),
   }));
