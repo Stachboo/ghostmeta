@@ -1,8 +1,9 @@
-import { Suspense, lazy, useLayoutEffect } from 'react';
+import { Suspense, lazy, useLayoutEffect, useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import ErrorBoundary from './components/ErrorBoundary';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
+import ConsentBanner from './components/ConsentBanner';
 
 // Imports dynamiques (Optimisation pour charger le site vite)
 const Home = lazy(() => import('./pages/Home'));
@@ -59,6 +60,25 @@ function LoadingFallback() {
 }
 
 function App() {
+  // SEC-018 : conditionner Vercel Analytics au consentement RGPD
+  const [analyticsConsent, setAnalyticsConsent] = useState(() => {
+    return localStorage.getItem('ghostmeta-analytics-consent') === 'accepted';
+  });
+
+  useEffect(() => {
+    const handler = () => {
+      setAnalyticsConsent(
+        localStorage.getItem('ghostmeta-analytics-consent') === 'accepted'
+      );
+    };
+    window.addEventListener('storage', handler);
+    window.addEventListener('consent-changed', handler);
+    return () => {
+      window.removeEventListener('storage', handler);
+      window.removeEventListener('consent-changed', handler);
+    };
+  }, []);
+
   return (
     <BrowserRouter>
       <ErrorBoundary>
@@ -89,8 +109,11 @@ function App() {
       {/* PWA Install Prompt — hors Suspense pour ne pas bloquer sur le lazy loading */}
       <PWAInstallPrompt />
 
-      {/* Analytics — hors ErrorBoundary pour ne pas perdre les events en cas d'erreur */}
-      <Analytics />
+      {/* SEC-018 : bandeau RGPD */}
+      <ConsentBanner />
+
+      {/* Analytics — conditionné au consentement, hors ErrorBoundary */}
+      {analyticsConsent && <Analytics />}
     </BrowserRouter>
   );
 }
