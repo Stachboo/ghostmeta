@@ -171,5 +171,121 @@ for (const slug of SLUGS) {
   } catch(e) { err(`/blog/${slug}`, e); }
 }
 
+// ── /fr/securite ──────────────────────────────────────────────────────────────
+try {
+  const secTitle = get(fr, 'security.seo.title');
+  const secDesc  = get(fr, 'security.seo.description');
+  const secFaqItems = Array.from({ length: 6 }, (_, i) => ({
+    q: get(fr, `security.faq.q${i + 1}`),
+    a: get(fr, `security.faq.a${i + 1}`),
+  }));
+  const secBodyContent = [
+    `<h1>${escHtml(get(fr, 'security.h1.line1'))} ${escHtml(get(fr, 'security.h1.line2'))} ${escHtml(get(fr, 'security.h1.accent'))} ${escHtml(get(fr, 'security.h1.line3'))}</h1>`,
+    `<p>${escHtml(get(fr, 'security.intro'))}</p>`,
+    `<h2>${escHtml(get(fr, 'security.s1.title'))}</h2>`,
+    `<p>${escHtml(get(fr, 'security.s1.p1'))}</p>`,
+    `<p>${escHtml(get(fr, 'security.s1.p2'))}</p>`,
+    `<p>${escHtml(get(fr, 'security.s1.p3'))}</p>`,
+    `<h2>${escHtml(get(fr, 'security.s2.title'))}</h2>`,
+    `<p>${escHtml(get(fr, 'security.s2.intro'))}</p>`,
+    `<h2>${escHtml(get(fr, 'security.s3.title'))}</h2>`,
+    `<p>${escHtml(get(fr, 'security.s3.intro'))}</p>`,
+    `<h2>${escHtml(get(fr, 'security.s4.title'))}</h2>`,
+    `<h2>${escHtml(get(fr, 'security.faq.title'))}</h2>`,
+    ...secFaqItems.map(item => `<h3>${escHtml(item.q)}</h3><p>${escHtml(item.a)}</p>`),
+  ].join('\n');
+
+  saveHtml('dist/fr/securite/index.html', buildHtml({
+    title:       secTitle,
+    description: secDesc,
+    canonical:   'https://www.ghostmeta.online/fr/securite',
+    hreflangEn:  'https://www.ghostmeta.online/en/security',
+    bodyContent: secBodyContent,
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebPage',
+          '@id': 'https://www.ghostmeta.online/fr/securite',
+          url: 'https://www.ghostmeta.online/fr/securite',
+          name: secTitle,
+          description: secDesc,
+          inLanguage: 'fr',
+          isPartOf: { '@id': 'https://www.ghostmeta.online/#website' },
+        },
+        {
+          '@type': 'FAQPage',
+          mainEntity: secFaqItems.map(item => ({
+            '@type': 'Question',
+            name: item.q,
+            acceptedAnswer: { '@type': 'Answer', text: item.a },
+          })),
+        },
+      ],
+    },
+  }));
+  log('/fr/securite', 'dist/fr/securite/index.html'); ok++;
+} catch(e) { err('/fr/securite', e); }
+
+// ── /en/security ─────────────────────────────────────────────────────────────
+try {
+  // Charger les traductions anglaises
+  const en = JSON.parse(
+    readFileSync(join(ROOT, 'src', 'locales', 'en', 'translation.json'), 'utf-8')
+  );
+  const secTitleEn = get(en, 'security.seo.title');
+  const secDescEn  = get(en, 'security.seo.description');
+  const secFaqItemsEn = Array.from({ length: 6 }, (_, i) => ({
+    q: get(en, `security.faq.q${i + 1}`),
+    a: get(en, `security.faq.a${i + 1}`),
+  }));
+  const secBodyContentEn = [
+    `<h1>${escHtml(get(en, 'security.h1.line1'))} ${escHtml(get(en, 'security.h1.line2'))} ${escHtml(get(en, 'security.h1.accent'))} ${escHtml(get(en, 'security.h1.line3'))}</h1>`,
+    `<p>${escHtml(get(en, 'security.intro'))}</p>`,
+    `<h2>${escHtml(get(en, 'security.s1.title'))}</h2>`,
+    `<p>${escHtml(get(en, 'security.s1.p1'))}</p>`,
+    `<p>${escHtml(get(en, 'security.s1.p2'))}</p>`,
+    `<p>${escHtml(get(en, 'security.s1.p3'))}</p>`,
+    `<h2>${escHtml(get(en, 'security.s2.title'))}</h2>`,
+    `<p>${escHtml(get(en, 'security.s2.intro'))}</p>`,
+    `<h2>${escHtml(get(en, 'security.s3.title'))}</h2>`,
+    `<p>${escHtml(get(en, 'security.s3.intro'))}</p>`,
+    `<h2>${escHtml(get(en, 'security.s4.title'))}</h2>`,
+    `<h2>${escHtml(get(en, 'security.faq.title'))}</h2>`,
+    ...secFaqItemsEn.map(item => `<h3>${escHtml(item.q)}</h3><p>${escHtml(item.a)}</p>`),
+  ].join('\n');
+
+  saveHtml('dist/en/security/index.html', buildHtml({
+    title:       secTitleEn,
+    description: secDescEn,
+    canonical:   'https://www.ghostmeta.online/en/security',
+    hreflangEn:  'https://www.ghostmeta.online/en/security',
+    bodyContent: secBodyContentEn,
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebPage',
+          '@id': 'https://www.ghostmeta.online/en/security',
+          url: 'https://www.ghostmeta.online/en/security',
+          name: secTitleEn,
+          description: secDescEn,
+          inLanguage: 'en',
+          isPartOf: { '@id': 'https://www.ghostmeta.online/#website' },
+        },
+        {
+          '@type': 'FAQPage',
+          mainEntity: secFaqItemsEn.map(item => ({
+            '@type': 'Question',
+            name: item.q,
+            acceptedAnswer: { '@type': 'Answer', text: item.a },
+          })),
+        },
+      ],
+    },
+  }));
+  log('/en/security', 'dist/en/security/index.html'); ok++;
+} catch(e) { err('/en/security', e); }
+
 console.log(`\n[prerender] ─── Résultat : ${ok} OK, ${fail} erreur(s) ─────────────\n`);
 process.exit(fail > 0 ? 1 : 0);

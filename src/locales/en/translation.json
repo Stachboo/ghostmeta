@@ -237,5 +237,106 @@
     "network_alert": "{{count}} request(s) detected",
     "network_monitored": "Monitor active",
     "network_verified": "Network verified"
+  },
+  "security": {
+    "badge": "Security & Privacy",
+    "h1": {
+      "line1": "Your photos.",
+      "line2": "Your",
+      "accent": "privacy.",
+      "line3": "Nothing uploaded."
+    },
+    "intro": "Most metadata removal tools ask you to upload your photos to a remote server. Think about that: to protect your privacy, you first have to hand your images to a stranger. GhostMeta works differently. Your photos never leave your device — everything happens in your browser. This page explains exactly how, and more importantly, how you can prove it yourself.",
+    "s1": {
+      "title": "Your photos never leave your device",
+      "p1": "GhostMeta strips EXIF data from your photos — GPS coordinates, phone model, timestamps, file names — directly inside your browser. Processing is 100% local. No image is sent to a server. No copy is stored. No data is collected.",
+      "p2": "Here's how that's different from most online tools: when you use a traditional EXIF remover, your photo travels to a remote server, gets processed there, then gets sent back to you. During that round trip, your image sits on a machine you don't control. You have no guarantee it's deleted afterward.",
+      "p3": "With GhostMeta, there is no round trip. Your photo enters your browser, gets cleaned, and comes out the other side. GhostMeta's server never sees your images — not because we chose not to look, but because they're never sent in the first place."
+    },
+    "flow": {
+      "local_title": "GhostMeta — Local processing",
+      "your_photo": "Your photo",
+      "your_browser": "Your browser",
+      "cleaned": "Cleaned photo",
+      "local_badge": "Everything stays on your device",
+      "upload_title": "Traditional tools — Server upload",
+      "server": "Remote server",
+      "upload_badge": "Your images travel through a third party"
+    },
+    "s2": {
+      "title": "How it actually works",
+      "intro": "When you drop a photo into GhostMeta, here's what happens step by step:",
+      "no_network": "No network request carries your image anywhere."
+    },
+    "how": {
+      "step1": "Your browser loads the image file from your device.",
+      "step2": "A JavaScript script running client-side (meaning on your machine, not on a remote server) reads the file and identifies all the EXIF metadata it contains.",
+      "step3": "The script produces a clean version of your image — visually identical, but stripped of all EXIF data: GPS coordinates, camera info, timestamps, orientation, embedded thumbnails, comments.",
+      "step4": "You download the cleaned file. Your original stays untouched on your device."
+    },
+    "verify": {
+      "title": "See for yourself",
+      "proof": "That's the most direct proof we can offer. Not a marketing promise — a technical fact you can check right now. Most online tools will never suggest this test. They wouldn't pass it."
+    },
+    "terminal": {
+      "title": "DEVTOOLS › NETWORK",
+      "s1": "Open GhostMeta in your browser.",
+      "s2": "Press F12 (or right-click → Inspect) to open Developer Tools.",
+      "s3": "Click the Network tab.",
+      "s4": "Drop a photo and run the metadata removal.",
+      "s5": "Watch the network requests: no image file is sent.",
+      "result_label": "result →",
+      "result": "0 image requests"
+    },
+    "s3": {
+      "title": "Why local processing is safer",
+      "intro": "There's something backwards about a \"privacy tool\" that requires you to upload your photos first. It's like handing your house keys to a stranger so they can check if your door is locked.",
+      "conclusion": "You don't need to trust us. You can verify. That's the difference."
+    },
+    "table": {
+      "header_criteria": "Criteria",
+      "header_upload": "Server upload",
+      "r1": { "c": "Upload required?", "g": "No — everything stays on your device", "s": "Yes — your photos travel to a third-party server" },
+      "r2": { "c": "Images stored?", "g": "Never — zero data retained", "s": "Possibly — depends on the service's policy" },
+      "r3": { "c": "Works offline?", "g": "Yes — once the page is loaded", "s": "No — requires a constant connection" },
+      "r4": { "c": "Risk of data leak?", "g": "None — no transfer means no leak", "s": "Present — servers are attack surfaces" },
+      "r5": { "c": "Image quality preserved?", "g": "Yes — lossless removal, no compression", "s": "Varies — some tools recompress your images" }
+    },
+    "s4": {
+      "title": "Our commitments"
+    },
+    "commits": {
+      "c1": { "title": "No user accounts", "desc": "Nothing to create, nothing to fill in. You show up, clean your photos, and leave. No signup, no email required." },
+      "c2": { "title": "No tracking cookies", "desc": "GhostMeta doesn't use advertising cookies or third-party trackers to follow your activity. Your visit stays your business." },
+      "c3": { "title": "No ads", "desc": "The interface is clean. No banners, no pop-ups, no sponsored links. A photo privacy tool that serves targeted ads would be a contradiction." },
+      "c4": { "title": "Complete EXIF removal", "desc": "Every piece of metadata embedded in your photos is stripped: GPS coordinates, device model, date and time, lens settings, embedded thumbnails, comments. Nothing remains." },
+      "c5": { "title": "Privacy by design", "desc": "The question of data privacy compliance barely applies: GhostMeta collects no data. Zero data processed means zero storage obligations, zero breach risk." }
+    },
+    "faq": {
+      "title": "Security FAQ",
+      "q1": "Are my photos sent to a server?",
+      "a1": "No, never. Your photos are processed locally in your browser using client-side JavaScript. No image file ever reaches GhostMeta's servers.",
+      "q2": "Does GhostMeta store my images?",
+      "a2": "No. No image is stored, temporarily or otherwise. Once you close the page, there's no trace of your visit.",
+      "q3": "Does it work offline?",
+      "a3": "Yes. Once the GhostMeta page is loaded in your browser, you can disconnect from the internet and keep stripping metadata. No server is involved in the processing.",
+      "q4": "What metadata gets removed?",
+      "a4": "All EXIF data: GPS coordinates, camera or phone model, date and time, lens parameters, orientation, embedded thumbnails, comments, and any other custom fields.",
+      "q5": "Is it really free?",
+      "a5": "Yes, with no limits on the number of photos or file size.",
+      "q6": "Does it affect my photo quality?",
+      "a6": "No. GhostMeta removes metadata without touching the image data itself. No recompression, no resizing. Your photo comes out visually identical, just slightly smaller in file size since the metadata is gone."
+    },
+    "cta": {
+      "button": "Try GhostMeta now",
+      "sub": "Nothing is uploaded — everything stays on your device"
+    },
+    "seo": {
+      "title": "Security & Privacy | GhostMeta — 100% Browser-Based Processing",
+      "description": "GhostMeta processes your photos entirely in your browser. No upload, no storage, no data collection. Learn how our security model works.",
+      "og_title": "Security & Privacy | GhostMeta",
+      "og_desc": "Your photos never leave your device. 100% local processing, zero uploads, zero data collection."
+    },
+    "footer_link": "Security"
   }
 }
