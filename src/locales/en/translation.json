@@ -306,11 +306,10 @@
       "title": "Our commitments"
     },
     "commits": {
-      "c1": { "title": "No user accounts", "desc": "Nothing to create, nothing to fill in. You show up, clean your photos, and leave. No signup, no email required." },
-      "c2": { "title": "No tracking cookies", "desc": "GhostMeta doesn't use advertising cookies or third-party trackers to follow your activity. Your visit stays your business." },
-      "c3": { "title": "No ads", "desc": "The interface is clean. No banners, no pop-ups, no sponsored links. A photo privacy tool that serves targeted ads would be a contradiction." },
-      "c4": { "title": "Complete EXIF removal", "desc": "Every piece of metadata embedded in your photos is stripped: GPS coordinates, device model, date and time, lens settings, embedded thumbnails, comments. Nothing remains." },
-      "c5": { "title": "Privacy by design", "desc": "The question of data privacy compliance barely applies: GhostMeta collects no data. Zero data processed means zero storage obligations, zero breach risk." }
+      "c1": { "title": "No tracking cookies", "desc": "GhostMeta doesn't use advertising cookies or third-party trackers to follow your activity. Your visit stays your business." },
+      "c2": { "title": "No ads", "desc": "The interface is clean. No banners, no pop-ups, no sponsored links. A photo privacy tool that serves targeted ads would be a contradiction." },
+      "c3": { "title": "Complete EXIF removal", "desc": "Every piece of metadata embedded in your photos is stripped: GPS coordinates, device model, date and time, lens settings, embedded thumbnails, comments. Nothing remains." },
+      "c4": { "title": "Privacy by design", "desc": "The question of data privacy compliance barely applies: GhostMeta collects no data. Zero data processed means zero storage obligations, zero breach risk." }
     },
     "faq": {
       "title": "Security FAQ",
@@ -322,10 +321,8 @@
       "a3": "Yes. Once the GhostMeta page is loaded in your browser, you can disconnect from the internet and keep stripping metadata. No server is involved in the processing.",
       "q4": "What metadata gets removed?",
       "a4": "All EXIF data: GPS coordinates, camera or phone model, date and time, lens parameters, orientation, embedded thumbnails, comments, and any other custom fields.",
-      "q5": "Is it really free?",
-      "a5": "Yes, with no limits on the number of photos or file size.",
-      "q6": "Does it affect my photo quality?",
-      "a6": "No. GhostMeta removes metadata without touching the image data itself. No recompression, no resizing. Your photo comes out visually identical, just slightly smaller in file size since the metadata is gone."
+      "q5": "Does it affect my photo quality?",
+      "a5": "No. GhostMeta removes metadata without touching the image data itself. No recompression, no resizing. Your photo comes out visually identical, just slightly smaller in file size since the metadata is gone."
     },
     "cta": {
       "button": "Try GhostMeta now",

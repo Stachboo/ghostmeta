@@ -175,7 +175,7 @@ for (const slug of SLUGS) {
 try {
   const secTitle = get(fr, 'security.seo.title');
   const secDesc  = get(fr, 'security.seo.description');
-  const secFaqItems = Array.from({ length: 6 }, (_, i) => ({
+  const secFaqItems = Array.from({ length: 5 }, (_, i) => ({
     q: get(fr, `security.faq.q${i + 1}`),
     a: get(fr, `security.faq.a${i + 1}`),
   }));
@@ -235,7 +235,7 @@ try {
   );
   const secTitleEn = get(en, 'security.seo.title');
   const secDescEn  = get(en, 'security.seo.description');
-  const secFaqItemsEn = Array.from({ length: 6 }, (_, i) => ({
+  const secFaqItemsEn = Array.from({ length: 5 }, (_, i) => ({
     q: get(en, `security.faq.q${i + 1}`),
     a: get(en, `security.faq.a${i + 1}`),
   }));
