@@ -219,6 +219,12 @@
       }
     }
   },
+  "consent": {
+    "text": "GhostMeta uses anonymous audience metrics (Vercel Analytics) to improve the service. No photos or personal data are collected.",
+    "accept": "Accept",
+    "refuse": "Decline",
+    "learn_more": "Learn more"
+  },
   "trust": {
     "section_label": "Technical Transparency",
     "zero_upload": "Zero Upload",

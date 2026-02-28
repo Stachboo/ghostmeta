@@ -219,6 +219,12 @@
       }
     }
   },
+  "consent": {
+    "text": "GhostMeta utilise des mesures d'audience anonymes (Vercel Analytics) pour améliorer le service. Aucune photo ni donnée personnelle n'est collectée.",
+    "accept": "Accepter",
+    "refuse": "Refuser",
+    "learn_more": "En savoir plus"
+  },
   "trust": {
     "section_label": "Transparence Technique",
     "zero_upload": "Zéro Upload",
