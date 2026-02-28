@@ -6,6 +6,7 @@ import {
   extractMetadata,
   stripMetadata,
   isSupportedImage,
+  validateImageFile,
 } from '@/lib/image-processor';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabase';
@@ -36,6 +37,12 @@ export function useImageProcessor() {
 
   const scanImage = async (img: ProcessedImage): Promise<ProcessedImage> => {
     try {
+      // SEC-009 : Valider les magic bytes AVANT tout traitement
+      const validation = await validateImageFile(img.originalFile);
+      if (!validation.valid) {
+        return { ...img, status: 'error' as const, error: validation.error };
+      }
+
       const metadata = await extractMetadata(img.originalFile);
       return { ...img, metadata, status: 'scanned' as const };
     } catch {

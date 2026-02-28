@@ -26,7 +26,8 @@ export default function DropZone({ onFilesAdded, hasImages, isProcessing }: Drop
   const onDropRejected = useCallback((rejections: FileRejection[]) => {
     for (const r of rejections) {
       if (r.errors.some(e => e.code === 'file-too-large')) {
-        toast.error(`${r.file.name} : fichier trop volumineux (max 50 MB)`);
+        // SEC-009 : limite réduite à 10 MB pour éviter les DoS côté client
+        toast.error(`${r.file.name} : fichier trop volumineux (max 10 MB)`);
       }
     }
   }, []);
@@ -41,7 +42,8 @@ export default function DropZone({ onFilesAdded, hasImages, isProcessing }: Drop
       'image/heic': [],
       'image/heif': [],
     },
-    maxSize: 50 * 1024 * 1024,
+    // SEC-009 : limite réduite de 50 MB à 10 MB
+    maxSize: 10 * 1024 * 1024,
     disabled: isProcessing,
   });
 
