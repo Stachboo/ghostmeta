@@ -10,6 +10,7 @@ import {
 } from '@/lib/image-processor';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabase';
+import { logSecurityEvent } from '@/lib/security-logger';
 
 interface ProcessingStats {
   total: number;
@@ -40,12 +41,23 @@ export function useImageProcessor() {
       // SEC-009 : Valider les magic bytes AVANT tout traitement
       const validation = await validateImageFile(img.originalFile);
       if (!validation.valid) {
+        // SEC-019 : Log structuré des fichiers rejetés
+        logSecurityEvent('FILE_REJECTED', validation.error || 'Validation échouée', {
+          filename: img.originalName,
+          size: img.originalSize,
+          type: img.originalFile.type,
+        });
         return { ...img, status: 'error' as const, error: validation.error };
       }
 
       const metadata = await extractMetadata(img.originalFile);
       return { ...img, metadata, status: 'scanned' as const };
-    } catch {
+    } catch (err) {
+      // SEC-019 : Log des erreurs de traitement inattendues
+      logSecurityEvent('PROCESSING_ERROR', err instanceof Error ? err.message : 'Erreur inconnue', {
+        filename: img.originalName,
+        size: img.originalSize,
+      });
       return { ...img, status: 'scanned' as const, metadata: { raw: {}, threatLevel: 'safe' as const, threats: [] } };
     }
   };
