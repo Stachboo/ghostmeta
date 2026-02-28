@@ -9,31 +9,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import GhostLogo from './GhostLogo';
 import { useTranslation } from 'react-i18next';
 
-const TRUST_BADGES = [
-  {
-    src: 'https://img.shields.io/mozilla-observatory/grade-score/www.ghostmeta.online?publish&label=Mozilla%20Observatory',
-    alt: 'Mozilla Observatory',
-    href: 'https://developer.mozilla.org/en-US/observatory/analyze?host=www.ghostmeta.online',
-  },
-  {
-    src: 'https://img.shields.io/badge/Security%20Headers-A-brightgreen?logo=shield&logoColor=white',
-    alt: 'Security Headers A',
-    href: 'https://securityheaders.com/?q=www.ghostmeta.online&followRedirects=on',
-  },
-  {
-    src: 'https://img.shields.io/badge/SSL%20Labs-A%2B-brightgreen?logo=letsencrypt&logoColor=white',
-    alt: 'SSL Labs A+',
-    href: 'https://www.ssllabs.com/ssltest/analyze.html?d=www.ghostmeta.online',
-  },
-  {
-    src: 'https://img.shields.io/badge/Traitement-100%25%20Client%20Side-blueviolet?logo=javascript&logoColor=white',
-    alt: '100% Client Side',
-  },
-  {
-    src: 'https://img.shields.io/badge/RGPD-Conforme-blue?logo=european-union&logoColor=white',
-    alt: 'RGPD Conforme',
-  },
-] as const;
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -51,34 +26,10 @@ export default function Footer() {
     <>
       <footer className="border-t border-border/30 mt-20 py-8">
         <div className="container">
-          {/* Badges de confiance */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
-            {TRUST_BADGES.map((badge) =>
-              badge.href ? (
-                <a
-                  key={badge.alt}
-                  href={badge.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={badge.src}
-                    alt={badge.alt}
-                    loading="lazy"
-                    className="h-5"
-                  />
-                </a>
-              ) : (
-                <img
-                  key={badge.alt}
-                  src={badge.src}
-                  alt={badge.alt}
-                  loading="lazy"
-                  className="h-5"
-                />
-              )
-            )}
-          </div>
+          {/* Barre de confiance — texte unifié */}
+          <p className="text-center text-[0.8rem] text-[#888] mb-6">
+            {"SSL A+ · Security A · Mozilla B+ · 100% Client-Side · RGPD Conforme"}
+          </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
