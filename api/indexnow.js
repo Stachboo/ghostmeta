@@ -21,6 +21,9 @@ const URLS = [
 ];
 
 export default async function handler(req, res) {
+  // SEC-020 : restreindre CORS à notre domaine uniquement
+  res.setHeader("Access-Control-Allow-Origin", "https://www.ghostmeta.online");
+
   // POST uniquement — bloque GET, PUT, DELETE, etc.
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
