@@ -2,7 +2,7 @@
  * SecurityPage — Page "Securite & Confidentialite" / "Security & Privacy"
  *
  * Routes : /fr/securite, /en/security
- * SEO : Helmet, hreflang, JSON-LD (WebPage + FAQPage)
+ * SEO : Helmet, hreflang, JSON-LD (WebPage)
  * i18n : toutes les chaines via react-i18next (cles security.*)
  */
 
@@ -11,7 +11,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import {
-  Shield, Code2, Scale, CheckCircle, HelpCircle, ChevronDown,
+  Shield, Code2, Scale, CheckCircle,
   Cookie, EyeOff, ShieldCheck, FileCheck, ArrowRight,
   Cloud, Lock, Terminal, Monitor, Smartphone, Server, ChevronRight,
 } from 'lucide-react';
@@ -69,7 +69,7 @@ function Divider() {
 }
 
 /* ─── Section heading ─── */
-const ICONS = { Shield, Code2, Scale, CheckCircle, HelpCircle } as const;
+const ICONS = { Shield, Code2, Scale, CheckCircle } as const;
 type IconName = keyof typeof ICONS;
 
 function SectionH2({ icon, children }: { icon: IconName; children: ReactNode }) {
@@ -310,45 +310,6 @@ function CommitCards() {
   );
 }
 
-/* ═══════ FAQ ACCORDION ═══════ */
-function FAQItem({ q, a, defaultOpen = false }: { q: string; a: string; defaultOpen?: boolean }) {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="border-b border-border">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-4 px-1 text-left gap-3"
-        aria-expanded={open}
-      >
-        <span className={`font-semibold text-sm transition-colors duration-200 ${open ? 'text-[#00ff41]' : 'text-white'}`}>
-          {q}
-        </span>
-        <div
-          className="w-6 h-6 rounded-md flex items-center justify-center shrink-0 transition-all duration-300"
-          style={{
-            background: open ? '#00ff4112' : '#5a5a7010',
-            transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
-          }}
-        >
-          <ChevronDown size={14} className={open ? 'text-[#00ff41]' : 'text-muted-foreground/50'} />
-        </div>
-      </button>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateRows: open ? '1fr' : '0fr',
-          transition: 'grid-template-rows 0.35s cubic-bezier(.16,1,.3,1), opacity 0.3s ease',
-          opacity: open ? 1 : 0,
-        }}
-      >
-        <div className="overflow-hidden">
-          <p className="pb-4 px-1 text-sm leading-relaxed text-muted-foreground">{a}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 /* ═══════════════════════════════════════════════════════════
    MAIN PAGE
    ═══════════════════════════════════════════════════════════ */
@@ -372,32 +333,15 @@ export default function SecurityPage() {
   const canonicalEn = 'https://www.ghostmeta.online/en/security';
   const canonical = isFr ? canonicalFr : canonicalEn;
 
-  const faqItems = Array.from({ length: 5 }, (_, i) => ({
-    q: t(`security.faq.q${i + 1}`),
-    a: t(`security.faq.a${i + 1}`),
-  }));
-
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'WebPage',
-        '@id': canonical,
-        url: canonical,
-        name: t('security.seo.title'),
-        description: t('security.seo.description'),
-        inLanguage: isFr ? 'fr' : 'en',
-        isPartOf: { '@id': 'https://www.ghostmeta.online/#website' },
-      },
-      {
-        '@type': 'FAQPage',
-        mainEntity: faqItems.map((item) => ({
-          '@type': 'Question',
-          name: item.q,
-          acceptedAnswer: { '@type': 'Answer', text: item.a },
-        })),
-      },
-    ],
+    '@type': 'WebPage',
+    '@id': canonical,
+    url: canonical,
+    name: t('security.seo.title'),
+    description: t('security.seo.description'),
+    inLanguage: isFr ? 'fr' : 'en',
+    isPartOf: { '@id': 'https://www.ghostmeta.online/#website' },
   };
 
   const steps = Array.from({ length: 4 }, (_, i) => t(`security.how.step${i + 1}`));
@@ -547,20 +491,6 @@ export default function SecurityPage() {
             <SectionH2 icon="CheckCircle">{t('security.s4.title')}</SectionH2>
           </Reveal>
           <CommitCards />
-
-          <Divider />
-
-          {/* ══════ S5: FAQ ══════ */}
-          <Reveal>
-            <SectionH2 icon="HelpCircle">{t('security.faq.title')}</SectionH2>
-            <div className="rounded-xl overflow-hidden bg-[#111119] border border-border">
-              <div className="px-5">
-                {faqItems.map((item, i) => (
-                  <FAQItem key={i} q={item.q} a={item.a} defaultOpen={i === 0} />
-                ))}
-              </div>
-            </div>
-          </Reveal>
 
           {/* ══════ CTA ══════ */}
           <div className="mt-20 mb-8 text-center">

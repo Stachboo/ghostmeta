@@ -175,10 +175,6 @@ for (const slug of SLUGS) {
 try {
   const secTitle = get(fr, 'security.seo.title');
   const secDesc  = get(fr, 'security.seo.description');
-  const secFaqItems = Array.from({ length: 5 }, (_, i) => ({
-    q: get(fr, `security.faq.q${i + 1}`),
-    a: get(fr, `security.faq.a${i + 1}`),
-  }));
   const secBodyContent = [
     `<h1>${escHtml(get(fr, 'security.h1.line1'))} ${escHtml(get(fr, 'security.h1.line2'))} ${escHtml(get(fr, 'security.h1.accent'))} ${escHtml(get(fr, 'security.h1.line3'))}</h1>`,
     `<p>${escHtml(get(fr, 'security.intro'))}</p>`,
@@ -191,8 +187,6 @@ try {
     `<h2>${escHtml(get(fr, 'security.s3.title'))}</h2>`,
     `<p>${escHtml(get(fr, 'security.s3.intro'))}</p>`,
     `<h2>${escHtml(get(fr, 'security.s4.title'))}</h2>`,
-    `<h2>${escHtml(get(fr, 'security.faq.title'))}</h2>`,
-    ...secFaqItems.map(item => `<h3>${escHtml(item.q)}</h3><p>${escHtml(item.a)}</p>`),
   ].join('\n');
 
   saveHtml('dist/fr/securite/index.html', buildHtml({
@@ -203,25 +197,13 @@ try {
     bodyContent: secBodyContent,
     jsonLd: {
       '@context': 'https://schema.org',
-      '@graph': [
-        {
-          '@type': 'WebPage',
-          '@id': 'https://www.ghostmeta.online/fr/securite',
-          url: 'https://www.ghostmeta.online/fr/securite',
-          name: secTitle,
-          description: secDesc,
-          inLanguage: 'fr',
-          isPartOf: { '@id': 'https://www.ghostmeta.online/#website' },
-        },
-        {
-          '@type': 'FAQPage',
-          mainEntity: secFaqItems.map(item => ({
-            '@type': 'Question',
-            name: item.q,
-            acceptedAnswer: { '@type': 'Answer', text: item.a },
-          })),
-        },
-      ],
+      '@type': 'WebPage',
+      '@id': 'https://www.ghostmeta.online/fr/securite',
+      url: 'https://www.ghostmeta.online/fr/securite',
+      name: secTitle,
+      description: secDesc,
+      inLanguage: 'fr',
+      isPartOf: { '@id': 'https://www.ghostmeta.online/#website' },
     },
   }));
   log('/fr/securite', 'dist/fr/securite/index.html'); ok++;
@@ -235,10 +217,6 @@ try {
   );
   const secTitleEn = get(en, 'security.seo.title');
   const secDescEn  = get(en, 'security.seo.description');
-  const secFaqItemsEn = Array.from({ length: 5 }, (_, i) => ({
-    q: get(en, `security.faq.q${i + 1}`),
-    a: get(en, `security.faq.a${i + 1}`),
-  }));
   const secBodyContentEn = [
     `<h1>${escHtml(get(en, 'security.h1.line1'))} ${escHtml(get(en, 'security.h1.line2'))} ${escHtml(get(en, 'security.h1.accent'))} ${escHtml(get(en, 'security.h1.line3'))}</h1>`,
     `<p>${escHtml(get(en, 'security.intro'))}</p>`,
@@ -251,8 +229,6 @@ try {
     `<h2>${escHtml(get(en, 'security.s3.title'))}</h2>`,
     `<p>${escHtml(get(en, 'security.s3.intro'))}</p>`,
     `<h2>${escHtml(get(en, 'security.s4.title'))}</h2>`,
-    `<h2>${escHtml(get(en, 'security.faq.title'))}</h2>`,
-    ...secFaqItemsEn.map(item => `<h3>${escHtml(item.q)}</h3><p>${escHtml(item.a)}</p>`),
   ].join('\n');
 
   saveHtml('dist/en/security/index.html', buildHtml({
@@ -263,25 +239,13 @@ try {
     bodyContent: secBodyContentEn,
     jsonLd: {
       '@context': 'https://schema.org',
-      '@graph': [
-        {
-          '@type': 'WebPage',
-          '@id': 'https://www.ghostmeta.online/en/security',
-          url: 'https://www.ghostmeta.online/en/security',
-          name: secTitleEn,
-          description: secDescEn,
-          inLanguage: 'en',
-          isPartOf: { '@id': 'https://www.ghostmeta.online/#website' },
-        },
-        {
-          '@type': 'FAQPage',
-          mainEntity: secFaqItemsEn.map(item => ({
-            '@type': 'Question',
-            name: item.q,
-            acceptedAnswer: { '@type': 'Answer', text: item.a },
-          })),
-        },
-      ],
+      '@type': 'WebPage',
+      '@id': 'https://www.ghostmeta.online/en/security',
+      url: 'https://www.ghostmeta.online/en/security',
+      name: secTitleEn,
+      description: secDescEn,
+      inLanguage: 'en',
+      isPartOf: { '@id': 'https://www.ghostmeta.online/#website' },
     },
   }));
   log('/en/security', 'dist/en/security/index.html'); ok++;
