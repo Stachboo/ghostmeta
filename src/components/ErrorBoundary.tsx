@@ -1,5 +1,6 @@
 import { Component, ReactNode } from "react";
 import ErrorFallback from "./ErrorFallback";
+import { logSecurityEvent } from "@/lib/security-logger";
 
 interface Props {
   children: ReactNode;
@@ -21,9 +22,12 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, info: { componentStack: string }) {
-    // Privacy-first : log local uniquement, aucun envoi serveur
-    console.error("[GhostMeta] Render Error:", error);
-    console.error("[GhostMeta] Component Stack:", info.componentStack);
+    // SEC-019 : Log structuré des crashes React
+    logSecurityEvent("RENDER_CRASH", error.message, {
+      name: error.name,
+      stack: error.stack?.slice(0, 500),
+      componentStack: info.componentStack?.slice(0, 500),
+    });
   }
 
   handleReset = () => {
