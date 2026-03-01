@@ -1,3 +1,4 @@
+import fs from "fs"
 import path from "path"
 import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
@@ -5,6 +6,20 @@ import react from "@vitejs/plugin-react"
 export default defineConfig({
   plugins: [
     react(),
+    {
+      name: 'sw-cache-buster',
+      apply: 'build' as const,
+      closeBundle() {
+        const swPath = path.resolve(__dirname, 'dist/sw.js');
+        if (fs.existsSync(swPath)) {
+          const content = fs.readFileSync(swPath, 'utf-8').replace(
+            "const CACHE_NAME = 'ghostmeta-v1'",
+            `const CACHE_NAME = 'ghostmeta-v${Date.now()}'`
+          );
+          fs.writeFileSync(swPath, content);
+        }
+      },
+    },
   ],
   resolve: {
     alias: {

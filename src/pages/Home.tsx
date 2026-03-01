@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
@@ -85,6 +86,30 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0a0a0c] font-sans text-white">
+      <Helmet>
+        <title>GhostMeta | Nettoyeur Photo pour Vinted &amp; Leboncoin (Gratuit)</title>
+        <meta name="description" content="Sécurisez vos ventes : supprimez immédiatement le GPS et les métadonnées cachées de vos photos Vinted, Leboncoin et eBay. Protection 100% locale et anonyme." />
+        <meta name="keywords" content="Vinted, Leboncoin, eBay, supprimer EXIF, localisation photo, anonymiser photo, sécurité vendeur, métadonnées, GPS" />
+        <link rel="canonical" href="https://www.ghostmeta.online/" />
+        <link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/" />
+        <link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/?lng=en" />
+        <link rel="alternate" hreflang="x-default" href="https://www.ghostmeta.online/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="GhostMeta" />
+        <meta property="og:url" content="https://www.ghostmeta.online/" />
+        <meta property="og:title" content="Protégez votre adresse sur Vinted et Leboncoin" />
+        <meta property="og:description" content="Outil gratuit pour supprimer la localisation GPS de vos photos de vente. Ne publiez rien sans nettoyer !" />
+        <meta property="og:locale" content="fr_FR" />
+        <meta property="og:image" content="https://www.ghostmeta.online/og-image-v2.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:alt" content="GhostMeta — Supprimez les métadonnées GPS de vos photos Vinted et Leboncoin" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="GhostMeta — Sécurité Vinted &amp; Leboncoin" />
+        <meta name="twitter:description" content="Supprimez GPS et EXIF en 1 clic. 100% Gratuit &amp; Local." />
+        <meta name="twitter:image" content="https://www.ghostmeta.online/og-image-v2.jpg" />
+      </Helmet>
       {/* HEADER */}
       <header className="sticky top-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl">
         <div className="container flex items-center justify-between h-14">
@@ -352,7 +377,7 @@ export default function Home() {
         </section>
 
         {/* BLOG SEO */}
-        <section className="container py-16 border-t border-border/30">
+        <section id="blog" className="container py-16 border-t border-border/30">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold mb-8 text-[#00ff41]">{t('blog.section_title')}</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
