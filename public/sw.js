@@ -30,18 +30,16 @@ self.addEventListener('activate', (event) => {
 
 // Network First — fallback cache si offline
 self.addEventListener('fetch', (event) => {
-  // Ignorer les requêtes non-GET et les extensions Chrome
+  // Ignorer les requêtes non-GET, les extensions Chrome, et les API routes
   if (event.request.method !== 'GET') return;
   if (event.request.url.startsWith('chrome-extension://')) return;
-  // Ne pas intercepter les requêtes cross-origin (tuiles OSM, fonts, APIs tierces)
-  // Laisser le navigateur les gérer directement pour éviter les blocages CSP
-  if (!event.request.url.startsWith(self.location.origin)) return;
+  if (new URL(event.request.url).pathname.startsWith('/api/')) return;
 
   event.respondWith(
     fetch(event.request)
       .then((response) => {
         // Mettre en cache une copie fraîche pour les ressources statiques
-        if (response.ok) {
+        if (response.ok && event.request.url.startsWith(self.location.origin)) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         }
