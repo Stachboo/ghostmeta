@@ -10,9 +10,25 @@
  */
 
 import ExifReader from 'exifreader';
+import DOMPurify from 'dompurify';
 
 // SEUIL DE SÉCURITÉ : Toute image > 4096px sera redimensionnée pour éviter le crash mémoire
 const MAX_DIMENSION = 4096;
+
+/**
+ * SEC-008 : Sanitize les valeurs EXIF avant affichage pour prévenir le XSS.
+ * Defense-in-depth — React échappe déjà le HTML via JSX, mais on sanitize
+ * à la source pour couvrir tout usage futur (innerHTML, attributs, etc.).
+ * ALLOWED_TAGS: [] → supprime TOUT le HTML, ne conserve que le texte brut.
+ */
+function sanitizeExifValue(value: unknown): string {
+  if (value == null) return '';
+  const str = typeof value === 'string' ? value : String(value);
+  // Strip ALL HTML — les valeurs EXIF sont du texte brut, jamais du HTML
+  const clean = DOMPurify.sanitize(str, { ALLOWED_TAGS: [] });
+  // Limite la longueur pour éviter les DoS via des champs EXIF anormalement longs
+  return clean.slice(0, 500);
+}
 
 export interface MetadataInfo {
   gps?: { latitude: number; longitude: number; altitude?: number; };
@@ -99,9 +115,11 @@ export async function extractMetadata(file: File): Promise<MetadataInfo> {
 
     const dateTag = tags.exif?.DateTimeOriginal || tags.exif?.DateTime || tags.exif?.DateTimeDigitized;
     if (dateTag) {
-      const dateStr = typeof dateTag === 'object' && 'description' in dateTag
+      const rawDate = typeof dateTag === 'object' && 'description' in dateTag
         ? (dateTag as { description: string }).description
         : String(dateTag);
+      // SEC-008 : sanitize la valeur EXIF avant stockage/affichage
+      const dateStr = sanitizeExifValue(rawDate);
       metadata.dateTime = dateStr;
       threats.push({ type: 'datetime', severity: 'warning', label: 'Date de prise de vue', value: dateStr });
     }
@@ -111,9 +129,10 @@ export async function extractMetadata(file: File): Promise<MetadataInfo> {
     const software = tags.exif?.Software;
 
     if (make || model || software) {
-      const makeStr = make ? String(make['description'] || make) : undefined;
-      const modelStr = model ? String(model['description'] || model) : undefined;
-      const softStr = software ? String(software['description'] || software) : undefined;
+      // SEC-008 : sanitize chaque valeur EXIF (make, model, software)
+      const makeStr = make ? sanitizeExifValue(make['description'] || make) : undefined;
+      const modelStr = model ? sanitizeExifValue(model['description'] || model) : undefined;
+      const softStr = software ? sanitizeExifValue(software['description'] || software) : undefined;
 
       metadata.camera = { make: makeStr, model: modelStr, software: softStr };
       if (makeStr || modelStr) {
@@ -220,6 +239,64 @@ export function isSupportedImage(file: File): boolean {
   const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];
   const name = file.name.toLowerCase();
   return validTypes.includes(file.type) || /\.(jpg|jpeg|png|webp|heic|heif)$/.test(name);
+}
+
+// ============================================================================
+// SEC-009 : Validation par magic bytes (signatures binaires)
+// ============================================================================
+
+/** Limite de taille : 10 MB — empêche les DoS par fichiers volumineux */
+export const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+/** Signatures binaires des formats image supportés */
+const MAGIC_SIGNATURES = {
+  jpeg: { offset: 0, bytes: [0xFF, 0xD8, 0xFF] },
+  png:  { offset: 0, bytes: [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A] },
+  // WebP = conteneur RIFF avec identifiant 'WEBP' aux octets 8-11
+  riff: { offset: 0, bytes: [0x52, 0x49, 0x46, 0x46] },
+  webp: { offset: 8, bytes: [0x57, 0x45, 0x42, 0x50] },
+  // HEIC/HEIF = conteneur ISO BMFF avec 'ftyp' aux octets 4-7
+  ftyp: { offset: 4, bytes: [0x66, 0x74, 0x79, 0x70] },
+} as const;
+
+/** Compare des octets dans un header binaire à une position donnée */
+function matchBytes(header: Uint8Array, offset: number, expected: readonly number[]): boolean {
+  if (header.length < offset + expected.length) return false;
+  for (let i = 0; i < expected.length; i++) {
+    if (header[offset + i] !== expected[i]) return false;
+  }
+  return true;
+}
+
+/**
+ * SEC-009 : Valide un fichier image par ses magic bytes AVANT tout traitement.
+ * Ne fait confiance ni au MIME type (spoofable) ni à l'extension (renommable).
+ * Lit uniquement les 12 premiers octets — rapide et sans charge mémoire.
+ */
+export async function validateImageFile(file: File): Promise<{ valid: boolean; error?: string }> {
+  // Vérification taille (fast-fail avant lecture des octets)
+  if (file.size > MAX_FILE_SIZE) {
+    return { valid: false, error: `Fichier trop volumineux (max 10 MB)` };
+  }
+
+  if (file.size < 12) {
+    return { valid: false, error: 'Fichier trop petit pour être une image valide' };
+  }
+
+  // Lire uniquement les 12 premiers octets (pas tout le fichier)
+  const header = new Uint8Array(await file.slice(0, 12).arrayBuffer());
+
+  const isJpeg = matchBytes(header, MAGIC_SIGNATURES.jpeg.offset, MAGIC_SIGNATURES.jpeg.bytes);
+  const isPng  = matchBytes(header, MAGIC_SIGNATURES.png.offset, MAGIC_SIGNATURES.png.bytes);
+  const isWebp = matchBytes(header, MAGIC_SIGNATURES.riff.offset, MAGIC_SIGNATURES.riff.bytes)
+              && matchBytes(header, MAGIC_SIGNATURES.webp.offset, MAGIC_SIGNATURES.webp.bytes);
+  const isHeic = matchBytes(header, MAGIC_SIGNATURES.ftyp.offset, MAGIC_SIGNATURES.ftyp.bytes);
+
+  if (!isJpeg && !isPng && !isWebp && !isHeic) {
+    return { valid: false, error: 'Format non reconnu (signature binaire invalide)' };
+  }
+
+  return { valid: true };
 }
 
 export function createProcessedImage(file: File): ProcessedImage {
