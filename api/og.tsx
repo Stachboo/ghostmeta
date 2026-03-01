@@ -362,10 +362,6 @@ export default function handler() {
     {
       width: 1200,
       height: 630,
-      headers: {
-        // SEC-020 : restreindre CORS à notre domaine uniquement
-        'Access-Control-Allow-Origin': 'https://www.ghostmeta.online',
-      },
     },
   );
 }
