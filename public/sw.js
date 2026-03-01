@@ -33,12 +33,15 @@ self.addEventListener('fetch', (event) => {
   // Ignorer les requêtes non-GET et les extensions Chrome
   if (event.request.method !== 'GET') return;
   if (event.request.url.startsWith('chrome-extension://')) return;
+  // Ne pas intercepter les requêtes cross-origin (tuiles OSM, fonts, APIs tierces)
+  // Laisser le navigateur les gérer directement pour éviter les blocages CSP
+  if (!event.request.url.startsWith(self.location.origin)) return;
 
   event.respondWith(
     fetch(event.request)
       .then((response) => {
         // Mettre en cache une copie fraîche pour les ressources statiques
-        if (response.ok && event.request.url.startsWith(self.location.origin)) {
+        if (response.ok) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         }
