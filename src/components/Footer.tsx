@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 
 
 export default function Footer() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [showLegal, setShowLegal] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
 
@@ -32,32 +32,70 @@ export default function Footer() {
             {"SSL A+ · Security A · Mozilla B+ · 100% Client-Side · RGPD Conforme"}
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Grille de liens */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
+            {/* Colonne 1 — Navigation */}
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-white/60 mb-3">
+                {t('nav.home')}
+              </h4>
+              <ul className="space-y-2 text-xs text-muted-foreground">
+                <li>
+                  <Link to="/securite" className="hover:text-[#00ff41] transition-colors">
+                    {t('security.footer_link')}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/pricing" className="hover:text-[#00ff41] transition-colors">
+                    {t('nav.pricing')}
+                  </Link>
+                </li>
+                <li>
+                  <button onClick={() => setShowPrivacy(true)} className="hover:text-[#00ff41] transition-colors">
+                    {t('footer.privacy_btn')}
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => setShowLegal(true)} className="hover:text-[#00ff41] transition-colors">
+                    {t('footer.legal_btn')}
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            {/* Colonne 2 — Blog */}
+            <div className="sm:col-span-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-white/60 mb-3">
+                {t('blog.section_title')}
+              </h4>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-muted-foreground">
+                {[
+                  'vinted-securite-photo-guide',
+                  'supprimer-exif-iphone-android',
+                  'comprendre-donnees-exif-gps',
+                  'nettoyage-photo-local-vs-cloud',
+                  'ghostmeta-manifeste-confidentialite',
+                ].map(slug => (
+                  <li key={slug}>
+                    <Link
+                      to={`/blog/${slug}`}
+                      className="hover:text-[#00ff41] transition-colors"
+                    >
+                      {t(`blog.posts.${slug}.title`)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Barre copyright */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-border/20">
             <div className="flex items-center gap-2">
               <GhostLogo size={24} />
               <span className="text-sm text-muted-foreground">
                 GhostMeta © {new Date().getFullYear()} — {t('footer.rights')}
               </span>
-            </div>
-            <div className="flex items-center gap-6 text-xs text-muted-foreground">
-              <Link
-                to={i18n.language === 'fr' ? '/fr/securite' : '/en/security'}
-                className="hover:text-[#00ff41] transition-colors"
-              >
-                {t('security.footer_link')}
-              </Link>
-              <button
-                onClick={() => setShowPrivacy(true)}
-                className="hover:text-[#00ff41] transition-colors"
-              >
-                {t('footer.privacy_btn')}
-              </button>
-              <button
-                onClick={() => setShowLegal(true)}
-                className="hover:text-[#00ff41] transition-colors"
-              >
-                {t('footer.legal_btn')}
-              </button>
             </div>
           </div>
         </div>

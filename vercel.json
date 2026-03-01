@@ -1,4 +1,8 @@
 {
+  "redirects": [
+    { "source": "/fr/securite", "destination": "/securite", "statusCode": 301 },
+    { "source": "/en/security", "destination": "/securite?lng=en", "statusCode": 301 }
+  ],
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }

@@ -2,6 +2,24 @@
   "common": {
     "back_home": "Retour a l'accueil"
   },
+  "nav": {
+    "home": "Accueil",
+    "blog": "Blog",
+    "security": "Sécurité",
+    "pricing": "Tarifs"
+  },
+  "breadcrumb": {
+    "home": "Accueil",
+    "blog": "Blog",
+    "security": "Sécurité & Confidentialité",
+    "pricing": "Tarifs"
+  },
+  "not_found": {
+    "title": "Zone introuvable",
+    "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "back": "Retour à l'accueil",
+    "seo_title": "Page introuvable | GhostMeta"
+  },
   "error": {
     "system_failure": "SYSTEM_FAILURE",
     "render_error": "GHOSTMETA - ERREUR DE RENDU",

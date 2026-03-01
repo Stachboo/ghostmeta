@@ -2,6 +2,24 @@
   "common": {
     "back_home": "Back to Home"
   },
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "security": "Security",
+    "pricing": "Pricing"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "blog": "Blog",
+    "security": "Security & Privacy",
+    "pricing": "Pricing"
+  },
+  "not_found": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "back": "Back to Home",
+    "seo_title": "Page Not Found | GhostMeta"
+  },
   "error": {
     "system_failure": "SYSTEM_FAILURE",
     "render_error": "GHOSTMETA — RENDER ERROR",
