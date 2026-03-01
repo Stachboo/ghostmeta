@@ -180,81 +180,160 @@
 }
 
 
-/* ── LINE 2 CORE : Scanner Biométrique ────────────────────────────
-   Faisceau laser vert qui balaye le mot de gauche à droite,
-   révélant les lettres progressivement en boucle.
-   ::after = ligne laser physique animée en sync.
+/* ── LINE 2 CORE : Machined Metal Block + Specular Highlight ──────
+   1. Knurl texture: repeating-linear-gradient diagonal stripes.
+   2. Color: Amber → Chartreuse → Neon Green (background-clip: text).
+   3. Edge bevel: -webkit-text-stroke catches the light source.
+   4. Extrusion: 8 solid straight-down layers (X=0).
+   5. Specular: ::before pseudo-element — white gradient overlay
+      blended with mix-blend-mode: overlay → top-surface light hit.
    ---------------------------------------------------------------- */
 .matrix-core {
-  display: inline-block;
-  position: relative;
-  font-size: clamp(2.8rem, 9.5vw, 7rem);
+  display: block;
+  position: relative; /* contains the ::before specular layer */
+  font-size: clamp(2.4rem, 9.5vw, 7rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1;
 
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Edge bevel catch — chartreuse outline snags the light source */
+  -webkit-text-stroke: 1px #c8ff00;
 
-  /* Lueur fantôme verte — glow externe, pas de stroke interne = pas de croisements */
-  text-shadow:
-    0 0 1px  rgba(57, 255, 20, 0.55),
-    0 0 6px  rgba(57, 255, 20, 0.20);
-
-  /* Faisceau de révélation — gradient vert centré qui sweep */
-  background: linear-gradient(90deg,
-    transparent                    0%,
-    rgba(57, 255, 20, 0.15)       38%,
-    #39ff14                        50%,
-    rgba(57, 255, 20, 0.15)       62%,
-    transparent                   100%);
-  background-size: 200% 100%;
-  background-repeat: no-repeat;
+  /*
+   * Multi-layer background clipped to text:
+   *   Layer 1: repeating -55° diagonal micro-stripes (industrial knurl)
+   *            1px dark groove every 5px — sharp, zero randomness
+   *   Layer 2: Amber → Chartreuse → Neon Green base color
+   */
+  background:
+    repeating-linear-gradient(
+      -55deg,
+      rgba(0, 0, 0, 0.14)  0px,
+      rgba(0, 0, 0, 0.14)  1px,
+      transparent           1px,
+      transparent           5px
+    ),
+    linear-gradient(100deg, #ffbf00 0%, #c8ff00 42%, #39ff14 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
 
-  animation: scan-reveal 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  will-change: background-position;
+  /*
+   * Straight-down extrusion — X=0px on every depth layer.
+   * 8 unblurred body layers → hard machined block edge.
+   * Contact shadow → anchors block to surface plane.
+   * Glow corona → energy leaking from the hot face.
+   */
+  text-shadow:
+    0  1px 0 rgba(18,  72,  0, 0.97),
+    0  2px 0 rgba(15,  60,  0, 0.94),
+    0  3px 0 rgba(12,  49,  0, 0.91),
+    0  4px 0 rgba( 9,  39,  0, 0.88),
+    0  5px 0 rgba( 7,  31,  0, 0.85),
+    0  6px 0 rgba( 5,  23,  0, 0.82),
+    0  7px 0 rgba( 3,  16,  0, 0.79),
+    0  8px 0 rgba( 2,  10,  0, 0.76),
+    0  9px  5px rgba(0,   0,  0, 0.74),
+    0 12px 12px rgba(0,   0,  0, 0.52),
+    0 15px 30px rgba(57, 255, 20, 0.62),
+    0  0   40px rgba(57, 255, 20, 0.18);
+
+  /* Breathing glow — CSS drop-shadow only */
+  filter:
+    drop-shadow(0  0  12px rgba(57, 255, 20, 0.38))
+    drop-shadow(0  4px 24px rgba(57, 255, 20, 0.14));
+
+  animation: core-breathe 3.8s ease-in-out infinite;
+  will-change: filter;
 }
 
-/* Ligne laser physique */
-.matrix-core::after {
-  content: '';
+/*
+ * Specular highlight layer — simulates light hitting the top surface
+ * of the machined block face.
+ *
+ * Technique: replicate same text via content: attr(data-text),
+ * position it absolutely on top of the parent text, clip a
+ * white→transparent top-down gradient to the text shape, then
+ * mix-blend-mode: overlay → brightens light areas of the face,
+ * leaves dark grooves untouched. Net result: metallic sheen.
+ */
+.matrix-core::before {
+  content: attr(data-text);
   position: absolute;
-  top: 10%;
+  top: 0;
   left: 0;
-  width: 2px;
-  height: 80%;
-  background: #39ff14;
-  box-shadow:
-    0 0 8px  #39ff14,
-    0 0 20px rgba(57, 255, 20, 0.6),
-    0 0 40px rgba(57, 255, 20, 0.3);
-  animation: laser-move 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  width: 100%;
+  z-index: 1;
   pointer-events: none;
+
+  /* Mirror every typographic property from parent */
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-align: center;
+  text-transform: inherit;
+
+  /* Top-surface specular: hot white → fully transparent by 75% height */
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 255, 255, 0.50) 22%,
+    rgba(255, 255, 255, 0.12) 52%,
+    transparent               76%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  /* Overlay blend: light multiplies with gradient face below */
+  mix-blend-mode: overlay;
+
+  /* No shadow/filter — pure surface highlight, nothing else */
+  text-shadow: none;
+  filter: none;
 }
 
-/* ── MOBILE: disable chroma-drift (text-shadow animation = CPU paint = jank)
-   holo-flicker conservé (opacity = GPU composited = fluide)
-   ---------------------------------------------------------------- */
-@media (max-width: 480px) {
-  .matrix-outer {
-    animation: holo-flicker 5.5s steps(1, end) infinite;
+@keyframes core-breathe {
+  0%, 100% {
+    filter:
+      drop-shadow(0  0  12px rgba( 57, 255, 20, 0.38))
+      drop-shadow(0  4px 24px rgba( 57, 255, 20, 0.14));
+  }
+  50% {
+    filter:
+      drop-shadow(0  0  20px rgba(100, 255, 50, 0.58))
+      drop-shadow(0  6px 44px rgba( 57, 255, 20, 0.28));
   }
 }
 
-@keyframes scan-reveal {
-  0%   { background-position: -100% 0; }
-  100% { background-position:  200% 0; }
+
+/* ── MOBILE: softer tilt, trim extrusion ──────────────────────────
+   rotateX halved — avoids text going off-screen on narrow viewports.
+   4 extrusion layers. chroma-drift dropped for GPU budget.
+   ---------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .matrix-hero-title {
+    transform: rotateX(4deg) translateY(-3px);
+  }
+
+  .matrix-outer {
+    letter-spacing: 0.25em;
+    animation: holo-flicker 5.5s steps(1, end) infinite;
+  }
+
+  .matrix-core {
+    letter-spacing: 0;
+    text-shadow:
+      0  1px 0 rgba(18,  72, 0, 0.97),
+      0  2px 0 rgba(12,  49, 0, 0.91),
+      0  3px 0 rgba( 7,  31, 0, 0.85),
+      0  4px 0 rgba( 3,  16, 0, 0.79),
+      0  5px 6px rgba(0,   0, 0, 0.66),
+      0 10px 20px rgba(57, 255, 20, 0.52);
+    filter: drop-shadow(0 0 10px rgba(57, 255, 20, 0.42));
+    animation: none;
+  }
 }
-
-@keyframes laser-move {
-  0%   { left: 0%;    opacity: 0; }
-  5%   { opacity: 1; }
-  95%  { opacity: 1; }
-  100% { left: 100%;  opacity: 0; }
-}
-
-

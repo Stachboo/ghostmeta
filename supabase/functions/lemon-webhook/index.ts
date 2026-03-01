@@ -124,22 +124,6 @@ async function verifyWebhookSignature(
 }
 
 // ============================================================================
-// PRIVACY HELPERS
-// ============================================================================
-
-/** Masque un email : "user@gmail.com" → "u***@gmail.com" */
-function maskEmail(email: string): string {
-  const [local, domain] = email.split('@');
-  if (!domain) return '***';
-  return `${local[0]}***@${domain}`;
-}
-
-/** Tronque un UUID : "550e8400-e29b-..." → "550e8400" */
-function shortId(id: string): string {
-  return id.split('-')[0] || id.slice(0, 8);
-}
-
-// ============================================================================
 // DATABASE OPERATIONS
 // ============================================================================
 
@@ -167,7 +151,7 @@ async function updateUserPremiumStatus(
   userId: string,
   isPremium: boolean
 ): Promise<void> {
-  console.log(`[DB] Updating user ${shortId(userId)} premium status to: ${isPremium}`);
+  console.log(`[DB] Updating user ${userId} premium status to: ${isPremium}`);
 
   const { error } = await supabase
     .from('profiles')
@@ -182,7 +166,7 @@ async function updateUserPremiumStatus(
     throw new Error(`Profile update failed: ${error.message}`);
   }
 
-  console.log(`[DB] Successfully updated profile for user ${shortId(userId)}`);
+  console.log(`[DB] Successfully updated profile for user ${userId}`);
 }
 
 /**
@@ -219,9 +203,10 @@ async function upsertSubscription(
   };
 
   console.log('[DB] Upserting subscription:', {
-    user: shortId(userId),
+    user_id: userId,
     external_id: data.id,
     status: subscription.status,
+    variant_id: subscription.variant_id,
   });
 
   const { error } = await supabase
@@ -407,6 +392,7 @@ serve(async (req: Request) => {
 
     if (!userId) {
       console.error(`[${requestId}] ERROR: Missing user_id in custom_data`);
+      console.log(`[${requestId}] Custom data:`, JSON.stringify(meta.custom_data));
       return new Response('Missing user_id in custom_data', { status: 400 });
     }
 
@@ -416,8 +402,8 @@ serve(async (req: Request) => {
       return new Response('Invalid user_id format', { status: 400 });
     }
 
-    console.log(`[${requestId}] User: ${shortId(userId)}`);
-    console.log(`[${requestId}] Email: ${maskEmail(data.attributes.user_email || 'N/A')}`);
+    console.log(`[${requestId}] User ID: ${userId}`);
+    console.log(`[${requestId}] User Email: ${data.attributes.user_email || 'N/A'}`);
     console.log(`[${requestId}] Test Mode: ${data.attributes.test_mode || false}`);
 
     // ------------------------------------------------------------------------
@@ -454,10 +440,11 @@ serve(async (req: Request) => {
 
     console.log(`[${requestId}] ========== WEBHOOK PROCESSED SUCCESSFULLY ==========\n`);
     
-    return new Response(JSON.stringify({
-      success: true,
+    return new Response(JSON.stringify({ 
+      success: true, 
       request_id: requestId,
       event: eventName,
+      user_id: userId,
     }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
@@ -466,9 +453,10 @@ serve(async (req: Request) => {
   } catch (error) {
     console.error(`[${requestId}] CRITICAL ERROR:`, error);
     
-    return new Response(JSON.stringify({
-      success: false,
+    return new Response(JSON.stringify({ 
+      success: false, 
       request_id: requestId,
+      error: error instanceof Error ? error.message : 'Unknown error',
     }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },

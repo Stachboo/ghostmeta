@@ -2,24 +2,6 @@
   "common": {
     "back_home": "Retour a l'accueil"
   },
-  "nav": {
-    "home": "Accueil",
-    "blog": "Blog",
-    "security": "Sécurité",
-    "pricing": "Tarifs"
-  },
-  "breadcrumb": {
-    "home": "Accueil",
-    "blog": "Blog",
-    "security": "Sécurité & Confidentialité",
-    "pricing": "Tarifs"
-  },
-  "not_found": {
-    "title": "Zone introuvable",
-    "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
-    "back": "Retour à l'accueil",
-    "seo_title": "Page introuvable | GhostMeta"
-  },
   "error": {
     "system_failure": "SYSTEM_FAILURE",
     "render_error": "GHOSTMETA - ERREUR DE RENDU",
@@ -237,12 +219,6 @@
       }
     }
   },
-  "consent": {
-    "text": "GhostMeta utilise des mesures d'audience anonymes (Vercel Analytics) pour améliorer le service. Aucune photo ni donnée personnelle n'est collectée.",
-    "accept": "Accepter",
-    "refuse": "Refuser",
-    "learn_more": "En savoir plus"
-  },
   "trust": {
     "section_label": "Transparence Technique",
     "zero_upload": "Zéro Upload",
@@ -255,103 +231,5 @@
     "network_alert": "{{count}} requête(s) détectée(s)",
     "network_monitored": "Moniteur actif",
     "network_verified": "Réseau vérifié"
-  },
-  "security": {
-    "badge": "Sécurité & Confidentialité",
-    "h1": {
-      "line1": "Protégez vos photos,",
-      "line2": "protégez votre",
-      "accent": "vie privée",
-      "line3": "— sans rien envoyer."
-    },
-    "intro": "La plupart des outils de suppression de métadonnées vous demandent d'envoyer vos photos sur un serveur distant. C'est un paradoxe : pour protéger votre vie privée, vous devez d'abord confier vos images à un tiers. GhostMeta fonctionne autrement. Vos photos ne quittent jamais votre appareil. Cette page vous explique exactement comment, et surtout comment le vérifier.",
-    "s1": {
-      "title": "Vos photos ne quittent jamais votre appareil",
-      "p1": "GhostMeta supprime les métadonnées EXIF de vos photos — coordonnées GPS, modèle de téléphone, date de prise de vue, nom du fichier — directement dans votre navigateur. Le traitement est 100 % local. Aucune image n'est envoyée vers un serveur. Aucune copie n'est stockée. Aucune donnée n'est collectée.",
-      "p2": "La différence avec les outils classiques est simple : quand vous utilisez un service en ligne standard pour supprimer les métadonnées d'une photo, votre image voyage jusqu'à un serveur distant, y est traitée, puis vous est renvoyée. Pendant ce trajet, votre photo existe quelque part sur une machine que vous ne contrôlez pas. Vous n'avez aucune garantie sur ce qu'il en advient ensuite.",
-      "p3": "Avec GhostMeta, il n'y a pas de trajet. Votre photo entre dans votre navigateur, y est nettoyée, et en ressort. Le serveur de GhostMeta ne voit jamais vos images. Pas parce qu'on a choisi de ne pas les regarder — mais parce qu'elles ne lui sont tout simplement jamais transmises."
-    },
-    "flow": {
-      "local_title": "GhostMeta — Traitement local",
-      "your_photo": "Votre photo",
-      "your_browser": "Votre navigateur",
-      "cleaned": "Photo nettoyée",
-      "local_badge": "Tout reste sur votre appareil",
-      "upload_title": "Outils classiques — Upload serveur",
-      "server": "Serveur distant",
-      "upload_badge": "Vos images transitent par un tiers"
-    },
-    "s2": {
-      "title": "Comment ça fonctionne concrètement",
-      "intro": "Quand vous déposez une photo sur GhostMeta, voici ce qui se passe :",
-      "no_network": "Aucune requête réseau ne transporte votre image."
-    },
-    "how": {
-      "step1": "Votre navigateur charge le fichier image depuis votre appareil.",
-      "step2": "Un script JavaScript, exécuté côté client (sur votre machine, pas sur un serveur distant), lit le fichier et identifie toutes les métadonnées EXIF.",
-      "step3": "Le script génère une nouvelle version de votre image, identique visuellement, mais débarrassée de toutes les données EXIF.",
-      "step4": "Vous téléchargez cette version nettoyée. L'image originale reste intacte sur votre appareil."
-    },
-    "verify": {
-      "title": "Vérifiez par vous-même",
-      "proof": "C'est la preuve la plus directe qu'on puisse offrir. Pas une promesse marketing — un fait technique vérifiable en trente secondes. Les outils classiques ne vous proposeront jamais ce test, parce qu'ils ne le passeraient pas."
-    },
-    "terminal": {
-      "title": "DEVTOOLS › RÉSEAU",
-      "s1": "Ouvrez GhostMeta dans votre navigateur.",
-      "s2": "Appuyez sur F12 → outils de développement.",
-      "s3": "Onglet Réseau (Network).",
-      "s4": "Déposez une photo, lancez la suppression.",
-      "s5": "Observez : aucun fichier image envoyé.",
-      "result_label": "résultat →",
-      "result": "0 requête image"
-    },
-    "s3": {
-      "title": "Pourquoi c'est plus sûr qu'un outil classique",
-      "intro": "Il y a quelque chose d'absurde à utiliser un « outil de confidentialité » qui exige d'abord que vous lui envoyiez vos photos. C'est comme confier vos clés à un inconnu pour qu'il vérifie que votre porte est bien fermée.",
-      "conclusion": "Vous n'avez pas besoin de nous faire confiance. Vous pouvez vérifier. C'est toute la différence."
-    },
-    "table": {
-      "header_criteria": "Critère",
-      "header_upload": "Upload serveur",
-      "r1": { "c": "Upload requis ?", "g": "Non — tout reste sur votre appareil", "s": "Oui — vos photos transitent par un serveur tiers" },
-      "r2": { "c": "Stockage des images ?", "g": "Aucun — zéro donnée conservée", "s": "Possible — dépend de la politique du service" },
-      "r3": { "c": "Fonctionne hors ligne ?", "g": "Oui — une fois la page chargée", "s": "Non — connexion permanente nécessaire" },
-      "r4": { "c": "Risque de fuite ?", "g": "Aucun — pas de transfert, pas de fuite", "s": "Présent — serveur = surface d'attaque" },
-      "r5": { "c": "Qualité de l'image ?", "g": "Optimale — recompression légère à 92%, imperceptible à l'œil nu", "s": "Variable — qualité non garantie après traitement serveur" }
-    },
-    "s4": {
-      "title": "Nos engagements"
-    },
-    "commits": {
-      "c1": { "title": "Pas de cookies de tracking", "desc": "Zéro traceur publicitaire. Votre visite reste votre affaire." },
-      "c2": { "title": "Pas de publicité", "desc": "Interface propre. Zéro bannière, zéro pop-up, zéro lien sponsorisé." },
-      "c3": { "title": "Suppression EXIF complète", "desc": "GPS, appareil, date, vignettes, commentaires — tout est retiré. Sans compression." },
-      "c4": { "title": "Compatible RGPD par architecture", "desc": "Zéro donnée collectée = zéro obligation de stockage, zéro risque de violation." }
-    },
-    "faq": {
-      "title": "Questions fréquentes",
-      "q1": "Mes photos sont-elles envoyées sur un serveur ?",
-      "a1": "Non, jamais. Vos photos sont traitées localement dans votre navigateur par un script JavaScript côté client. Aucun fichier image ne transite par les serveurs de GhostMeta.",
-      "q2": "GhostMeta conserve-t-il mes images ?",
-      "a2": "Non. Aucune image n'est stockée, ni temporairement ni définitivement. Une fois la page fermée, il ne reste aucune trace de votre passage.",
-      "q3": "Est-ce que ça fonctionne hors ligne ?",
-      "a3": "Oui. Une fois la page GhostMeta chargée dans votre navigateur, vous pouvez couper votre connexion internet et continuer à supprimer les métadonnées de vos photos. Le traitement ne dépend d'aucun serveur distant.",
-      "q4": "Quelles métadonnées sont supprimées ?",
-      "a4": "Toutes les données EXIF : coordonnées GPS, modèle d'appareil photo ou de téléphone, date et heure de prise de vue, paramètres de l'objectif, orientation, vignettes embarquées, commentaires et autres champs personnalisés.",
-      "q5": "La qualité de mes photos est-elle affectée ?",
-      "a5": "Non. GhostMeta retire les métadonnées sans toucher aux données de l'image elle-même. Pas de recompression, pas de redimensionnement. Votre photo en ressort visuellement identique, avec un poids de fichier légèrement réduit."
-    },
-    "cta": {
-      "button": "Essayez GhostMeta maintenant",
-      "sub": "Rien n'est uploadé — tout reste sur votre appareil"
-    },
-    "seo": {
-      "title": "Sécurité & Confidentialité | GhostMeta — Traitement 100% Local",
-      "description": "GhostMeta traite vos photos uniquement dans votre navigateur. Aucun upload, aucun stockage, aucune collecte de données. Découvrez notre modèle de sécurité.",
-      "og_title": "Sécurité & Confidentialité | GhostMeta",
-      "og_desc": "Vos photos ne quittent jamais votre appareil. Traitement 100% local, zéro upload, zéro collecte."
-    },
-    "footer_link": "Sécurité"
   }
 }

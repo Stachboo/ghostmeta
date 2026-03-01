@@ -6,11 +6,9 @@ import {
   extractMetadata,
   stripMetadata,
   isSupportedImage,
-  validateImageFile,
 } from '@/lib/image-processor';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabase';
-import { logSecurityEvent } from '@/lib/security-logger';
 
 interface ProcessingStats {
   total: number;
@@ -38,26 +36,9 @@ export function useImageProcessor() {
 
   const scanImage = async (img: ProcessedImage): Promise<ProcessedImage> => {
     try {
-      // SEC-009 : Valider les magic bytes AVANT tout traitement
-      const validation = await validateImageFile(img.originalFile);
-      if (!validation.valid) {
-        // SEC-019 : Log structuré des fichiers rejetés
-        logSecurityEvent('FILE_REJECTED', validation.error || 'Validation échouée', {
-          filename: img.originalName,
-          size: img.originalSize,
-          type: img.originalFile.type,
-        });
-        return { ...img, status: 'error' as const, error: validation.error };
-      }
-
       const metadata = await extractMetadata(img.originalFile);
       return { ...img, metadata, status: 'scanned' as const };
-    } catch (err) {
-      // SEC-019 : Log des erreurs de traitement inattendues
-      logSecurityEvent('PROCESSING_ERROR', err instanceof Error ? err.message : 'Erreur inconnue', {
-        filename: img.originalName,
-        size: img.originalSize,
-      });
+    } catch {
       return { ...img, status: 'scanned' as const, metadata: { raw: {}, threatLevel: 'safe' as const, threats: [] } };
     }
   };
@@ -77,9 +58,8 @@ export function useImageProcessor() {
     }
 
     // Marquer has_viewed_metadata=true via la fonction SECURITY DEFINER (bypass RLS)
-    // La fonction SQL doit utiliser auth.uid() en interne — on ne passe plus user_id
     if (user && !profile?.is_premium && !profile?.has_viewed_metadata) {
-      await supabase.rpc('lock_metadata_view');
+      await supabase.rpc('lock_metadata_view', { user_id: user.id });
       await refreshProfile();
     }
 

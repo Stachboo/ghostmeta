@@ -2,15 +2,20 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/icon-192.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0a0a0c" />
-    <link rel="manifest" href="/manifest.json" />
 
     <meta name="google-site-verification" content="19xcI1MYz04aeZ_uVhUOshrPNhyMoyS0-u15Mba2pL0" />
 
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <title>GhostMeta | Nettoyeur Photo pour Vinted & Leboncoin (Gratuit)</title>
+    <meta name="description" content="Sécurisez vos ventes : supprimez immédiatement le GPS et les métadonnées cachées de vos photos Vinted, Leboncoin et eBay. Protection 100% locale et anonyme." />
+    <meta name="keywords" content="Vinted, Leboncoin, eBay, supprimer EXIF, localisation photo, anonymiser photo, sécurité vendeur, métadonnées, GPS" />
+
+    <link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/" />
+    <link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/?lng=en" />
+    <link rel="alternate" hreflang="x-default" href="https://www.ghostmeta.online/" />
 
     <!-- Google Font : Rajdhani (titre hero matrice) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,7 +26,23 @@
     <!-- Sans preload, le navigateur découvre cette image trop tard (dans le JS) -->
     <link rel="preload" as="image" href="/hero-bg.avif" type="image/avif" fetchpriority="high" />
 
-    <!-- Balises SEO page-spécifiques gérées par react-helmet-async dans chaque page -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.ghostmeta.online/" />
+    <meta property="og:title" content="Protégez votre adresse sur Vinted et Leboncoin" />
+    <meta property="og:description" content="Outil gratuit pour supprimer la localisation GPS de vos photos de vente. Ne publiez rien sans nettoyer !" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:image" content="https://www.ghostmeta.online/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GhostMeta — Sécurité Vinted & Leboncoin" />
+    <meta name="twitter:description" content="Supprimez GPS et EXIF en 1 clic. 100% Gratuit & Local." />
+    <meta name="twitter:image" content="https://www.ghostmeta.online/og-image.jpg" />
+
+    <link rel="canonical" href="https://www.ghostmeta.online/" />
 
     <!-- CSP géré via vercel.json (HTTP headers) — plus complet et prioritaire -->
 
@@ -31,7 +52,7 @@
       "@type": "WebApplication",
       "name": "GhostMeta",
       "url": "https://www.ghostmeta.online",
-      "image": "https://www.ghostmeta.online/og-image-v2.jpg",
+      "image": "https://www.ghostmeta.online/og-image.jpg",
       "applicationCategory": "UtilityApplication",
       "operatingSystem": "Windows, macOS, Android, iOS",
       "description": "Outil gratuit pour supprimer les métadonnées EXIF et GPS des photos avant de les poster sur Vinted, Leboncoin ou eBay. Traitement 100% local via Canvas.",
@@ -163,19 +184,25 @@
           opacity: 0;
           visibility: hidden;
         }
+        .loader-icon {
+          width: clamp(80px, 22vw, 140px);
+          height: clamp(80px, 22vw, 140px);
+          border-radius: 24px;
+          margin-bottom: 2rem;
+          animation: pulse 2s infinite;
+        }
         .loader-text {
           color: #22c55e;
-          font-size: 1.5rem;
+          font-size: clamp(1rem, 4vw, 1.5rem);
           font-weight: 700;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.2em;
           margin-bottom: 1.5rem;
           text-transform: uppercase;
           text-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
-          animation: pulse 2s infinite;
         }
         .loader-bar-container {
-          width: 200px;
-          height: 4px;
+          width: clamp(140px, 40vw, 220px);
+          height: 3px;
           background: #1f2937;
           border-radius: 2px;
           overflow: hidden;
@@ -206,13 +233,11 @@
         <img
           src="/icon-512.png"
           alt=""
-          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"
+          class="loader-icon"
         />
-        <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;">
-          <div class="loader-text">INITIALISATION DU SYSTÈME...</div>
-          <div class="loader-bar-container">
-            <div class="loader-bar"></div>
-          </div>
+        <div class="loader-text">GHOSTMETA</div>
+        <div class="loader-bar-container">
+          <div class="loader-bar"></div>
         </div>
       </div>
 
