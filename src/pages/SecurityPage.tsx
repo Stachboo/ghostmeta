@@ -1,13 +1,13 @@
 /**
  * SecurityPage — Page "Securite & Confidentialite" / "Security & Privacy"
  *
- * Routes : /fr/securite, /en/security
+ * Route : /securite (langue via i18next, comme les autres pages)
  * SEO : Helmet, hreflang, JSON-LD (WebPage)
  * i18n : toutes les chaines via react-i18next (cles security.*)
  */
 
 import { useState, useEffect, useRef, ReactNode } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import {
@@ -15,7 +15,8 @@ import {
   Cookie, EyeOff, ShieldCheck, FileCheck, ArrowRight,
   Cloud, Lock, Terminal, Monitor, Smartphone, Server, ChevronRight,
 } from 'lucide-react';
-import GhostLogo from '@/components/GhostLogo';
+import Header from '@/components/Header';
+import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 
 /* ─── Scroll-triggered reveal ─── */
@@ -315,23 +316,14 @@ function CommitCards() {
    ═══════════════════════════════════════════════════════════ */
 export default function SecurityPage() {
   const { t, i18n } = useTranslation();
-  const location = useLocation();
-  const isFr = location.pathname.startsWith('/fr/');
-
-  // Basculer la langue selon la route
-  useEffect(() => {
-    const lang = isFr ? 'fr' : 'en';
-    if (i18n.language !== lang) i18n.changeLanguage(lang);
-  }, [isFr, i18n]);
 
   // Supprimer le bot-content injecte par le prerender
   useEffect(() => {
     document.getElementById('bot-content')?.remove();
   }, []);
 
-  const canonicalFr = 'https://www.ghostmeta.online/fr/securite';
-  const canonicalEn = 'https://www.ghostmeta.online/en/security';
-  const canonical = isFr ? canonicalFr : canonicalEn;
+  const canonical = 'https://www.ghostmeta.online/securite';
+  const hreflangEn = 'https://www.ghostmeta.online/securite?lng=en';
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -340,7 +332,7 @@ export default function SecurityPage() {
     url: canonical,
     name: t('security.seo.title'),
     description: t('security.seo.description'),
-    inLanguage: isFr ? 'fr' : 'en',
+    inLanguage: i18n.language === 'fr' ? 'fr' : 'en',
     isPartOf: { '@id': 'https://www.ghostmeta.online/#website' },
   };
 
@@ -352,9 +344,9 @@ export default function SecurityPage() {
         <title>{t('security.seo.title')}</title>
         <meta name="description" content={t('security.seo.description')} />
         <link rel="canonical" href={canonical} />
-        <link rel="alternate" hrefLang="fr" href={canonicalFr} />
-        <link rel="alternate" hrefLang="en" href={canonicalEn} />
-        <link rel="alternate" hrefLang="x-default" href={canonicalEn} />
+        <link rel="alternate" hrefLang="fr" href={canonical} />
+        <link rel="alternate" hrefLang="en" href={hreflangEn} />
+        <link rel="alternate" hrefLang="x-default" href={canonical} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="GhostMeta" />
         <meta property="og:title" content={t('security.seo.og_title')} />
@@ -371,20 +363,8 @@ export default function SecurityPage() {
 
       <GrainOverlay />
 
-      {/* Header */}
-      <header className="border-b border-white/10 bg-black/50 backdrop-blur-md sticky top-0 z-40">
-        <div className="container h-16 flex items-center justify-between px-4">
-          <Link to="/" className="flex items-center gap-2">
-            <GhostLogo size={32} />
-            <span className="text-lg font-bold tracking-wider">
-              Ghost<span className="text-[#00ff41]">Meta</span>
-            </span>
-          </Link>
-          <Link to="/" className="text-sm text-zinc-400 hover:text-[#00ff41] transition-colors">
-            {t('common.back_home')}
-          </Link>
-        </div>
-      </header>
+      <Header />
+      <Breadcrumb items={[{ label: t('breadcrumb.security') }]} />
 
       {/* Content */}
       <main className="flex-1 relative">

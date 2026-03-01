@@ -1,5 +1,5 @@
 import { Suspense, lazy, useLayoutEffect, useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import ErrorBoundary from './components/ErrorBoundary';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
@@ -98,9 +98,11 @@ function App() {
             {/* 2. Pricing Page */}
             <Route path="/pricing" element={<PricingPage />} />
 
-            {/* 3. Securite / Security */}
-            <Route path="/fr/securite" element={<SecurityPage />} />
-            <Route path="/en/security" element={<SecurityPage />} />
+            {/* 3. Securite */}
+            <Route path="/securite" element={<SecurityPage />} />
+            {/* Redirections anciennes URLs */}
+            <Route path="/fr/securite" element={<Navigate to="/securite" replace />} />
+            <Route path="/en/security" element={<Navigate to="/securite?lng=en" replace />} />
 
             {/* 4. Le Blog (Route dynamique) */}
             <Route path="/blog/:slug" element={<BlogPost />} />

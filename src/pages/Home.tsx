@@ -377,7 +377,7 @@ export default function Home() {
         </section>
 
         {/* BLOG SEO */}
-        <section className="container py-16 border-t border-border/30">
+        <section id="blog" className="container py-16 border-t border-border/30">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold mb-8 text-[#00ff41]">{t('blog.section_title')}</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-left">

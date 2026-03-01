@@ -122,13 +122,16 @@ try {
 } catch(e) { err('/pricing', e); }
 
 // ── /blog/:slug ───────────────────────────────────────────────────────────────
-const SLUGS = [
-  'vinted-securite-photo-guide',
-  'supprimer-exif-iphone-android',
-  'comprendre-donnees-exif-gps',
-  'nettoyage-photo-local-vs-cloud',
-  'ghostmeta-manifeste-confidentialite',
-];
+// Dates de publication par article (source : sitemap.xml)
+const BLOG_DATES = {
+  'vinted-securite-photo-guide': '2026-02-17',
+  'supprimer-exif-iphone-android': '2026-02-17',
+  'comprendre-donnees-exif-gps': '2026-02-17',
+  'nettoyage-photo-local-vs-cloud': '2026-02-17',
+  'ghostmeta-manifeste-confidentialite': '2026-02-17',
+};
+
+const SLUGS = Object.keys(BLOG_DATES);
 
 for (const slug of SLUGS) {
   try {
@@ -161,8 +164,8 @@ for (const slug of SLUGS) {
           name: 'GhostMeta Labs',
           logo: { '@type': 'ImageObject', url: 'https://www.ghostmeta.online/icon-192.png' },
         },
-        datePublished: '2026-02-20',
-        dateModified: '2026-02-20',
+        datePublished: BLOG_DATES[slug],
+        dateModified: BLOG_DATES[slug],
         mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
         image: { '@type': 'ImageObject', url: 'https://www.ghostmeta.online/og-image-v2.jpg', width: 1200, height: 630 },
       },
@@ -171,7 +174,7 @@ for (const slug of SLUGS) {
   } catch(e) { err(`/blog/${slug}`, e); }
 }
 
-// ── /fr/securite ──────────────────────────────────────────────────────────────
+// ── /securite ─────────────────────────────────────────────────────────────────
 try {
   const secTitle = get(fr, 'security.seo.title');
   const secDesc  = get(fr, 'security.seo.description');
@@ -189,67 +192,25 @@ try {
     `<h2>${escHtml(get(fr, 'security.s4.title'))}</h2>`,
   ].join('\n');
 
-  saveHtml('dist/fr/securite/index.html', buildHtml({
+  saveHtml('dist/securite/index.html', buildHtml({
     title:       secTitle,
     description: secDesc,
-    canonical:   'https://www.ghostmeta.online/fr/securite',
-    hreflangEn:  'https://www.ghostmeta.online/en/security',
+    canonical:   'https://www.ghostmeta.online/securite',
+    hreflangEn:  'https://www.ghostmeta.online/securite?lng=en',
     bodyContent: secBodyContent,
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
-      '@id': 'https://www.ghostmeta.online/fr/securite',
-      url: 'https://www.ghostmeta.online/fr/securite',
+      '@id': 'https://www.ghostmeta.online/securite',
+      url: 'https://www.ghostmeta.online/securite',
       name: secTitle,
       description: secDesc,
       inLanguage: 'fr',
       isPartOf: { '@id': 'https://www.ghostmeta.online/#website' },
     },
   }));
-  log('/fr/securite', 'dist/fr/securite/index.html'); ok++;
-} catch(e) { err('/fr/securite', e); }
-
-// ── /en/security ─────────────────────────────────────────────────────────────
-try {
-  // Charger les traductions anglaises
-  const en = JSON.parse(
-    readFileSync(join(ROOT, 'src', 'locales', 'en', 'translation.json'), 'utf-8')
-  );
-  const secTitleEn = get(en, 'security.seo.title');
-  const secDescEn  = get(en, 'security.seo.description');
-  const secBodyContentEn = [
-    `<h1>${escHtml(get(en, 'security.h1.line1'))} ${escHtml(get(en, 'security.h1.line2'))} ${escHtml(get(en, 'security.h1.accent'))} ${escHtml(get(en, 'security.h1.line3'))}</h1>`,
-    `<p>${escHtml(get(en, 'security.intro'))}</p>`,
-    `<h2>${escHtml(get(en, 'security.s1.title'))}</h2>`,
-    `<p>${escHtml(get(en, 'security.s1.p1'))}</p>`,
-    `<p>${escHtml(get(en, 'security.s1.p2'))}</p>`,
-    `<p>${escHtml(get(en, 'security.s1.p3'))}</p>`,
-    `<h2>${escHtml(get(en, 'security.s2.title'))}</h2>`,
-    `<p>${escHtml(get(en, 'security.s2.intro'))}</p>`,
-    `<h2>${escHtml(get(en, 'security.s3.title'))}</h2>`,
-    `<p>${escHtml(get(en, 'security.s3.intro'))}</p>`,
-    `<h2>${escHtml(get(en, 'security.s4.title'))}</h2>`,
-  ].join('\n');
-
-  saveHtml('dist/en/security/index.html', buildHtml({
-    title:       secTitleEn,
-    description: secDescEn,
-    canonical:   'https://www.ghostmeta.online/en/security',
-    hreflangEn:  'https://www.ghostmeta.online/en/security',
-    bodyContent: secBodyContentEn,
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'WebPage',
-      '@id': 'https://www.ghostmeta.online/en/security',
-      url: 'https://www.ghostmeta.online/en/security',
-      name: secTitleEn,
-      description: secDescEn,
-      inLanguage: 'en',
-      isPartOf: { '@id': 'https://www.ghostmeta.online/#website' },
-    },
-  }));
-  log('/en/security', 'dist/en/security/index.html'); ok++;
-} catch(e) { err('/en/security', e); }
+  log('/securite', 'dist/securite/index.html'); ok++;
+} catch(e) { err('/securite', e); }
 
 console.log(`\n[prerender] ─── Résultat : ${ok} OK, ${fail} erreur(s) ─────────────\n`);
 process.exit(fail > 0 ? 1 : 0);

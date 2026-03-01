@@ -22,23 +22,13 @@
   </url>
 
   <url>
-    <loc>https://www.ghostmeta.online/fr/securite</loc>
-    <lastmod>2026-02-28</lastmod>
+    <loc>https://www.ghostmeta.online/securite</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/fr/securite"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/en/security"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ghostmeta.online/en/security"/>
-  </url>
-
-  <url>
-    <loc>https://www.ghostmeta.online/en/security</loc>
-    <lastmod>2026-02-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/en/security"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/fr/securite"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ghostmeta.online/en/security"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/securite"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/securite?lng=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ghostmeta.online/securite"/>
   </url>
 
   <url>
