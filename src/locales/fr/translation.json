@@ -300,7 +300,7 @@
       "r2": { "c": "Stockage des images ?", "g": "Aucun — zéro donnée conservée", "s": "Possible — dépend de la politique du service" },
       "r3": { "c": "Fonctionne hors ligne ?", "g": "Oui — une fois la page chargée", "s": "Non — connexion permanente nécessaire" },
       "r4": { "c": "Risque de fuite ?", "g": "Aucun — pas de transfert, pas de fuite", "s": "Présent — serveur = surface d'attaque" },
-      "r5": { "c": "Qualité préservée ?", "g": "Oui — suppression sans compression", "s": "Variable — certains recompressent" }
+      "r5": { "c": "Qualité de l'image ?", "g": "Optimale — recompression légère à 92%, imperceptible à l'œil nu", "s": "Variable — qualité non garantie après traitement serveur" }
     },
     "s4": {
       "title": "Nos engagements"

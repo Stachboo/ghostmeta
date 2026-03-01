@@ -300,7 +300,7 @@
       "r2": { "c": "Images stored?", "g": "Never — zero data retained", "s": "Possibly — depends on the service's policy" },
       "r3": { "c": "Works offline?", "g": "Yes — once the page is loaded", "s": "No — requires a constant connection" },
       "r4": { "c": "Risk of data leak?", "g": "None — no transfer means no leak", "s": "Present — servers are attack surfaces" },
-      "r5": { "c": "Image quality preserved?", "g": "Yes — lossless removal, no compression", "s": "Varies — some tools recompress your images" }
+      "r5": { "c": "Image quality?", "g": "Optimal — light 92% recompression, imperceptible to the eye", "s": "Variable — quality not guaranteed after server processing" }
     },
     "s4": {
       "title": "Our commitments"
