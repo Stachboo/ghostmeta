@@ -43,6 +43,12 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Désactiver le scroll anchoring du navigateur —
+     empêche Chrome/Firefox de « corriger » la position de scroll
+     quand le contenu change (ex. Suspense → lazy page) */
+  html {
+    overflow-anchor: none;
+  }
 }
 
 .highlight-confidential {

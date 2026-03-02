@@ -62,15 +62,41 @@ function LoadingFallback() {
 }
 
 /**
- * ScrollToTop — useLayoutEffect (synchrone, AVANT le paint du navigateur)
- * + behavior: 'instant' pour forcer un scroll immédiat sans animation.
+ * ScrollToTop — Scroll vers le haut à chaque changement de route.
+ *
+ * Trois couches de protection :
+ *   1. history.scrollRestoration = 'manual' → désactive la restauration
+ *      automatique du navigateur (back/forward ET pushState).
+ *   2. useLayoutEffect (synchrone, AVANT le paint) → scroll immédiat.
+ *   3. useEffect + requestAnimationFrame → safety net APRÈS que Suspense
+ *      resolve le lazy chunk et que le contenu réel est peint.
+ *
  * Placé hors de Suspense pour ne jamais être démonté pendant le lazy loading.
  */
 function ScrollToTop() {
   const { pathname } = useLocation();
+
+  // Désactiver la scroll restoration du navigateur une seule fois
   useLayoutEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  }, []);
+
+  // Scroll immédiat (avant paint) à chaque changement de route
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
   }, [pathname]);
+
+  // Safety net : re-scroll après le paint et la résolution Suspense/lazy
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [pathname]);
+
   return null;
 }
 
