@@ -58,7 +58,7 @@ export default function DropZone({ onFilesAdded, hasImages, isProcessing }: Drop
         ${hasImages ? 'h-32' : 'h-64 sm:h-80'}
       `}
     >
-      <input {...getInputProps()} />
+      <input {...getInputProps()} aria-label={t('upload.drop_title')} />
       
       <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center space-y-4">
         <motion.div
