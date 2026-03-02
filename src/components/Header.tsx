@@ -8,7 +8,8 @@
  */
 
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import ScrollLink from './ScrollLink';
 import { useTranslation } from 'react-i18next';
 import { Globe, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -53,19 +54,19 @@ export default function Header() {
     <header className="border-b border-white/10 bg-black/50 backdrop-blur-md sticky top-0 z-50">
       <div className="container h-14 flex items-center justify-between px-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
+        <ScrollLink to="/" className="flex items-center gap-2">
           <GhostLogo size={32} />
           <span className="text-lg font-bold tracking-tight">
             Ghost<span className="text-[#00ff41]">Meta</span>
           </span>
-        </Link>
+        </ScrollLink>
 
         {/* Desktop nav + langue */}
         <div className="flex items-center gap-6">
           {/* Nav links — desktop only */}
           <nav className="hidden md:flex items-center gap-5">
             {NAV_LINKS.map(({ key, to }) => (
-              <Link
+              <ScrollLink
                 key={key}
                 to={to}
                 className={`text-sm transition-colors ${
@@ -75,7 +76,7 @@ export default function Header() {
                 }`}
               >
                 {t(`nav.${key}`)}
-              </Link>
+              </ScrollLink>
             ))}
           </nav>
 
@@ -126,7 +127,7 @@ export default function Header() {
               </SheetHeader>
               <nav className="flex flex-col gap-4 px-4 mt-4">
                 {NAV_LINKS.map(({ key, to }) => (
-                  <Link
+                  <ScrollLink
                     key={key}
                     to={to}
                     onClick={() => setOpen(false)}
@@ -137,7 +138,7 @@ export default function Header() {
                     }`}
                   >
                     {t(`nav.${key}`)}
-                  </Link>
+                  </ScrollLink>
                 ))}
               </nav>
             </SheetContent>

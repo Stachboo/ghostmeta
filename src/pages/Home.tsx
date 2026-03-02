@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import ScrollLink from '@/components/ScrollLink';
 import { ShieldCheck, Zap, Trash2, Download, Lock, ChevronDown, Shield, AlertTriangle, Globe, Smartphone, Clock, MapPin, CheckCircle2, XCircle, Server, Heart, Scan, FileDigit, MousePointerClick
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -138,7 +138,7 @@ export default function Home() {
             </DropdownMenu>
             
             {!isPro() && (
-              <Link to="/pricing">
+              <ScrollLink to="/pricing">
                 <Button
                   variant="outline"
                   size="sm"
@@ -146,7 +146,7 @@ export default function Home() {
                 >
                   <Zap className="w-3.5 h-3.5 mr-1" /> {t("header.upgrade")}
                 </Button>
-              </Link>
+              </ScrollLink>
             )}
             
             <AuthButton />
@@ -390,15 +390,15 @@ export default function Home() {
             <h2 className="text-2xl font-bold mb-8 text-[#00ff41]">{t('blog.section_title')}</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
               {['vinted-securite-photo-guide', 'supprimer-exif-iphone-android', 'comprendre-donnees-exif-gps', 'nettoyage-photo-local-vs-cloud'].map(slug => (
-                <Link key={slug} to={`/blog/${slug}`} className="p-4 rounded-lg bg-card border border-border hover:border-[#00ff41]/50 transition-all">
+                <ScrollLink key={slug} to={`/blog/${slug}`} className="p-4 rounded-lg bg-card border border-border hover:border-[#00ff41]/50 transition-all">
                   <h3 className="font-bold text-sm text-foreground mb-1">{t(`blog.posts.${slug}.title`)}</h3>
                   <p className="text-xs text-muted-foreground">{t(`blog.posts.${slug}.desc`)}</p>
-                </Link>
+                </ScrollLink>
               ))}
-              <Link to="/blog/ghostmeta-manifeste-confidentialite" className="p-4 rounded-lg bg-card border border-border hover:border-[#00ff41]/50 transition-all sm:col-span-2 lg:col-span-1">
+              <ScrollLink to="/blog/ghostmeta-manifeste-confidentialite" className="p-4 rounded-lg bg-card border border-border hover:border-[#00ff41]/50 transition-all sm:col-span-2 lg:col-span-1">
                 <h3 className="font-bold text-sm text-foreground mb-1">{t('blog.posts.ghostmeta-manifeste-confidentialite.title')}</h3>
                 <p className="text-xs text-muted-foreground">{t('blog.posts.ghostmeta-manifeste-confidentialite.desc')}</p>
-              </Link>
+              </ScrollLink>
             </div>
           </div>
         </section>

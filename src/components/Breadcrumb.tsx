@@ -5,7 +5,7 @@
  * Injecte le schema.org BreadcrumbList via Helmet.
  */
 
-import { Link } from 'react-router-dom';
+import ScrollLink from './ScrollLink';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { ChevronRight } from 'lucide-react';
@@ -55,12 +55,12 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
                 <ChevronRight className="w-3 h-3 text-muted-foreground/40" />
               )}
               {item.to && i < crumbs.length - 1 ? (
-                <Link
+                <ScrollLink
                   to={item.to}
                   className="hover:text-[#00ff41] transition-colors"
                 >
                   {item.label}
-                </Link>
+                </ScrollLink>
               ) : (
                 <span className="text-white/70">{item.label}</span>
               )}
