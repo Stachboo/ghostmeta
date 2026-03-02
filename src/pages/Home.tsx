@@ -312,7 +312,7 @@ export default function Home() {
             <div className="p-6 rounded-xl border border-white/10 bg-white/5 hover:border-[#00ff41]/30 transition-colors relative group">
               <div className="flex justify-between items-start mb-4">
                 <div className="p-2 bg-[#00ff41]/10 rounded-lg text-[#00ff41]"><MousePointerClick className="w-6 h-6" /></div>
-                <span aria-hidden="true" className="text-4xl font-bold text-white/5 group-hover:text-white/10 transition-colors">01</span>
+                <span aria-hidden="true" className="text-4xl font-bold text-white/20 group-hover:text-white/30 transition-colors">01</span>
               </div>
               <h3 className="font-bold text-[#00ff41] mb-2">{t('info.step_1_title')}</h3>
               <p className="text-xs text-muted-foreground">{t('info.step_1_desc')}</p>
@@ -322,7 +322,7 @@ export default function Home() {
             <div className="p-6 rounded-xl border border-white/10 bg-white/5 hover:border-[#ffb000]/30 transition-colors relative group">
               <div className="flex justify-between items-start mb-4">
                 <div className="p-2 bg-[#ffb000]/10 rounded-lg text-[#ffb000]"><Scan className="w-6 h-6" /></div>
-                <span aria-hidden="true" className="text-4xl font-bold text-white/5 group-hover:text-white/10 transition-colors">02</span>
+                <span aria-hidden="true" className="text-4xl font-bold text-white/20 group-hover:text-white/30 transition-colors">02</span>
               </div>
               <h3 className="font-bold text-[#ffb000] mb-2">{t('info.step_2_title')}</h3>
               <p className="text-xs text-muted-foreground">{t('info.step_2_desc')}</p>
@@ -332,7 +332,7 @@ export default function Home() {
             <div className="p-6 rounded-xl border border-white/10 bg-white/5 hover:border-[#00ff41]/30 transition-colors relative group">
               <div className="flex justify-between items-start mb-4">
                 <div className="p-2 bg-[#00ff41]/10 rounded-lg text-[#00ff41]"><FileDigit className="w-6 h-6" /></div>
-                <span aria-hidden="true" className="text-4xl font-bold text-white/5 group-hover:text-white/10 transition-colors">03</span>
+                <span aria-hidden="true" className="text-4xl font-bold text-white/20 group-hover:text-white/30 transition-colors">03</span>
               </div>
               <h3 className="font-bold text-[#00ff41] mb-2">{t('info.step_3_title')}</h3>
               <p className="text-xs text-muted-foreground">{t('info.step_3_desc')}</p>
