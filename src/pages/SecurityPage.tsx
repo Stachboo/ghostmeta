@@ -7,7 +7,7 @@
  */
 
 import { useState, useEffect, useRef, ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import ScrollLink from '@/components/ScrollLink';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import {
@@ -476,14 +476,14 @@ export default function SecurityPage() {
           {/* ══════ CTA ══════ */}
           <div className="mt-20 mb-8 text-center">
             <Reveal>
-              <Link
+              <ScrollLink
                 to="/"
                 className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-base font-bold transition-all duration-300 bg-[#00ff41] text-[#0a0a0c] hover:-translate-y-0.5 hover:scale-[1.02]"
                 style={{ boxShadow: '0 0 30px #00ff4120, 0 4px 16px rgba(0,0,0,0.4)' }}
               >
                 {t('security.cta.button')}
                 <ArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
-              </Link>
+              </ScrollLink>
               <p className="mt-4 text-sm text-muted-foreground/50">
                 {t('security.cta.sub')}
               </p>
