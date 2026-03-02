@@ -186,18 +186,28 @@ export default function AuthButton() {
                 required
                 className="h-11 bg-zinc-900 border-zinc-700 text-white placeholder:text-zinc-500"
               />
-              <Input
-                type="password"
-                placeholder={t(
-                  "auth.password_placeholder",
-                  "Mot de passe (6+ caractères)"
+              <div>
+                <Input
+                  type="password"
+                  placeholder={t(
+                    "auth.password_placeholder",
+                    "Mot de passe"
+                  )}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  minLength={6}
+                  className="h-11 bg-zinc-900 border-zinc-700 text-white placeholder:text-zinc-500"
+                />
+                {isSignUp && (
+                  <p className="text-[10px] text-zinc-500 mt-1 px-1">
+                    {t(
+                      "auth.password_rules",
+                      "Min. 6 caractères : majuscule, minuscule, chiffre et caractère spécial"
+                    )}
+                  </p>
                 )}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                minLength={6}
-                className="h-11 bg-zinc-900 border-zinc-700 text-white placeholder:text-zinc-500"
-              />
+              </div>
               <Button
                 type="submit"
                 disabled={submitting}

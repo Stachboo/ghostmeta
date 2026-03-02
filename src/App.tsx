@@ -1,6 +1,7 @@
 import { Suspense, lazy, useLayoutEffect, useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
+import { Toaster } from 'sonner';
 import ErrorBoundary from './components/ErrorBoundary';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
 import ConsentBanner from './components/ConsentBanner';
@@ -118,6 +119,9 @@ function App() {
 
       {/* SEC-018 : bandeau RGPD */}
       <ConsentBanner />
+
+      {/* Toasts (sonner) — z-index élevé pour passer au-dessus des dialogs */}
+      <Toaster position="top-center" theme="dark" richColors />
 
       {/* Analytics — conditionné au consentement, hors ErrorBoundary */}
       {analyticsConsent && <Analytics />}

@@ -131,15 +131,17 @@ export default function Home() {
               </DropdownMenuContent>
             </DropdownMenu>
             
-            <Link to="/pricing">
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="border-[#00ff41]/30 text-[#00ff41] hover:bg-[#00ff41]/10 font-bold h-8 hidden sm:flex"
-              >
-                <Zap className="w-3.5 h-3.5 mr-1" /> {t("header.upgrade")}
-              </Button>
-            </Link>
+            {!isPro() && (
+              <Link to="/pricing">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-[#00ff41]/30 text-[#00ff41] hover:bg-[#00ff41]/10 font-bold h-8 hidden sm:flex"
+                >
+                  <Zap className="w-3.5 h-3.5 mr-1" /> {t("header.upgrade")}
+                </Button>
+              </Link>
+            )}
             
             <AuthButton />
           </div>
