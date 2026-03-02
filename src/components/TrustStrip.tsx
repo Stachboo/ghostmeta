@@ -45,7 +45,7 @@ function TrustBadge({ icon, label, sublabel, color, dynamic = false }: BadgeProp
       {/* Text */}
       <div className="min-w-0">
         <p className={`text-xs font-bold tracking-wide truncate ${iconColor}`}>{label}</p>
-        <p className="text-[10px] text-gray-500 tracking-widest uppercase truncate">{sublabel}</p>
+        <p className="text-[10px] text-gray-400 tracking-widest uppercase truncate">{sublabel}</p>
       </div>
     </motion.div>
   );
@@ -112,7 +112,7 @@ export default function TrustStrip() {
         {/* Label section */}
         <div className="flex items-center gap-2 mb-4">
           <div className="h-px flex-1 bg-[#00ff41]/10" />
-          <span className="text-[10px] font-bold tracking-[3px] uppercase text-gray-600">
+          <span className="text-[10px] font-bold tracking-[3px] uppercase text-gray-400">
             {t('trust.section_label')}
           </span>
           <div className="h-px flex-1 bg-[#00ff41]/10" />

@@ -137,7 +137,7 @@ export default function Home() {
             </DropdownMenu>
             
             {!isPro() && (
-              <Link to="/pricing">
+              <Link to="/pricing" aria-label={t("header.upgrade")}>
                 <Button
                   variant="outline"
                   size="sm"
