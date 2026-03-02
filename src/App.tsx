@@ -1,5 +1,5 @@
 import { Suspense, lazy, useLayoutEffect, useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'sonner';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -61,13 +61,16 @@ function LoadingFallback() {
   );
 }
 
-/** Désactive la restauration auto du scroll par le navigateur */
-function DisableBrowserScrollRestore() {
-  useEffect(() => {
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-  }, []);
+/**
+ * ScrollToTop — useLayoutEffect (synchrone, AVANT le paint du navigateur)
+ * + behavior: 'instant' pour forcer un scroll immédiat sans animation.
+ * Placé hors de Suspense pour ne jamais être démonté pendant le lazy loading.
+ */
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname]);
   return null;
 }
 
@@ -93,7 +96,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <DisableBrowserScrollRestore />
+      <ScrollToTop />
       <ErrorBoundary>
         <Suspense fallback={<LoadingFallback />}>
           {/*

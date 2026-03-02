@@ -9,9 +9,8 @@ import Footer from '@/components/Footer';
 export default function PricingPage() {
   const { t } = useTranslation();
 
-  // Scroll en haut + supprimer le bot-content injecté par le prerender
+  // Supprimer le bot-content injecté par le prerender
   useEffect(() => {
-    window.scrollTo(0, 0);
     document.getElementById('bot-content')?.remove();
   }, []);
 

@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 import { Zap, Package, Download, Shield, Gift, Clock } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/hooks/useAuth";
-import ScrollLink from "./ScrollLink";
+import { Link } from "react-router-dom";
 
 interface ProModalProps {
   open: boolean;
@@ -128,13 +128,13 @@ export default function ProModal({ open, onClose }: ProModalProps) {
               asChild
               className="w-full h-12 bg-[#00ff41] hover:bg-[#00dd38] text-black font-bold text-base tracking-wide ghost-glow"
             >
-              <ScrollLink to="/pricing">
+              <Link to="/pricing">
                 <Gift className="w-5 h-5 mr-2" />
                 {t(
                   "trial.modal_signup_cta",
                   "Commencer l'essai gratuit"
                 )}
-              </ScrollLink>
+              </Link>
             </Button>
           ) : (
             <Button
@@ -142,10 +142,10 @@ export default function ProModal({ open, onClose }: ProModalProps) {
               asChild
               className="w-full h-12 bg-[#00ff41] hover:bg-[#00dd38] text-black font-bold text-base tracking-wide ghost-glow"
             >
-              <ScrollLink to="/pricing">
+              <Link to="/pricing">
                 <Zap className="w-5 h-5 mr-2" />
                 {t("pro.btn_action", "Passer à l'accès complet")}
-              </ScrollLink>
+              </Link>
             </Button>
           )}
         </div>
