@@ -61,6 +61,15 @@ function LoadingFallback() {
   );
 }
 
+/** ScrollToTop — remet le scroll en haut à chaque changement de route */
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 function App() {
   // SEC-018 : conditionner Vercel Analytics au consentement RGPD
   const [analyticsConsent, setAnalyticsConsent] = useState(() => {
@@ -92,6 +101,7 @@ function App() {
            * visible exactement le temps nécessaire — ni plus, ni moins.
            */}
           <HideLoader />
+          <ScrollToTop />
           <Routes>
             {/* 1. La Page d'Accueil */}
             <Route path="/" element={<Home />} />
