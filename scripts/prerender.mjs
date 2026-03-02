@@ -101,22 +101,46 @@ const err = (path, e)   => { console.error(`[prerender] ✗  ${path}  —  ${e.m
 
 // ── / ────────────────────────────────────────────────────────────────────────
 try {
+  const homeTitle = `${escHtml(get(fr, 'hero.title_start'))} ${escHtml(get(fr, 'hero.title_color'))} ${escHtml(get(fr, 'hero.title_end'))}`;
+  const homeBodyContent = [
+    `<h1>${homeTitle}</h1>`,
+    `<p>${escHtml(get(fr, 'hero.subtitle'))}</p>`,
+    `<h2>${escHtml(get(fr, 'info.why_title'))} ${escHtml(get(fr, 'info.why_title_highlight'))}</h2>`,
+    `<p>${escHtml(get(fr, 'info.why_desc'))}</p>`,
+    `<h2>${escHtml(get(fr, 'info.how_title'))} ${escHtml(get(fr, 'info.how_highlight'))}</h2>`,
+    `<p>${escHtml(get(fr, 'info.how_subtitle'))}</p>`,
+    `<h2>${escHtml(get(fr, 'info.arch_title'))} ${escHtml(get(fr, 'info.arch_highlight'))}</h2>`,
+    `<p>${escHtml(get(fr, 'info.arch_subtitle'))}</p>`,
+    `<h2>${escHtml(get(fr, 'info.faq_title'))}</h2>`,
+  ].join('\n');
+
   saveHtml('dist/index.html', buildHtml({
     title:       'GhostMeta | Nettoyeur Photo pour Vinted & Leboncoin (Gratuit)',
     description: 'Sécurisez vos ventes : supprimez immédiatement le GPS et les métadonnées cachées de vos photos Vinted, Leboncoin et eBay. Protection 100% locale et anonyme.',
     canonical:   'https://www.ghostmeta.online/',
     hreflangEn:  'https://www.ghostmeta.online/?lng=en',
+    bodyContent: homeBodyContent,
   }));
   log('/', 'dist/index.html'); ok++;
 } catch(e) { err('/', e); }
 
 // ── /pricing ─────────────────────────────────────────────────────────────────
 try {
+  const pricingBodyContent = [
+    `<h1>Tarifs GhostMeta | Nettoyeur Photo Gratuit pour Vendeurs</h1>`,
+    `<p>${escHtml(get(fr, 'pro.subtitle'))}</p>`,
+    `<h2>${escHtml(get(fr, 'pro.free_title'))}</h2>`,
+    `<p>${escHtml(get(fr, 'pro.free_1'))}. ${escHtml(get(fr, 'pro.free_2'))}. ${escHtml(get(fr, 'pro.free_3'))}. ${escHtml(get(fr, 'pro.free_4'))}.</p>`,
+    `<h2>${escHtml(get(fr, 'pro.pro_title'))}</h2>`,
+    `<p>${escHtml(get(fr, 'pro.pro_1'))}. ${escHtml(get(fr, 'pro.pro_2'))}. ${escHtml(get(fr, 'pro.pro_3'))}. ${escHtml(get(fr, 'pro.pro_4'))}.</p>`,
+  ].join('\n');
+
   saveHtml('dist/pricing/index.html', buildHtml({
     title:       'Tarifs GhostMeta | Nettoyeur Photo Gratuit pour Vendeurs',
     description: 'GhostMeta est 100% gratuit. Nettoyez vos photos de métadonnées EXIF/GPS pour vendre en ligne en toute sécurité sur Vinted, Leboncoin et eBay.',
     canonical:   'https://www.ghostmeta.online/pricing',
     hreflangEn:  'https://www.ghostmeta.online/pricing?lng=en',
+    bodyContent: pricingBodyContent,
   }));
   log('/pricing', 'dist/pricing/index.html'); ok++;
 } catch(e) { err('/pricing', e); }

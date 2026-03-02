@@ -99,9 +99,9 @@ export default function BlogPost() {
         <title>{postTitle} | GhostMeta</title>
         <meta name="description" content={postDesc} />
         <link rel="canonical" href={canonicalUrl} />
-        <link rel="alternate" hreflang="fr" href={canonicalUrl} />
-        <link rel="alternate" hreflang="en" href={`${canonicalUrl}?lng=en`} />
-        <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+        <link rel="alternate" hrefLang="fr" href={canonicalUrl} />
+        <link rel="alternate" hrefLang="en" href={`${canonicalUrl}?lng=en`} />
+        <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
         <meta property="og:type" content="article" />
         <meta property="og:title" content={postTitle} />
         <meta property="og:description" content={postDesc} />
