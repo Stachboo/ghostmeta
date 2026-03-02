@@ -1,5 +1,5 @@
 import { Suspense, lazy, useLayoutEffect, useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'sonner';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -61,35 +61,13 @@ function LoadingFallback() {
   );
 }
 
-/** ScrollToTop — remet le scroll en haut à chaque changement de route.
- *  1. Désactive la restauration automatique du navigateur (scroll restoration)
- *  2. Force le scroll à 0 sur window + documentElement + body (cross-browser)
- *  3. Double requestAnimationFrame pour scroll APRÈS le paint du lazy chunk
- */
-function ScrollToTop() {
-  const { pathname } = useLocation();
-
-  // Désactiver la restauration auto du navigateur (cause n°1 du scroll qui reste en bas)
+/** Désactive la restauration auto du scroll par le navigateur */
+function DisableBrowserScrollRestore() {
   useEffect(() => {
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
   }, []);
-
-  useEffect(() => {
-    // Scroll immédiat
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-
-    // Scroll après paint (couvre le cas où le lazy chunk rend après le useEffect)
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        window.scrollTo(0, 0);
-      });
-    });
-  }, [pathname]);
-
   return null;
 }
 
@@ -115,8 +93,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* ScrollToTop HORS de Suspense — ne se démonte jamais lors du lazy loading */}
-      <ScrollToTop />
+      <DisableBrowserScrollRestore />
       <ErrorBoundary>
         <Suspense fallback={<LoadingFallback />}>
           {/*

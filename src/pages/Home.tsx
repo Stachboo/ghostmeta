@@ -27,8 +27,9 @@ const PAYPAL_LINK = import.meta.env.VITE_DONATION_URL || "https://paypal.me/abdu
 export default function Home() {
   const { t, i18n } = useTranslation();
 
-  // Supprimer le bot-content injecté par le prerender
+  // Scroll en haut + supprimer le bot-content injecté par le prerender
   useEffect(() => {
+    window.scrollTo(0, 0);
     document.getElementById('bot-content')?.remove();
   }, []);
 

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +8,10 @@ import { useTranslation } from "react-i18next";
 export default function NotFound() {
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-[#0a0a0c]">
