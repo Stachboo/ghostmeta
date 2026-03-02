@@ -19,7 +19,7 @@ interface ProcessingStats {
 }
 
 export function useImageProcessor() {
-  const { profile, user, refreshProfile } = useAuth();
+  const { profile, user, refreshProfile, hasFullAccess } = useAuth();
   const [images, setImages] = useState<ProcessedImage[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState({ current: 0, total: 0 });
@@ -29,8 +29,8 @@ export function useImageProcessor() {
   const isScanningRef = useRef(false);
 
   const isPro = useCallback(() => {
-    return profile?.is_premium === true;
-  }, [profile]);
+    return hasFullAccess;
+  }, [hasFullAccess]);
 
   const getImageLimit = useCallback(() => {
     return isPro() ? 50 : 1;
@@ -78,7 +78,7 @@ export function useImageProcessor() {
 
     // Marquer has_viewed_metadata=true via la fonction SECURITY DEFINER (bypass RLS)
     // La fonction SQL doit utiliser auth.uid() en interne — on ne passe plus user_id
-    if (user && !profile?.is_premium && !profile?.has_viewed_metadata) {
+    if (user && !hasFullAccess && !profile?.has_viewed_metadata) {
       await supabase.rpc('lock_metadata_view');
       await refreshProfile();
     }
