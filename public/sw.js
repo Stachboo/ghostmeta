@@ -4,7 +4,7 @@
  * Stratégie : Network First (fraîcheur des données prioritaire).
  */
 
-const CACHE_NAME = 'ghostmeta-v1';
+const CACHE_NAME = 'ghostmeta-v2';
 
 // Ressources à précacher au install
 const PRECACHE_URLS = [
