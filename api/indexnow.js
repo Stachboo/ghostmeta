@@ -18,6 +18,7 @@ const URLS = [
   `https://${HOST}/blog/comprendre-donnees-exif-gps`,
   `https://${HOST}/blog/nettoyage-photo-local-vs-cloud`,
   `https://${HOST}/blog/ghostmeta-manifeste-confidentialite`,
+  `https://${HOST}/securite`,
 ];
 
 export default async function handler(req, res) {
