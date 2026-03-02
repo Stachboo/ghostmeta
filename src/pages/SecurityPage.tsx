@@ -317,8 +317,9 @@ function CommitCards() {
 export default function SecurityPage() {
   const { t, i18n } = useTranslation();
 
-  // Supprimer le bot-content injecte par le prerender
+  // Scroll en haut + supprimer le bot-content injecte par le prerender
   useEffect(() => {
+    window.scrollTo(0, 0);
     document.getElementById('bot-content')?.remove();
   }, []);
 
