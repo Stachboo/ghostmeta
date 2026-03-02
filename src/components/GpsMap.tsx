@@ -8,10 +8,24 @@
  * ne fonctionnent pas avec Vite. On utilise L.divIcon avec un SVG inline.
  */
 
+import { useEffect } from 'react';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { formatGPSCoord } from '@/lib/image-processor';
+
+// Fix tuiles grises dans les modals : Leaflet calcule les dimensions du conteneur
+// avant que l'animation du Dialog soit terminée → invalidateSize() force le recalcul
+function InvalidateSize() {
+  const map = useMap();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      map.invalidateSize();
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [map]);
+  return null;
+}
 
 // Marqueur rouge SVG — remplace l'icône PNG par défaut (incompatible Vite)
 const redMarkerIcon = L.divIcon({
@@ -51,6 +65,7 @@ export default function GpsMap({ latitude, longitude, filename }: GpsMapProps) {
         scrollWheelZoom={false}
         style={{ height: '380px', width: '100%', borderRadius: '0.5rem' }}
       >
+        <InvalidateSize />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
