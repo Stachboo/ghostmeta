@@ -36,10 +36,39 @@
   "auth": {
     "loading": "Initialisation...",
     "login": "Acces Securise",
-    "logout": "Deconnexion"
+    "logout": "Deconnexion",
+    "signup_title": "1 mois offert",
+    "signup_desc": "Créez un compte et profitez de 30 jours d'accès complet gratuit.",
+    "signin_title": "Connexion",
+    "signin_desc": "Connectez-vous à votre compte GhostMeta.",
+    "signup": "Créer mon compte",
+    "signin": "Se connecter",
+    "google": "Continuer avec Google",
+    "or": "ou",
+    "email_placeholder": "votre@email.com",
+    "password_placeholder": "Mot de passe (6+ caractères)",
+    "check_email": "Vérifiez votre email pour confirmer votre compte !",
+    "has_account": "Déjà un compte ?",
+    "no_account": "Pas encore de compte ?",
+    "switch_to_signin": "Se connecter",
+    "switch_to_signup": "Créer un compte"
+  },
+  "trial": {
+    "signup_title": "1 mois offert",
+    "signup_desc": "Créez un compte gratuit et profitez de 30 jours d'accès complet.",
+    "banner_active": "Essai gratuit actif — {{days}} jour(s) restant(s)",
+    "banner_expired": "Votre essai gratuit est terminé. Passez à l'accès complet pour continuer.",
+    "no_commitment": "Sans engagement, sans reconduction",
+    "modal_signup_cta": "Commencer l'essai gratuit",
+    "modal_upgrade_cta": "Passez à l'accès complet pour profiter de toutes les fonctionnalités."
   },
   "pricing": {
     "title": "STATUT DU SYSTEME : NIVEAUX D'ACCES",
+    "trial": {
+      "active": "Essai gratuit actif — {{days}} jour(s) restant(s)",
+      "badge": "TRIAL",
+      "cta_signup": "Créez un compte et profitez de 30 jours d'accès complet gratuit !"
+    },
     "standard": {
       "name": "OPERATEUR STANDARD",
       "price": "0€",
@@ -179,6 +208,12 @@
   },
   "pro": {
     "active": "PRO ACTIF",
+    "desc": "Débloquez toutes les fonctionnalités de GhostMeta.",
+    "price": "30 jours gratuits",
+    "benefit_1": "50 images par lot",
+    "benefit_2": "Export ZIP en un clic",
+    "benefit_3": "Vues GPS illimitées",
+    "btn_action": "Passer à l'accès complet",
     "price_btn": "Faire un don ❤️",
     "title": "Soutenez le projet",
     "subtitle": "GhostMeta est gratuit. Vos dons permettent de payer les serveurs et le café.",

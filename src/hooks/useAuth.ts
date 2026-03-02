@@ -14,6 +14,7 @@ export interface Profile {
   avatar_url?: string;
   is_premium?: boolean;
   has_viewed_metadata?: boolean;
+  trial_ends_at?: string | null;
   created_at: string;
 }
 
@@ -22,6 +23,9 @@ interface UseAuthReturn {
   profile: Profile | null;
   loading: boolean;
   error: Error | null;
+  hasFullAccess: boolean;
+  isTrialActive: boolean;
+  trialDaysLeft: number;
   refreshProfile: () => Promise<void>;
 }
 
@@ -149,11 +153,22 @@ export function useAuth(): UseAuthReturn {
     };
   }, [fetchProfile, stopPolling]);
 
+  // Trial : actif si trial_ends_at est dans le futur
+  const isTrialActive = !!profile?.trial_ends_at && new Date(profile.trial_ends_at) > new Date();
+  const trialDaysLeft = isTrialActive
+    ? Math.max(0, Math.ceil((new Date(profile!.trial_ends_at!).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
+    : 0;
+  // Accès complet = premium payant OU trial actif
+  const hasFullAccess = profile?.is_premium === true || isTrialActive;
+
   return {
     user,
     profile,
     loading,
     error,
+    hasFullAccess,
+    isTrialActive,
+    trialDaysLeft,
     refreshProfile,
   };
 }

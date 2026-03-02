@@ -36,10 +36,39 @@
   "auth": {
     "loading": "Initializing...",
     "login": "Secure Access",
-    "logout": "Logout"
+    "logout": "Logout",
+    "signup_title": "1 month free",
+    "signup_desc": "Create an account and enjoy 30 days of full access for free.",
+    "signin_title": "Sign in",
+    "signin_desc": "Sign in to your GhostMeta account.",
+    "signup": "Create my account",
+    "signin": "Sign in",
+    "google": "Continue with Google",
+    "or": "or",
+    "email_placeholder": "your@email.com",
+    "password_placeholder": "Password (6+ characters)",
+    "check_email": "Check your email to confirm your account!",
+    "has_account": "Already have an account?",
+    "no_account": "Don't have an account?",
+    "switch_to_signin": "Sign in",
+    "switch_to_signup": "Create an account"
+  },
+  "trial": {
+    "signup_title": "1 month free",
+    "signup_desc": "Create a free account and enjoy 30 days of full access.",
+    "banner_active": "Free trial active — {{days}} day(s) remaining",
+    "banner_expired": "Your free trial has ended. Upgrade to full access to continue.",
+    "no_commitment": "No commitment, no auto-renewal",
+    "modal_signup_cta": "Start free trial",
+    "modal_upgrade_cta": "Upgrade to full access to enjoy all features."
   },
   "pricing": {
     "title": "SYSTEM STATUS: ACCESS LEVELS",
+    "trial": {
+      "active": "Free trial active — {{days}} day(s) remaining",
+      "badge": "TRIAL",
+      "cta_signup": "Create an account and enjoy 30 days of full access for free!"
+    },
     "standard": {
       "name": "STANDARD OPERATOR",
       "price": "0€",
@@ -179,6 +208,12 @@
   },
   "pro": {
     "active": "PRO ACTIVE",
+    "desc": "Unlock all GhostMeta features.",
+    "price": "30 days free",
+    "benefit_1": "50 images per batch",
+    "benefit_2": "One-click ZIP export",
+    "benefit_3": "Unlimited GPS views",
+    "btn_action": "Upgrade to full access",
     "price_btn": "Donate ❤️",
     "title": "Support the project",
     "subtitle": "GhostMeta is free. Your donations keep the servers running.",

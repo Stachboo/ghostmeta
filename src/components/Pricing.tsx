@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useAuth, CHECKOUT_PENDING_KEY } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
-import { Check, Zap, Shield, Image, MapPin } from 'lucide-react';
+import { Check, Zap, Shield, Image, MapPin, Gift, Clock } from 'lucide-react';
 import { toast } from 'sonner';
 
 const LEMON_SQUEEZY_MONTHLY_ID = import.meta.env.VITE_LEMON_SQUEEZY_MONTHLY_ID;
@@ -10,7 +10,7 @@ const LEMON_SQUEEZY_YEARLY_ID = import.meta.env.VITE_LEMON_SQUEEZY_YEARLY_ID;
 
 export default function Pricing() {
   const { t } = useTranslation();
-  const { user, loading } = useAuth();
+  const { user, loading, isTrialActive, trialDaysLeft, hasFullAccess, profile } = useAuth();
 
   const handleAuth = async () => {
     await supabase.auth.signInWithOAuth({
@@ -68,6 +68,37 @@ export default function Pricing() {
             Upgrade your privacy protection capabilities. Process more images, unlock unlimited GPS views.
           </p>
         </div>
+
+        {/* Trial Banner */}
+        {user && isTrialActive && (
+          <div className="max-w-4xl mx-auto mb-8 p-4 rounded-xl border border-[#00ff41]/30 bg-[#00ff41]/5 flex items-center gap-3">
+            <Gift className="w-5 h-5 text-[#00ff41] shrink-0" />
+            <p className="text-sm text-[#00ff41]">
+              {t('pricing.trial.active', 'Essai gratuit actif — {{days}} jour(s) restant(s)', { days: trialDaysLeft })}
+            </p>
+            <span className="ml-auto text-xs font-mono bg-[#00ff41]/10 text-[#00ff41] px-2 py-1 rounded">
+              {t('pricing.trial.badge', 'TRIAL')}
+            </span>
+          </div>
+        )}
+
+        {user && !isTrialActive && !profile?.is_premium && profile?.trial_ends_at && (
+          <div className="max-w-4xl mx-auto mb-8 p-4 rounded-xl border border-amber-500/30 bg-amber-500/5 flex items-center gap-3">
+            <Clock className="w-5 h-5 text-amber-500 shrink-0" />
+            <p className="text-sm text-amber-400">
+              {t('trial.banner_expired', 'Votre essai gratuit est terminé. Passez à l\'accès complet pour continuer.')}
+            </p>
+          </div>
+        )}
+
+        {!user && (
+          <div className="max-w-4xl mx-auto mb-8 p-4 rounded-xl border border-[#00ff41]/30 bg-[#00ff41]/5 flex items-center gap-3">
+            <Gift className="w-5 h-5 text-[#00ff41] shrink-0" />
+            <p className="text-sm text-zinc-300">
+              {t('pricing.trial.cta_signup', 'Créez un compte et profitez de 30 jours d\'accès complet gratuit !')}
+            </p>
+          </div>
+        )}
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
