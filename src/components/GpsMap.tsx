@@ -9,21 +9,9 @@
  */
 
 import 'leaflet/dist/leaflet.css';
-import { useEffect } from 'react';
 import L from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { formatGPSCoord } from '@/lib/image-processor';
-
-// Fix Leaflet dans un Dialog animé : le MapContainer s'initialise à 0×0
-// pendant l'animation d'ouverture. invalidateSize() force le recalcul.
-function MapInvalidator() {
-  const map = useMap();
-  useEffect(() => {
-    const t = setTimeout(() => map.invalidateSize(), 250);
-    return () => clearTimeout(t);
-  }, [map]);
-  return null;
-}
 
 // Marqueur rouge SVG — remplace l'icône PNG par défaut (incompatible Vite)
 const redMarkerIcon = L.divIcon({
@@ -76,7 +64,6 @@ export default function GpsMap({ latitude, longitude, filename }: GpsMapProps) {
             </div>
           </Popup>
         </Marker>
-        <MapInvalidator />
       </MapContainer>
 
       <p className="text-[11px] text-zinc-500 font-mono px-1">
