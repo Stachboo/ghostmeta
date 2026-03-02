@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
@@ -26,7 +26,12 @@ const PAYPAL_LINK = import.meta.env.VITE_DONATION_URL || "https://paypal.me/abdu
 
 export default function Home() {
   const { t, i18n } = useTranslation();
-  
+
+  // Supprimer le bot-content injecté par le prerender
+  useEffect(() => {
+    document.getElementById('bot-content')?.remove();
+  }, []);
+
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
     localStorage.setItem('i18nextLng', lng);
@@ -91,9 +96,9 @@ export default function Home() {
         <meta name="description" content="Sécurisez vos ventes : supprimez immédiatement le GPS et les métadonnées cachées de vos photos Vinted, Leboncoin et eBay. Protection 100% locale et anonyme." />
         <meta name="keywords" content="Vinted, Leboncoin, eBay, supprimer EXIF, localisation photo, anonymiser photo, sécurité vendeur, métadonnées, GPS" />
         <link rel="canonical" href="https://www.ghostmeta.online/" />
-        <link rel="alternate" hreflang="fr" href="https://www.ghostmeta.online/" />
-        <link rel="alternate" hreflang="en" href="https://www.ghostmeta.online/?lng=en" />
-        <link rel="alternate" hreflang="x-default" href="https://www.ghostmeta.online/" />
+        <link rel="alternate" hrefLang="fr" href="https://www.ghostmeta.online/" />
+        <link rel="alternate" hrefLang="en" href="https://www.ghostmeta.online/?lng=en" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.ghostmeta.online/" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="GhostMeta" />
         <meta property="og:url" content="https://www.ghostmeta.online/" />
