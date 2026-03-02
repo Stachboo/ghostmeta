@@ -64,8 +64,8 @@ function LoadingFallback() {
 /** ScrollToTop — remet le scroll en haut à chaque changement de route */
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [pathname]);
   return null;
 }
@@ -92,6 +92,8 @@ function App() {
 
   return (
     <BrowserRouter>
+      {/* ScrollToTop HORS de Suspense — ne se démonte jamais lors du lazy loading */}
+      <ScrollToTop />
       <ErrorBoundary>
         <Suspense fallback={<LoadingFallback />}>
           {/*
@@ -101,7 +103,6 @@ function App() {
            * visible exactement le temps nécessaire — ni plus, ni moins.
            */}
           <HideLoader />
-          <ScrollToTop />
           <Routes>
             {/* 1. La Page d'Accueil */}
             <Route path="/" element={<Home />} />
