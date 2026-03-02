@@ -5,7 +5,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import ScrollLink from './ScrollLink';
+import { Link } from 'react-router-dom';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import GhostLogo from './GhostLogo';
 import { useTranslation } from 'react-i18next';
@@ -41,14 +41,14 @@ export default function Footer() {
               </h4>
               <ul className="space-y-2 text-xs text-muted-foreground">
                 <li>
-                  <ScrollLink to="/securite" className="hover:text-[#00ff41] transition-colors">
+                  <Link to="/securite" className="hover:text-[#00ff41] transition-colors">
                     {t('security.footer_link')}
-                  </ScrollLink>
+                  </Link>
                 </li>
                 <li>
-                  <ScrollLink to="/pricing" className="hover:text-[#00ff41] transition-colors">
+                  <Link to="/pricing" className="hover:text-[#00ff41] transition-colors">
                     {t('nav.pricing')}
-                  </ScrollLink>
+                  </Link>
                 </li>
                 <li>
                   <button onClick={() => setShowPrivacy(true)} className="hover:text-[#00ff41] transition-colors">
@@ -77,12 +77,12 @@ export default function Footer() {
                   'ghostmeta-manifeste-confidentialite',
                 ].map(slug => (
                   <li key={slug}>
-                    <ScrollLink
+                    <Link
                       to={`/blog/${slug}`}
                       className="hover:text-[#00ff41] transition-colors"
                     >
                       {t(`blog.posts.${slug}.title`)}
-                    </ScrollLink>
+                    </Link>
                   </li>
                 ))}
               </ul>

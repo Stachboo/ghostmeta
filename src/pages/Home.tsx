@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
-import ScrollLink from '@/components/ScrollLink';
+import { Link } from 'react-router-dom';
 import { ShieldCheck, Zap, Trash2, Download, Lock, ChevronDown, Shield, AlertTriangle, Globe, Smartphone, Clock, MapPin, CheckCircle2, XCircle, Server, Heart, Scan, FileDigit, MousePointerClick
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -27,9 +27,8 @@ const PAYPAL_LINK = import.meta.env.VITE_DONATION_URL || "https://paypal.me/abdu
 export default function Home() {
   const { t, i18n } = useTranslation();
 
-  // Scroll en haut + supprimer le bot-content injecté par le prerender
+  // Supprimer le bot-content injecté par le prerender
   useEffect(() => {
-    window.scrollTo(0, 0);
     document.getElementById('bot-content')?.remove();
   }, []);
 
@@ -138,7 +137,7 @@ export default function Home() {
             </DropdownMenu>
             
             {!isPro() && (
-              <ScrollLink to="/pricing">
+              <Link to="/pricing">
                 <Button
                   variant="outline"
                   size="sm"
@@ -146,7 +145,7 @@ export default function Home() {
                 >
                   <Zap className="w-3.5 h-3.5 mr-1" /> {t("header.upgrade")}
                 </Button>
-              </ScrollLink>
+              </Link>
             )}
             
             <AuthButton />
@@ -390,15 +389,15 @@ export default function Home() {
             <h2 className="text-2xl font-bold mb-8 text-[#00ff41]">{t('blog.section_title')}</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
               {['vinted-securite-photo-guide', 'supprimer-exif-iphone-android', 'comprendre-donnees-exif-gps', 'nettoyage-photo-local-vs-cloud'].map(slug => (
-                <ScrollLink key={slug} to={`/blog/${slug}`} className="p-4 rounded-lg bg-card border border-border hover:border-[#00ff41]/50 transition-all">
+                <Link key={slug} to={`/blog/${slug}`} className="p-4 rounded-lg bg-card border border-border hover:border-[#00ff41]/50 transition-all">
                   <h3 className="font-bold text-sm text-foreground mb-1">{t(`blog.posts.${slug}.title`)}</h3>
                   <p className="text-xs text-muted-foreground">{t(`blog.posts.${slug}.desc`)}</p>
-                </ScrollLink>
+                </Link>
               ))}
-              <ScrollLink to="/blog/ghostmeta-manifeste-confidentialite" className="p-4 rounded-lg bg-card border border-border hover:border-[#00ff41]/50 transition-all sm:col-span-2 lg:col-span-1">
+              <Link to="/blog/ghostmeta-manifeste-confidentialite" className="p-4 rounded-lg bg-card border border-border hover:border-[#00ff41]/50 transition-all sm:col-span-2 lg:col-span-1">
                 <h3 className="font-bold text-sm text-foreground mb-1">{t('blog.posts.ghostmeta-manifeste-confidentialite.title')}</h3>
                 <p className="text-xs text-muted-foreground">{t('blog.posts.ghostmeta-manifeste-confidentialite.desc')}</p>
-              </ScrollLink>
+              </Link>
             </div>
           </div>
         </section>

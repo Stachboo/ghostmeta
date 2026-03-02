@@ -24,9 +24,8 @@ export default function BlogPost() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
-  // Scroll en haut + supprimer le contenu pre-rendu quand React prend le relais
+  // Supprimer le contenu pre-rendu quand React prend le relais
   useEffect(() => {
-    window.scrollTo(0, 0);
     document.getElementById('bot-content')?.remove();
   }, []);
 

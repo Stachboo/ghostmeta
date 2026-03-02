@@ -7,7 +7,7 @@
  */
 
 import { useState, useEffect, useRef, ReactNode } from 'react';
-import ScrollLink from '@/components/ScrollLink';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import {
@@ -317,9 +317,8 @@ function CommitCards() {
 export default function SecurityPage() {
   const { t, i18n } = useTranslation();
 
-  // Scroll en haut + supprimer le bot-content injecte par le prerender
+  // Supprimer le bot-content injecte par le prerender
   useEffect(() => {
-    window.scrollTo(0, 0);
     document.getElementById('bot-content')?.remove();
   }, []);
 
@@ -476,14 +475,14 @@ export default function SecurityPage() {
           {/* ══════ CTA ══════ */}
           <div className="mt-20 mb-8 text-center">
             <Reveal>
-              <ScrollLink
+              <Link
                 to="/"
                 className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-base font-bold transition-all duration-300 bg-[#00ff41] text-[#0a0a0c] hover:-translate-y-0.5 hover:scale-[1.02]"
                 style={{ boxShadow: '0 0 30px #00ff4120, 0 4px 16px rgba(0,0,0,0.4)' }}
               >
                 {t('security.cta.button')}
                 <ArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
-              </ScrollLink>
+              </Link>
               <p className="mt-4 text-sm text-muted-foreground/50">
                 {t('security.cta.sub')}
               </p>
