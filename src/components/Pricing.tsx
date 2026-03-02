@@ -136,7 +136,7 @@ export default function Pricing() {
                 className="w-full h-12 border-[#ffbf00]/30 text-[#ffbf00] hover:bg-[#ffbf00]/10 font-mono"
                 disabled
               >
-                CURRENT ACCESS
+                {hasFullAccess ? t('pricing.standard.inactive', 'PLAN INACTIF') : 'CURRENT ACCESS'}
               </Button>
             </div>
           </div>
@@ -181,22 +181,32 @@ export default function Pricing() {
                 </li>
               </ul>
               {!loading && user ? (
-                <div className="space-y-3">
+                isTrialActive ? (
                   <Button
-                    onClick={handleMonthlyClick}
-                    className="w-full h-12 bg-[#00ff41] hover:bg-[#00ff41]/90 text-black font-bold font-mono"
+                    disabled
+                    className="w-full h-12 bg-[#00ff41]/20 text-[#00ff41] font-bold font-mono border border-[#00ff41]/30"
                   >
-                    <Zap className="w-4 h-4 mr-2" />
-                    {t('pricing.cta.buy', 'OBTENIR LE FULL ACCESS')}
+                    <Gift className="w-4 h-4 mr-2" />
+                    {t('pricing.trial.active_btn', 'ESSAI ACTIF — {{days}}J RESTANTS', { days: trialDaysLeft })}
                   </Button>
-                  <Button
-                    onClick={handleYearlyClick}
-                    variant="outline"
-                    className="w-full h-10 border-[#00ff41]/50 text-[#00ff41] hover:bg-[#00ff41]/10 font-mono text-xs"
-                  >
-                    Yearly Plan — Save 33%
-                  </Button>
-                </div>
+                ) : (
+                  <div className="space-y-3">
+                    <Button
+                      onClick={handleMonthlyClick}
+                      className="w-full h-12 bg-[#00ff41] hover:bg-[#00ff41]/90 text-black font-bold font-mono"
+                    >
+                      <Zap className="w-4 h-4 mr-2" />
+                      {t('pricing.cta.buy', 'OBTENIR LE FULL ACCESS')}
+                    </Button>
+                    <Button
+                      onClick={handleYearlyClick}
+                      variant="outline"
+                      className="w-full h-10 border-[#00ff41]/50 text-[#00ff41] hover:bg-[#00ff41]/10 font-mono text-xs"
+                    >
+                      Yearly Plan — Save 33%
+                    </Button>
+                  </div>
+                )
               ) : (
                 <Button
                   onClick={handleAuth}

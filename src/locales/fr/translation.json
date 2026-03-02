@@ -51,7 +51,8 @@
     "has_account": "Déjà un compte ?",
     "no_account": "Pas encore de compte ?",
     "switch_to_signin": "Se connecter",
-    "switch_to_signup": "Créer un compte"
+    "switch_to_signup": "Créer un compte",
+    "password_rules": "Min. 6 caractères : majuscule, minuscule, chiffre et caractère spécial"
   },
   "trial": {
     "signup_title": "1 mois offert",
@@ -67,7 +68,8 @@
     "trial": {
       "active": "Essai gratuit actif — {{days}} jour(s) restant(s)",
       "badge": "TRIAL",
-      "cta_signup": "Créez un compte et profitez de 30 jours d'accès complet gratuit !"
+      "cta_signup": "Créez un compte et profitez de 30 jours d'accès complet gratuit !",
+      "active_btn": "ESSAI ACTIF — {{days}}J RESTANTS"
     },
     "standard": {
       "name": "OPERATEUR STANDARD",

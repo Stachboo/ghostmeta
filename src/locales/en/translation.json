@@ -51,7 +51,8 @@
     "has_account": "Already have an account?",
     "no_account": "Don't have an account?",
     "switch_to_signin": "Sign in",
-    "switch_to_signup": "Create an account"
+    "switch_to_signup": "Create an account",
+    "password_rules": "Min. 6 characters: uppercase, lowercase, number and special character"
   },
   "trial": {
     "signup_title": "1 month free",
@@ -67,7 +68,8 @@
     "trial": {
       "active": "Free trial active — {{days}} day(s) remaining",
       "badge": "TRIAL",
-      "cta_signup": "Create an account and enjoy 30 days of full access for free!"
+      "cta_signup": "Create an account and enjoy 30 days of full access for free!",
+      "active_btn": "TRIAL ACTIVE — {{days}}D REMAINING"
     },
     "standard": {
       "name": "STANDARD OPERATOR",
