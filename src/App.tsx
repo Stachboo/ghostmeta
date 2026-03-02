@@ -61,12 +61,35 @@ function LoadingFallback() {
   );
 }
 
-/** ScrollToTop — remet le scroll en haut à chaque changement de route */
+/** ScrollToTop — remet le scroll en haut à chaque changement de route.
+ *  1. Désactive la restauration automatique du navigateur (scroll restoration)
+ *  2. Force le scroll à 0 sur window + documentElement + body (cross-browser)
+ *  3. Double requestAnimationFrame pour scroll APRÈS le paint du lazy chunk
+ */
 function ScrollToTop() {
   const { pathname } = useLocation();
+
+  // Désactiver la restauration auto du navigateur (cause n°1 du scroll qui reste en bas)
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  }, []);
+
+  useEffect(() => {
+    // Scroll immédiat
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
+    // Scroll après paint (couvre le cas où le lazy chunk rend après le useEffect)
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        window.scrollTo(0, 0);
+      });
+    });
   }, [pathname]);
+
   return null;
 }
 
