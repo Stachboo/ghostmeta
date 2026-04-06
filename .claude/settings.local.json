@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__plugin_claude-mem_mcp-search__search",
+      "Read(//c/Users/PC/.claude/**)",
+      "Read(//c/Users/PC/.claude/projects/**)",
+      "WebFetch(domain:www.ghostmeta.online)",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "mcp__plugin_playwright_playwright__browser_network_requests",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "Bash(xargs wc:*)",
+      "mcp__plugin_playwright_playwright__browser_close",
+      "Bash(curl -sI https://www.ghostmeta.online/)",
+      "Bash(wc -l src/**/*.ts src/**/*.tsx)",
+      "Skill(browse)",
+      "WebSearch",
+      "Skill(design-review)",
+      "Bash(git add:*)",
+      "Bash(git commit -m 'chore: add audit artifacts and project configuration:*)"
+    ]
+  }
+}
