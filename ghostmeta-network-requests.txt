@@ -1,0 +1,366 @@
+[GET] https://www.ghostmeta.online/ => [200] 
+  Request headers:
+    upgrade-insecure-requests: 1
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+    sec-ch-ua-platform: "Windows"
+[GET] https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;800&display=swap => [200] 
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/hero-bg.avif => [FAILED] net::ERR_ABORTED
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/index-B2A-VUzF.js => [FAILED] net::ERR_ABORTED
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/vendor-react-CjsTPKUe.js => [FAILED] net::ERR_ABORTED
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/vendor-motion-okTQmpTJ.js => [FAILED] net::ERR_ABORTED
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/vendor-i18n-CgLpxNPv.js => [FAILED] net::ERR_ABORTED
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/vendor-ui-BdXp_PdE.js => [200] 
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/index-BmajT-WT.css => [FAILED] net::ERR_ABORTED
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/icon-512.png => [FAILED] net::ERR_ABORTED
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/manifest.json => [FAILED] net::ERR_ABORTED
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/ => [200] 
+  Request headers:
+    upgrade-insecure-requests: 1
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+    sec-ch-ua-platform: "Windows"
+[GET] https://www.ghostmeta.online/assets/index-B2A-VUzF.js => [FAILED] net::ERR_ABORTED
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/manifest.json => [FAILED] net::ERR_ABORTED
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/hero-bg.avif => [FAILED] net::ERR_ABORTED
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/vendor-react-CjsTPKUe.js => [FAILED] net::ERR_ABORTED
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/vendor-motion-okTQmpTJ.js => [FAILED] net::ERR_ABORTED
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/vendor-i18n-CgLpxNPv.js => [FAILED] net::ERR_ABORTED
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/index-BmajT-WT.css => [FAILED] net::ERR_ABORTED
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/icon-512.png => [FAILED] net::ERR_ABORTED
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;800&display=swap => [200] 
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/hero-bg.avif => [200] 
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/index-B2A-VUzF.js => [200] 
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/vendor-react-CjsTPKUe.js => [200] 
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/vendor-motion-okTQmpTJ.js => [200] 
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/vendor-i18n-CgLpxNPv.js => [200] 
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/vendor-ui-BdXp_PdE.js => [304] 
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    if-none-match: "00bc4314508dcbc542cddf12acf688d3"
+    referer: https://www.ghostmeta.online/
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    if-modified-since: Sun, 29 Mar 2026 14:19:37 GMT
+[GET] https://www.ghostmeta.online/assets/index-BmajT-WT.css => [200] 
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/icon-512.png => [200] 
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/manifest.json => [200] 
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/Home-Cg5yb6wI.js => [200] 
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: 
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/Footer-41QyZGEw.js => [200] 
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: 
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/purify.es-HRjpPm7y.js => [200] 
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: 
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/assets/useAuth-CYYDKCHY.js => [200] 
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: 
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/favicon-32.png => [200] 
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/icon-192.png => [200] 
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/logo_optimized.webp => [200] 
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/scan-effect.avif => [200] 
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/shield.avif => [200] 
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/chat-chill.png => [200] 
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://fonts.gstatic.com/s/rajdhani/v17/LDI2apCSOBg7S-QT7pasEfOreec.woff2 => [200] 
+  Request headers:
+    origin: https://www.ghostmeta.online
+    sec-ch-ua-platform: "Windows"
+    referer: https://fonts.googleapis.com/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://www.ghostmeta.online/logo_optimized.webp => [200] 
+  Request headers:
+    sec-ch-ua-platform: "Windows"
+    referer: https://www.ghostmeta.online/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+[GET] https://qzfeayosrjocqtdfppgn.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Fwww.ghostmeta.online => [FAILED] net::ERR_NAME_NOT_RESOLVED
+  Request headers:
+    referer: https://www.ghostmeta.online/
+    upgrade-insecure-requests: 1
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+    sec-ch-ua-platform: "Windows"
+[GET] https://qzfeayosrjocqtdfppgn.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Fwww.ghostmeta.online => [FAILED] net::ERR_NAME_NOT_RESOLVED
+  Request headers:
+    referer: https://www.ghostmeta.online/
+    upgrade-insecure-requests: 1
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+    sec-ch-ua-platform: "Windows"
+[GET] https://qzfeayosrjocqtdfppgn.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Fwww.ghostmeta.online => [FAILED] net::ERR_NAME_NOT_RESOLVED
+  Request headers:
+    referer: https://www.ghostmeta.online/
+    upgrade-insecure-requests: 1
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+    sec-ch-ua-platform: "Windows"
+[GET] https://qzfeayosrjocqtdfppgn.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Fwww.ghostmeta.online => [FAILED] net::ERR_NAME_NOT_RESOLVED
+  Request headers:
+    referer: https://www.ghostmeta.online/
+    upgrade-insecure-requests: 1
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+    sec-ch-ua-platform: "Windows"
+[GET] https://qzfeayosrjocqtdfppgn.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Fwww.ghostmeta.online => [FAILED] net::ERR_NAME_NOT_RESOLVED
+  Request headers:
+    referer: https://www.ghostmeta.online/
+    upgrade-insecure-requests: 1
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+    sec-ch-ua-platform: "Windows"
+[GET] https://qzfeayosrjocqtdfppgn.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Fwww.ghostmeta.online => [FAILED] net::ERR_NAME_NOT_RESOLVED
+  Request headers:
+    referer: https://www.ghostmeta.online/
+    upgrade-insecure-requests: 1
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+    sec-ch-ua: "Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"
+    sec-ch-ua-mobile: ?0
+    sec-ch-ua-platform: "Windows"

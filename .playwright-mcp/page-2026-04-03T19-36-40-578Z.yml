@@ -1,0 +1,21 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - heading "Retirer les metadonnees de vos photos" [level=1] [ref=e3]
+    - paragraph [ref=e4]: Protegez votre vie privee avant de poster sur Vinted, eBay ou Depop. Traitement 100% Local.
+    - heading "Pourquoi vos photos vous trahissent" [level=2] [ref=e5]
+    - paragraph [ref=e6]: Chaque photo prise avec un smartphone contient des métadonnées invisibles. Quand vous publiez sur Vinted, Leboncoin ou eBay, ces données peuvent révéler votre adresse exacte, vos habitudes et votre équipement.
+    - heading "Comment ça fonctionne" [level=2] [ref=e7]
+    - paragraph [ref=e8]: Trois étapes. Zéro upload. Vos photos restent sur votre appareil.
+    - heading "Supprimez vos metadonnees en toute confidentialite" [level=2] [ref=e9]
+    - paragraph [ref=e10]: Vos photos ne quittent jamais votre appareil. Tout le traitement est effectué localement dans votre navigateur.
+    - heading "Questions fréquentes" [level=2] [ref=e11]
+  - generic [ref=e12]:
+    - generic [ref=e14]: INITIALISATION...
+    - generic [ref=e19]:
+      - paragraph [ref=e20]:
+        - text: GhostMeta utilise des mesures d'audience anonymes (Vercel Analytics) pour améliorer le service. Aucune photo ni donnée personnelle n'est collectée.
+        - button "En savoir plus" [ref=e21] [cursor=pointer]
+      - generic [ref=e22]:
+        - button "Refuser" [ref=e23] [cursor=pointer]
+        - button "Accepter" [ref=e24] [cursor=pointer]
+    - region "Notifications alt+T"
