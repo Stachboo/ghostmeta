@@ -41,22 +41,22 @@ export default function Footer() {
               </h4>
               <ul className="space-y-2 text-xs text-muted-foreground">
                 <li>
-                  <Link to="/securite" className="hover:text-[#00ff41] transition-colors">
+                  <Link to="/securite" className="hover:text-ghost-green transition-colors">
                     {t('security.footer_link')}
                   </Link>
                 </li>
                 <li>
-                  <Link to="/pricing" className="hover:text-[#00ff41] transition-colors">
+                  <Link to="/pricing" className="hover:text-ghost-green transition-colors">
                     {t('nav.pricing')}
                   </Link>
                 </li>
                 <li>
-                  <button onClick={() => setShowPrivacy(true)} className="hover:text-[#00ff41] transition-colors">
+                  <button onClick={() => setShowPrivacy(true)} className="hover:text-ghost-green transition-colors">
                     {t('footer.privacy_btn')}
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => setShowLegal(true)} className="hover:text-[#00ff41] transition-colors">
+                  <button onClick={() => setShowLegal(true)} className="hover:text-ghost-green transition-colors">
                     {t('footer.legal_btn')}
                   </button>
                 </li>
@@ -79,7 +79,7 @@ export default function Footer() {
                   <li key={slug}>
                     <Link
                       to={`/blog/${slug}`}
-                      className="hover:text-[#00ff41] transition-colors"
+                      className="hover:text-ghost-green transition-colors"
                     >
                       {t(`blog.posts.${slug}.title`)}
                     </Link>

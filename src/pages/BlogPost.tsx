@@ -36,13 +36,13 @@ export default function BlogPost() {
 
   if (!postExists) {
     return (
-      <div className="min-h-screen bg-[#0a0a0c] flex flex-col items-center justify-center p-4">
+      <div className="min-h-screen bg-ghost-dark flex flex-col items-center justify-center p-4">
         <GhostLogo size={60} glow />
         <h1 className="mt-8 text-2xl font-bold text-white">404: POST_NOT_FOUND</h1>
         <p className="text-muted-foreground mt-2 font-mono text-xs">ID: {slug}</p>
         <button
           onClick={() => navigate('/')}
-          className="mt-6 inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-black transition-all duration-300 bg-[#00ff41] rounded-full hover:bg-[#00dd38]"
+          className="mt-6 inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-black transition-all duration-300 bg-ghost-green rounded-full hover:bg-ghost-green-hover"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Return to Base
@@ -101,7 +101,7 @@ export default function BlogPost() {
   const canonicalUrl = `https://www.ghostmeta.online/blog/${slug}`;
 
   return (
-    <div className="min-h-screen bg-[#0a0a0c] text-foreground font-sans">
+    <div className="min-h-screen bg-ghost-dark text-foreground font-sans">
       <Helmet>
         <title>{postTitle} | GhostMeta</title>
         <meta name="description" content={postDesc} />
@@ -166,7 +166,7 @@ export default function BlogPost() {
           className="space-y-8"
         >
           <div className="space-y-4">
-            <div className="flex items-center gap-4 text-xs font-mono text-[#00ff41]">
+            <div className="flex items-center gap-4 text-xs font-mono text-ghost-green">
               <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {BLOG_DATES[slug!] ?? '2026-02-17'}</span>
               <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> 5 min read</span>
               <span className="flex items-center gap-1 text-amber-500"><Shield className="w-3 h-3" /> Encrypted Content</span>
@@ -174,7 +174,7 @@ export default function BlogPost() {
             <h1 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
               {postTitle}
             </h1>
-            <p className="text-xl text-muted-foreground italic border-l-4 border-[#00ff41] pl-4">
+            <p className="text-xl text-muted-foreground italic border-l-4 border-ghost-green pl-4">
               {postDesc}
             </p>
           </div>
@@ -187,7 +187,7 @@ export default function BlogPost() {
           {/* Rendu du contenu HTML SANITISÉ */}
           <div
             className="prose prose-invert prose-green max-w-none text-muted-foreground leading-relaxed
-            prose-headings:text-white prose-strong:text-[#00ff41] prose-a:text-[#00ff41] hover:prose-a:underline"
+            prose-headings:text-white prose-strong:text-ghost-green prose-a:text-ghost-green hover:prose-a:underline"
             dangerouslySetInnerHTML={{ __html: sanitizedContent }}
           />
 
@@ -199,9 +199,9 @@ export default function BlogPost() {
                 <Link
                   key={s}
                   to={`/blog/${s}`}
-                  className="p-4 rounded-lg bg-white/[0.02] border border-zinc-800 hover:border-[#00ff41]/50 transition-all group"
+                  className="p-4 rounded-lg bg-white/[0.02] border border-zinc-800 hover:border-ghost-green/50 transition-all group"
                 >
-                  <h3 className="font-bold text-sm text-white group-hover:text-[#00ff41] transition-colors mb-1">
+                  <h3 className="font-bold text-sm text-white group-hover:text-ghost-green transition-colors mb-1">
                     {t(`blog.posts.${s}.title`)}
                   </h3>
                   <p className="text-xs text-muted-foreground line-clamp-2">
@@ -213,7 +213,7 @@ export default function BlogPost() {
             <div className="text-center pt-4">
               <Link
                 to="/"
-                className="inline-flex items-center gap-2 text-sm font-bold text-[#00ff41] hover:underline"
+                className="inline-flex items-center gap-2 text-sm font-bold text-ghost-green hover:underline"
               >
                 {t('blog.cta_protect', 'Protégez vos photos maintenant')} <ArrowRight className="w-4 h-4" />
               </Link>

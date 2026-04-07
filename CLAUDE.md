@@ -67,6 +67,11 @@ The hook `src/hooks/useImageProcessor.ts` wraps this pipeline with React state.
 - Protected by `INDEXNOW_SECRET` env var (pass as `Authorization: Bearer` header)
 - Call after deploy: `curl -X POST -H "Authorization: Bearer $INDEXNOW_SECRET" https://www.ghostmeta.online/api/indexnow`
 
+### Health Check (`api/health.js`)
+- Returns `{ status, timestamp, version, environment }`
+- No authentication required
+- `curl https://www.ghostmeta.online/api/health`
+
 ### Code style
 - Prettier: double quotes, 80 chars, semicolons, no arrow parens
 - Strict TypeScript (`strict: true`, incremental builds)

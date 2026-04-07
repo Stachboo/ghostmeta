@@ -49,14 +49,14 @@ export default function Pricing() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00ff41]/10 border border-[#00ff41]/30 mb-6">
-            <Shield className="w-4 h-4 text-[#00ff41]" />
-            <span className="text-xs font-mono text-[#00ff41] tracking-wider">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ghost-green/10 border border-ghost-green/30 mb-6">
+            <Shield className="w-4 h-4 text-ghost-green" />
+            <span className="text-xs font-mono text-ghost-green tracking-wider">
               {t('pricing.title', 'SYSTEM STATUS: ACCESS LEVELS')}
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Choose Your <span className="text-[#00ff41]">Access Level</span>
+            Choose Your <span className="text-ghost-green">Access Level</span>
           </h1>
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Upgrade your privacy protection capabilities. Process more images, unlock unlimited GPS views.
@@ -65,12 +65,12 @@ export default function Pricing() {
 
         {/* Trial Banner */}
         {user && isTrialActive && (
-          <div className="max-w-4xl mx-auto mb-8 p-4 rounded-xl border border-[#00ff41]/30 bg-[#00ff41]/5 flex items-center gap-3">
-            <Gift className="w-5 h-5 text-[#00ff41] shrink-0" />
-            <p className="text-sm text-[#00ff41]">
+          <div className="max-w-4xl mx-auto mb-8 p-4 rounded-xl border border-ghost-green/30 bg-ghost-green/5 flex items-center gap-3">
+            <Gift className="w-5 h-5 text-ghost-green shrink-0" />
+            <p className="text-sm text-ghost-green">
               {t('pricing.trial.active', 'Essai gratuit actif — {{days}} jour(s) restant(s)', { days: trialDaysLeft })}
             </p>
-            <span className="ml-auto text-xs font-mono bg-[#00ff41]/10 text-[#00ff41] px-2 py-1 rounded">
+            <span className="ml-auto text-xs font-mono bg-ghost-green/10 text-ghost-green px-2 py-1 rounded">
               {t('pricing.trial.badge', 'TRIAL')}
             </span>
           </div>
@@ -86,8 +86,8 @@ export default function Pricing() {
         )}
 
         {!user && (
-          <div className="max-w-4xl mx-auto mb-8 p-4 rounded-xl border border-[#00ff41]/30 bg-[#00ff41]/5 flex items-center gap-3">
-            <Gift className="w-5 h-5 text-[#00ff41] shrink-0" />
+          <div className="max-w-4xl mx-auto mb-8 p-4 rounded-xl border border-ghost-green/30 bg-ghost-green/5 flex items-center gap-3">
+            <Gift className="w-5 h-5 text-ghost-green shrink-0" />
             <p className="text-sm text-zinc-300">
               {t('pricing.trial.cta_signup', 'Créez un compte et profitez de 30 jours d\'accès complet gratuit !')}
             </p>
@@ -136,21 +136,21 @@ export default function Pricing() {
           </div>
 
           {/* Premium Plan */}
-          <div className="relative rounded-2xl border-2 border-[#00ff41] bg-zinc-900/80 backdrop-blur-md p-8 overflow-hidden scale-105 shadow-[0_0_40px_rgba(0,255,65,0.15)]">
-            <div className="absolute top-0 right-0 bg-[#00ff41] text-black text-xs font-bold px-4 py-1 rounded-bl-lg">
+          <div className="relative rounded-2xl border-2 border-ghost-green bg-zinc-900/80 backdrop-blur-md p-8 overflow-hidden scale-105 shadow-[0_0_40px_rgba(0,255,65,0.15)]">
+            <div className="absolute top-0 right-0 bg-ghost-green text-black text-xs font-bold px-4 py-1 rounded-bl-lg">
               RECOMMENDED
             </div>
             <div className="absolute inset-0 bg-gradient-to-br from-[#00ff41]/10 to-transparent pointer-events-none" />
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-4">
-                <Zap className="w-5 h-5 text-[#00ff41]" />
-                <span className="text-sm font-mono text-[#00ff41]">TIER 02 — ACCÈS COMPLET</span>
+                <Zap className="w-5 h-5 text-ghost-green" />
+                <span className="text-sm font-mono text-ghost-green">TIER 02 — ACCÈS COMPLET</span>
               </div>
               <h3 className="text-2xl font-bold mb-2 text-white">
                 {t('pricing.premium.name', 'ACCÈS COMPLET')}
               </h3>
               <div className="flex items-baseline gap-1 mb-2">
-                <span className="text-4xl font-bold text-[#00ff41]">{t('pricing.premium.price', '5€')}</span>
+                <span className="text-4xl font-bold text-ghost-green">{t('pricing.premium.price', '5€')}</span>
                 <span className="text-zinc-500">/month</span>
               </div>
               <p className="text-xs text-zinc-400 mb-6 font-mono">
@@ -158,19 +158,19 @@ export default function Pricing() {
               </p>
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center gap-3 text-sm text-zinc-200">
-                  <Image className="w-4 h-4 text-[#00ff41]" />
+                  <Image className="w-4 h-4 text-ghost-green" />
                   {t('pricing.premium.batch', '50 images par traitement')}
                 </li>
                 <li className="flex items-center gap-3 text-sm text-zinc-200">
-                  <MapPin className="w-4 h-4 text-[#00ff41]" />
+                  <MapPin className="w-4 h-4 text-ghost-green" />
                   {t('pricing.premium.gps', 'Vues GPS illimitées')}
                 </li>
                 <li className="flex items-center gap-3 text-sm text-zinc-200">
-                  <Check className="w-4 h-4 text-[#00ff41]" />
+                  <Check className="w-4 h-4 text-ghost-green" />
                   Priority processing
                 </li>
                 <li className="flex items-center gap-3 text-sm text-zinc-200">
-                  <Check className="w-4 h-4 text-[#00ff41]" />
+                  <Check className="w-4 h-4 text-ghost-green" />
                   Advanced EXIF removal
                 </li>
               </ul>
@@ -178,7 +178,7 @@ export default function Pricing() {
                 isTrialActive ? (
                   <Button
                     disabled
-                    className="w-full h-12 bg-[#00ff41]/20 text-[#00ff41] font-bold font-mono border border-[#00ff41]/30"
+                    className="w-full h-12 bg-ghost-green/20 text-ghost-green font-bold font-mono border border-ghost-green/30"
                   >
                     <Gift className="w-4 h-4 mr-2" />
                     {t('pricing.trial.active_btn', 'ESSAI ACTIF — {{days}}J RESTANTS', { days: trialDaysLeft })}
@@ -187,7 +187,7 @@ export default function Pricing() {
                   <div className="space-y-3">
                     <Button
                       onClick={handleMonthlyClick}
-                      className="w-full h-12 bg-[#00ff41] hover:bg-[#00ff41]/90 text-black font-bold font-mono"
+                      className="w-full h-12 bg-ghost-green hover:bg-ghost-green/90 text-black font-bold font-mono"
                     >
                       <Zap className="w-4 h-4 mr-2" />
                       {t('pricing.cta.buy', 'OBTENIR LE FULL ACCESS')}
@@ -195,7 +195,7 @@ export default function Pricing() {
                     <Button
                       onClick={handleYearlyClick}
                       variant="outline"
-                      className="w-full h-10 border-[#00ff41]/50 text-[#00ff41] hover:bg-[#00ff41]/10 font-mono text-xs"
+                      className="w-full h-10 border-ghost-green/50 text-ghost-green hover:bg-ghost-green/10 font-mono text-xs"
                     >
                       Yearly Plan — Save 33%
                     </Button>
@@ -204,7 +204,7 @@ export default function Pricing() {
               ) : (
                 <Button
                   onClick={handleAuth}
-                  className="w-full h-12 bg-[#00ff41] hover:bg-[#00ff41]/90 text-black font-bold font-mono"
+                  className="w-full h-12 bg-ghost-green hover:bg-ghost-green/90 text-black font-bold font-mono"
                 >
                   <Zap className="w-4 h-4 mr-2" />
                   {t('pricing.cta.login', 'SE CONNECTER POUR ACTIVER')}
