@@ -1,5 +1,13 @@
 import { describe, it, expect } from 'vitest';
-import { isHeicFile, isSupportedImage, validateImageFile, MAX_FILE_SIZE } from './image-processor';
+import {
+  isHeicFile,
+  isSupportedImage,
+  validateImageFile,
+  MAX_FILE_SIZE,
+  sanitizeExifValue,
+  formatGPSCoord,
+  formatFileSize,
+} from './image-processor';
 
 // Helper to create a minimal File object
 function makeFile(name: string, type: string): File {
@@ -130,5 +138,123 @@ describe('validateImageFile', () => {
     const result = await validateImageFile(file);
     expect(result.valid).toBe(false);
     expect(result.error).toContain('signature binaire invalide');
+  });
+});
+
+// ─── sanitizeExifValue ──────────────────────────────────────────────
+
+describe('sanitizeExifValue', () => {
+  it('returns empty string for null', () => {
+    expect(sanitizeExifValue(null)).toBe('');
+  });
+
+  it('returns empty string for undefined', () => {
+    expect(sanitizeExifValue(undefined)).toBe('');
+  });
+
+  it('converts number to string', () => {
+    expect(sanitizeExifValue(42)).toBe('42');
+  });
+
+  it('passes through clean strings', () => {
+    expect(sanitizeExifValue('Canon EOS 5D')).toBe('Canon EOS 5D');
+  });
+
+  it('strips HTML tags (XSS prevention)', () => {
+    expect(sanitizeExifValue('<script>alert("xss")</script>')).toBe('');
+  });
+
+  it('strips img onerror XSS', () => {
+    expect(sanitizeExifValue('<img src=x onerror=alert(1)>')).toBe('');
+  });
+
+  it('truncates strings longer than 500 chars', () => {
+    const long = 'A'.repeat(600);
+    expect(sanitizeExifValue(long).length).toBe(500);
+  });
+
+  it('handles boolean values', () => {
+    expect(sanitizeExifValue(true)).toBe('true');
+  });
+});
+
+// ─── formatGPSCoord ─────────────────────────────────────────────────
+
+describe('formatGPSCoord', () => {
+  it('formats positive latitude as N', () => {
+    const result = formatGPSCoord(48.8566, true);
+    expect(result).toContain('N');
+    expect(result).toMatch(/^48°/);
+  });
+
+  it('formats negative latitude as S', () => {
+    const result = formatGPSCoord(-33.8688, true);
+    expect(result).toContain('S');
+    expect(result).toMatch(/^33°/);
+  });
+
+  it('formats positive longitude as E', () => {
+    const result = formatGPSCoord(2.3522, false);
+    expect(result).toContain('E');
+    expect(result).toMatch(/^2°/);
+  });
+
+  it('formats negative longitude as W', () => {
+    const result = formatGPSCoord(-73.9857, false);
+    expect(result).toContain('W');
+    expect(result).toMatch(/^73°/);
+  });
+
+  it('formats zero latitude as N', () => {
+    const result = formatGPSCoord(0, true);
+    expect(result).toContain('N');
+  });
+
+  it('formats zero longitude as E', () => {
+    const result = formatGPSCoord(0, false);
+    expect(result).toContain('E');
+  });
+
+  it('outputs degrees, minutes, seconds format', () => {
+    // 48°51'23.8" N (Paris)
+    const result = formatGPSCoord(48.8566, true);
+    expect(result).toMatch(/^\d+°\d+'\d+(\.\d+)?" [NS]$/);
+  });
+});
+
+// ─── formatFileSize ─────────────────────────────────────────────────
+
+describe('formatFileSize', () => {
+  it('returns "0 o" for 0 bytes', () => {
+    expect(formatFileSize(0)).toBe('0 o');
+  });
+
+  it('formats bytes (< 1 Ko)', () => {
+    expect(formatFileSize(512)).toBe('512 o');
+  });
+
+  it('formats kilobytes', () => {
+    const result = formatFileSize(1024);
+    expect(result).toBe('1 Ko');
+  });
+
+  it('formats megabytes', () => {
+    const result = formatFileSize(1024 * 1024);
+    expect(result).toBe('1 Mo');
+  });
+
+  it('formats gigabytes', () => {
+    const result = formatFileSize(1024 * 1024 * 1024);
+    expect(result).toBe('1 Go');
+  });
+
+  it('formats fractional sizes', () => {
+    const result = formatFileSize(1536); // 1.5 Ko
+    expect(result).toBe('1.5 Ko');
+  });
+
+  it('formats large MB values', () => {
+    const result = formatFileSize(5.2 * 1024 * 1024);
+    expect(result).toBe('5.2 Mo');
   });
 });

@@ -35,6 +35,13 @@ function dispatch(event: SecurityEvent): void {
     : "";
 
   console.error(`${prefix} | ${event.message}${detail}`);
+
+  // Transport Sentry (lazy import pour éviter le bundling si non configuré)
+  import("@/lib/sentry")
+    .then(({ captureSecurityEvent }) =>
+      captureSecurityEvent(event.type, event.message, event.details)
+    )
+    .catch(() => {});
 }
 
 /**
