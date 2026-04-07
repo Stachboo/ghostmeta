@@ -18,6 +18,7 @@ import Footer from '@/components/Footer';
 import TrustStrip from '@/components/TrustStrip';
 import { useImageProcessor } from '@/hooks/useImageProcessor';
 import AuthButton from '@/components/AuthButton';
+import { useAuth } from '@/hooks/useAuth';
 
 const HERO_BG = "/hero-bg.avif";
 const SCAN_EFFECT = "/scan-effect.avif";
@@ -26,6 +27,7 @@ const PAYPAL_LINK = import.meta.env.VITE_DONATION_URL || "https://paypal.me/abdu
 
 export default function Home() {
   const { t, i18n } = useTranslation();
+  const { signInWithGoogle } = useAuth();
 
   // Supprimer le bot-content injecté par le prerender
   useEffect(() => {
@@ -58,11 +60,7 @@ export default function Home() {
 
   const handleSignIn = async () => {
     if (!isLoggedIn) {
-      const { supabase } = await import('@/lib/supabase');
-      await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: { redirectTo: window.location.origin },
-      });
+      await signInWithGoogle();
     } else {
       // Free user ayant épuisé son scan : rediriger vers pricing
       window.location.href = '/pricing';

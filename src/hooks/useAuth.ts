@@ -27,6 +27,7 @@ interface UseAuthReturn {
   isTrialActive: boolean;
   trialDaysLeft: number;
   refreshProfile: () => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
 }
 
 export function useAuth(): UseAuthReturn {
@@ -67,6 +68,13 @@ export function useAuth(): UseAuthReturn {
       setError(err instanceof Error ? err : new Error('Erreur réseau'));
       return null;
     }
+  }, []);
+
+  const signInWithGoogle = useCallback(async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: window.location.origin },
+    });
   }, []);
 
   const refreshProfile = useCallback(async () => {
@@ -170,6 +178,7 @@ export function useAuth(): UseAuthReturn {
     isTrialActive,
     trialDaysLeft,
     refreshProfile,
+    signInWithGoogle,
   };
 }
 

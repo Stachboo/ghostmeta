@@ -5,13 +5,14 @@ __pycache__/
 
 # Ignorer la sécurité
 credentials.json
-.env
+.env*
+!.env.example
+.mcp.json
 
 # Ignorer les dossiers système/build
 node_modules/
 .DS_Store
 dist/
 build/
-.env.local
 ghostmeta/
 .gstack/

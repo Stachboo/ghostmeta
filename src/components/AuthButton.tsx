@@ -16,19 +16,12 @@ import { toast } from "sonner";
 
 export default function AuthButton() {
   const { t } = useTranslation();
-  const { user, loading } = useAuth();
+  const { user, loading, signInWithGoogle } = useAuth();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [isSignUp, setIsSignUp] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
-
-  const handleGoogleSignIn = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: { redirectTo: window.location.origin },
-    });
-  };
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -136,7 +129,7 @@ export default function AuthButton() {
           <div className="space-y-4 mt-2">
             {/* Google OAuth */}
             <Button
-              onClick={handleGoogleSignIn}
+              onClick={signInWithGoogle}
               variant="outline"
               className="w-full h-11 border-zinc-700 text-white hover:bg-zinc-800"
             >

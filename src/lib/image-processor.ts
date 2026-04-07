@@ -11,6 +11,7 @@
 
 import ExifReader from 'exifreader';
 import DOMPurify from 'dompurify';
+import { logSecurityEvent } from "@/lib/security-logger";
 
 // SEUIL DE SÉCURITÉ : Toute image > 4096px sera redimensionnée pour éviter le crash mémoire
 const MAX_DIMENSION = 4096;
@@ -145,6 +146,11 @@ export async function extractMetadata(file: File): Promise<MetadataInfo> {
 
     return metadata;
   } catch (e) {
+    logSecurityEvent("PROCESSING_ERROR", "Metadata extraction failed", {
+      fileName: file.name,
+      fileSize: file.size,
+      error: e instanceof Error ? e.message : String(e),
+    });
     return { raw: {}, threatLevel: 'safe', threats: [] };
   }
 }
