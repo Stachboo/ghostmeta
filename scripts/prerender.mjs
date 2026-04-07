@@ -75,7 +75,7 @@ function buildHtml({ title, description, canonical, hreflangEn, ogType = 'websit
   // Contenu visible par défaut pour les crawlers (Bingbot ne rend pas le JS)
   // React supprime ce div au mount → pas de doublon pour les utilisateurs
   if (bodyContent) {
-    const botDiv = `<div id="bot-content">${bodyContent}</div>\n  `;
+    const botDiv = `<div id="bot-content" style="display:none">${bodyContent}</div>\n  `;
     html = html.replace('<div id="root">', botDiv + '<div id="root">');
   }
 
