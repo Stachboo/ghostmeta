@@ -1,6 +1,7 @@
 import { Suspense, lazy, useLayoutEffect, useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Toaster } from 'sonner';
 import ErrorBoundary from './components/ErrorBoundary';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
@@ -165,6 +166,9 @@ function App() {
 
       {/* Analytics — conditionné au consentement, hors ErrorBoundary */}
       {analyticsConsent && <Analytics />}
+
+      {/* Speed Insights — GDPR-friendly par défaut (pas de cookies, pas de PII) */}
+      <SpeedInsights />
     </BrowserRouter>
   );
 }

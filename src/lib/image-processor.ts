@@ -22,7 +22,7 @@ const MAX_DIMENSION = 4096;
  * à la source pour couvrir tout usage futur (innerHTML, attributs, etc.).
  * ALLOWED_TAGS: [] → supprime TOUT le HTML, ne conserve que le texte brut.
  */
-function sanitizeExifValue(value: unknown): string {
+export function sanitizeExifValue(value: unknown): string {
   if (value == null) return '';
   const str = typeof value === 'string' ? value : String(value);
   // Strip ALL HTML — les valeurs EXIF sont du texte brut, jamais du HTML
