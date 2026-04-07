@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { useAuth, CHECKOUT_PENDING_KEY } from '@/hooks/useAuth';
-import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Check, Zap, Shield, Image, MapPin, Gift, Clock } from 'lucide-react';
 import { toast } from 'sonner';
@@ -10,15 +9,10 @@ const LEMON_SQUEEZY_YEARLY_ID = import.meta.env.VITE_LEMON_SQUEEZY_YEARLY_ID;
 
 export default function Pricing() {
   const { t } = useTranslation();
-  const { user, loading, isTrialActive, trialDaysLeft, hasFullAccess, profile } = useAuth();
+  const { user, loading, isTrialActive, trialDaysLeft, hasFullAccess, profile, signInWithGoogle } = useAuth();
 
   const handleAuth = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: window.location.origin,
-      },
-    });
+    await signInWithGoogle();
   };
 
   const handleCheckout = (variantId: string) => {

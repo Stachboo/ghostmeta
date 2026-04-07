@@ -10,6 +10,8 @@ pnpm build        # Production build
 pnpm preview      # Preview the built app
 pnpm check        # TypeScript type checking (tsc --noEmit)
 pnpm format       # Format code with Prettier
+pnpm start        # Production server (NODE_ENV=production)
+pnpm postbuild    # Prerender static HTML (runs automatically after build)
 ```
 
 Tests are located in `src/lib/image-processor.test.ts` and run with Vitest. To run them:
@@ -62,8 +64,8 @@ The hook `src/hooks/useImageProcessor.ts` wraps this pipeline with React state.
 ### IndexNow (`api/indexnow.js`)
 - Vercel serverless function that submits all 7 sitemap URLs to the IndexNow API (Bing, Yandex)
 - Key file: `public/ffb631a305804310a69bb3a7eaf4e97d.txt`
-- Protected by `INDEXNOW_SECRET` env var (pass as `Authorization: Bearer` header or `?secret=` query param)
-- Call after deploy: `curl -X POST https://www.ghostmeta.online/api/indexnow?secret=YOUR_SECRET`
+- Protected by `INDEXNOW_SECRET` env var (pass as `Authorization: Bearer` header)
+- Call after deploy: `curl -X POST -H "Authorization: Bearer $INDEXNOW_SECRET" https://www.ghostmeta.online/api/indexnow`
 
 ### Code style
 - Prettier: double quotes, 80 chars, semicolons, no arrow parens

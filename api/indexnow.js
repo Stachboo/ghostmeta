@@ -37,8 +37,7 @@ export default async function handler(req, res) {
   }
 
   const auth = req.headers.authorization?.replace("Bearer ", "");
-  const query = req.query?.secret;
-  if (auth !== secret && query !== secret) {
+  if (auth !== secret) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
