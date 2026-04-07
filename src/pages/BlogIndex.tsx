@@ -26,7 +26,7 @@ export default function BlogIndex() {
   const canonicalUrl = "https://www.ghostmeta.online/blog";
 
   return (
-    <div className="min-h-screen bg-[#0a0a0c] text-foreground font-sans">
+    <div className="min-h-screen bg-ghost-dark text-foreground font-sans">
       <Helmet>
         <title>Blog GhostMeta | Guides Confidentialit&eacute; Photo</title>
         <meta
@@ -72,12 +72,12 @@ export default function BlogIndex() {
         >
           {/* Heading */}
           <div className="text-center space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-[#00ff41]">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-ghost-green">
               <BookOpen className="w-3 h-3" /> Blog
             </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-white">
               Guides{" "}
-              <span className="text-[#00ff41]">Confidentialit&eacute;</span>{" "}
+              <span className="text-ghost-green">Confidentialit&eacute;</span>{" "}
               Photo
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -97,15 +97,15 @@ export default function BlogIndex() {
               >
                 <Link
                   to={`/blog/${slug}`}
-                  className="block h-full p-6 rounded-xl bg-white/[0.02] border border-zinc-800 hover:border-[#00ff41]/50 transition-all duration-300 group"
+                  className="block h-full p-6 rounded-xl bg-white/[0.02] border border-zinc-800 hover:border-ghost-green/50 transition-all duration-300 group"
                 >
-                  <h2 className="font-bold text-white text-lg mb-2 group-hover:text-[#00ff41] transition-colors">
+                  <h2 className="font-bold text-white text-lg mb-2 group-hover:text-ghost-green transition-colors">
                     {t(`blog.posts.${slug}.title`)}
                   </h2>
                   <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
                     {t(`blog.posts.${slug}.desc`)}
                   </p>
-                  <span className="inline-flex items-center gap-1 text-xs font-mono text-[#00ff41] group-hover:gap-2 transition-all">
+                  <span className="inline-flex items-center gap-1 text-xs font-mono text-ghost-green group-hover:gap-2 transition-all">
                     Lire l&apos;article{" "}
                     <ArrowRight className="w-3 h-3" />
                   </span>
@@ -118,7 +118,7 @@ export default function BlogIndex() {
           <div className="text-center pt-8 border-t border-zinc-800">
             <Link
               to="/"
-              className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-black bg-[#00ff41] rounded-full hover:bg-[#00dd38] transition-all duration-300"
+              className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-black bg-ghost-green rounded-full hover:bg-ghost-green-hover transition-all duration-300"
             >
               Prot&eacute;gez vos photos maintenant
               <ArrowRight className="w-4 h-4" />

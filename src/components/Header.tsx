@@ -56,7 +56,7 @@ export default function Header() {
         <Link to="/" className="flex items-center gap-2">
           <GhostLogo size={32} />
           <span className="text-lg font-bold tracking-tight">
-            Ghost<span className="text-[#00ff41]">Meta</span>
+            Ghost<span className="text-ghost-green">Meta</span>
           </span>
         </Link>
 
@@ -70,7 +70,7 @@ export default function Header() {
                 to={to}
                 className={`text-sm transition-colors ${
                   isActive(to)
-                    ? 'text-[#00ff41] font-semibold'
+                    ? 'text-ghost-green font-semibold'
                     : 'text-zinc-400 hover:text-white'
                 }`}
               >
@@ -114,13 +114,13 @@ export default function Header() {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="bg-[#0a0a0c] border-white/10 w-64"
+              className="bg-ghost-dark border-white/10 w-64"
             >
               <SheetHeader>
                 <SheetTitle className="flex items-center gap-2">
                   <GhostLogo size={24} />
                   <span className="font-bold">
-                    Ghost<span className="text-[#00ff41]">Meta</span>
+                    Ghost<span className="text-ghost-green">Meta</span>
                   </span>
                 </SheetTitle>
               </SheetHeader>
@@ -132,7 +132,7 @@ export default function Header() {
                     onClick={() => setOpen(false)}
                     className={`text-sm transition-colors ${
                       isActive(to)
-                        ? 'text-[#00ff41] font-semibold'
+                        ? 'text-ghost-green font-semibold'
                         : 'text-zinc-400 hover:text-white'
                     }`}
                   >

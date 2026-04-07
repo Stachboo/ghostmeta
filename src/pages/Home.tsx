@@ -4,14 +4,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Zap, Trash2, Download, Lock, ChevronDown, Shield, AlertTriangle, Globe, Smartphone, Clock, MapPin, CheckCircle2, XCircle, Server, Heart, Scan, FileDigit, MousePointerClick
+import { ShieldCheck, Zap, Trash2, Download, Shield, AlertTriangle, Globe, Smartphone, Clock, MapPin, CheckCircle2, XCircle, Server
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import GhostLogo from '@/components/GhostLogo';
-import DropZone from '@/components/DropZone';
+import HeroSection from '@/components/home/HeroSection';
+import HowItWorks from '@/components/home/HowItWorks';
+import FAQSection from '@/components/home/FAQSection';
 import ImageCard from '@/components/ImageCard';
 import ProModal from '@/components/ProModal';
 import Footer from '@/components/Footer';
@@ -78,17 +79,17 @@ export default function Home() {
     const result = addFiles(files);
     if (result.limitReached) {
       setShowProModal(true);
-      return result;
+      return { ...result, limitReached: true as const };
     }
     if (result.added > 0) toast.success(`${result.added} image(s)`, { description: t('upload.success') });
     if (result.rejected > 0) toast.error(t('upload.error_type'), { description: 'JPG, PNG, WebP, HEIC' });
-    return result;
+    return { ...result, limitReached: false as const };
   }, [addFiles, t]);
 
   const progressPercent = progress.total > 0 ? Math.round((progress.current / progress.total) * 100) : 0;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0a0a0c] font-sans text-white">
+    <div className="min-h-screen flex flex-col bg-ghost-dark font-sans text-white">
       <Helmet>
         <title>GhostMeta | Nettoyeur Photo pour Vinted &amp; Leboncoin (Gratuit)</title>
         <meta name="description" content="Sécurisez vos ventes : supprimez immédiatement le GPS et les métadonnées cachées de vos photos Vinted, Leboncoin et eBay. Protection 100% locale et anonyme." />
@@ -221,7 +222,7 @@ export default function Home() {
         <div className="container flex items-center justify-between h-14">
           <div className="flex items-center gap-2.5">
             <GhostLogo size={32} glow />
-            <span className="text-lg font-bold tracking-tight">Ghost<span className="text-[#00ff41]">Meta</span></span>
+            <span className="text-lg font-bold tracking-tight">Ghost<span className="text-ghost-green">Meta</span></span>
           </div>
           <div className="flex items-center gap-3">
             <DropdownMenu>
@@ -242,7 +243,7 @@ export default function Home() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="border-[#00ff41]/30 text-[#00ff41] hover:bg-[#00ff41]/10 font-bold h-8 hidden sm:flex"
+                  className="border-ghost-green/30 text-ghost-green hover:bg-ghost-green/10 font-bold h-8 hidden sm:flex"
                 >
                   <Zap className="w-3.5 h-3.5 mr-1" /> {t("header.upgrade")}
                 </Button>
@@ -256,35 +257,7 @@ export default function Home() {
 
       <main className="flex-1">
         {/* HERO SECTION */}
-        <section className="relative overflow-hidden min-h-[550px] flex items-center">
-          <div className="absolute inset-0 z-0">
-            <img src={HERO_BG} width="1920" height="1080" alt="GhostMeta Secure Interface Background" className="w-full h-full object-cover opacity-40" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0c]/60 to-[#0a0a0c]"></div>
-          </div>
-
-          <div className="container relative z-10 py-12 text-center">
-            <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium mb-6">
-                <Lock className="w-3 h-3 text-[#00ff41]" /> {t('hero.secure_badge')}
-              </div>
-              
-              <h1
-                className="matrix-hero-title"
-                aria-label={`${t('hero.title_start')} ${t('hero.title_color')} ${t('hero.title_end')}`}
-              >
-                <span className="matrix-outer" data-text={t('hero.title_start')}>{t('hero.title_start')}</span>
-                <span className="matrix-core" data-text={t('hero.title_color')}>{t('hero.title_color')}</span>
-                <span className="matrix-outer" data-text={t('hero.title_end')}>{t('hero.title_end')}</span>
-              </h1>
-              
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-10">{t('hero.subtitle')}</p>
-              
-              <div className="max-w-2xl mx-auto">
-                <DropZone onFilesAdded={handleFilesAdded} hasImages={images.length > 0} isProcessing={isProcessing} />
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <HeroSection onFilesAdded={handleFilesAdded} hasImages={images.length > 0} isProcessing={isProcessing} />
 
         {/* IMAGE PROCESSING UI */}
         {images.length > 0 && (
@@ -299,21 +272,21 @@ export default function Home() {
                 <p className="text-2xl font-bold text-amber-500">{stats.threatsFound}</p>
               </div>
               <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-                <ShieldCheck className="w-6 h-6 mx-auto mb-2 text-[#00ff41]" />
-                <p className="text-2xl font-bold text-[#00ff41]">{stats.cleaned}</p>
+                <ShieldCheck className="w-6 h-6 mx-auto mb-2 text-ghost-green" />
+                <p className="text-2xl font-bold text-ghost-green">{stats.cleaned}</p>
               </div>
             </div>
 
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col sm:flex-row gap-3 mb-6 p-4 rounded-lg bg-card border border-border">
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 {stats.cleaned < stats.total && (
-                  <Button onClick={handleCleanAll} disabled={isProcessing} className="flex-1 sm:flex-none h-11 bg-[#00ff41] hover:bg-[#00dd38] text-black font-bold ghost-glow text-sm">
+                  <Button onClick={handleCleanAll} disabled={isProcessing} className="flex-1 sm:flex-none h-11 bg-ghost-green hover:bg-ghost-green-hover text-black font-bold ghost-glow text-sm">
                    {isProcessing ? <span className="flex items-center gap-2"><span className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin"></span>{t('upload.cleaning')}</span> : <><ShieldCheck className="w-4 h-4 mr-2" />{t('upload.cleaning').replace('...', '')}</>}
                   </Button>
                 )}
                 
                 {stats.cleaned > 0 && (
-                  <Button onClick={downloadAllZip} variant="outline" className="flex-1 sm:flex-none h-11 border-[#00ff41]/30 text-[#00ff41] hover:bg-[#00ff41]/10">
+                  <Button onClick={downloadAllZip} variant="outline" className="flex-1 sm:flex-none h-11 border-ghost-green/30 text-ghost-green hover:bg-ghost-green/10">
                     <Download className="w-4 h-4 mr-2" /> {t('upload.download_all')}
                   </Button>
                 )}
@@ -329,7 +302,7 @@ export default function Home() {
                 <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="mb-6">
                   <div className="flex items-center justify-between text-xs text-muted-foreground mb-2">
                     <span className="font-mono">{t('upload.processing')} {progress.current}/{progress.total}</span>
-                    <span className="font-mono text-[#00ff41]">{progressPercent}%</span>
+                    <span className="font-mono text-ghost-green">{progressPercent}%</span>
                   </div>
                   <Progress value={progressPercent} className="h-2 bg-muted" />
                 </motion.div>
@@ -363,7 +336,7 @@ export default function Home() {
                 <h2 className="text-2xl font-bold text-[#ffb000]">{t('marketing.vinted_title')}</h2>
                 <p className="text-muted-foreground text-base leading-relaxed">{t('marketing.vinted_text_1')}</p>
                 <p className="text-muted-foreground text-base leading-relaxed">{t('marketing.vinted_text_2')}</p>
-                <p className="text-[#00ff41] font-medium text-base leading-relaxed">{t('marketing.vinted_text_3')}</p>
+                <p className="text-ghost-green font-medium text-base leading-relaxed">{t('marketing.vinted_text_3')}</p>
               </div>
             </div>
           </motion.div>
@@ -402,44 +375,7 @@ export default function Home() {
         </section>
 
         {/* COMMENT ÇA FONCTIONNE */}
-        <section className="container py-12">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold mb-2">{t('info.how_title')} <span className="text-[#00ff41]">{t('info.how_highlight')}</span></h2>
-            <p className="text-muted-foreground">{t('info.how_subtitle')}</p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            {/* Etape 01 */}
-            <div className="p-6 rounded-xl border border-white/10 bg-white/5 hover:border-[#00ff41]/30 transition-colors relative group">
-              <div className="flex justify-between items-start mb-4">
-                <div className="p-2 bg-[#00ff41]/10 rounded-lg text-[#00ff41]"><MousePointerClick className="w-6 h-6" /></div>
-                <span aria-hidden="true" className="text-4xl font-bold text-white/20 group-hover:text-white/30 transition-colors">01</span>
-              </div>
-              <h3 className="font-bold text-[#00ff41] mb-2">{t('info.step_1_title')}</h3>
-              <p className="text-xs text-muted-foreground">{t('info.step_1_desc')}</p>
-            </div>
-
-            {/* Etape 02 */}
-            <div className="p-6 rounded-xl border border-white/10 bg-white/5 hover:border-[#ffb000]/30 transition-colors relative group">
-              <div className="flex justify-between items-start mb-4">
-                <div className="p-2 bg-[#ffb000]/10 rounded-lg text-[#ffb000]"><Scan className="w-6 h-6" /></div>
-                <span aria-hidden="true" className="text-4xl font-bold text-white/20 group-hover:text-white/30 transition-colors">02</span>
-              </div>
-              <h3 className="font-bold text-[#ffb000] mb-2">{t('info.step_2_title')}</h3>
-              <p className="text-xs text-muted-foreground">{t('info.step_2_desc')}</p>
-            </div>
-
-            {/* Etape 03 */}
-            <div className="p-6 rounded-xl border border-white/10 bg-white/5 hover:border-[#00ff41]/30 transition-colors relative group">
-              <div className="flex justify-between items-start mb-4">
-                <div className="p-2 bg-[#00ff41]/10 rounded-lg text-[#00ff41]"><FileDigit className="w-6 h-6" /></div>
-                <span aria-hidden="true" className="text-4xl font-bold text-white/20 group-hover:text-white/30 transition-colors">03</span>
-              </div>
-              <h3 className="font-bold text-[#00ff41] mb-2">{t('info.step_3_title')}</h3>
-              <p className="text-xs text-muted-foreground">{t('info.step_3_desc')}</p>
-            </div>
-          </div>
-        </section>
+        <HowItWorks />
 
         {/* ARCHITECTURE */}
         <section className="container py-16">
@@ -467,17 +403,17 @@ export default function Home() {
             </div>
 
             {/* Colonne Verte (GhostMeta) */}
-            <div className="relative border border-[#00ff41]/20 bg-[#00ff41]/5 p-8 rounded-xl h-full overflow-hidden">
+            <div className="relative border border-ghost-green/20 bg-ghost-green/5 p-8 rounded-xl h-full overflow-hidden">
               <img src={SHIELD_IMG} width="320" height="320" className="absolute -right-16 -bottom-16 w-80 h-80 opacity-10 pointer-events-none z-0 object-contain" alt="GhostMeta Technical Analysis View" />
               
               <div className="relative z-10">
-                <h3 className="text-[#00ff41] font-bold mb-6 flex items-center gap-2 text-lg">
+                <h3 className="text-ghost-green font-bold mb-6 flex items-center gap-2 text-lg">
                   <ShieldCheck className="w-5 h-5" /> {t('info.arch_good_title')}
                 </h3>
                 <ul className="space-y-4 text-sm text-muted-foreground">
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#00ff41] flex-shrink-0" /> {t('info.arch_good_1')}</li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#00ff41] flex-shrink-0" /> {t('info.arch_good_2')}</li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#00ff41] flex-shrink-0" /> {t('info.arch_good_3')}</li>
+                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-ghost-green flex-shrink-0" /> {t('info.arch_good_1')}</li>
+                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-ghost-green flex-shrink-0" /> {t('info.arch_good_2')}</li>
+                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-ghost-green flex-shrink-0" /> {t('info.arch_good_3')}</li>
                 </ul>
               </div>
             </div>
@@ -487,15 +423,15 @@ export default function Home() {
         {/* BLOG SEO */}
         <section id="blog" className="container py-16 border-t border-border/30">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold mb-8 text-[#00ff41]">{t('blog.section_title')}</h2>
+            <h2 className="text-2xl font-bold mb-8 text-ghost-green">{t('blog.section_title')}</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
               {['vinted-securite-photo-guide', 'supprimer-exif-iphone-android', 'comprendre-donnees-exif-gps', 'nettoyage-photo-local-vs-cloud'].map(slug => (
-                <Link key={slug} to={`/blog/${slug}`} className="p-4 rounded-lg bg-card border border-border hover:border-[#00ff41]/50 transition-all">
+                <Link key={slug} to={`/blog/${slug}`} className="p-4 rounded-lg bg-card border border-border hover:border-ghost-green/50 transition-all">
                   <h3 className="font-bold text-sm text-foreground mb-1">{t(`blog.posts.${slug}.title`)}</h3>
                   <p className="text-xs text-muted-foreground">{t(`blog.posts.${slug}.desc`)}</p>
                 </Link>
               ))}
-              <Link to="/blog/ghostmeta-manifeste-confidentialite" className="p-4 rounded-lg bg-card border border-border hover:border-[#00ff41]/50 transition-all sm:col-span-2 lg:col-span-1">
+              <Link to="/blog/ghostmeta-manifeste-confidentialite" className="p-4 rounded-lg bg-card border border-border hover:border-ghost-green/50 transition-all sm:col-span-2 lg:col-span-1">
                 <h3 className="font-bold text-sm text-foreground mb-1">{t('blog.posts.ghostmeta-manifeste-confidentialite.title')}</h3>
                 <p className="text-xs text-muted-foreground">{t('blog.posts.ghostmeta-manifeste-confidentialite.desc')}</p>
               </Link>
@@ -506,7 +442,7 @@ export default function Home() {
         {/* PRICING */}
         <section className="container py-16 text-center">
           <h2 className="text-3xl font-bold mb-2 flex items-center justify-center gap-2">
-            <Zap className="w-6 h-6 text-[#00ff41]" /> {t('pro.title')}
+            <Zap className="w-6 h-6 text-ghost-green" /> {t('pro.title')}
           </h2>
           
           <div className="flex justify-center mt-10">
@@ -517,17 +453,7 @@ export default function Home() {
         </section>
 
         {/* FAQ */}
-        <section className="max-w-2xl mx-auto py-16 space-y-6">
-          <h2 className="text-2xl font-bold text-center">{t('info.faq_title')}</h2>
-          <Accordion type="single" collapsible className="w-full">
-            {[1, 2, 3, 4, 5, 6].map((num) => (
-              <AccordionItem key={num} value={`item-${num}`}>
-                <AccordionTrigger className="text-left">{t(`info.q${num}`)}</AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">{t(`info.a${num}`)}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </section>
+        <FAQSection />
       </main>
 
       <Footer />
