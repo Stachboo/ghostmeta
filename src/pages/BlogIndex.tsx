@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
@@ -16,6 +17,11 @@ const BLOG_SLUGS = [
 
 export default function BlogIndex() {
   const { t } = useTranslation();
+
+  // Supprimer le bot-content injecté par le prerender
+  useEffect(() => {
+    document.getElementById("bot-content")?.remove();
+  }, []);
 
   const canonicalUrl = "https://www.ghostmeta.online/blog";
 
