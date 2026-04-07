@@ -27,7 +27,7 @@ export default function DropZone({ onFilesAdded, hasImages, isProcessing }: Drop
     for (const r of rejections) {
       if (r.errors.some(e => e.code === 'file-too-large')) {
         // SEC-009 : limite réduite à 10 MB pour éviter les DoS côté client
-        toast.error(`${r.file.name} : fichier trop volumineux (max 10 MB)`);
+        toast.error(`${r.file.name} : ${t("upload.file_too_large", "fichier trop volumineux (max 10 MB)")}`);
       }
     }
   }, []);

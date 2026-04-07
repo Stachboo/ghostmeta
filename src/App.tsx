@@ -1,5 +1,6 @@
 import { Suspense, lazy, useLayoutEffect, useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { MotionConfig } from "framer-motion";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Toaster } from 'sonner';
@@ -9,6 +10,7 @@ import ConsentBanner from './components/ConsentBanner';
 
 // Imports dynamiques (Optimisation pour charger le site vite)
 const Home = lazy(() => import('./pages/Home'));
+const BlogIndex = lazy(() => import('./pages/BlogIndex'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const PricingPage = lazy(() => import('./pages/PricingPage'));
 const SecurityPage = lazy(() => import('./pages/SecurityPage'));
@@ -122,6 +124,7 @@ function App() {
   }, []);
 
   return (
+    <MotionConfig reducedMotion="user">
     <BrowserRouter>
       <ScrollToTop />
       <ErrorBoundary>
@@ -146,7 +149,8 @@ function App() {
             <Route path="/fr/securite" element={<Navigate to="/securite" replace />} />
             <Route path="/en/security" element={<Navigate to="/securite?lng=en" replace />} />
 
-            {/* 4. Le Blog (Route dynamique) */}
+            {/* 4. Le Blog */}
+            <Route path="/blog" element={<BlogIndex />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
 
             {/* 4. Page 404 */}
@@ -170,6 +174,7 @@ function App() {
       {/* Speed Insights — GDPR-friendly par défaut (pas de cookies, pas de PII) */}
       <SpeedInsights />
     </BrowserRouter>
+    </MotionConfig>
   );
 }
 

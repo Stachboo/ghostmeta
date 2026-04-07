@@ -1,6 +1,7 @@
 {
   "common": {
-    "back_home": "Retour a l'accueil"
+    "back_home": "Retour a l'accueil",
+    "close": "Fermer"
   },
   "nav": {
     "home": "Accueil",
@@ -21,6 +22,7 @@
     "seo_title": "Page introuvable | GhostMeta"
   },
   "error": {
+    "network": "Erreur réseau",
     "system_failure": "SYSTEM_FAILURE",
     "render_error": "GHOSTMETA - ERREUR DE RENDU",
     "description": "Une erreur inattendue a interrompu le pipeline de rendu.",
@@ -34,6 +36,7 @@
     "upgrade": "Passer Pro"
   },
   "auth": {
+    "welcome_pro": "Bienvenue en Pro ! ✨",
     "loading": "Initialisation...",
     "login": "Acces Securise",
     "logout": "Deconnexion",
@@ -109,7 +112,8 @@
     "limit_title": "Limite atteinte",
     "limit_desc": "En mode gratuit, le nettoyage est limite a 1 session toutes les 12 heures. Revenez plus tard ou soutenez le projet.",
     "donate_btn": "Soutenir le developpeur (PayPal)",
-    "pro_soon": "Pack Pro Bientot Disponible !"
+    "pro_soon": "Pack Pro Bientot Disponible !",
+    "file_too_large": "fichier trop volumineux (max 10 MB)"
   },
   "card": {
     "pending": "EN ATTENTE",
@@ -124,7 +128,12 @@
     "cleaned_success": "Metadonnees supprimees avec succes",
     "download": "Telecharger",
     "remove": "Supprimer",
-    "unlock_cta": "Debloquer"
+    "unlock_cta": "Debloquer",
+    "preview_alt": "Aperçu du fichier en cours de nettoyage",
+    "view_map": "Voir sur la carte",
+    "data_hidden": "Données masquées",
+    "gps_detected": "LOCALISATION GPS DÉTECTÉE",
+    "map_loading": "Chargement de la carte..."
   },
   "marketing": {
     "vinted_title": "Vos photos Vinted revelent votre adresse.",
@@ -390,5 +399,16 @@
       "og_desc": "Vos photos ne quittent jamais votre appareil. Traitement 100% local, zéro upload, zéro collecte."
     },
     "footer_link": "Sécurité"
+  },
+  "pwa": {
+    "title": "Installer GhostMeta",
+    "subtitle": "Accès rapide · Fonctionne hors-ligne",
+    "subtitle_ios": "Accès rapide depuis ton écran d'accueil",
+    "install": "+ Installer",
+    "ios_title": "Installer sur iOS",
+    "ios_step1": "Appuie sur le bouton Partager dans Safari",
+    "ios_step2": "Fais défiler et sélectionne « Sur l'écran d'accueil »",
+    "ios_step3": "Appuie sur « Ajouter » en haut à droite",
+    "dismiss": "Ne plus afficher"
   }
 }

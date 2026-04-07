@@ -157,6 +157,28 @@ const BLOG_DATES = {
 
 const SLUGS = Object.keys(BLOG_DATES);
 
+// ── /blog (index) ────────────────────────────────────────────────────────────
+try {
+  const blogIndexBodyContent = [
+    `<h1>Blog GhostMeta — Guides Confidentialité Photo</h1>`,
+    `<p>Conseils pratiques pour protéger votre vie privée en ligne et sécuriser vos photos avant de les publier.</p>`,
+    ...SLUGS.map(slug => {
+      const title = get(fr, `blog.posts.${slug}.title`);
+      const desc  = get(fr, `blog.posts.${slug}.desc`);
+      return `<h2><a href="/blog/${slug}">${escHtml(title)}</a></h2><p>${escHtml(desc)}</p>`;
+    }),
+  ].join('\n');
+
+  saveHtml('dist/blog/index.html', buildHtml({
+    title:       'Blog GhostMeta | Guides Confidentialité Photo',
+    description: 'Guides pratiques pour protéger votre vie privée en ligne : supprimer les métadonnées EXIF, sécuriser vos photos Vinted, comprendre les données GPS cachées.',
+    canonical:   'https://www.ghostmeta.online/blog',
+    hreflangEn:  'https://www.ghostmeta.online/blog?lng=en',
+    bodyContent: blogIndexBodyContent,
+  }));
+  log('/blog', 'dist/blog/index.html'); ok++;
+} catch(e) { err('/blog', e); }
+
 for (const slug of SLUGS) {
   try {
     const title   = get(fr, `blog.posts.${slug}.title`);

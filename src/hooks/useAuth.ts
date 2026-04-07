@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
 import type { User } from '@supabase/supabase-js';
 import { toast } from 'sonner';
+import i18next from 'i18next';
 
 export const CHECKOUT_PENDING_KEY = 'ghostmeta_checkout_pending';
 const POLL_INTERVAL_MS = 3_000;
@@ -65,7 +66,7 @@ export function useAuth(): UseAuthReturn {
       setError(null);
       return data as Profile;
     } catch (err) {
-      setError(err instanceof Error ? err : new Error('Erreur réseau'));
+      setError(err instanceof Error ? err : new Error(i18next.t("error.network", "Erreur réseau")));
       return null;
     }
   }, []);
@@ -94,7 +95,7 @@ export function useAuth(): UseAuthReturn {
       if (localStorage.getItem(CHECKOUT_PENDING_KEY) === 'true') {
         stopPolling();
         localStorage.removeItem(CHECKOUT_PENDING_KEY);
-        toast.success('Bienvenue en Pro ! ✨');
+        toast.success(i18next.t("auth.welcome_pro", "Bienvenue en Pro ! ✨"));
       }
       return;
     }
