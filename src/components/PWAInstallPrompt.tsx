@@ -10,6 +10,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import GhostLogo from './GhostLogo';
 
 const DISMISSED_KEY = 'ghostmeta_pwa_dismissed';
@@ -29,6 +30,7 @@ function isStandalone(): boolean {
 }
 
 export default function PWAInstallPrompt() {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
   const [isIOSDevice, setIsIOSDevice] = useState(false);
   const [showIOSGuide, setShowIOSGuide] = useState(false);
@@ -140,7 +142,7 @@ export default function PWAInstallPrompt() {
                     color: '#e5e7eb',
                   }}
                 >
-                  Installer GhostMeta
+                  {t("pwa.title", "Installer GhostMeta")}
                 </p>
                 <p
                   style={{
@@ -151,7 +153,7 @@ export default function PWAInstallPrompt() {
                     letterSpacing: '0.04em',
                   }}
                 >
-                  {isIOSDevice ? 'Accès rapide depuis ton écran d\'accueil' : 'Accès rapide · Fonctionne hors-ligne'}
+                  {isIOSDevice ? t("pwa.subtitle_ios", "Accès rapide depuis ton écran d'accueil") : t("pwa.subtitle", "Accès rapide · Fonctionne hors-ligne")}
                 </p>
               </div>
 
@@ -174,13 +176,13 @@ export default function PWAInstallPrompt() {
                   whiteSpace: 'nowrap',
                 }}
               >
-                + Installer
+                {t("pwa.install", "+ Installer")}
               </button>
 
               {/* Fermer */}
               <button
                 onClick={dismiss}
-                aria-label="Fermer"
+                aria-label={t("common.close", "Fermer")}
                 className="border border-white/[0.12] text-white/[0.45] hover:text-[#ff4444] hover:border-red-500/40 transition-colors"
                 style={{
                   flexShrink: 0,
@@ -240,7 +242,7 @@ export default function PWAInstallPrompt() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
                 <GhostLogo size={28} glow />
                 <span style={{ fontWeight: 700, fontSize: '15px', color: '#e5e7eb' }}>
-                  Installer sur iOS
+                  {t("pwa.ios_title", "Installer sur iOS")}
                 </span>
                 <button
                   onClick={() => setShowIOSGuide(false)}
@@ -258,9 +260,9 @@ export default function PWAInstallPrompt() {
               </div>
 
               {[
-                { step: '1', icon: '⬆️', text: 'Appuie sur le bouton Partager dans Safari' },
-                { step: '2', icon: '📲', text: 'Fais défiler et sélectionne « Sur l\'écran d\'accueil »' },
-                { step: '3', icon: '✅', text: 'Appuie sur « Ajouter » en haut à droite' },
+                { step: '1', icon: '⬆️', text: t("pwa.ios_step1", "Appuie sur le bouton Partager dans Safari") },
+                { step: '2', icon: '📲', text: t("pwa.ios_step2", "Fais défiler et sélectionne « Sur l'écran d'accueil »") },
+                { step: '3', icon: '✅', text: t("pwa.ios_step3", "Appuie sur « Ajouter » en haut à droite") },
               ].map(({ step, icon, text }) => (
                 <div
                   key={step}
@@ -311,7 +313,7 @@ export default function PWAInstallPrompt() {
                   letterSpacing: '0.05em',
                 }}
               >
-                Ne plus afficher
+                {t("pwa.dismiss", "Ne plus afficher")}
               </button>
             </motion.div>
           </motion.div>

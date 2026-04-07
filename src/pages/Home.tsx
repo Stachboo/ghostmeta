@@ -112,6 +112,109 @@ export default function Home() {
         <meta name="twitter:title" content="GhostMeta — Sécurité Vinted &amp; Leboncoin" />
         <meta name="twitter:description" content="Supprimez GPS et EXIF en 1 clic. 100% Gratuit &amp; Local." />
         <meta name="twitter:image" content="https://www.ghostmeta.online/og-image-v2.jpg" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "GhostMeta",
+          "url": "https://www.ghostmeta.online",
+          "image": "https://www.ghostmeta.online/og-image-v2.jpg",
+          "applicationCategory": "UtilityApplication",
+          "operatingSystem": "Windows, macOS, Android, iOS",
+          "description": "Outil gratuit pour supprimer les métadonnées EXIF et GPS des photos avant de les poster sur Vinted, Leboncoin ou eBay. Traitement 100% local via Canvas.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock"
+          },
+          "featureList": [
+            "Suppression GPS",
+            "Nettoyage EXIF/XMP/IPTC",
+            "Anonymisation photo pixel par pixel",
+            "Traitement local sécurisé"
+          ],
+          "author": {
+            "@type": "Organization",
+            "name": "GhostMeta Labs"
+          }
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Mes photos sont-elles envoyées sur un serveur ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Non. Tout le traitement se fait localement dans votre navigateur via l'API Canvas. Aucune donnée ne transite par un serveur."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Quels formats d'images sont supportés ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GhostMeta supporte JPEG, PNG, WebP et HEIC (iPhone)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Quelles métadonnées sont supprimées ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Toutes les métadonnées embarquées : GPS, EXIF, XMP, IPTC. L'image est reconstruite pixel par pixel pour garantir un fichier propre."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "La qualité de l'image est-elle affectée ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "L'image est recompressée à 92% de qualité (JPEG) pour un bon compromis poids/qualité. Les images de plus de 4096px sont redimensionnées."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Les plateformes comme Vinted ne nettoient-elles pas déjà les métadonnées ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Pas toujours, et souvent après avoir stocké l'original sur leurs serveurs. GhostMeta vous protège avant même l'upload."
+              }
+            }
+          ]
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          "name": "Comment supprimer les métadonnées GPS de vos photos Vinted",
+          "description": "Guide en 3 étapes pour anonymiser vos photos avant de les publier sur Vinted, Leboncoin ou eBay.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Déposez vos photos",
+              "text": "Glissez-déposez ou sélectionnez vos images. JPEG, PNG, WebP et HEIC supportés."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Scan des menaces",
+              "text": "GhostMeta analyse chaque image et identifie les métadonnées sensibles (GPS, date, appareil)."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Neutralisation et téléchargement",
+              "text": "Un clic pour supprimer toutes les métadonnées. Téléchargez vos images propres."
+            }
+          ],
+          "tool": {
+            "@type": "HowToTool",
+            "name": "GhostMeta (navigateur web)"
+          },
+          "totalTime": "PT30S"
+        })}</script>
       </Helmet>
       {/* HEADER */}
       <header className="sticky top-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl">

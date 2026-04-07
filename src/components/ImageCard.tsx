@@ -155,7 +155,7 @@ export default function ImageCard({ image, onRemove, onDownload, index, blurMeta
         <div className="flex items-center gap-3 min-w-0">
           <div className="w-10 h-10 rounded bg-muted/50 flex-shrink-0 overflow-hidden border border-border/30">
             {image.previewUrl ? (
-              <img src={image.previewUrl} alt="Aperçu du fichier en cours de nettoyage" className="w-full h-full object-cover" />
+              <img src={image.previewUrl} alt={t("card.preview_alt", "Aperçu du fichier en cours de nettoyage")} className="w-full h-full object-cover" />
             ) : (
               <div className="w-full h-full flex items-center justify-center">
                 <ImageIcon className="w-5 h-5 text-muted-foreground/50" />
@@ -212,7 +212,7 @@ export default function ImageCard({ image, onRemove, onDownload, index, blurMeta
                   aria-label="Voir la localisation GPS sur la carte"
                 >
                   <MapPin className="w-3 h-3" />
-                  Voir sur la carte
+                  {t("card.view_map", "Voir sur la carte")}
                 </button>
               )}
             </motion.div>
@@ -222,7 +222,7 @@ export default function ImageCard({ image, onRemove, onDownload, index, blurMeta
             <div className="flex items-center justify-between pt-1.5 px-1">
               <span className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
                 <Lock className="w-3 h-3" />
-                Données masquées
+                {t("card.data_hidden", "Données masquées")}
               </span>
               {onSignIn && (
                 <button
@@ -297,12 +297,12 @@ export default function ImageCard({ image, onRemove, onDownload, index, blurMeta
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2 text-red-400 font-mono text-sm">
                 <MapPin className="w-4 h-4" />
-                LOCALISATION GPS DÉTECTÉE
+                {t("card.gps_detected", "LOCALISATION GPS DÉTECTÉE")}
               </DialogTitle>
             </DialogHeader>
             <Suspense fallback={
               <div className="flex items-center justify-center h-[380px] text-zinc-500 font-mono text-xs">
-                <Loader2 className="w-4 h-4 animate-spin mr-2" /> Chargement de la carte...
+                <Loader2 className="w-4 h-4 animate-spin mr-2" /> {t("card.map_loading", "Chargement de la carte...")}
               </div>
             }>
               <GpsMap

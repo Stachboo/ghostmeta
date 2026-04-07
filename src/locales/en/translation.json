@@ -1,6 +1,7 @@
 {
   "common": {
-    "back_home": "Back to Home"
+    "back_home": "Back to Home",
+    "close": "Close"
   },
   "nav": {
     "home": "Home",
@@ -21,6 +22,7 @@
     "seo_title": "Page Not Found | GhostMeta"
   },
   "error": {
+    "network": "Network error",
     "system_failure": "SYSTEM_FAILURE",
     "render_error": "GHOSTMETA — RENDER ERROR",
     "description": "An unexpected error interrupted the rendering pipeline.",
@@ -34,6 +36,7 @@
     "upgrade": "Upgrade"
   },
   "auth": {
+    "welcome_pro": "Welcome to Pro! ✨",
     "loading": "Initializing...",
     "login": "Secure Access",
     "logout": "Logout",
@@ -109,7 +112,8 @@
     "limit_title": "Limit Reached",
     "limit_desc": "In free mode, cleaning is limited to 1 session every 12 hours. Come back later or support the project.",
     "donate_btn": "Support Developer (PayPal)",
-    "pro_soon": "Pro Pack Coming Soon!"
+    "pro_soon": "Pro Pack Coming Soon!",
+    "file_too_large": "file too large (max 10 MB)"
   },
   "card": {
     "pending": "PENDING",
@@ -124,7 +128,12 @@
     "cleaned_success": "Metadata successfully removed",
     "download": "Download",
     "remove": "Remove",
-    "unlock_cta": "Unlock"
+    "unlock_cta": "Unlock",
+    "preview_alt": "Preview of file being cleaned",
+    "view_map": "View on map",
+    "data_hidden": "Data hidden",
+    "gps_detected": "GPS LOCATION DETECTED",
+    "map_loading": "Loading map..."
   },
   "marketing": {
     "vinted_title": "Your Vinted photos reveal your address.",
@@ -390,5 +399,16 @@
       "og_desc": "Your photos never leave your device. 100% local processing, zero uploads, zero data collection."
     },
     "footer_link": "Security"
+  },
+  "pwa": {
+    "title": "Install GhostMeta",
+    "subtitle": "Quick access · Works offline",
+    "subtitle_ios": "Quick access from your home screen",
+    "install": "+ Install",
+    "ios_title": "Install on iOS",
+    "ios_step1": "Tap the Share button in Safari",
+    "ios_step2": "Scroll down and select 'Add to Home Screen'",
+    "ios_step3": "Tap 'Add' in the top right",
+    "dismiss": "Don't show again"
   }
 }

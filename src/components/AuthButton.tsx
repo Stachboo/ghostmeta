@@ -174,6 +174,7 @@ export default function AuthButton() {
                   "auth.email_placeholder",
                   "votre@email.com"
                 )}
+                aria-label={t("auth.email_placeholder", "votre@email.com")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -186,6 +187,7 @@ export default function AuthButton() {
                     "auth.password_placeholder",
                     "Mot de passe"
                   )}
+                  aria-label={t("auth.password_placeholder", "Mot de passe")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required

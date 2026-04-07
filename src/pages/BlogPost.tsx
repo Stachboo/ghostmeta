@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useMemo } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Clock, Calendar, Shield } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Clock, Calendar, Shield } from 'lucide-react';
 import Header from '@/components/Header';
 import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
@@ -50,6 +50,13 @@ export default function BlogPost() {
       </div>
     );
   }
+
+  // Articles connexes : 3 articles aléatoires (hors article courant)
+  const BLOG_SLUGS = Object.keys(BLOG_DATES);
+  const relatedSlugs = useMemo(
+    () => BLOG_SLUGS.filter((s) => s !== slug).slice(0, 3),
+    [slug]
+  );
 
   // Sanitization du contenu HTML pour prévenir XSS
   // Liste étendue des balises autorisées pour préserver la mise en forme
@@ -178,11 +185,40 @@ export default function BlogPost() {
           </div>
 
           {/* Rendu du contenu HTML SANITISÉ */}
-          <div 
+          <div
             className="prose prose-invert prose-green max-w-none text-muted-foreground leading-relaxed
             prose-headings:text-white prose-strong:text-[#00ff41] prose-a:text-[#00ff41] hover:prose-a:underline"
             dangerouslySetInnerHTML={{ __html: sanitizedContent }}
           />
+
+          {/* Articles connexes */}
+          <div className="mt-12 pt-8 border-t border-zinc-800 space-y-6">
+            <h2 className="text-xl font-bold text-white">{t('blog.related_title', 'Articles connexes')}</h2>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {relatedSlugs.map((s) => (
+                <Link
+                  key={s}
+                  to={`/blog/${s}`}
+                  className="p-4 rounded-lg bg-white/[0.02] border border-zinc-800 hover:border-[#00ff41]/50 transition-all group"
+                >
+                  <h3 className="font-bold text-sm text-white group-hover:text-[#00ff41] transition-colors mb-1">
+                    {t(`blog.posts.${s}.title`)}
+                  </h3>
+                  <p className="text-xs text-muted-foreground line-clamp-2">
+                    {t(`blog.posts.${s}.desc`)}
+                  </p>
+                </Link>
+              ))}
+            </div>
+            <div className="text-center pt-4">
+              <Link
+                to="/"
+                className="inline-flex items-center gap-2 text-sm font-bold text-[#00ff41] hover:underline"
+              >
+                {t('blog.cta_protect', 'Protégez vos photos maintenant')} <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
         </motion.article>
       </main>
       <Footer />
