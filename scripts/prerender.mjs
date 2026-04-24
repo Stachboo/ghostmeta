@@ -66,8 +66,10 @@ function buildHtml({ title, description, canonical, hreflangEn, ogType = 'websit
     `<meta name="twitter:description" content="${escAttr(description)}">`,
   ].join('\n  ');
 
+  // data-prerender="true" sert d'identifiant pour que le composant React
+  // puisse retirer ce <script> au mount (et n'en garde qu'un seul exemplaire).
   const jsonLdTag = jsonLd
-    ? `\n  <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`
+    ? `\n  <script type="application/ld+json" data-prerender="true">${JSON.stringify(jsonLd)}</script>`
     : '';
 
   html = html.replace('</head>', `  ${seoHead}${jsonLdTag}\n</head>`);
@@ -257,6 +259,47 @@ try {
   }));
   log('/securite', 'dist/securite/index.html'); ok++;
 } catch(e) { err('/securite', e); }
+
+// ── sitemap.xml ───────────────────────────────────────────────────────────────
+// Regénère dist/sitemap.xml avec la date du build pour que Google/Bing
+// considèrent le contenu comme frais (les `lastmod` figés font baisser
+// la fréquence de crawl).
+try {
+  const today = new Date().toISOString().slice(0, 10);
+  const ORIGIN = 'https://www.ghostmeta.online';
+  const urls = [
+    { loc: `${ORIGIN}/`,         changefreq: 'daily',   priority: '1.0' },
+    { loc: `${ORIGIN}/pricing`,  changefreq: 'monthly', priority: '0.7' },
+    { loc: `${ORIGIN}/securite`, changefreq: 'monthly', priority: '0.8' },
+    { loc: `${ORIGIN}/blog`,     changefreq: 'weekly',  priority: '0.7' },
+    ...SLUGS.map(slug => ({
+      loc: `${ORIGIN}/blog/${slug}`,
+      changefreq: 'weekly',
+      priority: slug === 'ghostmeta-manifeste-confidentialite' ? '0.6' : '0.8',
+    })),
+  ];
+
+  const xml = [
+    `<?xml version="1.0" encoding="UTF-8"?>`,
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">`,
+    ...urls.map(({ loc, changefreq, priority }) => [
+      `  <url>`,
+      `    <loc>${loc}</loc>`,
+      `    <lastmod>${today}</lastmod>`,
+      `    <changefreq>${changefreq}</changefreq>`,
+      `    <priority>${priority}</priority>`,
+      `    <xhtml:link rel="alternate" hreflang="fr" href="${loc}"/>`,
+      `    <xhtml:link rel="alternate" hreflang="en" href="${loc}?lng=en"/>`,
+      `    <xhtml:link rel="alternate" hreflang="x-default" href="${loc}"/>`,
+      `  </url>`,
+    ].join('\n')),
+    `</urlset>`,
+    ``,
+  ].join('\n');
+
+  saveHtml('dist/sitemap.xml', xml);
+  log('sitemap.xml', `dist/sitemap.xml (lastmod=${today})`); ok++;
+} catch(e) { err('sitemap.xml', e); }
 
 console.log(`\n[prerender] ─── Résultat : ${ok} OK, ${fail} erreur(s) ─────────────\n`);
 process.exit(fail > 0 ? 1 : 0);

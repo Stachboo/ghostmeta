@@ -56,10 +56,10 @@ export default function Pricing() {
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Choose Your <span className="text-ghost-green">Access Level</span>
+            {t('pricing.h1_start')} <span className="text-ghost-green">{t('pricing.h1_accent')}</span>
           </h1>
           <p className="text-zinc-400 max-w-2xl mx-auto">
-            Upgrade your privacy protection capabilities. Process more images, unlock unlimited GPS views.
+            {t('pricing.h1_desc')}
           </p>
         </div>
 
