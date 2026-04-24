@@ -27,12 +27,11 @@ export default function HeroSection({ onFilesAdded, hasImages, isProcessing }: H
             <Lock className="w-3 h-3 text-ghost-green" /> {t('hero.secure_badge')}
           </div>
 
-          <h1
-            className="matrix-hero-title"
-            aria-label={`${t('hero.title_start')} ${t('hero.title_color')} ${t('hero.title_end')}`}
-          >
+          <h1 className="matrix-hero-title">
             <span className="matrix-outer" data-text={t('hero.title_start')}>{t('hero.title_start')}</span>
+            {' '}
             <span className="matrix-core" data-text={t('hero.title_color')}>{t('hero.title_color')}</span>
+            {' '}
             <span className="matrix-outer" data-text={t('hero.title_end')}>{t('hero.title_end')}</span>
           </h1>
 

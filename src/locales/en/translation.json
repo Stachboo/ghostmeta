@@ -67,6 +67,9 @@
     "modal_upgrade_cta": "Upgrade to full access to enjoy all features."
   },
   "pricing": {
+    "h1_start": "Choose your",
+    "h1_accent": "access level",
+    "h1_desc": "Upgrade your privacy protection. Process more images, unlock unlimited GPS views.",
     "title": "SYSTEM STATUS: ACCESS LEVELS",
     "trial": {
       "active": "Free trial active — {{days}} day(s) remaining",

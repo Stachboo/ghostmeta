@@ -24,9 +24,15 @@ export default function BlogPost() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
-  // Supprimer le contenu pre-rendu quand React prend le relais
+  // Supprimer le contenu pre-rendu quand React prend le relais.
+  // Le BlogPosting JSON-LD est injecté par le prerender (data-prerender="true")
+  // ET par Helmet ci-dessous → on retire celui du prerender pour éviter le
+  // doublon que Google rejette dans les Rich Results.
   useEffect(() => {
     document.getElementById('bot-content')?.remove();
+    document
+      .querySelectorAll('script[type="application/ld+json"][data-prerender="true"]')
+      .forEach((node) => node.remove());
   }, []);
 
   // Vérification robuste de l'existence de l'article
