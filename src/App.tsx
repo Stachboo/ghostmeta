@@ -15,6 +15,7 @@ const BlogPost = lazy(() => import('./pages/BlogPost'));
 const PricingPage = lazy(() => import('./pages/PricingPage'));
 const SecurityPage = lazy(() => import('./pages/SecurityPage'));
 const ToolLanding = lazy(() => import('./pages/ToolLanding'));
+const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 /**
@@ -157,7 +158,10 @@ function App() {
             {/* 5. Tool landings (programmatic SEO) */}
             <Route path="/tools/:slug" element={<ToolLanding />} />
 
-            {/* 6. Page 404 */}
+            {/* 6. Settings (Pro B2B API key management) */}
+            <Route path="/settings" element={<SettingsPage />} />
+
+            {/* 7. Page 404 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
