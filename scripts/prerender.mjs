@@ -31,6 +31,11 @@ const fr = JSON.parse(
   readFileSync(join(ROOT, 'src', 'locales', 'fr', 'translation.json'), 'utf-8')
 );
 
+// Landings programmatiques (FR + EN dans le même JSON, FR utilisé pour le prerender)
+const LANDINGS = JSON.parse(
+  readFileSync(join(ROOT, 'src', 'data', 'landings.json'), 'utf-8')
+);
+
 // Accès à une clé pointée dans un objet imbriqué
 const get = (obj, path) => path.split('.').reduce((o, k) => o?.[k], obj);
 
@@ -260,6 +265,40 @@ try {
   log('/securite', 'dist/securite/index.html'); ok++;
 } catch(e) { err('/securite', e); }
 
+// ── /tools/:slug ──────────────────────────────────────────────────────────────
+for (const landing of LANDINGS) {
+  try {
+    const c = landing.fr;
+    const canonical = `https://www.ghostmeta.online/tools/${landing.slug}`;
+    const hreflangEn = `${canonical}?lng=en`;
+
+    const bodyContent = [
+      `<h1>${escHtml(c.h1)}</h1>`,
+      `<p>${escHtml(c.intro)}</p>`,
+      `<h2>FAQ</h2>`,
+      ...c.faq.map(f => `<h3>${escHtml(f.q)}</h3><p>${escHtml(f.a)}</p>`),
+    ].join('\n');
+
+    saveHtml(`dist/tools/${landing.slug}/index.html`, buildHtml({
+      title:       c.title,
+      description: c.description,
+      canonical,
+      hreflangEn,
+      bodyContent,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: c.faq.map(f => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      },
+    }));
+    log(`/tools/${landing.slug}`, `dist/tools/${landing.slug}/index.html`); ok++;
+  } catch(e) { err(`/tools/${landing.slug}`, e); }
+}
+
 // ── sitemap.xml ───────────────────────────────────────────────────────────────
 // Regénère dist/sitemap.xml avec la date du build pour que Google/Bing
 // considèrent le contenu comme frais (les `lastmod` figés font baisser
@@ -276,6 +315,11 @@ try {
       loc: `${ORIGIN}/blog/${slug}`,
       changefreq: 'weekly',
       priority: slug === 'ghostmeta-manifeste-confidentialite' ? '0.6' : '0.8',
+    })),
+    ...LANDINGS.map(landing => ({
+      loc: `${ORIGIN}/tools/${landing.slug}`,
+      changefreq: 'monthly',
+      priority: '0.75',
     })),
   ];
 
