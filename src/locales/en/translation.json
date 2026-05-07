@@ -96,10 +96,10 @@
     }
   },
   "hero": {
-    "title_start": "Remove",
+    "title_start": "Strip",
     "title_color": "metadata",
-    "title_end": "from your photos",
-    "subtitle": "Protect your privacy before posting on Vinted, eBay, or Depop. 100% Local Processing.",
+    "title_end": "from any image",
+    "subtitle": "EXIF, GPS, C2PA Content Credentials & AI watermarks — removed in your browser. From smartphone photos to Sora, Midjourney & DALL-E images.",
     "secure_badge": "100% Local"
   },
   "upload": {
@@ -139,10 +139,10 @@
     "map_loading": "Loading map..."
   },
   "marketing": {
-    "vinted_title": "Your Vinted photos reveal your address.",
-    "vinted_text_1": "Every photo taken with your iPhone or Android embeds your exact GPS coordinates, date and time, and your phone model.",
-    "vinted_text_2": "When a buyer asks for \"more photos\" via WhatsApp, they get everything.",
-    "vinted_text_3": "Clean your photos before posting. GhostMeta removes all metadata in one click, directly in your browser. Nothing is sent to the internet.",
+    "vinted_title": "Your images carry hidden fingerprints.",
+    "vinted_text_1": "Smartphone photos embed GPS coordinates, timestamp and device model. AI-generated images carry C2PA Content Credentials, generator signatures and provenance manifests.",
+    "vinted_text_2": "Once you share an image — on Vinted, Twitter, LinkedIn, or in a client deck — every recipient can extract that data with a free online tool.",
+    "vinted_text_3": "GhostMeta strips it all in your browser. EXIF, GPS, C2PA, AI watermarks. Nothing is sent to the internet.",
     "batch_lock_title": "Batch Mode Locked",
     "batch_lock_desc": "In free mode, clean photos one by one (unlimited). The Pro Pack unlocks batch processing and ZIP export."
   },
@@ -179,7 +179,7 @@
   "info": {
     "why_title": "Why your photos",
     "why_title_highlight": "betray you",
-    "why_desc": "Every smartphone photo contains invisible metadata. When you post on Vinted, eBay or Depop, this data can reveal your exact address, habits, and equipment.",
+    "why_desc": "Every smartphone photo contains invisible EXIF/GPS metadata. Every AI-generated image carries C2PA Content Credentials and generator fingerprints. Once shared online, this data can reveal your address, habits, equipment — or that an image is AI-generated.",
     "geo_title": "GPS Geolocation",
     "geo_desc": "Exact home coordinates embedded in every smartphone photo.",
     "meta_title": "Time Profiling",

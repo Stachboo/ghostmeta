@@ -96,10 +96,10 @@
     }
   },
   "hero": {
-    "title_start": "Retirer les",
+    "title_start": "Effacez les",
     "title_color": "métadonnées",
-    "title_end": "de vos photos",
-    "subtitle": "Protégez votre vie privée avant de poster sur Vinted, eBay ou Depop. Traitement 100% Local.",
+    "title_end": "de toute image",
+    "subtitle": "EXIF, GPS, Content Credentials C2PA & watermarks IA — supprimés dans votre navigateur. Des photos smartphone aux images Sora, Midjourney & DALL-E.",
     "secure_badge": "100% Local"
   },
   "upload": {
@@ -139,10 +139,10 @@
     "map_loading": "Chargement de la carte..."
   },
   "marketing": {
-    "vinted_title": "Vos photos Vinted révèlent votre adresse.",
-    "vinted_text_1": "Chaque photo prise avec votre iPhone ou Android intègre vos coordonnées GPS exactes, la date et l'heure, ainsi que le modèle de votre téléphone.",
-    "vinted_text_2": "Quand un acheteur demande des « photos supplémentaires » via WhatsApp, il obtient tout.",
-    "vinted_text_3": "Nettoyez vos photos avant de poster. GhostMeta supprime toutes les métadonnées en un clic, directement dans votre navigateur. Rien n'est envoyé sur Internet.",
+    "vinted_title": "Vos images contiennent des empreintes invisibles.",
+    "vinted_text_1": "Les photos smartphone intègrent vos coordonnées GPS, l'horodatage et le modèle d'appareil. Les images générées par IA portent des Content Credentials C2PA, des signatures de modèle et des manifests de provenance.",
+    "vinted_text_2": "Dès que vous partagez une image — sur Vinted, Twitter, LinkedIn ou dans un dossier client — chaque destinataire peut extraire ces données avec un outil en ligne gratuit.",
+    "vinted_text_3": "GhostMeta supprime tout dans votre navigateur. EXIF, GPS, C2PA, watermarks IA. Rien n'est envoyé sur Internet.",
     "batch_lock_title": "Mode Lot Verrouillé",
     "batch_lock_desc": "En mode gratuit, nettoyez les photos une par une (illimité). Le Pack Pro débloque le traitement par lots et l'export ZIP."
   },
@@ -179,7 +179,7 @@
   "info": {
     "why_title": "Pourquoi vos photos vous",
     "why_title_highlight": "trahissent",
-    "why_desc": "Chaque photo prise avec un smartphone contient des métadonnées invisibles. Quand vous publiez sur Vinted, Leboncoin ou eBay, ces données peuvent révéler votre adresse exacte, vos habitudes et votre équipement.",
+    "why_desc": "Chaque photo smartphone contient des métadonnées EXIF/GPS invisibles. Chaque image générée par IA porte des Content Credentials C2PA et signatures de modèle. Une fois partagées, ces données peuvent révéler votre adresse, vos habitudes, votre équipement — ou trahir qu'une image est générée par IA.",
     "geo_title": "Géolocalisation GPS",
     "geo_desc": "Coordonnées exactes de votre domicile intégrées dans chaque photo prise avec un smartphone.",
     "meta_title": "Profilage temporel",

@@ -1,11 +1,12 @@
 # GhostMeta
 
-> Privacy-first photo metadata cleaner for Vinted, eBay & marketplace sellers.
+> Privacy-first metadata cleaner for any image — strip EXIF, GPS, C2PA Content Credentials and AI fingerprints from photos and AI-generated images (Sora, Midjourney, DALL-E, ChatGPT). 100% in your browser.
 
 ## Features
 
 - 🔒 100% local processing — no server upload
 - 📸 EXIF/IPTC/XMP/GPS metadata extraction & stripping
+- 🤖 C2PA / Content Credentials detection on AI-generated images (Sora, Midjourney, DALL-E, ChatGPT)
 - 🗺️ GPS location detection with map visualization
 - 🛡️ Threat level analysis (critical/warning/safe)
 - 📱 PWA — installable on mobile & desktop

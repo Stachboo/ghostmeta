@@ -117,8 +117,8 @@ try {
   ].join('\n');
 
   saveHtml('dist/index.html', buildHtml({
-    title:       'GhostMeta | Nettoyeur Photo pour Vinted & Leboncoin (Gratuit)',
-    description: 'Sécurisez vos ventes : supprimez immédiatement le GPS et les métadonnées cachées de vos photos Vinted, Leboncoin et eBay. Protection 100% locale et anonyme.',
+    title:       'GhostMeta | Strip EXIF, GPS, C2PA & AI Watermarks — 100% Browser',
+    description: 'Supprimez EXIF, GPS, Content Credentials C2PA et empreintes IA de vos images. Compatible Sora, Midjourney, DALL-E, ChatGPT, Adobe Firefly. 100% navigateur, zéro upload.',
     canonical:   'https://www.ghostmeta.online/',
     hreflangEn:  'https://www.ghostmeta.online/?lng=en',
     bodyContent: homeBodyContent,
@@ -129,7 +129,7 @@ try {
 // ── /pricing ─────────────────────────────────────────────────────────────────
 try {
   const pricingBodyContent = [
-    `<h1>Tarifs GhostMeta | Nettoyeur Photo Gratuit pour Vendeurs</h1>`,
+    `<h1>Tarifs GhostMeta | Image privacy &amp; AI fingerprint cleaner</h1>`,
     `<p>${escHtml(get(fr, 'pro.subtitle'))}</p>`,
     `<h2>${escHtml(get(fr, 'pro.free_title'))}</h2>`,
     `<p>${escHtml(get(fr, 'pro.free_1'))}. ${escHtml(get(fr, 'pro.free_2'))}. ${escHtml(get(fr, 'pro.free_3'))}. ${escHtml(get(fr, 'pro.free_4'))}.</p>`,
@@ -138,8 +138,8 @@ try {
   ].join('\n');
 
   saveHtml('dist/pricing/index.html', buildHtml({
-    title:       'Tarifs GhostMeta | Nettoyeur Photo Gratuit pour Vendeurs',
-    description: 'GhostMeta est 100% gratuit. Nettoyez vos photos de métadonnées EXIF/GPS pour vendre en ligne en toute sécurité sur Vinted, Leboncoin et eBay.',
+    title:       'Tarifs GhostMeta | Image privacy & AI fingerprint cleaner',
+    description: 'Gratuit pour usage personnel. Pro B2B pour créateurs IA, agences et revendeurs : batch unlimited, REST API, strip C2PA + EXIF en masse. 100% navigateur.',
     canonical:   'https://www.ghostmeta.online/pricing',
     hreflangEn:  'https://www.ghostmeta.online/pricing?lng=en',
     bodyContent: pricingBodyContent,
@@ -172,8 +172,8 @@ try {
   ].join('\n');
 
   saveHtml('dist/blog/index.html', buildHtml({
-    title:       'Blog GhostMeta | Guides Confidentialité Photo',
-    description: 'Guides pratiques pour protéger votre vie privée en ligne : supprimer les métadonnées EXIF, sécuriser vos photos Vinted, comprendre les données GPS cachées.',
+    title:       'Blog GhostMeta | Image privacy, EXIF/GPS & C2PA guides',
+    description: 'Guides pratiques pour protéger vos images : supprimer métadonnées EXIF/GPS, comprendre les Content Credentials C2PA, nettoyer les empreintes IA (Sora, Midjourney, DALL-E), sécuriser vos photos avant publication.',
     canonical:   'https://www.ghostmeta.online/blog',
     hreflangEn:  'https://www.ghostmeta.online/blog?lng=en',
     bodyContent: blogIndexBodyContent,
