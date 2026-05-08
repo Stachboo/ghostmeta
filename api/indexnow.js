@@ -10,6 +10,22 @@ const INDEXNOW_KEY = "ffb631a305804310a69bb3a7eaf4e97d";
 const HOST = "www.ghostmeta.online";
 const KEY_LOCATION = `https://${HOST}/${INDEXNOW_KEY}.txt`;
 
+const TOOL_SLUGS = [
+  "remove-ai-watermark-from-image",
+  "remove-sora-c2pa",
+  "remove-midjourney-metadata",
+  "clean-chatgpt-image-metadata",
+  "strip-dalle-fingerprint",
+  "remove-firefly-content-credentials",
+  "clean-stable-diffusion-metadata",
+  "remove-flux-image-metadata",
+  "remove-leonardo-ai-metadata",
+  "strip-runway-ml-watermark",
+  "clean-google-imagen-metadata",
+  "ai-image-anonymizer",
+  "browser-c2pa-remover",
+];
+
 const URLS = [
   `https://${HOST}/`,
   `https://${HOST}/pricing`,
@@ -19,6 +35,7 @@ const URLS = [
   `https://${HOST}/blog/nettoyage-photo-local-vs-cloud`,
   `https://${HOST}/blog/ghostmeta-manifeste-confidentialite`,
   `https://${HOST}/securite`,
+  ...TOOL_SLUGS.map((slug) => `https://${HOST}/tools/${slug}`),
 ];
 
 export default async function handler(req, res) {
