@@ -1,13 +1,14 @@
 # GhostMeta
 
-> Nettoyeur de métadonnées EXIF/GPS pour vendeurs en ligne. 100% gratuit, traitement local via Canvas API, zéro upload serveur.
+> Nettoyeur de métadonnées image et empreintes IA. Supprime EXIF, GPS, C2PA Content Credentials et watermarks d'images IA (Sora, Midjourney, DALL-E, ChatGPT). 100% navigateur, traitement local via Canvas API, zéro upload serveur.
 
 ## Fonctionnalités principales
 
 - Suppression des métadonnées EXIF (appareil photo, date, coordonnées GPS)
+- Détection et strip des Content Credentials C2PA sur images IA (Sora, Midjourney, DALL-E, ChatGPT, Adobe Firefly)
 - Traitement 100% local dans le navigateur (Canvas API, aucun envoi serveur)
-- Gratuit, sans compte, sans publicité
-- Compatible avec les photos destinées à Vinted, Leboncoin, eBay, Etsy, Facebook Marketplace
+- Gratuit pour usage personnel, Pro B2B pour créateurs/agences
+- Compatible avec photos smartphone (Vinted, Leboncoin, eBay) ET images générées par IA
 - Support des formats JPEG, PNG, WebP et HEIC (photos iPhone)
 - Traitement par lot avec téléchargement ZIP
 - Analyse des menaces : chaque champ de métadonnée est classé critique, warning ou safe
@@ -16,9 +17,9 @@
 
 ## Public cible
 
-Vendeurs sur marketplace (Vinted, Leboncoin, eBay, Etsy, Depop, Facebook Marketplace) soucieux de protéger leur vie privée et leur localisation exacte avant de publier des photos d'articles en vente.
-
-Également utile pour toute personne souhaitant supprimer les métadonnées de ses photos avant de les partager en ligne.
+1. Créateurs et agences IA : retrait des Content Credentials C2PA et empreintes des images générées par Sora, Midjourney, DALL-E, ChatGPT, Adobe Firefly avant diffusion publique ou commerciale.
+2. Vendeurs sur marketplace (Vinted, Leboncoin, eBay, Etsy, Depop, Facebook Marketplace) protégeant leur vie privée et leur localisation avant publication de photos d'articles.
+3. Toute personne souhaitant supprimer les métadonnées de ses images avant de les partager en ligne.
 
 ## Sécurité et confidentialité
 
@@ -40,8 +41,8 @@ Vendeurs sur marketplace (Vinted, Leboncoin, eBay, Etsy, Depop, Facebook Marketp
 
 ## URLs importantes
 
-- <https://www.ghostmeta.online/> : Accueil — outil principal de suppression de métadonnées
-- <https://www.ghostmeta.online/pricing> : Tarifs — 100% gratuit
+- <https://www.ghostmeta.online/> : Accueil — outil principal de suppression de métadonnées et C2PA
+- <https://www.ghostmeta.online/pricing> : Tarifs — gratuit pour usage personnel, Pro B2B pour créateurs et agences
 
 ## Articles de blog
 

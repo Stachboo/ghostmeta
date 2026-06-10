@@ -17,20 +17,20 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-[#121212] flex flex-col">
       <Helmet>
-        <title>Tarifs GhostMeta | Nettoyeur Photo Gratuit pour Vendeurs</title>
-        <meta name="description" content="GhostMeta est 100% gratuit. Nettoyez vos photos de métadonnées EXIF/GPS pour vendre en ligne en toute sécurité sur Vinted, Leboncoin et eBay." />
+        <title>Tarifs GhostMeta | Image privacy &amp; AI fingerprint cleaner</title>
+        <meta name="description" content="Gratuit pour usage personnel. Pro B2B pour créateurs, agences et revendeurs IA — strip C2PA + EXIF en batch, REST API, sans limite. 100% navigateur." />
         <link rel="canonical" href="https://www.ghostmeta.online/pricing" />
         <link rel="alternate" hrefLang="fr" href="https://www.ghostmeta.online/pricing" />
         <link rel="alternate" hrefLang="en" href="https://www.ghostmeta.online/pricing?lng=en" />
         <link rel="alternate" hrefLang="x-default" href="https://www.ghostmeta.online/pricing" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Tarifs GhostMeta | Nettoyeur Photo Gratuit" />
-        <meta property="og:description" content="GhostMeta est 100% gratuit. Supprimez le GPS et les EXIF de vos photos avant de vendre sur Vinted ou Leboncoin." />
+        <meta property="og:title" content="Tarifs GhostMeta | Free + Pro B2B" />
+        <meta property="og:description" content="Gratuit pour usage personnel. Pro B2B pour créateurs IA, agences et revendeurs : batch unlimited, REST API, strip C2PA en masse." />
         <meta property="og:url" content="https://www.ghostmeta.online/pricing" />
         <meta property="og:image" content="https://www.ghostmeta.online/og-image-v2.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Tarifs GhostMeta | Nettoyeur Photo Gratuit" />
-        <meta name="twitter:description" content="GhostMeta est 100% gratuit. Supprimez le GPS et les EXIF en 1 clic." />
+        <meta name="twitter:title" content="Tarifs GhostMeta | Free + Pro B2B" />
+        <meta name="twitter:description" content="Free for personal use. Pro B2B with REST API for creators, agencies & AI resellers." />
       </Helmet>
       <Header />
       <Breadcrumb items={[{ label: t('breadcrumb.pricing') }]} />

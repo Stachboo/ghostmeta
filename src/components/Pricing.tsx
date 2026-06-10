@@ -1,11 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import { useAuth, CHECKOUT_PENDING_KEY } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
-import { Check, Zap, Shield, Image, MapPin, Gift, Clock } from 'lucide-react';
+import { Check, Zap, Shield, Image, MapPin, Gift, Clock, Briefcase, Code2, Layers } from 'lucide-react';
 import { toast } from 'sonner';
 
 const LEMON_SQUEEZY_MONTHLY_ID = import.meta.env.VITE_LEMON_SQUEEZY_MONTHLY_ID;
 const LEMON_SQUEEZY_YEARLY_ID = import.meta.env.VITE_LEMON_SQUEEZY_YEARLY_ID;
+const LEMON_SQUEEZY_B2B_MONTHLY_ID = import.meta.env.VITE_LEMON_SQUEEZY_B2B_MONTHLY_ID;
 
 export default function Pricing() {
   const { t } = useTranslation();
@@ -42,6 +43,14 @@ export default function Pricing() {
       return;
     }
     handleCheckout(LEMON_SQUEEZY_YEARLY_ID);
+  };
+
+  const handleB2BClick = () => {
+    if (!LEMON_SQUEEZY_B2B_MONTHLY_ID) {
+      toast.error(t('pricing.b2b.not_configured', 'Pro B2B coming soon — contact us for early access'));
+      return;
+    }
+    handleCheckout(LEMON_SQUEEZY_B2B_MONTHLY_ID);
   };
 
   return (
@@ -95,7 +104,7 @@ export default function Pricing() {
         )}
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {/* Standard Plan */}
           <div className="relative rounded-2xl border border-[#ffbf00]/30 bg-zinc-900/50 backdrop-blur-md p-8 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-[#ffbf00]/5 to-transparent pointer-events-none" />
@@ -136,7 +145,7 @@ export default function Pricing() {
           </div>
 
           {/* Premium Plan */}
-          <div className="relative rounded-2xl border-2 border-ghost-green bg-zinc-900/80 backdrop-blur-md p-8 overflow-hidden scale-105 shadow-[0_0_40px_rgba(0,255,65,0.15)]">
+          <div className="relative rounded-2xl border-2 border-ghost-green bg-zinc-900/80 backdrop-blur-md p-8 overflow-hidden md:scale-105 shadow-[0_0_40px_rgba(0,255,65,0.15)]">
             <div className="absolute top-0 right-0 bg-ghost-green text-black text-xs font-bold px-4 py-1 rounded-bl-lg">
               RECOMMENDED
             </div>
@@ -208,6 +217,62 @@ export default function Pricing() {
                 >
                   <Zap className="w-4 h-4 mr-2" />
                   {t('pricing.cta.login', 'SE CONNECTER POUR ACTIVER')}
+                </Button>
+              )}
+            </div>
+          </div>
+
+          {/* B2B Pro Plan */}
+          <div className="relative rounded-2xl border border-cyan-400/40 bg-zinc-900/60 backdrop-blur-md p-8 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent pointer-events-none" />
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 mb-4">
+                <Briefcase className="w-5 h-5 text-cyan-400" />
+                <span className="text-sm font-mono text-cyan-400">TIER 03 — B2B</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-2 text-white">
+                {t('pricing.b2b.name', 'PRO B2B')}
+              </h3>
+              <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-4xl font-bold text-cyan-400">{t('pricing.b2b.price', '$19')}</span>
+                <span className="text-zinc-500">/month</span>
+              </div>
+              <p className="text-xs text-zinc-400 mb-6 font-mono">
+                {t('pricing.b2b.tagline', 'Pour créateurs, agences & revendeurs IA')}
+              </p>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-center gap-3 text-sm text-zinc-200">
+                  <Code2 className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                  {t('pricing.b2b.api', 'REST API — strip + inspect')}
+                </li>
+                <li className="flex items-center gap-3 text-sm text-zinc-200">
+                  <Layers className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                  {t('pricing.b2b.batch', 'Batch unlimited & ZIP export')}
+                </li>
+                <li className="flex items-center gap-3 text-sm text-zinc-200">
+                  <Zap className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                  {t('pricing.b2b.quota', '500 strips + 1k inspects / day / key')}
+                </li>
+                <li className="flex items-center gap-3 text-sm text-zinc-200">
+                  <Check className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                  {t('pricing.b2b.support', 'Priority email support')}
+                </li>
+              </ul>
+              {!loading && user ? (
+                <Button
+                  onClick={handleB2BClick}
+                  className="w-full h-12 bg-cyan-500 hover:bg-cyan-400 text-black font-bold font-mono"
+                >
+                  <Briefcase className="w-4 h-4 mr-2" />
+                  {t('pricing.b2b.cta', 'GET PRO B2B')}
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleAuth}
+                  variant="outline"
+                  className="w-full h-12 border-cyan-400/40 text-cyan-400 hover:bg-cyan-500/10 font-mono"
+                >
+                  {t('pricing.cta.login_short', 'SIGN IN TO UPGRADE')}
                 </Button>
               )}
             </div>

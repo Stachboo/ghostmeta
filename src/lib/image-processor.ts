@@ -12,6 +12,7 @@
 import ExifReader from 'exifreader';
 import DOMPurify from 'dompurify';
 import { logSecurityEvent } from "@/lib/security-logger";
+import { detectC2PA, type C2PAInfo } from "@/lib/c2pa-detector";
 
 // SEUIL DE SÉCURITÉ : Toute image > 4096px sera redimensionnée pour éviter le crash mémoire
 const MAX_DIMENSION = 4096;
@@ -36,13 +37,14 @@ export interface MetadataInfo {
   dateTime?: string;
   camera?: { make?: string; model?: string; lens?: string; software?: string; };
   dimensions?: { width: number; height: number; };
+  c2pa?: C2PAInfo;
   raw: Record<string, unknown>;
   threatLevel: 'critical' | 'warning' | 'safe';
   threats: ThreatItem[];
 }
 
 export interface ThreatItem {
-  type: 'gps' | 'datetime' | 'device' | 'software' | 'serial';
+  type: 'gps' | 'datetime' | 'device' | 'software' | 'serial' | 'c2pa';
   severity: 'critical' | 'warning' | 'info';
   label: string;
   value: string;
@@ -139,6 +141,17 @@ export async function extractMetadata(file: File): Promise<MetadataInfo> {
       if (makeStr || modelStr) {
         threats.push({ type: 'device', severity: 'warning', label: 'Appareil', value: [makeStr, modelStr].filter(Boolean).join(' ') });
       }
+    }
+
+    const c2pa = detectC2PA(buffer);
+    if (c2pa.detected) {
+      metadata.c2pa = c2pa;
+      threats.push({
+        type: 'c2pa',
+        severity: 'warning',
+        label: 'AI Content Credentials (C2PA)',
+        value: c2pa.generatorLabel ?? 'Unknown C2PA Generator',
+      });
     }
 
     if (threats.some(t => t.severity === 'critical')) metadata.threatLevel = 'critical';
