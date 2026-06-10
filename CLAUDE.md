@@ -14,7 +14,7 @@ pnpm start        # Production server (NODE_ENV=production)
 pnpm postbuild    # Prerender static HTML (runs automatically after build)
 ```
 
-Tests are located in `src/lib/image-processor.test.ts` and run with Vitest. To run them:
+Tests are located in `src/lib/*.test.ts` (image-processor, c2pa-detector, server-strip) and run with Vitest. To run them:
 ```bash
 pnpm vitest run                              # Run all tests once
 pnpm vitest run src/lib/image-processor.test.ts  # Run a single test file
@@ -54,15 +54,15 @@ The hook `src/hooks/useImageProcessor.ts` wraps this pipeline with React state.
 
 ### SEO & Prerendering
 - **react-helmet-async** manages `<head>` tags per page (title, OG, Twitter, hreflang)
-- **Prerender script** (`scripts/prerender.mjs`): Node.js postbuild, generates 7 static HTML files (home, pricing, 5 blog articles)
+- **Prerender script** (`scripts/prerender.mjs`): Node.js postbuild, generates 22 static HTML pages (home, pricing, blog index, 5 blog articles, /securite, 13 `/tools/:slug` landings from `src/data/landings.json`)
 - **bot-content**: pre-rendered article content injected as visible `<div id="bot-content">` before `<div id="root">`. React removes it on mount via `useEffect` in `BlogPost.tsx` — crawlers see real content, users see React.
-- **sitemap.xml**: 7 URLs with `hreflang` fr + en + x-default
+- **sitemap.xml**: 22 URLs with `hreflang` fr + en + x-default
 - **robots.txt**: explicitly allows all major crawlers (Googlebot, Bingbot, GPTBot, CCBot, ClaudeBot, anthropic-ai, PerplexityBot, Applebot, Bytespider, YandexBot)
 - **llms.txt**: Markdown file for AI crawlers (llmstxt.org format) at `/llms.txt`
 - **JSON-LD**: `BlogPosting` schema on each blog article (in prerender + BlogPost.tsx)
 
 ### IndexNow (`api/indexnow.js`)
-- Vercel serverless function that submits all 7 sitemap URLs to the IndexNow API (Bing, Yandex)
+- Vercel serverless function that submits 21 URLs (8 base + 13 `/tools/:slug` via `TOOL_SLUGS`) to the IndexNow API (Bing, Yandex)
 - Key file: `public/ffb631a305804310a69bb3a7eaf4e97d.txt`
 - Protected by `INDEXNOW_SECRET` env var (pass as `Authorization: Bearer` header)
 - Call after deploy: `curl -X POST -H "Authorization: Bearer $INDEXNOW_SECRET" https://www.ghostmeta.online/api/indexnow`
