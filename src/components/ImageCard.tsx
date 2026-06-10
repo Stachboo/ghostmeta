@@ -15,6 +15,7 @@ import {
   Smartphone,
   Code,
   Fingerprint,
+  Sparkles,
   X,
   Download,
   Shield,
@@ -53,6 +54,8 @@ function getThreatIcon(type: ThreatItem['type']) {
       return <Code className="w-3.5 h-3.5" />;
     case 'serial':
       return <Fingerprint className="w-3.5 h-3.5" />;
+    case 'c2pa':
+      return <Sparkles className="w-3.5 h-3.5" />;
   }
 }
 

@@ -31,6 +31,11 @@ const fr = JSON.parse(
   readFileSync(join(ROOT, 'src', 'locales', 'fr', 'translation.json'), 'utf-8')
 );
 
+// Landings programmatiques (FR + EN dans le même JSON, FR utilisé pour le prerender)
+const LANDINGS = JSON.parse(
+  readFileSync(join(ROOT, 'src', 'data', 'landings.json'), 'utf-8')
+);
+
 // Accès à une clé pointée dans un objet imbriqué
 const get = (obj, path) => path.split('.').reduce((o, k) => o?.[k], obj);
 
@@ -117,8 +122,8 @@ try {
   ].join('\n');
 
   saveHtml('dist/index.html', buildHtml({
-    title:       'GhostMeta | Nettoyeur Photo pour Vinted & Leboncoin (Gratuit)',
-    description: 'Sécurisez vos ventes : supprimez immédiatement le GPS et les métadonnées cachées de vos photos Vinted, Leboncoin et eBay. Protection 100% locale et anonyme.',
+    title:       'GhostMeta | Strip EXIF, GPS, C2PA & AI Watermarks — 100% Browser',
+    description: 'Supprimez EXIF, GPS, Content Credentials C2PA et empreintes IA de vos images. Compatible Sora, Midjourney, DALL-E, ChatGPT, Adobe Firefly. 100% navigateur, zéro upload.',
     canonical:   'https://www.ghostmeta.online/',
     hreflangEn:  'https://www.ghostmeta.online/?lng=en',
     bodyContent: homeBodyContent,
@@ -129,7 +134,7 @@ try {
 // ── /pricing ─────────────────────────────────────────────────────────────────
 try {
   const pricingBodyContent = [
-    `<h1>Tarifs GhostMeta | Nettoyeur Photo Gratuit pour Vendeurs</h1>`,
+    `<h1>Tarifs GhostMeta | Image privacy &amp; AI fingerprint cleaner</h1>`,
     `<p>${escHtml(get(fr, 'pro.subtitle'))}</p>`,
     `<h2>${escHtml(get(fr, 'pro.free_title'))}</h2>`,
     `<p>${escHtml(get(fr, 'pro.free_1'))}. ${escHtml(get(fr, 'pro.free_2'))}. ${escHtml(get(fr, 'pro.free_3'))}. ${escHtml(get(fr, 'pro.free_4'))}.</p>`,
@@ -138,8 +143,8 @@ try {
   ].join('\n');
 
   saveHtml('dist/pricing/index.html', buildHtml({
-    title:       'Tarifs GhostMeta | Nettoyeur Photo Gratuit pour Vendeurs',
-    description: 'GhostMeta est 100% gratuit. Nettoyez vos photos de métadonnées EXIF/GPS pour vendre en ligne en toute sécurité sur Vinted, Leboncoin et eBay.',
+    title:       'Tarifs GhostMeta | Image privacy & AI fingerprint cleaner',
+    description: 'Gratuit pour usage personnel. Pro B2B pour créateurs IA, agences et revendeurs : batch unlimited, REST API, strip C2PA + EXIF en masse. 100% navigateur.',
     canonical:   'https://www.ghostmeta.online/pricing',
     hreflangEn:  'https://www.ghostmeta.online/pricing?lng=en',
     bodyContent: pricingBodyContent,
@@ -172,8 +177,8 @@ try {
   ].join('\n');
 
   saveHtml('dist/blog/index.html', buildHtml({
-    title:       'Blog GhostMeta | Guides Confidentialité Photo',
-    description: 'Guides pratiques pour protéger votre vie privée en ligne : supprimer les métadonnées EXIF, sécuriser vos photos Vinted, comprendre les données GPS cachées.',
+    title:       'Blog GhostMeta | Image privacy, EXIF/GPS & C2PA guides',
+    description: 'Guides pratiques pour protéger vos images : supprimer métadonnées EXIF/GPS, comprendre les Content Credentials C2PA, nettoyer les empreintes IA (Sora, Midjourney, DALL-E), sécuriser vos photos avant publication.',
     canonical:   'https://www.ghostmeta.online/blog',
     hreflangEn:  'https://www.ghostmeta.online/blog?lng=en',
     bodyContent: blogIndexBodyContent,
@@ -260,6 +265,40 @@ try {
   log('/securite', 'dist/securite/index.html'); ok++;
 } catch(e) { err('/securite', e); }
 
+// ── /tools/:slug ──────────────────────────────────────────────────────────────
+for (const landing of LANDINGS) {
+  try {
+    const c = landing.fr;
+    const canonical = `https://www.ghostmeta.online/tools/${landing.slug}`;
+    const hreflangEn = `${canonical}?lng=en`;
+
+    const bodyContent = [
+      `<h1>${escHtml(c.h1)}</h1>`,
+      `<p>${escHtml(c.intro)}</p>`,
+      `<h2>FAQ</h2>`,
+      ...c.faq.map(f => `<h3>${escHtml(f.q)}</h3><p>${escHtml(f.a)}</p>`),
+    ].join('\n');
+
+    saveHtml(`dist/tools/${landing.slug}/index.html`, buildHtml({
+      title:       c.title,
+      description: c.description,
+      canonical,
+      hreflangEn,
+      bodyContent,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: c.faq.map(f => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      },
+    }));
+    log(`/tools/${landing.slug}`, `dist/tools/${landing.slug}/index.html`); ok++;
+  } catch(e) { err(`/tools/${landing.slug}`, e); }
+}
+
 // ── sitemap.xml ───────────────────────────────────────────────────────────────
 // Regénère dist/sitemap.xml avec la date du build pour que Google/Bing
 // considèrent le contenu comme frais (les `lastmod` figés font baisser
@@ -276,6 +315,11 @@ try {
       loc: `${ORIGIN}/blog/${slug}`,
       changefreq: 'weekly',
       priority: slug === 'ghostmeta-manifeste-confidentialite' ? '0.6' : '0.8',
+    })),
+    ...LANDINGS.map(landing => ({
+      loc: `${ORIGIN}/tools/${landing.slug}`,
+      changefreq: 'monthly',
+      priority: '0.75',
     })),
   ];
 

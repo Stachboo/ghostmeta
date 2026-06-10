@@ -1,7 +1,7 @@
 {
   "short_name": "GhostMeta",
   "name": "GhostMeta - Privacy Tool",
-  "description": "Supprime les métadonnées de tes photos en 1 clic. 100% local, zéro upload.",
+  "description": "Supprime EXIF, GPS, C2PA et empreintes IA de tes images en 1 clic. 100% local, zéro upload.",
   "icons": [
     {
       "src": "icon-192.png",

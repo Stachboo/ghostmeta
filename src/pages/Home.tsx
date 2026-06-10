@@ -91,9 +91,9 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-ghost-dark font-sans text-white">
       <Helmet>
-        <title>GhostMeta | Nettoyeur Photo pour Vinted &amp; Leboncoin (Gratuit)</title>
-        <meta name="description" content="Sécurisez vos ventes : supprimez immédiatement le GPS et les métadonnées cachées de vos photos Vinted, Leboncoin et eBay. Protection 100% locale et anonyme." />
-        <meta name="keywords" content="Vinted, Leboncoin, eBay, supprimer EXIF, localisation photo, anonymiser photo, sécurité vendeur, métadonnées, GPS" />
+        <title>GhostMeta | Strip EXIF, GPS, C2PA &amp; AI Watermarks — 100% Browser</title>
+        <meta name="description" content="Supprimez EXIF, GPS, Content Credentials C2PA et empreintes IA de vos images. Compatible Sora, Midjourney, DALL-E, ChatGPT, Adobe Firefly. 100% navigateur, zéro upload." />
+        <meta name="keywords" content="C2PA, Content Credentials, supprimer watermark IA, Sora, Midjourney, DALL-E, ChatGPT, supprimer EXIF, GPS photo, métadonnées image, AI image privacy, Vinted, Leboncoin" />
         <link rel="canonical" href="https://www.ghostmeta.online/" />
         <link rel="alternate" hrefLang="fr" href="https://www.ghostmeta.online/" />
         <link rel="alternate" hrefLang="en" href="https://www.ghostmeta.online/?lng=en" />
@@ -101,17 +101,17 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="GhostMeta" />
         <meta property="og:url" content="https://www.ghostmeta.online/" />
-        <meta property="og:title" content="Protégez votre adresse sur Vinted et Leboncoin" />
-        <meta property="og:description" content="Outil gratuit pour supprimer la localisation GPS de vos photos de vente. Ne publiez rien sans nettoyer !" />
+        <meta property="og:title" content="Strip EXIF, GPS, C2PA &amp; AI Watermarks from any image" />
+        <meta property="og:description" content="GhostMeta supprime métadonnées EXIF/GPS et Content Credentials C2PA de vos images IA (Sora, Midjourney, DALL-E) — 100% dans votre navigateur." />
         <meta property="og:locale" content="fr_FR" />
         <meta property="og:image" content="https://www.ghostmeta.online/og-image-v2.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="image/jpeg" />
-        <meta property="og:image:alt" content="GhostMeta — Supprimez les métadonnées GPS de vos photos Vinted et Leboncoin" />
+        <meta property="og:image:alt" content="GhostMeta — Strip EXIF, GPS, C2PA Content Credentials and AI watermarks from any image" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="GhostMeta — Sécurité Vinted &amp; Leboncoin" />
-        <meta name="twitter:description" content="Supprimez GPS et EXIF en 1 clic. 100% Gratuit &amp; Local." />
+        <meta name="twitter:title" content="GhostMeta — Image privacy &amp; AI fingerprint cleaner" />
+        <meta name="twitter:description" content="Strip EXIF, GPS, C2PA &amp; AI watermarks in 1 click. 100% browser, zero upload." />
         <meta name="twitter:image" content="https://www.ghostmeta.online/og-image-v2.jpg" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -121,7 +121,7 @@ export default function Home() {
           "image": "https://www.ghostmeta.online/og-image-v2.jpg",
           "applicationCategory": "UtilityApplication",
           "operatingSystem": "Windows, macOS, Android, iOS",
-          "description": "Outil gratuit pour supprimer les métadonnées EXIF et GPS des photos avant de les poster sur Vinted, Leboncoin ou eBay. Traitement 100% local via Canvas.",
+          "description": "Outil de confidentialité image : supprime métadonnées EXIF/GPS et Content Credentials C2PA des images IA (Sora, Midjourney, DALL-E, ChatGPT, Adobe Firefly) ainsi que des photos smartphone. Traitement 100% local via Canvas.",
           "offers": {
             "@type": "Offer",
             "price": "0",
@@ -129,10 +129,10 @@ export default function Home() {
             "availability": "https://schema.org/InStock"
           },
           "featureList": [
-            "Suppression GPS",
-            "Nettoyage EXIF/XMP/IPTC",
-            "Anonymisation photo pixel par pixel",
-            "Traitement local sécurisé"
+            "Suppression GPS / EXIF / XMP / IPTC",
+            "Détection et strip C2PA Content Credentials (Sora, Midjourney, DALL-E, Adobe Firefly)",
+            "Reconstruction pixel par pixel via Canvas",
+            "Traitement 100% navigateur, zéro upload"
           ],
           "author": {
             "@type": "Organization",
@@ -156,7 +156,7 @@ export default function Home() {
               "name": "Quels formats d'images sont supportés ?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "GhostMeta supporte JPEG, PNG, WebP et HEIC (iPhone)."
+                "text": "GhostMeta supporte JPEG, PNG, WebP et HEIC (iPhone). Les images générées par Sora, Midjourney, DALL-E, ChatGPT et Adobe Firefly sont également supportées."
               }
             },
             {
@@ -164,7 +164,15 @@ export default function Home() {
               "name": "Quelles métadonnées sont supprimées ?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Toutes les métadonnées embarquées : GPS, EXIF, XMP, IPTC. L'image est reconstruite pixel par pixel pour garantir un fichier propre."
+                "text": "Toutes les métadonnées embarquées : GPS, EXIF, XMP, IPTC, ainsi que les Content Credentials C2PA (manifests JUMBF, signatures de provenance) présents dans les images IA. L'image est reconstruite pixel par pixel pour garantir un fichier propre."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "GhostMeta supprime-t-il les Content Credentials C2PA des images IA ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui. Lors du re-encodage canvas, les manifests JUMBF/C2PA insérés par Sora, Midjourney, DALL-E, ChatGPT et Adobe Firefly sont retirés en même temps que les autres métadonnées. GhostMeta affiche également la liste des Content Credentials détectés avant suppression."
               }
             },
             {
@@ -188,8 +196,8 @@ export default function Home() {
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "HowTo",
-          "name": "Comment supprimer les métadonnées GPS de vos photos Vinted",
-          "description": "Guide en 3 étapes pour anonymiser vos photos avant de les publier sur Vinted, Leboncoin ou eBay.",
+          "name": "Comment supprimer EXIF, GPS et Content Credentials C2PA d'une image",
+          "description": "Guide en 3 étapes pour nettoyer toutes métadonnées (EXIF/GPS) et empreintes C2PA (Sora, Midjourney, DALL-E) de vos images, 100% dans votre navigateur.",
           "step": [
             {
               "@type": "HowToStep",
