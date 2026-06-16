@@ -10,11 +10,13 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import LocaleLink from "@/components/LocaleLink";
+import { seoUrls, localePath, localeFromPath, ORIGIN } from "@/lib/locale";
 import landingsData from "@/data/landings.json";
 
 type ToolLocale = { title: string; description: string; h1: string; wedge: string };
@@ -31,7 +33,10 @@ export default function ToolsIndex() {
     document.getElementById("bot-content")?.remove();
   }, []);
 
-  const canonicalUrl = "https://www.ghostmeta.online/tools";
+  const { pathname } = useLocation();
+  const seo = seoUrls(pathname);
+  const locale = localeFromPath(pathname);
+  const canonicalUrl = seo.canonical;
   const title = isEn
     ? "AI Image Privacy Tools — Strip C2PA, Metadata & Watermarks"
     : "Outils confidentialité image IA — Strip C2PA, métadonnées & watermarks";
@@ -44,10 +49,10 @@ export default function ToolsIndex() {
       <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <link rel="canonical" href={canonicalUrl} />
-        <link rel="alternate" hrefLang="fr" href={canonicalUrl} />
-        <link rel="alternate" hrefLang="en" href={`${canonicalUrl}?lng=en`} />
-        <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
+        <link rel="canonical" href={seo.canonical} />
+        <link rel="alternate" hrefLang="fr" href={seo.fr} />
+        <link rel="alternate" hrefLang="en" href={seo.en} />
+        <link rel="alternate" hrefLang="x-default" href={seo.xDefault} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
@@ -75,7 +80,7 @@ export default function ToolsIndex() {
                 "@type": "ListItem",
                 position: i + 1,
                 name: tool[lang].h1,
-                url: `https://www.ghostmeta.online/tools/${tool.slug}`,
+                url: `${ORIGIN}${localePath(`/tools/${tool.slug}`, locale)}`,
               })),
             },
           })}
@@ -113,7 +118,7 @@ export default function ToolsIndex() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.04 }}
                 >
-                  <Link
+                  <LocaleLink
                     to={`/tools/${tool.slug}`}
                     className="block h-full p-6 rounded-xl bg-white/[0.02] border border-zinc-800 hover:border-ghost-green/50 transition-all duration-300 group"
                   >
@@ -130,7 +135,7 @@ export default function ToolsIndex() {
                       {isEn ? "Open tool" : "Ouvrir l'outil"}
                       <ArrowRight className="w-3 h-3" />
                     </span>
-                  </Link>
+                  </LocaleLink>
                 </motion.div>
               );
             })}
@@ -138,13 +143,13 @@ export default function ToolsIndex() {
 
           {/* CTA */}
           <div className="text-center pt-8 border-t border-zinc-800">
-            <Link
+            <LocaleLink
               to="/"
               className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-black bg-ghost-green rounded-full hover:bg-ghost-green-hover transition-all duration-300"
             >
               {isEn ? "Clean your image now" : "Nettoyez votre image maintenant"}
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </LocaleLink>
           </div>
         </motion.div>
       </main>

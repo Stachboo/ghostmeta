@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { BookOpen, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import LocaleLink from "@/components/LocaleLink";
+import { seoUrls } from "@/lib/locale";
 
 const BLOG_SLUGS = [
   "vinted-securite-photo-guide",
@@ -23,7 +25,9 @@ export default function BlogIndex() {
     document.getElementById("bot-content")?.remove();
   }, []);
 
-  const canonicalUrl = "https://www.ghostmeta.online/blog";
+  const { pathname } = useLocation();
+  const seo = seoUrls(pathname);
+  const canonicalUrl = seo.canonical;
 
   return (
     <div className="min-h-screen bg-ghost-dark text-foreground font-sans">
@@ -33,10 +37,10 @@ export default function BlogIndex() {
           name="description"
           content="Guides pratiques pour prot&eacute;ger votre vie priv&eacute;e en ligne : supprimer les m&eacute;tadonn&eacute;es EXIF, s&eacute;curiser vos photos Vinted, comprendre les donn&eacute;es GPS cach&eacute;es."
         />
-        <link rel="canonical" href={canonicalUrl} />
-        <link rel="alternate" hrefLang="fr" href={canonicalUrl} />
-        <link rel="alternate" hrefLang="en" href={`${canonicalUrl}?lng=en`} />
-        <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
+        <link rel="canonical" href={seo.canonical} />
+        <link rel="alternate" hrefLang="fr" href={seo.fr} />
+        <link rel="alternate" hrefLang="en" href={seo.en} />
+        <link rel="alternate" hrefLang="x-default" href={seo.xDefault} />
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
@@ -95,7 +99,7 @@ export default function BlogIndex() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.08 }}
               >
-                <Link
+                <LocaleLink
                   to={`/blog/${slug}`}
                   className="block h-full p-6 rounded-xl bg-white/[0.02] border border-zinc-800 hover:border-ghost-green/50 transition-all duration-300 group"
                 >
@@ -109,20 +113,20 @@ export default function BlogIndex() {
                     Lire l&apos;article{" "}
                     <ArrowRight className="w-3 h-3" />
                   </span>
-                </Link>
+                </LocaleLink>
               </motion.div>
             ))}
           </div>
 
           {/* CTA */}
           <div className="text-center pt-8 border-t border-zinc-800">
-            <Link
+            <LocaleLink
               to="/"
               className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-black bg-ghost-green rounded-full hover:bg-ghost-green-hover transition-all duration-300"
             >
               Prot&eacute;gez vos photos maintenant
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </LocaleLink>
           </div>
         </motion.div>
       </main>

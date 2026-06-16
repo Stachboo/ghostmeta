@@ -3,7 +3,9 @@ import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import LocaleLink from '@/components/LocaleLink';
+import { seoUrls, basePath, localePath, type Locale } from '@/lib/locale';
 import { ShieldCheck, Zap, Trash2, Download, Shield, AlertTriangle, Globe, Smartphone, Clock, MapPin, CheckCircle2, XCircle, Server
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -27,7 +29,10 @@ const SHIELD_IMG = "/shield.avif";
 const PAYPAL_LINK = import.meta.env.VITE_DONATION_URL || "https://paypal.me/abdus84";
 
 export default function Home() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const seo = seoUrls(pathname);
   const { signInWithGoogle } = useAuth();
 
   // Supprimer le bot-content injecté par le prerender
@@ -35,9 +40,9 @@ export default function Home() {
     document.getElementById('bot-content')?.remove();
   }, []);
 
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
+  const changeLanguage = (lng: Locale) => {
     localStorage.setItem('i18nextLng', lng);
+    navigate(localePath(basePath(pathname), lng));
   };
 
   const {
@@ -94,13 +99,13 @@ export default function Home() {
         <title>GhostMeta | Strip EXIF, GPS, C2PA &amp; AI Watermarks — 100% Browser</title>
         <meta name="description" content="Supprimez EXIF, GPS, Content Credentials C2PA et empreintes IA de vos images. Compatible Sora, Midjourney, DALL-E, ChatGPT, Adobe Firefly. 100% navigateur, zéro upload." />
         <meta name="keywords" content="C2PA, Content Credentials, supprimer watermark IA, Sora, Midjourney, DALL-E, ChatGPT, supprimer EXIF, GPS photo, métadonnées image, AI image privacy, Vinted, Leboncoin" />
-        <link rel="canonical" href="https://www.ghostmeta.online/" />
-        <link rel="alternate" hrefLang="fr" href="https://www.ghostmeta.online/" />
-        <link rel="alternate" hrefLang="en" href="https://www.ghostmeta.online/?lng=en" />
-        <link rel="alternate" hrefLang="x-default" href="https://www.ghostmeta.online/" />
+        <link rel="canonical" href={seo.canonical} />
+        <link rel="alternate" hrefLang="fr" href={seo.fr} />
+        <link rel="alternate" hrefLang="en" href={seo.en} />
+        <link rel="alternate" hrefLang="x-default" href={seo.xDefault} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="GhostMeta" />
-        <meta property="og:url" content="https://www.ghostmeta.online/" />
+        <meta property="og:url" content={seo.canonical} />
         <meta property="og:title" content="Strip EXIF, GPS, C2PA &amp; AI Watermarks from any image" />
         <meta property="og:description" content="GhostMeta supprime métadonnées EXIF/GPS et Content Credentials C2PA de vos images IA (Sora, Midjourney, DALL-E) — 100% dans votre navigateur." />
         <meta property="og:locale" content="fr_FR" />
@@ -234,10 +239,10 @@ export default function Home() {
           </div>
           {/* Navigation desktop (mobile : menu dans le footer) */}
           <nav className="hidden md:flex items-center gap-5 text-sm">
-            <Link to="/blog" className="text-zinc-400 hover:text-white transition-colors">{t('nav.blog')}</Link>
-            <Link to="/tools" className="text-zinc-400 hover:text-white transition-colors">{t('nav.tools')}</Link>
-            <Link to="/securite" className="text-zinc-400 hover:text-white transition-colors">{t('nav.security')}</Link>
-            <Link to="/pricing" className="text-zinc-400 hover:text-white transition-colors">{t('nav.pricing')}</Link>
+            <LocaleLink to="/blog" className="text-zinc-400 hover:text-white transition-colors">{t('nav.blog')}</LocaleLink>
+            <LocaleLink to="/tools" className="text-zinc-400 hover:text-white transition-colors">{t('nav.tools')}</LocaleLink>
+            <LocaleLink to="/securite" className="text-zinc-400 hover:text-white transition-colors">{t('nav.security')}</LocaleLink>
+            <LocaleLink to="/pricing" className="text-zinc-400 hover:text-white transition-colors">{t('nav.pricing')}</LocaleLink>
           </nav>
           <div className="flex items-center gap-3">
             <DropdownMenu>
@@ -254,7 +259,7 @@ export default function Home() {
             </DropdownMenu>
             
             {!isPro() && (
-              <Link to="/pricing" aria-label={t("header.upgrade")}>
+              <LocaleLink to="/pricing" aria-label={t("header.upgrade")}>
                 <Button
                   variant="outline"
                   size="sm"
@@ -262,7 +267,7 @@ export default function Home() {
                 >
                   <Zap className="w-3.5 h-3.5 mr-1" /> {t("header.upgrade")}
                 </Button>
-              </Link>
+              </LocaleLink>
             )}
             
             <AuthButton />
@@ -441,15 +446,15 @@ export default function Home() {
             <h2 className="text-2xl font-bold mb-8 text-ghost-green">{t('blog.section_title')}</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
               {['vinted-securite-photo-guide', 'supprimer-exif-iphone-android', 'comprendre-donnees-exif-gps', 'nettoyage-photo-local-vs-cloud'].map(slug => (
-                <Link key={slug} to={`/blog/${slug}`} className="p-4 rounded-lg bg-card border border-border hover:border-ghost-green/50 transition-all">
+                <LocaleLink key={slug} to={`/blog/${slug}`} className="p-4 rounded-lg bg-card border border-border hover:border-ghost-green/50 transition-all">
                   <h3 className="font-bold text-sm text-foreground mb-1">{t(`blog.posts.${slug}.title`)}</h3>
                   <p className="text-xs text-muted-foreground">{t(`blog.posts.${slug}.desc`)}</p>
-                </Link>
+                </LocaleLink>
               ))}
-              <Link to="/blog/ghostmeta-manifeste-confidentialite" className="p-4 rounded-lg bg-card border border-border hover:border-ghost-green/50 transition-all sm:col-span-2 lg:col-span-1">
+              <LocaleLink to="/blog/ghostmeta-manifeste-confidentialite" className="p-4 rounded-lg bg-card border border-border hover:border-ghost-green/50 transition-all sm:col-span-2 lg:col-span-1">
                 <h3 className="font-bold text-sm text-foreground mb-1">{t('blog.posts.ghostmeta-manifeste-confidentialite.title')}</h3>
                 <p className="text-xs text-muted-foreground">{t('blog.posts.ghostmeta-manifeste-confidentialite.desc')}</p>
-              </Link>
+              </LocaleLink>
             </div>
           </div>
         </section>

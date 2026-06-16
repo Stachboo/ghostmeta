@@ -5,10 +5,12 @@
  * Injecte le schema.org BreadcrumbList via Helmet.
  */
 
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { ChevronRight } from 'lucide-react';
+import LocaleLink from '@/components/LocaleLink';
+import { localeFromPath, localePath, ORIGIN } from '@/lib/locale';
 
 interface BreadcrumbItem {
   label: string;
@@ -21,6 +23,8 @@ interface BreadcrumbProps {
 
 export default function Breadcrumb({ items }: BreadcrumbProps) {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const locale = localeFromPath(pathname);
 
   // Toujours commencer par Accueil
   const crumbs: BreadcrumbItem[] = [
@@ -28,7 +32,7 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
     ...items,
   ];
 
-  // JSON-LD BreadcrumbList
+  // JSON-LD BreadcrumbList (URLs localisées)
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -37,7 +41,7 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
       position: i + 1,
       name: item.label,
       ...(item.to
-        ? { item: `https://www.ghostmeta.online${item.to}` }
+        ? { item: `${ORIGIN}${localePath(item.to, locale)}` }
         : {}),
     })),
   };
@@ -55,12 +59,12 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
                 <ChevronRight className="w-3 h-3 text-muted-foreground/40" />
               )}
               {item.to && i < crumbs.length - 1 ? (
-                <Link
+                <LocaleLink
                   to={item.to}
                   className="hover:text-[#00ff41] transition-colors"
                 >
                   {item.label}
-                </Link>
+                </LocaleLink>
               ) : (
                 <span className="text-white/70">{item.label}</span>
               )}

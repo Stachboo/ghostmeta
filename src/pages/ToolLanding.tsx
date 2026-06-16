@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
-import { useParams, Navigate, Link } from 'react-router-dom';
+import { useParams, Navigate, useLocation } from 'react-router-dom';
+import LocaleLink from '@/components/LocaleLink';
+import { seoUrls, localePath, localeFromPath, ORIGIN } from '@/lib/locale';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, ShieldCheck, Sparkles, Lock } from 'lucide-react';
@@ -46,8 +48,10 @@ export default function ToolLanding() {
 
   const c = lang === 'en' ? landing.en : landing.fr;
   const otherLocale = lang === 'en' ? landing.fr : landing.en;
-  const canonical = `https://www.ghostmeta.online/tools/${landing.slug}`;
-  const hreflangEn = `${canonical}?lng=en`;
+  const { pathname } = useLocation();
+  const seo = seoUrls(pathname);
+  const locale = localeFromPath(pathname);
+  const canonical = seo.canonical;
 
   // Related: prefer same generator, fall back to "generic" landings
   const related = ALL
@@ -72,10 +76,10 @@ export default function ToolLanding() {
         <title>{c.title}</title>
         <meta name="description" content={c.description} />
         <meta name="keywords" content={`${c.wedge}, ${otherLocale.wedge}, C2PA, Content Credentials, GhostMeta`} />
-        <link rel="canonical" href={canonical} />
-        <link rel="alternate" hrefLang="fr" href={canonical} />
-        <link rel="alternate" hrefLang="en" href={hreflangEn} />
-        <link rel="alternate" hrefLang="x-default" href={canonical} />
+        <link rel="canonical" href={seo.canonical} />
+        <link rel="alternate" hrefLang="fr" href={seo.fr} />
+        <link rel="alternate" hrefLang="en" href={seo.en} />
+        <link rel="alternate" hrefLang="x-default" href={seo.xDefault} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="GhostMeta" />
         <meta property="og:title" content={c.title} />
@@ -110,8 +114,8 @@ export default function ToolLanding() {
           breadcrumb: {
             '@type': 'BreadcrumbList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.ghostmeta.online/' },
-              { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://www.ghostmeta.online/tools' },
+              { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}${localePath('/', locale)}` },
+              { '@type': 'ListItem', position: 2, name: 'Tools', item: `${ORIGIN}${localePath('/tools', locale)}` },
               { '@type': 'ListItem', position: 3, name: c.h1, item: canonical },
             ],
           },
@@ -132,19 +136,19 @@ export default function ToolLanding() {
           <p className="text-lg text-white/80 leading-relaxed mb-8">{c.intro}</p>
 
           <div className="flex flex-wrap items-center gap-3 mb-10">
-            <Link
+            <LocaleLink
               to="/"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-ghost-green text-black font-semibold hover:bg-ghost-green/90 transition-colors"
             >
               {ctaLabel}
               <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
+            </LocaleLink>
+            <LocaleLink
               to="/pricing"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/15 hover:border-white/30 transition-colors text-white/90"
             >
               {lang === 'en' ? 'Pricing' : 'Tarifs'}
-            </Link>
+            </LocaleLink>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-12">
@@ -182,7 +186,7 @@ export default function ToolLanding() {
               const rc = lang === 'en' ? r.en : r.fr;
               return (
                 <li key={r.slug}>
-                  <Link
+                  <LocaleLink
                     to={`/tools/${r.slug}`}
                     className="block p-5 border border-white/10 rounded-lg hover:border-ghost-green/50 hover:bg-white/5 transition-colors h-full"
                   >
@@ -190,7 +194,7 @@ export default function ToolLanding() {
                       {r.generator === 'generic' ? 'AI privacy' : r.generator}
                     </div>
                     <div className="font-semibold text-sm text-white">{rc.h1}</div>
-                  </Link>
+                  </LocaleLink>
                 </li>
               );
             })}

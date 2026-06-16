@@ -5,7 +5,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import LocaleLink from '@/components/LocaleLink';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import GhostLogo from './GhostLogo';
 import { useTranslation } from 'react-i18next';
@@ -45,14 +45,14 @@ export default function Footer() {
               </h4>
               <ul className="space-y-2 text-xs text-muted-foreground">
                 <li>
-                  <Link to="/securite" className="hover:text-ghost-green transition-colors">
+                  <LocaleLink to="/securite" className="hover:text-ghost-green transition-colors">
                     {t('security.footer_link')}
-                  </Link>
+                  </LocaleLink>
                 </li>
                 <li>
-                  <Link to="/pricing" className="hover:text-ghost-green transition-colors">
+                  <LocaleLink to="/pricing" className="hover:text-ghost-green transition-colors">
                     {t('nav.pricing')}
-                  </Link>
+                  </LocaleLink>
                 </li>
                 <li>
                   <button onClick={() => setShowPrivacy(true)} className="hover:text-ghost-green transition-colors">
@@ -70,9 +70,9 @@ export default function Footer() {
             {/* Colonne 2 — Blog */}
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-white/60 mb-3">
-                <Link to="/blog" className="hover:text-ghost-green transition-colors">
+                <LocaleLink to="/blog" className="hover:text-ghost-green transition-colors">
                   {t('blog.section_title')}
-                </Link>
+                </LocaleLink>
               </h4>
               <ul className="space-y-2 text-xs text-muted-foreground">
                 {[
@@ -83,21 +83,21 @@ export default function Footer() {
                   'ghostmeta-manifeste-confidentialite',
                 ].map(slug => (
                   <li key={slug}>
-                    <Link
+                    <LocaleLink
                       to={`/blog/${slug}`}
                       className="hover:text-ghost-green transition-colors"
                     >
                       {t(`blog.posts.${slug}.title`)}
-                    </Link>
+                    </LocaleLink>
                   </li>
                 ))}
                 <li>
-                  <Link
+                  <LocaleLink
                     to="/blog"
                     className="text-ghost-green/80 hover:text-ghost-green transition-colors"
                   >
                     {t('footer.blog_index')} →
-                  </Link>
+                  </LocaleLink>
                 </li>
               </ul>
             </div>
@@ -105,19 +105,19 @@ export default function Footer() {
             {/* Colonne 3 — Outils IA (maillage SEO des landings /tools) */}
             <div className="sm:col-span-2">
               <h4 className="text-xs font-bold uppercase tracking-wider text-white/60 mb-3">
-                <Link to="/tools" className="hover:text-ghost-green transition-colors">
+                <LocaleLink to="/tools" className="hover:text-ghost-green transition-colors">
                   {t('footer.tools_title')}
-                </Link>
+                </LocaleLink>
               </h4>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-muted-foreground">
                 {TOOLS.map(tool => (
                   <li key={tool.slug}>
-                    <Link
+                    <LocaleLink
                       to={`/tools/${tool.slug}`}
                       className="hover:text-ghost-green transition-colors"
                     >
                       {tool[lang].h1}
-                    </Link>
+                    </LocaleLink>
                   </li>
                 ))}
               </ul>

@@ -7,6 +7,8 @@ import { Toaster } from 'sonner';
 import ErrorBoundary from './components/ErrorBoundary';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
 import ConsentBanner from './components/ConsentBanner';
+import i18n from './i18n';
+import { localeFromPath } from '@/lib/locale';
 
 // Imports dynamiques (Optimisation pour charger le site vite)
 const Home = lazy(() => import('./pages/Home'));
@@ -103,6 +105,13 @@ function ScrollToTop() {
     return () => cancelAnimationFrame(raf);
   }, [pathname]);
 
+  // Synchronise la langue i18n + <html lang> avec le préfixe d'URL (/en).
+  useLayoutEffect(() => {
+    const loc = localeFromPath(pathname);
+    if (i18n.language !== loc) i18n.changeLanguage(loc);
+    document.documentElement.lang = loc;
+  }, [pathname]);
+
   return null;
 }
 
@@ -142,23 +151,30 @@ function App() {
           <Routes>
             {/* 1. La Page d'Accueil */}
             <Route path="/" element={<Home />} />
+            <Route path="/en" element={<Home />} />
 
             {/* 2. Pricing Page */}
             <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/en/pricing" element={<PricingPage />} />
 
             {/* 3. Securite */}
             <Route path="/securite" element={<SecurityPage />} />
+            <Route path="/en/securite" element={<SecurityPage />} />
             {/* Redirections anciennes URLs */}
             <Route path="/fr/securite" element={<Navigate to="/securite" replace />} />
-            <Route path="/en/security" element={<Navigate to="/securite?lng=en" replace />} />
+            <Route path="/en/security" element={<Navigate to="/en/securite" replace />} />
 
             {/* 4. Le Blog */}
             <Route path="/blog" element={<BlogIndex />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/en/blog" element={<BlogIndex />} />
+            <Route path="/en/blog/:slug" element={<BlogPost />} />
 
             {/* 5. Tool landings (programmatic SEO) */}
             <Route path="/tools" element={<ToolsIndex />} />
             <Route path="/tools/:slug" element={<ToolLanding />} />
+            <Route path="/en/tools" element={<ToolsIndex />} />
+            <Route path="/en/tools/:slug" element={<ToolLanding />} />
 
             {/* 6. Settings (Pro B2B API key management) */}
             <Route path="/settings" element={<SettingsPage />} />

@@ -1,5 +1,7 @@
 import { useEffect, useMemo } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import LocaleLink from '@/components/LocaleLink';
+import { seoUrls } from '@/lib/locale';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
@@ -104,17 +106,19 @@ export default function BlogPost() {
 
   const postTitle = t(titleKey);
   const postDesc = t(`blog.posts.${slug}.desc`);
-  const canonicalUrl = `https://www.ghostmeta.online/blog/${slug}`;
+  const { pathname } = useLocation();
+  const seo = seoUrls(pathname);
+  const canonicalUrl = seo.canonical;
 
   return (
     <div className="min-h-screen bg-ghost-dark text-foreground font-sans">
       <Helmet>
         <title>{postTitle} | GhostMeta</title>
         <meta name="description" content={postDesc} />
-        <link rel="canonical" href={canonicalUrl} />
-        <link rel="alternate" hrefLang="fr" href={canonicalUrl} />
-        <link rel="alternate" hrefLang="en" href={`${canonicalUrl}?lng=en`} />
-        <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
+        <link rel="canonical" href={seo.canonical} />
+        <link rel="alternate" hrefLang="fr" href={seo.fr} />
+        <link rel="alternate" hrefLang="en" href={seo.en} />
+        <link rel="alternate" hrefLang="x-default" href={seo.xDefault} />
         <meta property="og:type" content="article" />
         <meta property="og:title" content={postTitle} />
         <meta property="og:description" content={postDesc} />
@@ -202,7 +206,7 @@ export default function BlogPost() {
             <h2 className="text-xl font-bold text-white">{t('blog.related_title', 'Articles connexes')}</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {relatedSlugs.map((s) => (
-                <Link
+                <LocaleLink
                   key={s}
                   to={`/blog/${s}`}
                   className="p-4 rounded-lg bg-white/[0.02] border border-zinc-800 hover:border-ghost-green/50 transition-all group"
@@ -213,16 +217,16 @@ export default function BlogPost() {
                   <p className="text-xs text-muted-foreground line-clamp-2">
                     {t(`blog.posts.${s}.desc`)}
                   </p>
-                </Link>
+                </LocaleLink>
               ))}
             </div>
             <div className="text-center pt-4">
-              <Link
+              <LocaleLink
                 to="/"
                 className="inline-flex items-center gap-2 text-sm font-bold text-ghost-green hover:underline"
               >
                 {t('blog.cta_protect', 'Protégez vos photos maintenant')} <ArrowRight className="w-4 h-4" />
-              </Link>
+              </LocaleLink>
             </div>
           </div>
         </motion.article>

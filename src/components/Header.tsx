@@ -8,8 +8,10 @@
  */
 
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import LocaleLink from '@/components/LocaleLink';
+import { basePath, localePath, type Locale } from '@/lib/locale';
 import { Globe, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -36,37 +38,39 @@ const NAV_LINKS = [
 ] as const;
 
 export default function Header() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
+  const changeLanguage = (lng: Locale) => {
     localStorage.setItem('i18nextLng', lng);
+    navigate(localePath(basePath(pathname), lng));
   };
 
   const isActive = (to: string) => {
-    if (to === '/') return pathname === '/';
-    return pathname.startsWith(to);
+    const base = basePath(pathname);
+    if (to === '/') return base === '/';
+    return base.startsWith(to);
   };
 
   return (
     <header className="border-b border-white/10 bg-black/50 backdrop-blur-md sticky top-0 z-50">
       <div className="container h-14 flex items-center justify-between px-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
+        <LocaleLink to="/" className="flex items-center gap-2">
           <GhostLogo size={32} />
           <span className="text-lg font-bold tracking-tight">
             Ghost<span className="text-ghost-green">Meta</span>
           </span>
-        </Link>
+        </LocaleLink>
 
         {/* Desktop nav + langue */}
         <div className="flex items-center gap-6">
           {/* Nav links — desktop only */}
           <nav className="hidden md:flex items-center gap-5">
             {NAV_LINKS.map(({ key, to }) => (
-              <Link
+              <LocaleLink
                 key={key}
                 to={to}
                 className={`text-sm transition-colors ${
@@ -76,7 +80,7 @@ export default function Header() {
                 }`}
               >
                 {t(`nav.${key}`)}
-              </Link>
+              </LocaleLink>
             ))}
           </nav>
 
@@ -127,7 +131,7 @@ export default function Header() {
               </SheetHeader>
               <nav className="flex flex-col gap-4 px-4 mt-4">
                 {NAV_LINKS.map(({ key, to }) => (
-                  <Link
+                  <LocaleLink
                     key={key}
                     to={to}
                     onClick={() => setOpen(false)}
@@ -138,7 +142,7 @@ export default function Header() {
                     }`}
                   >
                     {t(`nav.${key}`)}
-                  </Link>
+                  </LocaleLink>
                 ))}
               </nav>
             </SheetContent>
