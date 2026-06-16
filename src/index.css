@@ -43,6 +43,12 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Accessibilité clavier : indicateur de focus visible sur les éléments interactifs */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid #00ff41;
+    outline-offset: 2px;
+  }
   /* Désactiver le scroll anchoring du navigateur —
      empêche Chrome/Firefox de « corriger » la position de scroll
      quand le contenu change (ex. Suspense → lazy page) */
@@ -240,6 +246,11 @@
     0 0 40px rgba(57, 255, 20, 0.3);
   animation: laser-move 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   pointer-events: none;
+  /* Anime transform (GPU composite) au lieu de `left` (repaint + CLS).
+     Compromis : la largeur du mot ("metadata"/"métadonnées") est dynamique
+     (clamp font-size + i18n), donc le balayage utilise une amplitude en `ch`
+     approchée plutôt que `left: 100%` (= largeur parent exacte). */
+  will-change: transform;
 }
 
 /* ── MOBILE: disable chroma-drift (text-shadow animation = CPU paint = jank)
@@ -257,10 +268,10 @@
 }
 
 @keyframes laser-move {
-  0%   { left: 0%;    opacity: 0; }
+  0%   { transform: translateX(0);     opacity: 0; }
   5%   { opacity: 1; }
   95%  { opacity: 1; }
-  100% { left: 100%;  opacity: 0; }
+  100% { transform: translateX(11ch);  opacity: 0; }
 }
 
 /* Respect prefers-reduced-motion for non-Framer animations */

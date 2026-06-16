@@ -95,7 +95,7 @@ function saveHtml(relPath, html) {
 // ─── Strings hardcodées par langue (pages sans clés i18n dédiées) ──────────────
 const T = {
   homeTitle: {
-    fr: 'GhostMeta | Strip EXIF, GPS, C2PA & AI Watermarks — 100% Browser',
+    fr: 'GhostMeta — Supprimer les métadonnées EXIF, GPS & C2PA de vos images',
     en: 'GhostMeta | Strip EXIF, GPS, C2PA & AI Watermarks — 100% Browser',
   },
   homeDesc: {
@@ -150,10 +150,10 @@ const T = {
 
 const BLOG_DATES = {
   'vinted-securite-photo-guide': '2026-02-17',
-  'supprimer-exif-iphone-android': '2026-02-17',
-  'comprendre-donnees-exif-gps': '2026-02-17',
-  'nettoyage-photo-local-vs-cloud': '2026-02-17',
-  'ghostmeta-manifeste-confidentialite': '2026-02-17',
+  'supprimer-exif-iphone-android': '2026-03-11',
+  'comprendre-donnees-exif-gps': '2026-04-02',
+  'nettoyage-photo-local-vs-cloud': '2026-04-24',
+  'ghostmeta-manifeste-confidentialite': '2026-05-19',
 };
 const SLUGS = Object.keys(BLOG_DATES);
 
@@ -190,7 +190,84 @@ for (const lang of ['fr', 'en']) {
       `<p>${escHtml(get(L, 'info.arch_subtitle'))}</p>`,
       `<h2>${escHtml(get(L, 'info.faq_title'))}</h2>`,
     ].join('\n');
-    emit(lang, '/', { title: T.homeTitle[lang], description: T.homeDesc[lang], bodyContent: body });
+
+    // FAQ : 2-3 Q/R issues des clés info.qN/aN de la locale, sinon génériques
+    const faqPairs = [];
+    for (let i = 1; i <= 3; i++) {
+      const q = get(L, `info.q${i}`);
+      const a = get(L, `info.a${i}`);
+      if (q && a) faqPairs.push({ q, a });
+    }
+    if (faqPairs.length === 0) {
+      faqPairs.push(
+        lang === 'en'
+          ? {
+              q: 'Are my photos uploaded to a server?',
+              a: 'No. All EXIF, GPS and C2PA stripping happens locally in your browser. No image ever leaves your device.',
+            }
+          : {
+              q: 'Mes photos sont-elles envoyées sur un serveur ?',
+              a: "Non. La suppression EXIF, GPS et C2PA se fait localement dans votre navigateur. Aucune image ne quitte votre appareil.",
+            }
+      );
+      faqPairs.push(
+        lang === 'en'
+          ? {
+              q: 'What metadata does GhostMeta remove?',
+              a: 'EXIF, GPS coordinates, IPTC, XMP and C2PA Content Credentials are all stripped from your images.',
+            }
+          : {
+              q: 'Quelles métadonnées GhostMeta supprime-t-il ?',
+              a: "L'EXIF, les coordonnées GPS, l'IPTC, le XMP et les Content Credentials C2PA sont tous retirés de vos images.",
+            }
+      );
+    }
+
+    const homeJsonLd = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebSite',
+          '@id': `${ORIGIN}/#website`,
+          url: ORIGIN,
+          name: 'GhostMeta',
+          inLanguage: lang,
+        },
+        {
+          '@type': 'WebApplication',
+          '@id': `${urlFor(lang, '/')}#webapp`,
+          name: 'GhostMeta',
+          url: urlFor(lang, '/'),
+          applicationCategory: 'SecurityApplication',
+          operatingSystem: 'Any (browser-based)',
+          inLanguage: lang,
+          isPartOf: { '@id': `${ORIGIN}/#website` },
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'USD',
+          },
+        },
+        {
+          '@type': 'FAQPage',
+          '@id': `${urlFor(lang, '/')}#faq`,
+          inLanguage: lang,
+          isPartOf: { '@id': `${ORIGIN}/#website` },
+          mainEntity: faqPairs.map((f) => ({
+            '@type': 'Question',
+            name: f.q,
+            acceptedAnswer: { '@type': 'Answer', text: f.a },
+          })),
+        },
+      ],
+    };
+
+    emit(lang, '/', {
+      title: T.homeTitle[lang],
+      description: T.homeDesc[lang],
+      bodyContent: body,
+      jsonLd: homeJsonLd,
+    });
   }
 
   // ── /pricing ──

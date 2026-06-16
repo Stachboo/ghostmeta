@@ -118,7 +118,7 @@ export default function Pricing() {
               </h3>
               <div className="flex items-baseline gap-1 mb-6">
                 <span className="text-4xl font-bold">{t('pricing.standard.price', '0€')}</span>
-                <span className="text-zinc-500">/forever</span>
+                <span className="text-zinc-500">{t('pricing.standard.period', '/forever')}</span>
               </div>
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center gap-3 text-sm text-zinc-300">
@@ -131,7 +131,7 @@ export default function Pricing() {
                 </li>
                 <li className="flex items-center gap-3 text-sm text-zinc-500">
                   <Check className="w-4 h-4 text-zinc-600" />
-                  Local processing only
+                  {t('pricing.standard.local', 'Local processing only')}
                 </li>
               </ul>
               <Button
@@ -139,7 +139,7 @@ export default function Pricing() {
                 className="w-full h-12 border-[#ffbf00]/30 text-[#ffbf00] hover:bg-[#ffbf00]/10 font-mono"
                 disabled
               >
-                {hasFullAccess ? t('pricing.standard.inactive', 'PLAN INACTIF') : 'CURRENT ACCESS'}
+                {hasFullAccess ? t('pricing.standard.inactive', 'PLAN INACTIF') : t('pricing.standard.current', 'CURRENT ACCESS')}
               </Button>
             </div>
           </div>
@@ -147,7 +147,7 @@ export default function Pricing() {
           {/* Premium Plan */}
           <div className="relative rounded-2xl border-2 border-ghost-green bg-zinc-900/80 backdrop-blur-md p-8 overflow-hidden md:scale-105 shadow-[0_0_40px_rgba(0,255,65,0.15)]">
             <div className="absolute top-0 right-0 bg-ghost-green text-black text-xs font-bold px-4 py-1 rounded-bl-lg">
-              RECOMMENDED
+              {t('pricing.premium.badge', 'RECOMMENDED')}
             </div>
             <div className="absolute inset-0 bg-gradient-to-br from-[#00ff41]/10 to-transparent pointer-events-none" />
             <div className="relative z-10">
@@ -160,7 +160,7 @@ export default function Pricing() {
               </h3>
               <div className="flex items-baseline gap-1 mb-2">
                 <span className="text-4xl font-bold text-ghost-green">{t('pricing.premium.price', '5€')}</span>
-                <span className="text-zinc-500">/month</span>
+                <span className="text-zinc-500">{t('pricing.premium.period', '/month')}</span>
               </div>
               <p className="text-xs text-zinc-400 mb-6 font-mono">
                 {t('pricing.premium.yearly_note', 'Ou 40€/an (2 mois offerts)')}
@@ -176,11 +176,11 @@ export default function Pricing() {
                 </li>
                 <li className="flex items-center gap-3 text-sm text-zinc-200">
                   <Check className="w-4 h-4 text-ghost-green" />
-                  Priority processing
+                  {t('pricing.premium.priority', 'Priority processing')}
                 </li>
                 <li className="flex items-center gap-3 text-sm text-zinc-200">
                   <Check className="w-4 h-4 text-ghost-green" />
-                  Advanced EXIF removal
+                  {t('pricing.premium.advanced', 'Advanced EXIF removal')}
                 </li>
               </ul>
               {!loading && user ? (
@@ -206,7 +206,7 @@ export default function Pricing() {
                       variant="outline"
                       className="w-full h-10 border-ghost-green/50 text-ghost-green hover:bg-ghost-green/10 font-mono text-xs"
                     >
-                      Yearly Plan — Save 33%
+                      {t('pricing.cta.yearly', 'Yearly Plan — Save 33%')}
                     </Button>
                   </div>
                 )
@@ -235,7 +235,7 @@ export default function Pricing() {
               </h3>
               <div className="flex items-baseline gap-1 mb-2">
                 <span className="text-4xl font-bold text-cyan-400">{t('pricing.b2b.price', '$19')}</span>
-                <span className="text-zinc-500">/month</span>
+                <span className="text-zinc-500">{t('pricing.b2b.period', '/month')}</span>
               </div>
               <p className="text-xs text-zinc-400 mb-6 font-mono">
                 {t('pricing.b2b.tagline', 'Pour créateurs, agences & revendeurs IA')}
@@ -284,15 +284,15 @@ export default function Pricing() {
           <div className="inline-flex items-center gap-6 text-xs text-zinc-500 font-mono">
             <span className="flex items-center gap-2">
               <Shield className="w-3 h-3" />
-              Secure Checkout
+              {t('pricing.trust.secure', 'Secure Checkout')}
             </span>
             <span className="flex items-center gap-2">
               <Check className="w-3 h-3" />
-              Cancel Anytime
+              {t('pricing.trust.cancel', 'Cancel Anytime')}
             </span>
             <span className="flex items-center gap-2">
               <Check className="w-3 h-3" />
-              No Hidden Fees
+              {t('pricing.trust.no_fees', 'No Hidden Fees')}
             </span>
           </div>
         </div>

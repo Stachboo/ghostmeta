@@ -39,9 +39,12 @@
 - PWA avec Service Worker pour utilisation hors-ligne
 - Hébergé sur Vercel
 
-## URLs importantes
+## Pages clés
 
-- <https://www.ghostmeta.online/> : Accueil — outil principal de suppression de métadonnées et C2PA
+- <https://www.ghostmeta.online/> : Accueil — outil principal de suppression de métadonnées EXIF et C2PA
+- <https://www.ghostmeta.online/tools> : Hub des outils IA — annuaire des 13 nettoyeurs spécialisés par générateur
+- <https://www.ghostmeta.online/blog> : Blog — guides confidentialité photo, EXIF, GPS et C2PA
+- <https://www.ghostmeta.online/securite> : Sécurité — fonctionnement du traitement local et garanties de confidentialité
 - <https://www.ghostmeta.online/pricing> : Tarifs — gratuit pour usage personnel, Pro B2B pour créateurs et agences
 
 ## Articles de blog
@@ -51,6 +54,35 @@
 - <https://www.ghostmeta.online/blog/supprimer-exif-iphone-android> : Comment supprimer les EXIF sur iPhone et Android
 - <https://www.ghostmeta.online/blog/nettoyage-photo-local-vs-cloud> : Nettoyage photo local vs cloud — pourquoi le local est plus sûr
 - <https://www.ghostmeta.online/blog/ghostmeta-manifeste-confidentialite> : Manifeste de confidentialité GhostMeta
+
+## Outils IA
+
+Nettoyeurs spécialisés par générateur et type d'empreinte, tous accessibles depuis le hub <https://www.ghostmeta.online/tools> :
+
+- <https://www.ghostmeta.online/tools/remove-ai-watermark-from-image> : Supprimer les watermarks IA de toute image (C2PA, signatures de modèle, métadonnées)
+- <https://www.ghostmeta.online/tools/remove-sora-c2pa> : Supprimer les Content Credentials C2PA de Sora (OpenAI)
+- <https://www.ghostmeta.online/tools/remove-midjourney-metadata> : Supprimer les métadonnées Midjourney d'un PNG (prompt, job ID, version)
+- <https://www.ghostmeta.online/tools/clean-chatgpt-image-metadata> : Nettoyer les métadonnées d'image ChatGPT (GPT-4o, GPT-Image-1)
+- <https://www.ghostmeta.online/tools/strip-dalle-fingerprint> : Retirer l'empreinte DALL-E d'un PNG (manifest C2PA)
+- <https://www.ghostmeta.online/tools/remove-firefly-content-credentials> : Supprimer les Content Credentials d'Adobe Firefly
+- <https://www.ghostmeta.online/tools/clean-stable-diffusion-metadata> : Nettoyer les métadonnées PNG Stable Diffusion (prompt, seed, modèle)
+- <https://www.ghostmeta.online/tools/remove-flux-image-metadata> : Supprimer les métadonnées d'image Flux (Black Forest Labs, BFL)
+- <https://www.ghostmeta.online/tools/remove-leonardo-ai-metadata> : Supprimer les métadonnées Leonardo.AI d'un PNG (prompt, ID de génération)
+- <https://www.ghostmeta.online/tools/strip-runway-ml-watermark> : Retirer les métadonnées watermark Runway ML (Gen-3)
+- <https://www.ghostmeta.online/tools/clean-google-imagen-metadata> : Nettoyer les métadonnées Google Imagen & SynthID
+- <https://www.ghostmeta.online/tools/ai-image-anonymizer> : Anonymiseur d'images IA — strip de toute provenance (C2PA, EXIF, XMP, IPTC)
+- <https://www.ghostmeta.online/tools/browser-c2pa-remover> : Remover C2PA en navigateur — sans upload, sans compte
+
+## Versions anglaises
+
+Chaque page dispose d'une version anglaise accessible sous le préfixe `/en/` (ou via le paramètre `?lng=en`). Exemples :
+
+- <https://www.ghostmeta.online/en> : Home (English)
+- <https://www.ghostmeta.online/en/tools> : AI tools hub (English)
+- <https://www.ghostmeta.online/en/blog> : Blog (English)
+- <https://www.ghostmeta.online/en/pricing> : Pricing (English)
+
+Les articles de blog et les 13 outils IA ci-dessus existent aussi en anglais sous `/en/blog/<slug>` et `/en/tools/<slug>`.
 
 ## Langues
 

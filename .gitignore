@@ -8,6 +8,10 @@ credentials.json
 .env*
 !.env.example
 .mcp.json
+# Fichiers persos/sensibles, jamais déployés (incident 2026-06 : PDF stratégie, screenshots perso PII)
+public/*.pdf
+public/Screenshot_*
+public/ghost.jpg
 
 # Ignorer les dossiers système/build
 node_modules/

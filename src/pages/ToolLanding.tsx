@@ -41,6 +41,9 @@ export default function ToolLanding() {
 
   useEffect(() => {
     document.getElementById('bot-content')?.remove();
+    document
+      .querySelectorAll('script[type="application/ld+json"][data-prerender="true"]')
+      .forEach((node) => node.remove());
   }, []);
 
   const landing = ALL.find((l) => l.slug === slug);

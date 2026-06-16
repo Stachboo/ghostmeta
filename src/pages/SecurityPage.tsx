@@ -320,8 +320,12 @@ export default function SecurityPage() {
   const { t, i18n } = useTranslation();
 
   // Supprimer le bot-content injecte par le prerender
+  // Retirer aussi le JSON-LD prerendu pour eviter le doublon avec celui de Helmet
   useEffect(() => {
     document.getElementById('bot-content')?.remove();
+    document
+      .querySelectorAll('script[type="application/ld+json"][data-prerender="true"]')
+      .forEach((node) => node.remove());
   }, []);
 
   const { pathname } = useLocation();

@@ -29,8 +29,12 @@ export default function ToolsIndex() {
   const isEn = lang === "en";
 
   // Supprimer le bot-content injecté par le prerender
+  // Retirer aussi le JSON-LD prerendu pour éviter le doublon avec celui de Helmet
   useEffect(() => {
     document.getElementById("bot-content")?.remove();
+    document
+      .querySelectorAll('script[type="application/ld+json"][data-prerender="true"]')
+      .forEach((node) => node.remove());
   }, []);
 
   const { pathname } = useLocation();

@@ -6,11 +6,12 @@ import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LocaleLink from '@/components/LocaleLink';
 import { seoUrls, basePath, localePath, type Locale } from '@/lib/locale';
-import { ShieldCheck, Zap, Trash2, Download, Shield, AlertTriangle, Globe, Smartphone, Clock, MapPin, CheckCircle2, XCircle, Server
+import { ShieldCheck, Zap, Trash2, Download, Shield, AlertTriangle, Globe, Smartphone, Clock, MapPin, CheckCircle2, XCircle, Server, Menu
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import GhostLogo from '@/components/GhostLogo';
 import HeroSection from '@/components/home/HeroSection';
 import HowItWorks from '@/components/home/HowItWorks';
@@ -29,11 +30,12 @@ const SHIELD_IMG = "/shield.avif";
 const PAYPAL_LINK = import.meta.env.VITE_DONATION_URL || "https://paypal.me/abdus84";
 
 export default function Home() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const seo = seoUrls(pathname);
   const { signInWithGoogle } = useAuth();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Supprimer le bot-content injecté par le prerender
   useEffect(() => {
@@ -96,7 +98,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-ghost-dark font-sans text-white">
       <Helmet>
-        <title>GhostMeta | Strip EXIF, GPS, C2PA &amp; AI Watermarks — 100% Browser</title>
+        <title>{i18n.language === "fr" ? "GhostMeta — Supprimer les métadonnées EXIF, GPS & C2PA de vos images" : "GhostMeta | Strip EXIF, GPS, C2PA & AI Watermarks — 100% Browser"}</title>
         <meta name="description" content="Supprimez EXIF, GPS, Content Credentials C2PA et empreintes IA de vos images. Compatible Sora, Midjourney, DALL-E, ChatGPT, Adobe Firefly. 100% navigateur, zéro upload." />
         <meta name="keywords" content="C2PA, Content Credentials, supprimer watermark IA, Sora, Midjourney, DALL-E, ChatGPT, supprimer EXIF, GPS photo, métadonnées image, AI image privacy, Vinted, Leboncoin" />
         <link rel="canonical" href={seo.canonical} />
@@ -248,8 +250,8 @@ export default function Home() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 {/* MODIFICATION UNIQUE ICI : Ajout du aria-label pour Google */}
-                <Button variant="ghost" size="icon" aria-label="Changer la langue / Change Language">
-                  <Globe className="h-4 w-4" />
+                <Button variant="ghost" size="icon" className="h-11 w-11" aria-label="Changer la langue / Change Language">
+                  <Globe className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -257,20 +259,50 @@ export default function Home() {
                 <DropdownMenuItem onClick={() => changeLanguage('en')}>🇺🇸 English</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            
+
             {!isPro() && (
               <LocaleLink to="/pricing" aria-label={t("header.upgrade")}>
                 <Button
                   variant="outline"
                   size="sm"
-                  className="border-ghost-green/30 text-ghost-green hover:bg-ghost-green/10 font-bold h-8 hidden sm:flex"
+                  className="border-ghost-green/30 text-ghost-green hover:bg-ghost-green/10 font-bold h-11 px-3 hidden sm:flex"
                 >
                   <Zap className="w-3.5 h-3.5 mr-1" /> {t("header.upgrade")}
                 </Button>
               </LocaleLink>
             )}
-            
+
             <AuthButton />
+
+            {/* Menu mobile (hamburger → drawer) */}
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-11 w-11 md:hidden"
+                  aria-label="Menu"
+                >
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="bg-ghost-dark border-white/10 w-64">
+                <SheetHeader>
+                  <SheetTitle className="flex items-center gap-2">
+                    <GhostLogo size={24} />
+                    <span className="font-bold">
+                      Ghost<span className="text-ghost-green">Meta</span>
+                    </span>
+                  </SheetTitle>
+                </SheetHeader>
+                <nav className="flex flex-col gap-4 px-4 mt-4">
+                  <LocaleLink to="/blog" onClick={() => setMobileMenuOpen(false)} className="text-sm text-zinc-400 hover:text-white transition-colors">{t('nav.blog')}</LocaleLink>
+                  <LocaleLink to="/tools" onClick={() => setMobileMenuOpen(false)} className="text-sm text-zinc-400 hover:text-white transition-colors">{t('nav.tools')}</LocaleLink>
+                  <LocaleLink to="/securite" onClick={() => setMobileMenuOpen(false)} className="text-sm text-zinc-400 hover:text-white transition-colors">{t('nav.security')}</LocaleLink>
+                  <LocaleLink to="/pricing" onClick={() => setMobileMenuOpen(false)} className="text-sm text-zinc-400 hover:text-white transition-colors">{t('nav.pricing')}</LocaleLink>
+                </nav>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </header>
@@ -343,7 +375,7 @@ export default function Home() {
         <section className="container py-12">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-4xl mx-auto p-8 rounded-xl border border-[#ffb000]/20 bg-[#ffb000]/5 relative overflow-hidden">
             <div className="absolute inset-0 z-0">
-               <img src={HERO_BG} width="1920" height="1080" alt="GhostMeta Secure Interface Background" className="w-full h-full object-cover opacity-20 mix-blend-overlay" />
+               <img src={HERO_BG} width="1920" height="1080" loading="lazy" decoding="async" alt="GhostMeta Secure Interface Background" className="w-full h-full object-cover opacity-20 mix-blend-overlay" />
             </div>
             <div className="absolute top-0 left-0 w-20 h-20 border-t border-l border-[#ffb000]/30 rounded-tl-3xl z-10"></div>
             <div className="absolute bottom-0 right-0 w-20 h-20 border-b border-r border-[#ffb000]/30 rounded-br-3xl z-10"></div>
@@ -371,7 +403,7 @@ export default function Home() {
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8">{t('info.why_desc')}</p>
             
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-3xl mx-auto mb-12 rounded-xl overflow-hidden border border-white/10 shadow-2xl bg-black">
-              <img src={SCAN_EFFECT} width="1200" height="800" alt="Scan Analysis" className="w-full h-auto object-cover opacity-90" />
+              <img src={SCAN_EFFECT} width="1200" height="800" loading="lazy" decoding="async" alt="Scan Analysis" className="w-full h-auto object-cover opacity-90" />
             </motion.div>
           </div>
 
@@ -424,7 +456,7 @@ export default function Home() {
 
             {/* Colonne Verte (GhostMeta) */}
             <div className="relative border border-ghost-green/20 bg-ghost-green/5 p-8 rounded-xl h-full overflow-hidden">
-              <img src={SHIELD_IMG} width="320" height="320" className="absolute -right-16 -bottom-16 w-80 h-80 opacity-10 pointer-events-none z-0 object-contain" alt="GhostMeta Technical Analysis View" />
+              <img src={SHIELD_IMG} width="320" height="320" loading="lazy" decoding="async" className="absolute -right-16 -bottom-16 w-80 h-80 opacity-10 pointer-events-none z-0 object-contain" alt="GhostMeta Technical Analysis View" />
               
               <div className="relative z-10">
                 <h3 className="text-ghost-green font-bold mb-6 flex items-center gap-2 text-lg">
@@ -467,7 +499,7 @@ export default function Home() {
           
           <div className="flex justify-center mt-10">
             <button onClick={handleDonation} className="hover:opacity-80 transition-opacity cursor-pointer">
-              <img src="/chat-chill.png" alt="Soutenir GhostMeta" className="w-48 h-auto" />
+              <img src="/chat-chill.png" loading="lazy" decoding="async" alt="Soutenir GhostMeta" className="w-48 h-auto" />
             </button>
           </div>
         </section>
