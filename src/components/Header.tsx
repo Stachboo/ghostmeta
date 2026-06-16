@@ -29,7 +29,7 @@ import GhostLogo from '@/components/GhostLogo';
 
 const NAV_LINKS = [
   { key: 'home', to: '/' },
-  { key: 'blog', to: '/#blog' },
+  { key: 'blog', to: '/blog' },
   { key: 'security', to: '/securite' },
   { key: 'pricing', to: '/pricing' },
 ] as const;
@@ -46,7 +46,7 @@ export default function Header() {
 
   const isActive = (to: string) => {
     if (to === '/') return pathname === '/';
-    return pathname.startsWith(to.replace('/#blog', ''));
+    return pathname.startsWith(to);
   };
 
   return (

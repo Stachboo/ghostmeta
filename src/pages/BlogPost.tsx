@@ -159,7 +159,7 @@ export default function BlogPost() {
       <Header />
       <Breadcrumb
         items={[
-          { label: t('breadcrumb.blog'), to: '/#blog' },
+          { label: t('breadcrumb.blog'), to: '/blog' },
           { label: postTitle },
         ]}
       />

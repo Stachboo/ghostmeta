@@ -9,10 +9,14 @@ import { Link } from 'react-router-dom';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import GhostLogo from './GhostLogo';
 import { useTranslation } from 'react-i18next';
+import landingsData from '@/data/landings.json';
 
+type FooterTool = { slug: string; en: { h1: string }; fr: { h1: string } };
+const TOOLS = landingsData as unknown as FooterTool[];
 
 export default function Footer() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang: 'en' | 'fr' = i18n.language === 'en' ? 'en' : 'fr';
   const [showLegal, setShowLegal] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
 
@@ -33,7 +37,7 @@ export default function Footer() {
           </p>
 
           {/* Grille de liens */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-8 mb-8">
             {/* Colonne 1 — Navigation */}
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-white/60 mb-3">
@@ -64,11 +68,13 @@ export default function Footer() {
             </div>
 
             {/* Colonne 2 — Blog */}
-            <div className="sm:col-span-2">
+            <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-white/60 mb-3">
-                {t('blog.section_title')}
+                <Link to="/blog" className="hover:text-ghost-green transition-colors">
+                  {t('blog.section_title')}
+                </Link>
               </h4>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-muted-foreground">
+              <ul className="space-y-2 text-xs text-muted-foreground">
                 {[
                   'vinted-securite-photo-guide',
                   'supprimer-exif-iphone-android',
@@ -82,6 +88,33 @@ export default function Footer() {
                       className="hover:text-ghost-green transition-colors"
                     >
                       {t(`blog.posts.${slug}.title`)}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    to="/blog"
+                    className="text-ghost-green/80 hover:text-ghost-green transition-colors"
+                  >
+                    {t('footer.blog_index')} →
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Colonne 3 — Outils IA (maillage SEO des landings /tools) */}
+            <div className="sm:col-span-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-white/60 mb-3">
+                {t('footer.tools_title')}
+              </h4>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-muted-foreground">
+                {TOOLS.map(tool => (
+                  <li key={tool.slug}>
+                    <Link
+                      to={`/tools/${tool.slug}`}
+                      className="hover:text-ghost-green transition-colors"
+                    >
+                      {tool[lang].h1}
                     </Link>
                   </li>
                 ))}
