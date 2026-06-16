@@ -30,6 +30,7 @@ import GhostLogo from '@/components/GhostLogo';
 const NAV_LINKS = [
   { key: 'home', to: '/' },
   { key: 'blog', to: '/blog' },
+  { key: 'tools', to: '/tools' },
   { key: 'security', to: '/securite' },
   { key: 'pricing', to: '/pricing' },
 ] as const;

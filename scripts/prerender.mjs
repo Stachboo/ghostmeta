@@ -265,6 +265,47 @@ try {
   log('/securite', 'dist/securite/index.html'); ok++;
 } catch(e) { err('/securite', e); }
 
+// ── /tools (index hub) ─────────────────────────────────────────────────────────
+// Maille les 13 landings via de vrais <a href> visibles aux crawlers sans JS
+// (corrige les pages orphelines détectées dans l'audit SEO 2026-06-16).
+try {
+  const toolsIndexBody = [
+    `<h1>Outils confidentialité image IA — Strip C2PA, métadonnées &amp; watermarks</h1>`,
+    `<p>13 outils gratuits en navigateur pour retirer les Content Credentials C2PA, l'EXIF/GPS et les empreintes IA des images générées par Sora, Midjourney, DALL-E, ChatGPT, Firefly, Flux et plus. Sans upload.</p>`,
+    ...LANDINGS.map(l =>
+      `<h2><a href="/tools/${l.slug}">${escHtml(l.fr.h1)}</a></h2><p>${escHtml(l.fr.description)}</p>`
+    ),
+  ].join('\n');
+
+  saveHtml('dist/tools/index.html', buildHtml({
+    title:       'Outils confidentialité image IA — Strip C2PA, métadonnées & watermarks | GhostMeta',
+    description: "13 outils gratuits en navigateur pour retirer les Content Credentials C2PA, l'EXIF/GPS et les empreintes IA de Sora, Midjourney, DALL-E, ChatGPT, Firefly, Flux et plus. Sans upload.",
+    canonical:   'https://www.ghostmeta.online/tools',
+    hreflangEn:  'https://www.ghostmeta.online/tools?lng=en',
+    bodyContent: toolsIndexBody,
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      '@id': 'https://www.ghostmeta.online/tools',
+      url: 'https://www.ghostmeta.online/tools',
+      name: 'Outils confidentialité image IA',
+      description: '13 outils en navigateur pour retirer C2PA, EXIF/GPS et empreintes IA.',
+      inLanguage: 'fr',
+      isPartOf: { '@id': 'https://www.ghostmeta.online/#website' },
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: LANDINGS.map((l, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: l.fr.h1,
+          url: `https://www.ghostmeta.online/tools/${l.slug}`,
+        })),
+      },
+    },
+  }));
+  log('/tools', 'dist/tools/index.html'); ok++;
+} catch(e) { err('/tools', e); }
+
 // ── /tools/:slug ──────────────────────────────────────────────────────────────
 for (const landing of LANDINGS) {
   try {
@@ -311,6 +352,7 @@ try {
     { loc: `${ORIGIN}/pricing`,  changefreq: 'monthly', priority: '0.7' },
     { loc: `${ORIGIN}/securite`, changefreq: 'monthly', priority: '0.8' },
     { loc: `${ORIGIN}/blog`,     changefreq: 'weekly',  priority: '0.7' },
+    { loc: `${ORIGIN}/tools`,    changefreq: 'weekly',  priority: '0.8' },
     ...SLUGS.map(slug => ({
       loc: `${ORIGIN}/blog/${slug}`,
       changefreq: 'weekly',

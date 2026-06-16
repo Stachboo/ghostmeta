@@ -119,7 +119,7 @@ export default function ToolLanding() {
       </Helmet>
 
       <Header />
-      <Breadcrumb items={[{ label: lang === 'en' ? 'Tools' : 'Outils' }, { label: c.h1 }]} />
+      <Breadcrumb items={[{ label: lang === 'en' ? 'Tools' : 'Outils', to: '/tools' }, { label: c.h1 }]} />
 
       <main className="flex-1">
         <section className="container max-w-4xl py-12 md:py-16">

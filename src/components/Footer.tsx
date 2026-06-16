@@ -105,7 +105,9 @@ export default function Footer() {
             {/* Colonne 3 — Outils IA (maillage SEO des landings /tools) */}
             <div className="sm:col-span-2">
               <h4 className="text-xs font-bold uppercase tracking-wider text-white/60 mb-3">
-                {t('footer.tools_title')}
+                <Link to="/tools" className="hover:text-ghost-green transition-colors">
+                  {t('footer.tools_title')}
+                </Link>
               </h4>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-muted-foreground">
                 {TOOLS.map(tool => (
