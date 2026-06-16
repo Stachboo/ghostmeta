@@ -232,6 +232,13 @@ export default function Home() {
             <GhostLogo size={32} glow />
             <span className="text-lg font-bold tracking-tight">Ghost<span className="text-ghost-green">Meta</span></span>
           </div>
+          {/* Navigation desktop (mobile : menu dans le footer) */}
+          <nav className="hidden md:flex items-center gap-5 text-sm">
+            <Link to="/blog" className="text-zinc-400 hover:text-white transition-colors">{t('nav.blog')}</Link>
+            <Link to="/tools" className="text-zinc-400 hover:text-white transition-colors">{t('nav.tools')}</Link>
+            <Link to="/securite" className="text-zinc-400 hover:text-white transition-colors">{t('nav.security')}</Link>
+            <Link to="/pricing" className="text-zinc-400 hover:text-white transition-colors">{t('nav.pricing')}</Link>
+          </nav>
           <div className="flex items-center gap-3">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
