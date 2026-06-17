@@ -7,24 +7,66 @@
       "title": "Remove AI Watermark from Image — Free, In-Browser",
       "description": "Strip C2PA watermarks, generator signatures and metadata from any AI image (Sora, Midjourney, DALL-E, ChatGPT). 100% browser, zero upload.",
       "h1": "Remove AI watermarks from any image",
-      "intro": "Every major AI image generator now embeds a Content Credentials (C2PA) manifest, an XMP block, or a JUMBF box that announces the image was AI-generated and identifies the model. GhostMeta strips all of that in your browser — the file never leaves your device. Drop a JPEG or PNG, see exactly which AI fingerprint was found, then download a clean copy.",
+      "intro": "Every major AI image generator now embeds a Content Credentials (C2PA) manifest, an XMP block, or a JUMBF box that announces the image was AI-generated and identifies the model. GhostMeta strips all of that in your browser — the file never leaves your device. Drop a JPEG or PNG, see exactly which AI fingerprint was found, then download a clean copy. Where the fingerprint actually lives depends on the format: in a JPEG it rides inside an APP11 marker segment, while in a PNG the same C2PA manifest is wrapped in a caBX chunk, and any prompt or model string sits in separate tEXt or iTXt chunks. GhostMeta reads every container in one pass, so a mixed batch of JPEGs and PNGs from different tools all come out neutral without you having to know which generator made which file. The practical payoff is concrete: marketplaces and stock platforms that auto-scan for a C2PA claim_generator can demote or reject an AI-flagged listing, and clearing that single metadata layer removes the signal those scanners key on.",
       "wedge": "ai watermark remover",
       "faq": [
-        { "q": "Which AI generators are detected?", "a": "Sora, ChatGPT (GPT-4o image), DALL-E 3, Midjourney v5/v6, Adobe Firefly, Stable Diffusion, Flux, Leonardo.AI, Runway and Google Imagen are recognised. Any image carrying a C2PA/JUMBF manifest is flagged even if the generator string is unknown." },
-        { "q": "Is the watermark visually removed?", "a": "GhostMeta removes the technical metadata (C2PA Content Credentials, EXIF, XMP, JUMBF). It does not erase visible burn-in watermarks pixel-for-pixel. For visible watermarks an image editor is needed." },
-        { "q": "Does the file leave my browser?", "a": "No. The image is decoded to canvas and re-encoded locally via the Canvas API. No upload, no telemetry, no log." }
+        {
+          "q": "Which AI generators are detected?",
+          "a": "Sora, ChatGPT (GPT-4o image), DALL-E 3, Midjourney v5/v6, Adobe Firefly, Stable Diffusion, Flux, Leonardo.AI, Runway and Google Imagen are recognised. Any image carrying a C2PA/JUMBF manifest is flagged even if the generator string is unknown."
+        },
+        {
+          "q": "Is the watermark visually removed?",
+          "a": "GhostMeta removes the technical metadata (C2PA Content Credentials, EXIF, XMP, JUMBF). It does not erase visible burn-in watermarks pixel-for-pixel. For visible watermarks an image editor is needed."
+        },
+        {
+          "q": "Does the file leave my browser?",
+          "a": "No. The image is decoded to canvas and re-encoded locally via the Canvas API. No upload, no telemetry, no log."
+        },
+        {
+          "q": "If I don't know which AI made the image, will GhostMeta still clean it?",
+          "a": "Yes. GhostMeta does not rely on you naming the generator. It inspects the actual byte structure — the JPEG APP11 segment, the PNG caBX chunk, the JUMBF box nesting, and any tEXt/iTXt or XMP block — and strips whatever provenance it finds. An unrecognised generator string still gets removed as long as the manifest sits in one of these standard containers."
+        },
+        {
+          "q": "After stripping, what metadata is left in the file?",
+          "a": "Effectively none of the original provenance. Because the image is decoded to a canvas and re-encoded from raw pixels, the output is a fresh file built only from the visible image data — no C2PA manifest, no EXIF, no XMP, no PNG text chunks carry over. The only fields present are the minimal ones the browser's encoder writes for a valid JPEG or PNG."
+        },
+        {
+          "q": "Does the cleaned image keep its original resolution and aspect ratio?",
+          "a": "Yes, up to a 4096px cap on the longest side, which prevents memory crashes on mobile. Below that limit the pixel dimensions and aspect ratio are preserved exactly; only the metadata layers are dropped. Note that re-encoding a JPEG applies one more lossy compression pass, so for archival-grade work start from a PNG."
+        }
       ]
     },
     "fr": {
       "title": "Supprimer les watermarks IA d'une image — gratuit, navigateur",
       "description": "Strip C2PA, signatures de modèle et métadonnées de toute image IA (Sora, Midjourney, DALL-E, ChatGPT). 100% navigateur, zéro upload.",
       "h1": "Supprimer les watermarks IA de toute image",
-      "intro": "Chaque générateur IA moderne embarque désormais un manifest C2PA Content Credentials, un bloc XMP ou une box JUMBF qui annonce que l'image a été générée par IA et identifie le modèle. GhostMeta retire tout ça dans votre navigateur — le fichier ne quitte jamais votre appareil. Déposez un JPEG ou un PNG, visualisez l'empreinte IA détectée, puis téléchargez une copie propre.",
+      "intro": "Chaque générateur IA moderne embarque désormais un manifest C2PA Content Credentials, un bloc XMP ou une box JUMBF qui annonce que l'image a été générée par IA et identifie le modèle. GhostMeta retire tout ça dans votre navigateur — le fichier ne quitte jamais votre appareil. Déposez un JPEG ou un PNG, visualisez l'empreinte IA détectée, puis téléchargez une copie propre. L'empreinte ne se loge pas au même endroit selon le format : dans un JPEG elle voyage dans un segment marqueur APP11, alors que dans un PNG le même manifest C2PA est encapsulé dans un chunk caBX, et tout prompt ou nom de modèle réside dans des chunks tEXt ou iTXt distincts. GhostMeta lit chaque conteneur en une passe : un lot mélangeant des JPEG et des PNG issus d'outils différents ressort entièrement neutre sans que vous ayez à deviner quel générateur a produit quel fichier. Le bénéfice est concret : les marketplaces et banques d'images qui scannent automatiquement un claim_generator C2PA peuvent rétrograder ou rejeter une annonce taguée IA, et effacer cette seule couche de métadonnées retire le signal sur lequel ces scanners s'appuient.",
       "wedge": "supprimer watermark IA",
       "faq": [
-        { "q": "Quels générateurs IA sont détectés ?", "a": "Sora, ChatGPT (GPT-4o image), DALL-E 3, Midjourney v5/v6, Adobe Firefly, Stable Diffusion, Flux, Leonardo.AI, Runway et Google Imagen sont reconnus. Toute image contenant un manifest C2PA/JUMBF est flaggée même si le générateur est inconnu." },
-        { "q": "Le watermark visible est-il retiré ?", "a": "GhostMeta supprime les métadonnées techniques (C2PA Content Credentials, EXIF, XMP, JUMBF). Il n'efface pas les watermarks pixel-incrustés. Pour ceux-là un éditeur d'image est nécessaire." },
-        { "q": "Le fichier quitte-t-il mon navigateur ?", "a": "Non. L'image est décodée puis ré-encodée localement via Canvas API. Aucun upload, aucune télémétrie, aucun log." }
+        {
+          "q": "Quels générateurs IA sont détectés ?",
+          "a": "Sora, ChatGPT (GPT-4o image), DALL-E 3, Midjourney v5/v6, Adobe Firefly, Stable Diffusion, Flux, Leonardo.AI, Runway et Google Imagen sont reconnus. Toute image contenant un manifest C2PA/JUMBF est flaggée même si le générateur est inconnu."
+        },
+        {
+          "q": "Le watermark visible est-il retiré ?",
+          "a": "GhostMeta supprime les métadonnées techniques (C2PA Content Credentials, EXIF, XMP, JUMBF). Il n'efface pas les watermarks pixel-incrustés. Pour ceux-là un éditeur d'image est nécessaire."
+        },
+        {
+          "q": "Le fichier quitte-t-il mon navigateur ?",
+          "a": "Non. L'image est décodée puis ré-encodée localement via Canvas API. Aucun upload, aucune télémétrie, aucun log."
+        },
+        {
+          "q": "Si je ne sais pas quelle IA a produit l'image, GhostMeta la nettoie-t-il quand même ?",
+          "a": "Oui. GhostMeta ne dépend pas du fait que vous nommiez le générateur. Il inspecte la structure réelle des octets — le segment APP11 du JPEG, le chunk caBX du PNG, l'imbrication des box JUMBF, et tout bloc tEXt/iTXt ou XMP — et retire toute provenance trouvée. Une chaîne de générateur non reconnue est tout de même supprimée tant que le manifest réside dans l'un de ces conteneurs standard."
+        },
+        {
+          "q": "Après le strip, quelles métadonnées restent dans le fichier ?",
+          "a": "En pratique, plus aucune de la provenance d'origine. Comme l'image est décodée sur un canvas puis ré-encodée à partir des pixels bruts, la sortie est un fichier neuf construit uniquement depuis les données visibles — aucun manifest C2PA, aucun EXIF, aucun XMP, aucun chunk text PNG n'est repris. Seuls subsistent les champs minimaux que l'encodeur du navigateur écrit pour un JPEG ou PNG valide."
+        },
+        {
+          "q": "L'image nettoyée garde-t-elle sa résolution et son ratio d'origine ?",
+          "a": "Oui, jusqu'à une limite de 4096px sur le plus grand côté, qui évite les plantages mémoire sur mobile. En dessous de cette limite, les dimensions en pixels et le ratio sont préservés à l'identique ; seules les couches de métadonnées sont retirées. À noter : ré-encoder un JPEG applique une passe de compression avec perte supplémentaire, donc pour un travail de qualité archivage partez d'un PNG."
+        }
       ]
     }
   },
@@ -36,24 +78,66 @@
       "title": "Remove Sora C2PA Content Credentials from Images",
       "description": "OpenAI Sora embeds C2PA manifests in every output frame. GhostMeta strips them in your browser before you publish. Free, no upload, no signup.",
       "h1": "Remove Sora C2PA Content Credentials",
-      "intro": "OpenAI Sora attaches a C2PA Content Credentials manifest to every video frame and still image it produces. The manifest contains the claim_generator string, signing certificate, and assertions linking the output to your OpenAI account. Once you share a Sora frame on social or in a client deck, that manifest goes with it — anyone with a free C2PA viewer can read it. GhostMeta detects the Sora signature in the JPEG APP11 segment, shows you what's there, then strips it via canvas re-encode.",
+      "intro": "OpenAI Sora attaches a C2PA Content Credentials manifest to every video frame and still image it produces. The manifest contains the claim_generator string, signing certificate, and assertions linking the output to your OpenAI account. Once you share a Sora frame on social or in a client deck, that manifest goes with it — anyone with a free C2PA viewer can read it. GhostMeta detects the Sora signature in the JPEG APP11 segment, shows you what's there, then strips it via canvas re-encode. Inside a Sora JPEG, the manifest lives in one or more APP11 segments that reassemble into a single JUMBF superbox: a c2pa claim box, a hard-binding hash assertion bound to the pixel data, and a signature box holding a certificate-chain (COSE) signature. Because the binding is a hash, even a light crop or filter applied later leaves a broken-but-still-present manifest that a viewer flags as tampered rather than absent — which can look worse than an untouched credential. Stock libraries and ad networks that scan uploads on ingest increasingly read this box and either label the asset, push it to manual review, or reject it outright, so a single un-stripped Sora frame can stall an entire batch submission.",
       "wedge": "remove sora c2pa",
       "faq": [
-        { "q": "Does Sora embed identifiable info?", "a": "Sora's C2PA manifest carries a claim_generator string, the signing certificate chain, and timestamped assertions. It does not embed your raw OpenAI email by default, but the chain ties the output to OpenAI as the producer." },
-        { "q": "Will Sora videos still play after stripping?", "a": "Yes. The C2PA manifest sits in metadata containers — its removal does not affect the H.264/H.265 stream. For video frames exported as stills, GhostMeta handles the JPEG normally." },
-        { "q": "Can I still verify the image is real after stripping?", "a": "No — that is the point. C2PA is a provenance chain. Once stripped, no third-party tool can prove the image came from Sora. Only strip when you control the publishing context." }
+        {
+          "q": "Does Sora embed identifiable info?",
+          "a": "Sora's C2PA manifest carries a claim_generator string, the signing certificate chain, and timestamped assertions. It does not embed your raw OpenAI email by default, but the chain ties the output to OpenAI as the producer."
+        },
+        {
+          "q": "Will Sora videos still play after stripping?",
+          "a": "Yes. The C2PA manifest sits in metadata containers — its removal does not affect the H.264/H.265 stream. For video frames exported as stills, GhostMeta handles the JPEG normally."
+        },
+        {
+          "q": "Can I still verify the image is real after stripping?",
+          "a": "No — that is the point. C2PA is a provenance chain. Once stripped, no third-party tool can prove the image came from Sora. Only strip when you control the publishing context."
+        },
+        {
+          "q": "Where exactly does Sora store the C2PA data in a JPEG frame?",
+          "a": "It sits in the APP11 marker segments, not APP1 (which holds EXIF/XMP). C2PA splits a manifest larger than 64KB across several APP11 segments that a reader concatenates into one JUMBF box, identified by the 'JP' marker and a box-instance number. GhostMeta walks the JPEG segment list, recognises every APP11 fragment as part of the Sora manifest, and drops them all on canvas re-encode so no partial box survives."
+        },
+        {
+          "q": "If I crop a Sora frame in a normal editor, is the credential gone?",
+          "a": "No. A basic crop only changes the pixels; the APP11 manifest is copied through by most editors untouched. Worse, the hard-binding hash no longer matches the new pixels, so a C2PA viewer reports the asset as modified rather than clean. To actually clear it you need to remove the JUMBF box, which is what GhostMeta does by re-encoding from a bare canvas with no metadata carried over."
+        },
+        {
+          "q": "Does stripping a single exported Sora still also remove its 'soft binding'?",
+          "a": "GhostMeta removes everything stored in the file: the APP11/JUMBF manifest, plus any EXIF, XMP or IPTC. What it cannot remove is a soft binding — a fingerprint Sora may compute from the pixels and register server-side — because that is not data inside your file and would survive re-encoding. For metadata-based provenance, though, a re-encoded frame carries no readable C2PA at all."
+        }
       ]
     },
     "fr": {
       "title": "Supprimer les Content Credentials C2PA de Sora",
       "description": "OpenAI Sora embarque un manifest C2PA dans chaque image et frame vidéo. GhostMeta le retire dans votre navigateur avant publication. Gratuit, sans upload.",
       "h1": "Supprimer les Content Credentials C2PA de Sora",
-      "intro": "OpenAI Sora attache un manifest C2PA Content Credentials à chaque image fixe et frame vidéo qu'il produit. Ce manifest contient la chaîne claim_generator, le certificat de signature et des assertions horodatées qui relient la sortie à votre compte OpenAI. Dès que vous partagez une frame Sora sur les réseaux ou dans un dossier client, le manifest part avec — n'importe quel viewer C2PA gratuit peut le lire. GhostMeta détecte la signature Sora dans le segment APP11 du JPEG, vous montre le contenu, puis le retire via re-encodage canvas.",
+      "intro": "OpenAI Sora attache un manifest C2PA Content Credentials à chaque image fixe et frame vidéo qu'il produit. Ce manifest contient la chaîne claim_generator, le certificat de signature et des assertions horodatées qui relient la sortie à votre compte OpenAI. Dès que vous partagez une frame Sora sur les réseaux ou dans un dossier client, le manifest part avec — n'importe quel viewer C2PA gratuit peut le lire. GhostMeta détecte la signature Sora dans le segment APP11 du JPEG, vous montre le contenu, puis le retire via re-encodage canvas. Dans un JPEG Sora, le manifest est réparti sur un ou plusieurs segments APP11 qui se recomposent en une seule superbox JUMBF : une box claim c2pa, une assertion de hash en hard binding liée aux pixels et une box de signature portant une signature COSE adossée à une chaîne de certificats. Comme le lien est un hash, un simple recadrage ou filtre appliqué plus tard laisse un manifest cassé mais toujours présent, qu'un viewer signale comme « altéré » plutôt qu'absent — ce qui peut paraître plus louche qu'un credential intact. Les banques d'images et régies publicitaires qui scannent les fichiers à l'ingestion lisent de plus en plus cette box et finissent par labelliser l'asset, le basculer en revue manuelle ou le rejeter, si bien qu'une seule frame Sora non nettoyée peut bloquer toute une soumission groupée.",
       "wedge": "supprimer c2pa sora",
       "faq": [
-        { "q": "Sora embarque-t-il des infos identifiantes ?", "a": "Le manifest C2PA de Sora contient la chaîne claim_generator, la chaîne de certificats de signature et des assertions horodatées. Il n'embarque pas votre email OpenAI par défaut, mais la chaîne relie la sortie à OpenAI comme producteur." },
-        { "q": "Les vidéos Sora restent-elles lisibles après strip ?", "a": "Oui. Le manifest C2PA est stocké dans des conteneurs metadata — sa suppression n'affecte pas le stream H.264/H.265. Pour les frames extraites en stills, GhostMeta traite le JPEG normalement." },
-        { "q": "Peut-on encore prouver l'image vient de Sora après strip ?", "a": "Non — c'est l'objectif. Le C2PA est une chaîne de provenance. Une fois retiré, aucun outil tiers ne peut prouver que l'image vient de Sora. Ne strip que si vous contrôlez le contexte de publication." }
+        {
+          "q": "Sora embarque-t-il des infos identifiantes ?",
+          "a": "Le manifest C2PA de Sora contient la chaîne claim_generator, la chaîne de certificats de signature et des assertions horodatées. Il n'embarque pas votre email OpenAI par défaut, mais la chaîne relie la sortie à OpenAI comme producteur."
+        },
+        {
+          "q": "Les vidéos Sora restent-elles lisibles après strip ?",
+          "a": "Oui. Le manifest C2PA est stocké dans des conteneurs metadata — sa suppression n'affecte pas le stream H.264/H.265. Pour les frames extraites en stills, GhostMeta traite le JPEG normalement."
+        },
+        {
+          "q": "Peut-on encore prouver l'image vient de Sora après strip ?",
+          "a": "Non — c'est l'objectif. Le C2PA est une chaîne de provenance. Une fois retiré, aucun outil tiers ne peut prouver que l'image vient de Sora. Ne strip que si vous contrôlez le contexte de publication."
+        },
+        {
+          "q": "Où Sora stocke-t-il exactement les données C2PA dans une frame JPEG ?",
+          "a": "Elles se trouvent dans les segments marqueur APP11, pas APP1 (qui porte l'EXIF/XMP). Le C2PA répartit un manifest de plus de 64 Ko sur plusieurs segments APP11 qu'un lecteur recompose en une seule box JUMBF, identifiée par le marqueur « JP » et un numéro d'instance. GhostMeta parcourt la liste des segments JPEG, reconnaît chaque fragment APP11 comme partie du manifest Sora et les supprime tous au re-encodage canvas, sans laisser de box partielle."
+        },
+        {
+          "q": "Si je recadre une frame Sora dans un éditeur classique, le credential disparaît-il ?",
+          "a": "Non. Un recadrage simple ne change que les pixels ; le manifest APP11 est recopié tel quel par la plupart des éditeurs. Pire, le hash de hard binding ne correspond plus aux nouveaux pixels, donc un viewer C2PA signale l'asset comme « modifié » plutôt que propre. Pour vraiment l'effacer il faut retirer la box JUMBF, ce que fait GhostMeta en ré-encodant depuis un canvas nu sans aucune métadonnée reportée."
+        },
+        {
+          "q": "Nettoyer une seule frame Sora exportée retire-t-il aussi son « soft binding » ?",
+          "a": "GhostMeta retire tout ce qui est stocké dans le fichier : le manifest APP11/JUMBF, plus tout EXIF, XMP ou IPTC. Ce qu'il ne peut pas retirer, c'est un soft binding — une empreinte que Sora peut calculer à partir des pixels et enregistrer côté serveur — car ce n'est pas une donnée présente dans votre fichier et elle survivrait au re-encodage. Pour la provenance basée sur les métadonnées, en revanche, une frame ré-encodée ne porte plus aucun C2PA lisible."
+        }
       ]
     }
   },
@@ -65,24 +149,66 @@
       "title": "Remove Midjourney Metadata from PNG Images",
       "description": "Midjourney embeds prompt text, job ID, and version in PNG metadata. GhostMeta strips it all in-browser — no upload, no signup, instant.",
       "h1": "Remove Midjourney metadata from PNG",
-      "intro": "Midjourney saves your prompt, job_id, version (v6, v6.1, niji), and Discord user reference inside the PNG tEXt and iTXt chunks of every download. If you forward that file to a client or upload it to a stock platform, those fields are exposed. GhostMeta scans the PNG chunk list, surfaces what's there, and re-encodes via canvas — the resulting file has zero text chunks and a clean caBX boundary if Midjourney enabled C2PA on your tier.",
+      "intro": "Midjourney saves your prompt, job_id, version (v6, v6.1, niji), and Discord user reference inside the PNG tEXt and iTXt chunks of every download. If you forward that file to a client or upload it to a stock platform, those fields are exposed. GhostMeta scans the PNG chunk list, surfaces what's there, and re-encodes via canvas — the resulting file has zero text chunks and a clean caBX boundary if Midjourney enabled C2PA on your tier. Because the parameters chunk records your exact flags — --ar, --stylize, --chaos, --weird, and crucially the --seed plus any --sref / --cref reference codes — anyone reading the PNG can re-roll a near-identical generation and trace the style or character references you reused across a series. Upscales and variations carry the same tEXt and iTXt chunks as the original grid download, so cleaning one frame does not clean the rest. GhostMeta decodes the PNG to a canvas and re-encodes it locally, dropping every text chunk and the caBX C2PA box in one pass, with nothing ever sent to a server.",
       "wedge": "remove midjourney metadata",
       "faq": [
-        { "q": "What does Midjourney embed in PNG?", "a": "tEXt or iTXt chunks named Description, parameters, prompt and Software, plus optional XMP, plus a caBX C2PA chunk on Pro/Mega tiers. Job ID and version are usually present." },
-        { "q": "Will the prompt come back after editing?", "a": "If you re-export through Midjourney's web app the metadata is re-attached. To stay clean, run GhostMeta as the LAST step before sharing." },
-        { "q": "Does Midjourney embed Discord identity?", "a": "Older versions wrote your Discord ID into the user_id field. Recent versions hash or omit it, but treat any tEXt block as suspect." }
+        {
+          "q": "What does Midjourney embed in PNG?",
+          "a": "tEXt or iTXt chunks named Description, parameters, prompt and Software, plus optional XMP, plus a caBX C2PA chunk on Pro/Mega tiers. Job ID and version are usually present."
+        },
+        {
+          "q": "Will the prompt come back after editing?",
+          "a": "If you re-export through Midjourney's web app the metadata is re-attached. To stay clean, run GhostMeta as the LAST step before sharing."
+        },
+        {
+          "q": "Does Midjourney embed Discord identity?",
+          "a": "Older versions wrote your Discord ID into the user_id field. Recent versions hash or omit it, but treat any tEXt block as suspect."
+        },
+        {
+          "q": "Can someone reproduce my image from the metadata?",
+          "a": "Partially. The parameters tEXt chunk often stores the seed alongside --sref and --cref reference codes. With those values plus the prompt, another Midjourney user can re-roll a near-identical generation or lift your style references — Midjourney is not pixel-for-pixel deterministic, but the result is close. Stripping the chunk removes that reproducibility leak; only the visible pixels remain."
+        },
+        {
+          "q": "Do upscaled and variation downloads need stripping too?",
+          "a": "Yes. When you upscale a tile or request variations, Midjourney writes fresh tEXt and iTXt chunks into each new PNG — the metadata is not inherited from a single cleaned file. Run GhostMeta on every final asset individually, since one clean frame says nothing about the others in the set."
+        },
+        {
+          "q": "Why do stock and print-on-demand platforms reject Midjourney PNGs?",
+          "a": "Many marketplaces parse the PNG chunk list on upload; a Software or parameters chunk naming Midjourney, or a caBX C2PA box, can trigger an automated AI-content flag or outright rejection. GhostMeta wipes those chunks so the file presents as a neutral PNG. Note this only addresses metadata signals — pixel-based AI detectors are unaffected."
+        }
       ]
     },
     "fr": {
       "title": "Supprimer les métadonnées Midjourney d'un PNG",
       "description": "Midjourney embarque prompt, job ID et version dans les métadonnées PNG. GhostMeta retire tout dans le navigateur — sans upload, sans compte.",
       "h1": "Supprimer les métadonnées Midjourney d'un PNG",
-      "intro": "Midjourney sauvegarde votre prompt, le job_id, la version (v6, v6.1, niji) et une référence à votre utilisateur Discord dans les chunks tEXt et iTXt de chaque PNG téléchargé. Si vous transmettez ce fichier à un client ou l'uploadez sur une plateforme stock, ces champs sont exposés. GhostMeta scanne la liste des chunks PNG, affiche ce qui s'y trouve, puis re-encode via canvas — le fichier résultant a zéro chunk text et un bord caBX propre si Midjourney a activé le C2PA sur votre tier.",
+      "intro": "Midjourney sauvegarde votre prompt, le job_id, la version (v6, v6.1, niji) et une référence à votre utilisateur Discord dans les chunks tEXt et iTXt de chaque PNG téléchargé. Si vous transmettez ce fichier à un client ou l'uploadez sur une plateforme stock, ces champs sont exposés. GhostMeta scanne la liste des chunks PNG, affiche ce qui s'y trouve, puis re-encode via canvas — le fichier résultant a zéro chunk text et un bord caBX propre si Midjourney a activé le C2PA sur votre tier. Le chunk parameters consigne vos flags exacts — --ar, --stylize, --chaos, --weird, et surtout le --seed ainsi que les codes de référence --sref / --cref : quiconque lit le PNG peut re-générer une image quasi identique et retracer les références de style ou de personnage que vous avez réutilisées sur toute une série. Les upscales et les variations embarquent les mêmes chunks tEXt et iTXt que le téléchargement initial de la grille, donc nettoyer une seule frame ne nettoie pas les autres. GhostMeta décode le PNG sur un canvas et le ré-encode localement, supprimant chaque chunk text et la box C2PA caBX en une passe, sans jamais rien envoyer à un serveur.",
       "wedge": "supprimer métadonnées midjourney",
       "faq": [
-        { "q": "Que Midjourney embarque-t-il dans le PNG ?", "a": "Des chunks tEXt ou iTXt nommés Description, parameters, prompt et Software, plus du XMP optionnel, plus un chunk C2PA caBX sur les tiers Pro/Mega. Le job ID et la version sont généralement présents." },
-        { "q": "Le prompt reviendra-t-il après édition ?", "a": "Si vous re-exportez via l'app web Midjourney les métadonnées sont ré-attachées. Pour rester propre, lancez GhostMeta comme DERNIÈRE étape avant partage." },
-        { "q": "Midjourney embarque-t-il l'identité Discord ?", "a": "Les anciennes versions écrivaient votre Discord ID dans user_id. Les versions récentes hashent ou omettent, mais traitez tout bloc tEXt comme suspect." }
+        {
+          "q": "Que Midjourney embarque-t-il dans le PNG ?",
+          "a": "Des chunks tEXt ou iTXt nommés Description, parameters, prompt et Software, plus du XMP optionnel, plus un chunk C2PA caBX sur les tiers Pro/Mega. Le job ID et la version sont généralement présents."
+        },
+        {
+          "q": "Le prompt reviendra-t-il après édition ?",
+          "a": "Si vous re-exportez via l'app web Midjourney les métadonnées sont ré-attachées. Pour rester propre, lancez GhostMeta comme DERNIÈRE étape avant partage."
+        },
+        {
+          "q": "Midjourney embarque-t-il l'identité Discord ?",
+          "a": "Les anciennes versions écrivaient votre Discord ID dans user_id. Les versions récentes hashent ou omettent, mais traitez tout bloc tEXt comme suspect."
+        },
+        {
+          "q": "Peut-on reproduire mon image à partir des métadonnées ?",
+          "a": "En partie. Le chunk tEXt parameters stocke souvent la seed avec les codes de référence --sref et --cref. Avec ces valeurs et le prompt, un autre utilisateur Midjourney peut re-générer une image quasi identique ou récupérer vos références de style — Midjourney n'est pas déterministe au pixel près, mais le résultat est proche. Retirer le chunk supprime cette fuite de reproductibilité ; seuls les pixels visibles subsistent."
+        },
+        {
+          "q": "Les upscales et variations doivent-ils aussi être nettoyés ?",
+          "a": "Oui. Quand vous upscalez une tuile ou demandez des variations, Midjourney écrit de nouveaux chunks tEXt et iTXt dans chaque PNG — les métadonnées ne sont pas héritées d'un fichier déjà nettoyé. Passez GhostMeta sur chaque asset final individuellement, car une frame propre ne garantit rien pour les autres du lot."
+        },
+        {
+          "q": "Pourquoi les plateformes stock et print-on-demand rejettent-elles les PNG Midjourney ?",
+          "a": "Beaucoup de marketplaces analysent la liste des chunks PNG à l'upload ; un chunk Software ou parameters nommant Midjourney, ou une box C2PA caBX, peut déclencher un flag automatique de contenu IA voire un rejet. GhostMeta efface ces chunks pour que le fichier se présente comme un PNG neutre. À noter : cela ne traite que les signaux de métadonnées — les détecteurs IA basés sur les pixels ne sont pas affectés."
+        }
       ]
     }
   },
@@ -94,24 +220,66 @@
       "title": "Clean ChatGPT Image Metadata — GPT-4o, GPT-Image",
       "description": "ChatGPT image outputs (GPT-4o, GPT-Image-1) embed C2PA Content Credentials. Strip them locally before posting, in-browser, no upload.",
       "h1": "Clean ChatGPT image metadata",
-      "intro": "Images produced by ChatGPT (GPT-4o image, GPT-Image-1) carry a C2PA manifest in the PNG caBX chunk announcing OpenAI as the claim_generator. The manifest also contains a signing timestamp and a content_binding hash that uniquely identifies the file. If you publish a ChatGPT image on a marketplace, social post, or thumbnail, that fingerprint becomes a tracking primitive. GhostMeta surfaces the OpenAI signature, then strips it via canvas re-encode.",
+      "intro": "Images produced by ChatGPT (GPT-4o image, GPT-Image-1) carry a C2PA manifest in the PNG caBX chunk announcing OpenAI as the claim_generator. The manifest also contains a signing timestamp and a content_binding hash that uniquely identifies the file. If you publish a ChatGPT image on a marketplace, social post, or thumbnail, that fingerprint becomes a tracking primitive. GhostMeta surfaces the OpenAI signature, then strips it via canvas re-encode. ChatGPT can export the same image as PNG or JPEG, and its pipeline writes the C2PA Content Credentials manifest into whichever container you pick — the PNG caBX chunk or the JPEG APP11 segment. It is the same JUMBF-encoded payload either way, so choosing JPEG over PNG at export time does not clean the file. The manifest also carries an IPTC digitalSourceType assertion set to \"trainedAlgorithmicMedia\", the field a growing number of print-on-demand and stock marketplaces parse to flag AI uploads. GhostMeta wipes the whole manifest layer in one canvas re-encode, whichever format you exported.",
       "wedge": "clean chatgpt image metadata",
       "faq": [
-        { "q": "Does ChatGPT label every image?", "a": "Since 2024-Q3 every image generated through ChatGPT consumer or API includes a C2PA manifest. The label persists across format conversions unless explicitly stripped." },
-        { "q": "Is the user's account leaked?", "a": "The manifest names OpenAI as producer, not the end user. However the signing chain plus the time-of-creation assertion is unique enough to fingerprint a session." },
-        { "q": "Can I screenshot to bypass it?", "a": "A screenshot via the OS does not carry the manifest forward, but loses original quality. GhostMeta keeps the original pixels and only strips metadata." }
+        {
+          "q": "Does ChatGPT label every image?",
+          "a": "Since 2024-Q3 every image generated through ChatGPT consumer or API includes a C2PA manifest. The label persists across format conversions unless explicitly stripped."
+        },
+        {
+          "q": "Is the user's account leaked?",
+          "a": "The manifest names OpenAI as producer, not the end user. However the signing chain plus the time-of-creation assertion is unique enough to fingerprint a session."
+        },
+        {
+          "q": "Can I screenshot to bypass it?",
+          "a": "A screenshot via the OS does not carry the manifest forward, but loses original quality. GhostMeta keeps the original pixels and only strips metadata."
+        },
+        {
+          "q": "Does exporting the ChatGPT image as JPEG instead of PNG remove the C2PA?",
+          "a": "No. ChatGPT's export pipeline writes the same JUMBF-encoded C2PA payload into the JPEG APP11 segment instead of the PNG caBX chunk — the manifest travels intact between containers, so the format choice alone changes nothing. A third-party converter may strip it or keep it depending on the tool, which is unpredictable. GhostMeta reliably drops the box by decoding to canvas and re-encoding without any metadata segment."
+        },
+        {
+          "q": "What is the content_binding hash, and why does removing it matter?",
+          "a": "OpenAI's manifest includes a content_binding assertion: a cryptographic hash computed over the image data at generation time, so two visually identical outputs still carry different bindings. Because it is unique per file, it can in principle be logged and later matched to tie a published image back to a single generation event. GhostMeta strips the entire manifest, that hash included, so nothing in the file links it to its origin."
+        },
+        {
+          "q": "Why do marketplaces reject ChatGPT images that look original?",
+          "a": "A growing number of print-on-demand, stock, and microstock platforms parse the C2PA manifest's IPTC digitalSourceType assertion, which ChatGPT sets to trainedAlgorithmicMedia. An automated intake filter can read that single field and flag, demote, or reject the upload regardless of the pixels. Once GhostMeta strips the caBX/APP11 manifest, that assertion no longer exists in the file."
+        }
       ]
     },
     "fr": {
       "title": "Nettoyer les métadonnées d'image ChatGPT — GPT-4o",
       "description": "Les images ChatGPT (GPT-4o, GPT-Image-1) embarquent un manifest C2PA. Retirez-le localement avant publication, dans le navigateur, sans upload.",
       "h1": "Nettoyer les métadonnées d'image ChatGPT",
-      "intro": "Les images produites par ChatGPT (GPT-4o image, GPT-Image-1) portent un manifest C2PA dans le chunk PNG caBX annonçant OpenAI comme claim_generator. Le manifest contient aussi un horodatage de signature et un hash content_binding qui identifie uniquement le fichier. Si vous publiez une image ChatGPT sur un marketplace, en post social ou en thumbnail, cette empreinte devient un primitif de tracking. GhostMeta affiche la signature OpenAI puis la retire via re-encodage canvas.",
+      "intro": "Les images produites par ChatGPT (GPT-4o image, GPT-Image-1) portent un manifest C2PA dans le chunk PNG caBX annonçant OpenAI comme claim_generator. Le manifest contient aussi un horodatage de signature et un hash content_binding qui identifie uniquement le fichier. Si vous publiez une image ChatGPT sur un marketplace, en post social ou en thumbnail, cette empreinte devient un primitif de tracking. GhostMeta affiche la signature OpenAI puis la retire via re-encodage canvas. ChatGPT peut exporter la même image en PNG ou en JPEG, et son pipeline écrit le manifest C2PA Content Credentials dans le conteneur choisi — le chunk PNG caBX ou le segment JPEG APP11. C'est la même charge encodée en JUMBF dans les deux cas : choisir le JPEG plutôt que le PNG à l'export ne nettoie donc pas le fichier. Le manifest embarque aussi une assertion IPTC digitalSourceType fixée à « trainedAlgorithmicMedia », le champ qu'un nombre croissant de marketplaces print-on-demand et stock analysent pour repérer les uploads IA. GhostMeta efface toute la couche manifest en un seul re-encodage canvas, quel que soit le format exporté.",
       "wedge": "nettoyer métadonnées chatgpt image",
       "faq": [
-        { "q": "ChatGPT marque-t-il toutes les images ?", "a": "Depuis Q3 2024 toute image générée via ChatGPT consumer ou API inclut un manifest C2PA. Le label persiste à travers les conversions de format sauf strip explicite." },
-        { "q": "Le compte de l'utilisateur fuite-t-il ?", "a": "Le manifest nomme OpenAI comme producteur, pas l'utilisateur final. Cependant la chaîne de signature plus l'assertion time-of-creation est suffisamment unique pour fingerprinter une session." },
-        { "q": "Peut-on contourner par screenshot ?", "a": "Un screenshot OS ne propage pas le manifest mais perd la qualité originale. GhostMeta garde les pixels originaux et ne retire que les métadonnées." }
+        {
+          "q": "ChatGPT marque-t-il toutes les images ?",
+          "a": "Depuis Q3 2024 toute image générée via ChatGPT consumer ou API inclut un manifest C2PA. Le label persiste à travers les conversions de format sauf strip explicite."
+        },
+        {
+          "q": "Le compte de l'utilisateur fuite-t-il ?",
+          "a": "Le manifest nomme OpenAI comme producteur, pas l'utilisateur final. Cependant la chaîne de signature plus l'assertion time-of-creation est suffisamment unique pour fingerprinter une session."
+        },
+        {
+          "q": "Peut-on contourner par screenshot ?",
+          "a": "Un screenshot OS ne propage pas le manifest mais perd la qualité originale. GhostMeta garde les pixels originaux et ne retire que les métadonnées."
+        },
+        {
+          "q": "Exporter l'image ChatGPT en JPEG plutôt qu'en PNG retire-t-il le C2PA ?",
+          "a": "Non. Le pipeline d'export de ChatGPT écrit la même charge C2PA encodée en JUMBF dans le segment JPEG APP11 au lieu du chunk PNG caBX — le manifest voyage intact d'un conteneur à l'autre, le choix du format n'y change rien. Un convertisseur tiers pourra le retirer ou le conserver selon l'outil, de façon imprévisible. GhostMeta retire la box de façon fiable en décodant sur un canvas puis en ré-encodant sans aucun segment de métadonnées."
+        },
+        {
+          "q": "C'est quoi le hash content_binding, et pourquoi son retrait compte-t-il ?",
+          "a": "Le manifest d'OpenAI inclut une assertion content_binding : un hash cryptographique calculé sur les données de l'image au moment de la génération, si bien que deux sorties visuellement identiques portent des bindings différents. Comme il est unique par fichier, il peut en principe être journalisé puis recoupé pour relier une image publiée à un unique événement de génération. GhostMeta retire le manifest entier, ce hash compris, de sorte que plus rien dans le fichier ne le relie à son origine."
+        },
+        {
+          "q": "Pourquoi les marketplaces rejettent-ils des images ChatGPT qui semblent originales ?",
+          "a": "Un nombre croissant de plateformes print-on-demand, stock et microstock analysent l'assertion IPTC digitalSourceType du manifest C2PA, que ChatGPT fixe à trainedAlgorithmicMedia. Un filtre d'admission automatisé peut lire ce seul champ et signaler, démoter ou rejeter l'upload, indépendamment des pixels. Une fois que GhostMeta a retiré le manifest caBX/APP11, cette assertion n'existe plus dans le fichier."
+        }
       ]
     }
   },
@@ -123,24 +291,66 @@
       "title": "Strip DALL-E Fingerprint from PNG Images",
       "description": "DALL-E 3 embeds a C2PA manifest plus invisible cryptographic watermark. GhostMeta strips the C2PA in-browser. Free, no upload.",
       "h1": "Strip DALL-E fingerprint from PNG",
-      "intro": "DALL-E 3 outputs carry two layers of provenance: a C2PA Content Credentials manifest in the PNG caBX chunk, and an invisible cryptographic watermark embedded at pixel level (announced by OpenAI in 2024). GhostMeta strips the C2PA layer via canvas re-encode — the most common signal third parties read. The pixel-level watermark survives re-encoding by design and would require destructive editing to remove.",
+      "intro": "DALL-E 3 outputs carry two layers of provenance: a C2PA Content Credentials manifest in the PNG caBX chunk, and an invisible cryptographic watermark embedded at pixel level (announced by OpenAI in 2024). GhostMeta strips the C2PA layer via canvas re-encode — the most common signal third parties read. The pixel-level watermark survives re-encoding by design and would require destructive editing to remove. DALL-E 3 reaches you through several surfaces — the ChatGPT app, the OpenAI API, Microsoft Copilot and the old Bing Image Creator — and each one attaches the same caBX-encoded C2PA manifest, so a file saved from Copilot carries the identical OpenAI provenance as one saved from ChatGPT. Because PNG is lossless, GhostMeta's canvas re-encode preserves the pixel values without JPEG-style requantization: the image stays visually identical (within the 4096px processing cap) while the metadata chunks are rewritten clean. After processing, the downloaded PNG keeps just the structural chunks (IHDR, IDAT, IEND) — the caBX provenance chunk and any tEXt/iTXt blocks are gone.",
       "wedge": "strip dalle fingerprint",
       "faq": [
-        { "q": "Does GhostMeta remove the invisible pixel watermark?", "a": "No. OpenAI's pixel watermark is embedded in image data and survives canvas re-encode. GhostMeta strips the C2PA metadata layer, which is what most C2PA viewers read." },
-        { "q": "Which DALL-E versions are flagged?", "a": "DALL-E 2 outputs without a C2PA manifest are passed through. DALL-E 3 outputs carry the manifest and are flagged." },
-        { "q": "Is the prompt embedded in the file?", "a": "The C2PA manifest does not contain the user prompt by default, but the assertion list may include the model version, which can hint at the prompt class." }
+        {
+          "q": "Does GhostMeta remove the invisible pixel watermark?",
+          "a": "No. OpenAI's pixel watermark is embedded in image data and survives canvas re-encode. GhostMeta strips the C2PA metadata layer, which is what most C2PA viewers read."
+        },
+        {
+          "q": "Which DALL-E versions are flagged?",
+          "a": "DALL-E 2 outputs without a C2PA manifest are passed through. DALL-E 3 outputs carry the manifest and are flagged."
+        },
+        {
+          "q": "Is the prompt embedded in the file?",
+          "a": "The C2PA manifest does not contain the user prompt by default, but the assertion list may include the model version, which can hint at the prompt class."
+        },
+        {
+          "q": "DALL-E images saved from Copilot or Bing — same fingerprint as ChatGPT?",
+          "a": "Yes. Whatever the surface — ChatGPT, the OpenAI Images API, Microsoft Copilot or Bing Image Creator — the DALL-E 3 backend writes the same C2PA manifest into the PNG caBX chunk, naming OpenAI as the claim_generator. The delivery channel does not change the embedded provenance, so GhostMeta strips that metadata layer identically in every case."
+        },
+        {
+          "q": "Does stripping the caBX chunk degrade my PNG quality?",
+          "a": "No. PNG is a lossless format, so the canvas re-encode preserves the pixel values without JPEG-style requantization — the image you download is visually identical to the original (images above 4096px are scaled down to that cap to stay memory-safe on mobile). Only the caBX provenance chunk and any text chunks are dropped; IHDR, IDAT and IEND remain."
+        },
+        {
+          "q": "How can I confirm the DALL-E manifest is actually gone?",
+          "a": "Open the cleaned PNG in any C2PA viewer such as Content Credentials Verify (verify.contentauthenticity.org) — it will report no manifest found instead of OpenAI. At the byte level, the file no longer contains a caBX chunk; a chunk inspector will show only IHDR, IDAT and IEND. Note that this confirms removal of the metadata layer only, not the separate pixel-level watermark, which survives any re-encode."
+        }
       ]
     },
     "fr": {
       "title": "Retirer l'empreinte DALL-E d'un PNG",
       "description": "DALL-E 3 embarque un manifest C2PA plus un watermark cryptographique invisible. GhostMeta retire le C2PA en navigateur. Gratuit, sans upload.",
       "h1": "Retirer l'empreinte DALL-E d'un PNG",
-      "intro": "Les sorties DALL-E 3 portent deux couches de provenance : un manifest C2PA Content Credentials dans le chunk PNG caBX, et un watermark cryptographique invisible embarqué au niveau pixel (annoncé par OpenAI en 2024). GhostMeta retire la couche C2PA via re-encodage canvas — le signal le plus couramment lu par les outils tiers. Le watermark pixel survit au re-encodage par design et nécessiterait une édition destructive pour être retiré.",
+      "intro": "Les sorties DALL-E 3 portent deux couches de provenance : un manifest C2PA Content Credentials dans le chunk PNG caBX, et un watermark cryptographique invisible embarqué au niveau pixel (annoncé par OpenAI en 2024). GhostMeta retire la couche C2PA via re-encodage canvas — le signal le plus couramment lu par les outils tiers. Le watermark pixel survit au re-encodage par design et nécessiterait une édition destructive pour être retiré. DALL-E 3 vous parvient par plusieurs canaux — l'app ChatGPT, l'API OpenAI, Microsoft Copilot et l'ancien Bing Image Creator — et chacun attache le même manifest C2PA encodé dans le chunk caBX : un fichier sauvegardé depuis Copilot porte donc la provenance OpenAI identique à un fichier sauvegardé depuis ChatGPT. Le PNG étant sans perte, le re-encodage canvas de GhostMeta préserve les valeurs de pixels sans re-quantification de type JPEG : l'image reste visuellement identique (dans la limite de traitement de 4096px) tandis que les chunks de métadonnées sont réécrits propres. Après traitement, le PNG téléchargé ne conserve que les chunks structurels (IHDR, IDAT, IEND) — le chunk de provenance caBX et les éventuels blocs tEXt/iTXt ont disparu.",
       "wedge": "retirer empreinte dalle",
       "faq": [
-        { "q": "GhostMeta retire-t-il le watermark pixel invisible ?", "a": "Non. Le watermark pixel d'OpenAI est embarqué dans les données image et survit au re-encodage canvas. GhostMeta retire la couche metadata C2PA, ce que la plupart des viewers C2PA lisent." },
-        { "q": "Quelles versions DALL-E sont flaggées ?", "a": "Les sorties DALL-E 2 sans manifest C2PA passent. Les sorties DALL-E 3 portent le manifest et sont flaggées." },
-        { "q": "Le prompt est-il embarqué dans le fichier ?", "a": "Le manifest C2PA ne contient pas le prompt utilisateur par défaut, mais la liste d'assertions peut inclure la version du modèle qui suggère la classe de prompt." }
+        {
+          "q": "GhostMeta retire-t-il le watermark pixel invisible ?",
+          "a": "Non. Le watermark pixel d'OpenAI est embarqué dans les données image et survit au re-encodage canvas. GhostMeta retire la couche metadata C2PA, ce que la plupart des viewers C2PA lisent."
+        },
+        {
+          "q": "Quelles versions DALL-E sont flaggées ?",
+          "a": "Les sorties DALL-E 2 sans manifest C2PA passent. Les sorties DALL-E 3 portent le manifest et sont flaggées."
+        },
+        {
+          "q": "Le prompt est-il embarqué dans le fichier ?",
+          "a": "Le manifest C2PA ne contient pas le prompt utilisateur par défaut, mais la liste d'assertions peut inclure la version du modèle qui suggère la classe de prompt."
+        },
+        {
+          "q": "Une image DALL-E sauvegardée depuis Copilot ou Bing — même empreinte que ChatGPT ?",
+          "a": "Oui. Quel que soit le canal — ChatGPT, l'API Images d'OpenAI, Microsoft Copilot ou Bing Image Creator — le backend DALL-E 3 écrit le même manifest C2PA dans le chunk PNG caBX, avec OpenAI comme claim_generator. Le canal de diffusion ne change pas la provenance embarquée, donc GhostMeta retire cette couche de métadonnées de façon identique dans tous les cas."
+        },
+        {
+          "q": "Retirer le chunk caBX dégrade-t-il la qualité de mon PNG ?",
+          "a": "Non. Le PNG est un format sans perte : le re-encodage canvas préserve les valeurs de pixels sans re-quantification de type JPEG — l'image téléchargée est visuellement identique à l'originale (les images au-delà de 4096px sont réduites à cette limite pour rester sûres en mémoire sur mobile). Seuls le chunk de provenance caBX et les éventuels chunks texte sont supprimés ; IHDR, IDAT et IEND restent."
+        },
+        {
+          "q": "Comment vérifier que le manifest DALL-E a bien disparu ?",
+          "a": "Ouvrez le PNG nettoyé dans n'importe quel viewer C2PA comme Content Credentials Verify (verify.contentauthenticity.org) : il indiquera aucun manifest trouvé au lieu d'OpenAI. Au niveau octet, le fichier ne contient plus de chunk caBX ; un inspecteur de chunks n'affichera que IHDR, IDAT et IEND. Attention : cela confirme uniquement le retrait de la couche métadonnées, pas le watermark pixel distinct, qui survit à tout re-encodage."
+        }
       ]
     }
   },
@@ -152,24 +362,66 @@
       "title": "Remove Adobe Firefly Content Credentials",
       "description": "Adobe Firefly attaches a Content Credentials C2PA manifest to every output. GhostMeta strips it client-side, free, no Adobe account.",
       "h1": "Remove Adobe Firefly Content Credentials",
-      "intro": "Adobe Firefly was the first generator to ship Content Credentials by default in 2023. Every Firefly export — JPEG or PNG — embeds a C2PA manifest signed by Adobe with the claim_generator set to com.adobe.firefly. The manifest survives most editor exports and is read by Adobe Bridge, Photoshop, and any C2PA viewer. GhostMeta detects the Adobe signature in the JPEG APP11 segment or PNG caBX chunk, shows what's there, then strips via canvas re-encode.",
+      "intro": "Adobe Firefly was the first generator to ship Content Credentials by default in 2023. Every Firefly export — JPEG or PNG — embeds a C2PA manifest signed by Adobe with the claim_generator set to com.adobe.firefly. The manifest survives most editor exports and is read by Adobe Bridge, Photoshop, and any C2PA viewer. GhostMeta detects the Adobe signature in the JPEG APP11 segment or PNG caBX chunk, shows what's there, then strips via canvas re-encode. Firefly's manifest is unusually rich: alongside the Adobe signature it writes an XMP assertion with digitalSourceType set to trainedAlgorithmicMedia and a c2pa.actions list whose claim_generator is com.adobe.firefly, so a verifier sees not just \"AI\" but specifically \"made with Firefly\". That same payload lives in two places depending on export — the JPEG APP11/JUMBF box or the PNG caBX chunk — and stock desks like Adobe Stock and Behance read it automatically to auto-label or gate the upload. GhostMeta removes both the JUMBF assertions and the parallel XMP block in a single canvas re-encode, so the file no longer self-reports its origin to any C2PA-aware platform.",
       "wedge": "remove firefly content credentials",
       "faq": [
-        { "q": "Will my Adobe Creative Cloud ID leak?", "a": "Firefly's manifest names Adobe as producer. If you signed in with a Creative Cloud account, the assertion may include a hashed user reference but not your raw email." },
-        { "q": "Will Photoshop reattach the manifest?", "a": "If you re-export the image from Photoshop with Content Credentials enabled, yes. Disable that toggle in Preferences > Content Credentials before exporting." },
-        { "q": "Does this affect my license to use the image?", "a": "Removing the technical metadata does not change your usage rights. Adobe's license terms apply regardless of whether the manifest is present." }
+        {
+          "q": "Will my Adobe Creative Cloud ID leak?",
+          "a": "Firefly's manifest names Adobe as producer. If you signed in with a Creative Cloud account, the assertion may include a hashed user reference but not your raw email."
+        },
+        {
+          "q": "Will Photoshop reattach the manifest?",
+          "a": "If you re-export the image from Photoshop with Content Credentials enabled, yes. Disable that toggle in Preferences > Content Credentials before exporting."
+        },
+        {
+          "q": "Does this affect my license to use the image?",
+          "a": "Removing the technical metadata does not change your usage rights. Adobe's license terms apply regardless of whether the manifest is present."
+        },
+        {
+          "q": "Does Generative Fill in Photoshop leave Firefly credentials even if the base photo wasn't AI?",
+          "a": "Yes. When you use Generative Fill, Generative Expand, or Remove Tool, Photoshop appends a c2pa.actions entry attributed to com.adobe.firefly in the image's Content Credentials even though most of the pixels are your original photo. The manifest then reports the file as partly AI-edited. GhostMeta strips that appended assertion along with the rest of the JUMBF box when you re-encode the exported JPEG or PNG."
+        },
+        {
+          "q": "What exactly does a verifier read from a Firefly file?",
+          "a": "Drop a Firefly export into contentcredentials.org/verify and it parses the JUMBF box: the Adobe-signed claim, the claim_generator (com.adobe.firefly), a creation timestamp, and a c2pa.actions assertion list describing the generation. The XMP block mirrors digitalSourceType so even non-C2PA tools that read XMP can infer AI origin. After GhostMeta, the verifier finds no manifest and reports the file as having no Content Credentials."
+        },
+        {
+          "q": "Will stripping break the image on Adobe Stock or a marketplace upload?",
+          "a": "No — removing the manifest only removes the provenance layer, not the picture. The JPEG or PNG decodes and displays identically. What changes is that Adobe Stock, Behance, or any C2PA-reading marketplace can no longer auto-detect and label it as Firefly-generated. Note that stripping does not remove any visible Firefly logo burned into the pixels — GhostMeta only touches metadata layers, never the pixel data."
+        }
       ]
     },
     "fr": {
       "title": "Supprimer les Content Credentials d'Adobe Firefly",
       "description": "Adobe Firefly attache un manifest Content Credentials C2PA à chaque sortie. GhostMeta le retire côté client, gratuit, sans compte Adobe.",
       "h1": "Supprimer les Content Credentials d'Adobe Firefly",
-      "intro": "Adobe Firefly a été le premier générateur à shipper les Content Credentials par défaut en 2023. Chaque export Firefly — JPEG ou PNG — embarque un manifest C2PA signé par Adobe avec claim_generator = com.adobe.firefly. Le manifest survit à la plupart des exports d'éditeurs et est lu par Adobe Bridge, Photoshop et tout viewer C2PA. GhostMeta détecte la signature Adobe dans le segment APP11 JPEG ou le chunk caBX PNG, affiche le contenu, puis retire via re-encodage canvas.",
+      "intro": "Adobe Firefly a été le premier générateur à shipper les Content Credentials par défaut en 2023. Chaque export Firefly — JPEG ou PNG — embarque un manifest C2PA signé par Adobe avec claim_generator = com.adobe.firefly. Le manifest survit à la plupart des exports d'éditeurs et est lu par Adobe Bridge, Photoshop et tout viewer C2PA. GhostMeta détecte la signature Adobe dans le segment APP11 JPEG ou le chunk caBX PNG, affiche le contenu, puis retire via re-encodage canvas. Le manifest de Firefly est particulièrement riche : en plus de la signature Adobe, il écrit une assertion XMP avec digitalSourceType réglé sur trainedAlgorithmicMedia et une liste c2pa.actions dont le claim_generator est com.adobe.firefly — un vérificateur lit donc non pas un simple « IA » mais précisément « fait avec Firefly ». Ce même contenu vit à deux endroits selon l'export : la box JUMBF du segment APP11 en JPEG, ou le chunk caBX en PNG, et des plateformes comme Adobe Stock et Behance le lisent automatiquement pour labelliser ou filtrer l'upload. GhostMeta retire à la fois les assertions JUMBF et le bloc XMP parallèle en un seul re-encodage canvas : le fichier ne déclare plus son origine à aucune plateforme compatible C2PA.",
       "wedge": "supprimer content credentials firefly",
       "faq": [
-        { "q": "Mon ID Adobe Creative Cloud va-t-il fuiter ?", "a": "Le manifest de Firefly nomme Adobe comme producteur. Si vous étiez connecté avec un compte Creative Cloud, l'assertion peut inclure une référence utilisateur hashée mais pas votre email brut." },
-        { "q": "Photoshop va-t-il ré-attacher le manifest ?", "a": "Si vous ré-exportez l'image depuis Photoshop avec Content Credentials activé, oui. Désactivez ce toggle dans Préférences > Content Credentials avant export." },
-        { "q": "Cela affecte-t-il ma licence d'usage ?", "a": "Retirer les métadonnées techniques ne change pas vos droits d'usage. Les conditions de licence Adobe s'appliquent quel que soit la présence du manifest." }
+        {
+          "q": "Mon ID Adobe Creative Cloud va-t-il fuiter ?",
+          "a": "Le manifest de Firefly nomme Adobe comme producteur. Si vous étiez connecté avec un compte Creative Cloud, l'assertion peut inclure une référence utilisateur hashée mais pas votre email brut."
+        },
+        {
+          "q": "Photoshop va-t-il ré-attacher le manifest ?",
+          "a": "Si vous ré-exportez l'image depuis Photoshop avec Content Credentials activé, oui. Désactivez ce toggle dans Préférences > Content Credentials avant export."
+        },
+        {
+          "q": "Cela affecte-t-il ma licence d'usage ?",
+          "a": "Retirer les métadonnées techniques ne change pas vos droits d'usage. Les conditions de licence Adobe s'appliquent quel que soit la présence du manifest."
+        },
+        {
+          "q": "Le Remplissage génératif de Photoshop laisse-t-il des credentials Firefly même si la photo de base n'est pas IA ?",
+          "a": "Oui. Quand vous utilisez le Remplissage génératif, l'Extension générative ou l'outil Supprimer, Photoshop ajoute aux Content Credentials de l'image une entrée c2pa.actions attribuée à com.adobe.firefly, même si l'essentiel des pixels vient de votre photo d'origine. Le manifest signale alors le fichier comme partiellement édité par IA. GhostMeta retire cette assertion ajoutée avec le reste de la box JUMBF lors du re-encodage du JPEG ou PNG exporté."
+        },
+        {
+          "q": "Que lit exactement un vérificateur dans un fichier Firefly ?",
+          "a": "Déposez un export Firefly sur contentcredentials.org/verify : il parse la box JUMBF — le claim signé par Adobe, le claim_generator (com.adobe.firefly), un horodatage de création et une liste d'assertions c2pa.actions décrivant la génération. Le bloc XMP reflète digitalSourceType, si bien que même des outils non-C2PA lisant le XMP peuvent déduire l'origine IA. Après GhostMeta, le vérificateur ne trouve aucun manifest et signale le fichier comme dépourvu de Content Credentials."
+        },
+        {
+          "q": "Le strip casse-t-il l'image lors d'un upload sur Adobe Stock ou un marketplace ?",
+          "a": "Non — retirer le manifest ne retire que la couche de provenance, pas l'image. Le JPEG ou PNG se décode et s'affiche à l'identique. Ce qui change, c'est qu'Adobe Stock, Behance ou tout marketplace lisant le C2PA ne peut plus la détecter et la labelliser automatiquement comme générée par Firefly. À noter : le strip ne retire aucun logo Firefly visible incrusté dans les pixels — GhostMeta ne touche que les couches de métadonnées, jamais les pixels."
+        }
       ]
     }
   },
@@ -181,24 +433,66 @@
       "title": "Clean Stable Diffusion PNG Metadata & Prompt",
       "description": "Automatic1111 and ComfyUI write your full prompt, model hash and seed into PNG tEXt chunks. Strip them in your browser, free.",
       "h1": "Clean Stable Diffusion PNG metadata",
-      "intro": "Automatic1111 and ComfyUI write the entire generation context into the PNG tEXt chunks: prompt, negative prompt, sampler, CFG, seed, model hash, LoRA stack, even ControlNet inputs. Anyone with a free PNG inspector reads it back word-for-word. If you ship Stable Diffusion outputs to a client or sell them on a stock site, you also ship your full workflow. GhostMeta wipes every tEXt and iTXt chunk via canvas re-encode — the visible pixels stay, the recipe disappears.",
+      "intro": "Automatic1111 and ComfyUI write the entire generation context into the PNG tEXt chunks: prompt, negative prompt, sampler, CFG, seed, model hash, LoRA stack, even ControlNet inputs. Anyone with a free PNG inspector reads it back word-for-word. If you ship Stable Diffusion outputs to a client or sell them on a stock site, you also ship your full workflow. GhostMeta wipes every tEXt and iTXt chunk via canvas re-encode — the visible pixels stay, the recipe disappears. Unlike cloud generators, a local Stable Diffusion install signs nothing — there is no JUMBF box, no APP11 C2PA segment, so the only leak surface is the freeform PNG text. But that text is plaintext, not hashed: the model hash alone resolves to the exact checkpoint on Civitai, and a marketplace reviewer can reconstruct your whole pipeline from one download. If you instead export to JPEG, Automatic1111 moves the same generation string into the EXIF UserComment field inside the APP1 segment, so it follows the file just as readily. GhostMeta decodes the bitmap to canvas and re-encodes it, so neither the PNG tEXt chunks nor the JPEG APP1 EXIF survive the round trip.",
       "wedge": "clean stable diffusion metadata",
       "faq": [
-        { "q": "What about ComfyUI workflow embedding?", "a": "ComfyUI writes the full graph as JSON in a 'workflow' tEXt chunk. GhostMeta drops it along with everything else when re-encoding." },
-        { "q": "Does this work for SDXL and SD3?", "a": "Yes — the metadata format is the same PNG chunk structure across SD 1.5, SDXL, and SD3 outputs from A1111 and ComfyUI." },
-        { "q": "Can I keep some metadata?", "a": "Not currently. GhostMeta is all-or-nothing on metadata to keep the privacy promise simple. Use a dedicated EXIF editor if you need partial preservation." }
+        {
+          "q": "What about ComfyUI workflow embedding?",
+          "a": "ComfyUI writes the full graph as JSON in a 'workflow' tEXt chunk. GhostMeta drops it along with everything else when re-encoding."
+        },
+        {
+          "q": "Does this work for SDXL and SD3?",
+          "a": "Yes — the metadata format is the same PNG chunk structure across SD 1.5, SDXL, and SD3 outputs from A1111 and ComfyUI."
+        },
+        {
+          "q": "Can I keep some metadata?",
+          "a": "Not currently. GhostMeta is all-or-nothing on metadata to keep the privacy promise simple. Use a dedicated EXIF editor if you need partial preservation."
+        },
+        {
+          "q": "Under which key does A1111 write the prompt, and does the key name matter?",
+          "a": "Automatic1111 writes the full generation string into a single PNG tEXt chunk keyed 'parameters' — one block holding prompt, negative prompt, seed, sampler, CFG and hashes. GhostMeta does not depend on that key: it enumerates every tEXt and iTXt chunk in the PNG stream, including compressed iTXt, and drops all of them on re-encode whatever they are named. So a renamed or non-standard key is stripped just the same."
+        },
+        {
+          "q": "The model hash looks harmless — why strip it?",
+          "a": "The 10-character model hash and any LoRA hashes in the parameters chunk are public identifiers. Anyone can paste them into Civitai's search and land on the exact checkpoint and LoRA you used, exposing the style source you may have wanted to keep private. Stripping the text chunk removes the hash along with the seed, sampler and CFG."
+        },
+        {
+          "q": "Does exporting as JPEG instead of PNG hide the prompt?",
+          "a": "No. When A1111 saves a JPEG it cannot use PNG text chunks, so it writes the same parameters string into the EXIF UserComment tag inside the JPEG APP1 segment. The data is just relocated, not removed. GhostMeta strips the APP1 EXIF block on re-encode, so the JPEG path is covered the same as PNG."
+        }
       ]
     },
     "fr": {
       "title": "Nettoyer les métadonnées PNG Stable Diffusion",
       "description": "Automatic1111 et ComfyUI écrivent votre prompt complet, le hash du modèle et la seed dans les chunks tEXt PNG. Retirez-les, gratuit.",
       "h1": "Nettoyer les métadonnées PNG Stable Diffusion",
-      "intro": "Automatic1111 et ComfyUI écrivent le contexte de génération entier dans les chunks tEXt PNG : prompt, prompt négatif, sampler, CFG, seed, hash du modèle, stack LoRA, même les inputs ControlNet. N'importe qui avec un inspecteur PNG gratuit lit ça mot pour mot. Si vous livrez des sorties Stable Diffusion à un client ou les vendez sur un stock, vous livrez aussi votre workflow complet. GhostMeta efface chaque chunk tEXt et iTXt via re-encodage canvas — les pixels visibles restent, la recette disparaît.",
+      "intro": "Automatic1111 et ComfyUI écrivent le contexte de génération entier dans les chunks tEXt PNG : prompt, prompt négatif, sampler, CFG, seed, hash du modèle, stack LoRA, même les inputs ControlNet. N'importe qui avec un inspecteur PNG gratuit lit ça mot pour mot. Si vous livrez des sorties Stable Diffusion à un client ou les vendez sur un stock, vous livrez aussi votre workflow complet. GhostMeta efface chaque chunk tEXt et iTXt via re-encodage canvas — les pixels visibles restent, la recette disparaît. Contrairement aux générateurs cloud, une installation Stable Diffusion locale ne signe rien : pas de box JUMBF, pas de segment C2PA APP11, donc la seule surface de fuite reste le texte libre du PNG. Or ce texte est en clair, pas hashé : le seul hash de modèle suffit à retrouver le checkpoint exact sur Civitai, et un relecteur de marketplace peut reconstituer tout votre pipeline depuis un unique téléchargement. Si vous exportez en JPEG, Automatic1111 déplace la même chaîne de génération dans le champ EXIF UserComment du segment APP1, qui suit le fichier tout aussi facilement. GhostMeta décode le bitmap sur un canvas puis le ré-encode, si bien que ni les chunks tEXt PNG ni l'EXIF APP1 du JPEG ne survivent à l'opération.",
       "wedge": "nettoyer métadonnées stable diffusion",
       "faq": [
-        { "q": "Et l'embedding workflow ComfyUI ?", "a": "ComfyUI écrit le graph complet en JSON dans un chunk tEXt 'workflow'. GhostMeta le drop avec le reste lors du re-encodage." },
-        { "q": "Ça marche pour SDXL et SD3 ?", "a": "Oui — le format metadata est la même structure de chunks PNG sur les sorties SD 1.5, SDXL et SD3 d'A1111 et ComfyUI." },
-        { "q": "Peut-on garder une partie des métadonnées ?", "a": "Pas actuellement. GhostMeta est tout-ou-rien sur les métadonnées pour garder la promesse de confidentialité simple. Utilisez un éditeur EXIF dédié pour préservation partielle." }
+        {
+          "q": "Et l'embedding workflow ComfyUI ?",
+          "a": "ComfyUI écrit le graph complet en JSON dans un chunk tEXt 'workflow'. GhostMeta le drop avec le reste lors du re-encodage."
+        },
+        {
+          "q": "Ça marche pour SDXL et SD3 ?",
+          "a": "Oui — le format metadata est la même structure de chunks PNG sur les sorties SD 1.5, SDXL et SD3 d'A1111 et ComfyUI."
+        },
+        {
+          "q": "Peut-on garder une partie des métadonnées ?",
+          "a": "Pas actuellement. GhostMeta est tout-ou-rien sur les métadonnées pour garder la promesse de confidentialité simple. Utilisez un éditeur EXIF dédié pour préservation partielle."
+        },
+        {
+          "q": "Sous quelle clé A1111 écrit-il le prompt, et le nom de la clé compte-t-il ?",
+          "a": "Automatic1111 écrit toute la chaîne de génération dans un unique chunk PNG tEXt nommé 'parameters' — un seul bloc qui contient prompt, prompt négatif, seed, sampler, CFG et hashes. GhostMeta ne dépend pas de cette clé : il énumère chaque chunk tEXt et iTXt du flux PNG, y compris les iTXt compressés, et les supprime tous au ré-encodage quel que soit leur nom. Une clé renommée ou non standard est donc retirée de la même façon."
+        },
+        {
+          "q": "Le hash du modèle paraît inoffensif — pourquoi le retirer ?",
+          "a": "Le hash de modèle de 10 caractères et les hashes de LoRA présents dans le chunk parameters sont des identifiants publics. N'importe qui peut les coller dans la recherche Civitai et retomber sur le checkpoint et le LoRA exacts que vous avez utilisés, révélant la source de style que vous vouliez peut-être garder privée. Retirer le chunk text supprime le hash en même temps que la seed, le sampler et le CFG."
+        },
+        {
+          "q": "Exporter en JPEG plutôt qu'en PNG masque-t-il le prompt ?",
+          "a": "Non. Quand A1111 enregistre un JPEG, il ne peut pas utiliser les chunks text du PNG, alors il écrit la même chaîne parameters dans le tag EXIF UserComment du segment APP1 du JPEG. La donnée est seulement déplacée, pas supprimée. GhostMeta retire le bloc EXIF APP1 au ré-encodage, donc le cas JPEG est couvert comme le PNG."
+        }
       ]
     }
   },
@@ -210,24 +504,66 @@
       "title": "Remove Flux (Black Forest Labs) Image Metadata",
       "description": "Flux outputs from BFL or Replicate carry a C2PA manifest plus generation params in PNG. GhostMeta strips both, free, in-browser.",
       "h1": "Remove Flux image metadata",
-      "intro": "Flux models from Black Forest Labs (Flux Pro, Flux Dev, Flux Schnell) embed a C2PA Content Credentials manifest when generated through the BFL API or via Replicate's official deployment. Outputs from local installs (ComfyUI, Forge) usually carry only the PNG tEXt chunks with prompt and generation params. GhostMeta detects both signals — the JUMBF-encoded manifest and the freeform tEXt blocks — and strips them with one canvas re-encode.",
+      "intro": "Flux models from Black Forest Labs (Flux Pro, Flux Dev, Flux Schnell) embed a C2PA Content Credentials manifest when generated through the BFL API or via Replicate's official deployment. Outputs from local installs (ComfyUI, Forge) usually carry only the PNG tEXt chunks with prompt and generation params. GhostMeta detects both signals — the JUMBF-encoded manifest and the freeform tEXt blocks — and strips them with one canvas re-encode. When you resell Flux renders on a stock or print-on-demand marketplace, the embedded seed and sampler settings let a competitor reproduce a near-identical image from the same prompt, eroding the exclusivity you are selling. GhostMeta neutralises that by wiping the chunk before the listing goes live, with the visible pixels untouched. Whether your Flux file arrives as a PNG (with a caBX chunk) or as a JPEG export (with the manifest in an APP11 segment), the same single canvas re-encode handles it client-side, with nothing uploaded.",
       "wedge": "remove flux metadata",
       "faq": [
-        { "q": "Does Flux Pro embed the same data as Flux Dev?", "a": "Both ship the C2PA manifest when run through BFL infrastructure. Local Flux Dev runs do not unless your wrapper explicitly attaches one." },
-        { "q": "What about Replicate-generated Flux images?", "a": "Replicate adds its own metadata layer on top of the BFL manifest. GhostMeta strips both as a single canvas re-encode." },
-        { "q": "Are LoRA names preserved in metadata?", "a": "If the wrapper writes the LoRA filename into the parameters tEXt chunk, yes. After GhostMeta the chunk is gone." }
+        {
+          "q": "Does Flux Pro embed the same data as Flux Dev?",
+          "a": "Both ship the C2PA manifest when run through BFL infrastructure. Local Flux Dev runs do not unless your wrapper explicitly attaches one."
+        },
+        {
+          "q": "What about Replicate-generated Flux images?",
+          "a": "Replicate adds its own metadata layer on top of the BFL manifest. GhostMeta strips both as a single canvas re-encode."
+        },
+        {
+          "q": "Are LoRA names preserved in metadata?",
+          "a": "If the wrapper writes the LoRA filename into the parameters tEXt chunk, yes. After GhostMeta the chunk is gone."
+        },
+        {
+          "q": "Flux files reach me as both PNG and JPEG — does GhostMeta handle the two formats the same way?",
+          "a": "Yes. A PNG-exported Flux render stores its C2PA manifest in a caBX chunk and its prompt in tEXt/iTXt chunks; a JPEG export carries the manifest in an APP11 segment instead. GhostMeta decodes either container to canvas and re-encodes locally, so both end up with no metadata layer regardless of the source format."
+        },
+        {
+          "q": "My host wraps Flux (Fal, Together, a custom API) — will GhostMeta still find the metadata?",
+          "a": "GhostMeta does not rely on knowing which host produced the file. It inspects the actual byte structure: it reads the JUMBF box that holds the C2PA manifest and lists every PNG tEXt/iTXt chunk present. Any provenance or parameter block a wrapper attached is surfaced and then dropped on re-encode, even if the host is one we have never seen."
+        },
+        {
+          "q": "Does the negative prompt get embedded too, not just the positive prompt?",
+          "a": "On local Flux runs through ComfyUI or Forge the parameters tEXt chunk typically stores the full generation context, which can include the negative prompt, guidance scale and seed. GhostMeta removes the entire chunk, so the negative prompt leaves with everything else — it is not preserved separately."
+        }
       ]
     },
     "fr": {
       "title": "Supprimer les métadonnées d'image Flux (BFL)",
       "description": "Les sorties Flux de BFL ou Replicate portent un manifest C2PA plus les paramètres de génération en PNG. GhostMeta retire les deux, gratuit.",
       "h1": "Supprimer les métadonnées d'image Flux",
-      "intro": "Les modèles Flux de Black Forest Labs (Flux Pro, Flux Dev, Flux Schnell) embarquent un manifest C2PA Content Credentials quand générés via l'API BFL ou via le déploiement officiel Replicate. Les sorties d'installs locaux (ComfyUI, Forge) portent généralement seulement les chunks PNG tEXt avec prompt et paramètres. GhostMeta détecte les deux signaux — le manifest encodé JUMBF et les blocs tEXt libres — et les retire en un re-encodage canvas.",
+      "intro": "Les modèles Flux de Black Forest Labs (Flux Pro, Flux Dev, Flux Schnell) embarquent un manifest C2PA Content Credentials quand générés via l'API BFL ou via le déploiement officiel Replicate. Les sorties d'installs locaux (ComfyUI, Forge) portent généralement seulement les chunks PNG tEXt avec prompt et paramètres. GhostMeta détecte les deux signaux — le manifest encodé JUMBF et les blocs tEXt libres — et les retire en un re-encodage canvas. Quand vous revendez des rendus Flux sur une marketplace stock ou print-on-demand, la seed et les réglages de sampler embarqués permettent à un concurrent de reproduire une image quasi identique à partir du même prompt, ce qui dilue l'exclusivité que vous vendez. GhostMeta neutralise ça en effaçant le chunk avant la mise en ligne, sans toucher aux pixels visibles. Que votre fichier Flux arrive en PNG (avec un chunk caBX) ou en export JPEG (manifest dans un segment APP11), le même re-encodage canvas unique le traite côté client, sans rien uploader.",
       "wedge": "supprimer métadonnées flux",
       "faq": [
-        { "q": "Flux Pro embarque-t-il les mêmes données que Flux Dev ?", "a": "Les deux shippent le manifest C2PA quand exécutés via l'infra BFL. Les runs locaux de Flux Dev ne le font pas sauf si votre wrapper l'attache explicitement." },
-        { "q": "Et les images Flux générées sur Replicate ?", "a": "Replicate ajoute sa propre couche metadata par-dessus le manifest BFL. GhostMeta retire les deux en un seul re-encodage canvas." },
-        { "q": "Les noms LoRA sont-ils préservés ?", "a": "Si le wrapper écrit le nom de fichier LoRA dans le chunk parameters tEXt, oui. Après GhostMeta le chunk est parti." }
+        {
+          "q": "Flux Pro embarque-t-il les mêmes données que Flux Dev ?",
+          "a": "Les deux shippent le manifest C2PA quand exécutés via l'infra BFL. Les runs locaux de Flux Dev ne le font pas sauf si votre wrapper l'attache explicitement."
+        },
+        {
+          "q": "Et les images Flux générées sur Replicate ?",
+          "a": "Replicate ajoute sa propre couche metadata par-dessus le manifest BFL. GhostMeta retire les deux en un seul re-encodage canvas."
+        },
+        {
+          "q": "Les noms LoRA sont-ils préservés ?",
+          "a": "Si le wrapper écrit le nom de fichier LoRA dans le chunk parameters tEXt, oui. Après GhostMeta le chunk est parti."
+        },
+        {
+          "q": "Mes fichiers Flux arrivent en PNG comme en JPEG — GhostMeta traite-t-il les deux formats pareil ?",
+          "a": "Oui. Un rendu Flux exporté en PNG range son manifest C2PA dans un chunk caBX et son prompt dans des chunks tEXt/iTXt ; un export JPEG porte plutôt le manifest dans un segment APP11. GhostMeta décode l'un ou l'autre conteneur sur un canvas et re-encode localement, donc les deux finissent sans couche de métadonnées quel que soit le format d'origine."
+        },
+        {
+          "q": "Mon hébergeur encapsule Flux (Fal, Together, une API maison) — GhostMeta trouvera-t-il quand même les métadonnées ?",
+          "a": "GhostMeta ne dépend pas de savoir quel hébergeur a produit le fichier. Il inspecte la structure d'octets réelle : il lit la box JUMBF qui contient le manifest C2PA et liste chaque chunk PNG tEXt/iTXt présent. Tout bloc de provenance ou de paramètres ajouté par un wrapper est affiché puis retiré au re-encodage, même si l'hébergeur nous est inconnu."
+        },
+        {
+          "q": "Le prompt négatif est-il aussi embarqué, pas seulement le prompt positif ?",
+          "a": "Sur les runs Flux locaux via ComfyUI ou Forge, le chunk tEXt parameters stocke généralement le contexte de génération complet, ce qui peut inclure le prompt négatif, le guidance scale et la seed. GhostMeta retire le chunk entier, donc le prompt négatif part avec le reste — il n'est pas conservé à part."
+        }
       ]
     }
   },
@@ -239,24 +575,66 @@
       "title": "Remove Leonardo.AI Metadata from PNG",
       "description": "Leonardo.AI embeds prompt, model name and generation ID in PNG metadata. GhostMeta strips it before you publish or sell. Free, in-browser.",
       "h1": "Remove Leonardo.AI metadata from PNG",
-      "intro": "Leonardo.AI saves the prompt, the model name (PhotoReal, Anime XL, Flux Schnell, etc.), the generation_id, and a Leonardo brand reference in PNG tEXt chunks of every download. The generation_id ties the image back to your Leonardo account and is queryable via their public gallery if your image was set to public. GhostMeta drops every text chunk via canvas re-encode and the file becomes neutral.",
+      "intro": "Leonardo.AI saves the prompt, the model name (PhotoReal, Anime XL, Flux Schnell, etc.), the generation_id, and a Leonardo brand reference in PNG tEXt chunks of every download. The generation_id ties the image back to your Leonardo account and is queryable via their public gallery if your image was set to public. GhostMeta drops every text chunk via canvas re-encode and the file becomes neutral. Unlike a signed C2PA manifest, Leonardo's PNG tEXt and iTXt chunks are plain readable text — any free PNG inspector dumps the prompt, model name and generation_id without decoding anything. That matters for print-on-demand and stock-marketplace delivery: when you hand a client or a Redbubble/Etsy reviewer the raw download, your full prompt and the Leonardo brand string travel inside the file and can be read in one click. GhostMeta decodes the PNG to a canvas and re-encodes it, dropping every text chunk while keeping the original pixels and the alpha channel intact, so transparent backgrounds survive the clean-up.",
       "wedge": "remove leonardo ai metadata",
       "faq": [
-        { "q": "Can someone find my prompt from generation_id?", "a": "If your generation was public on Leonardo, yes — the ID is enough to look up the original prompt and parameters via Leonardo's gallery." },
-        { "q": "Does Alchemy or PhotoReal embed extra fields?", "a": "Yes, Alchemy preset writes the upscale model and noise level. PhotoReal writes the photorealism strength. All flow through the same tEXt chunk and are stripped together." },
-        { "q": "What about API-generated Leonardo images?", "a": "API outputs carry the same metadata as the web UI. Strip them the same way." }
+        {
+          "q": "Can someone find my prompt from generation_id?",
+          "a": "If your generation was public on Leonardo, yes — the ID is enough to look up the original prompt and parameters via Leonardo's gallery."
+        },
+        {
+          "q": "Does Alchemy or PhotoReal embed extra fields?",
+          "a": "Yes, Alchemy preset writes the upscale model and noise level. PhotoReal writes the photorealism strength. All flow through the same tEXt chunk and are stripped together."
+        },
+        {
+          "q": "What about API-generated Leonardo images?",
+          "a": "API outputs carry the same metadata as the web UI. Strip them the same way."
+        },
+        {
+          "q": "Where exactly in the PNG does Leonardo store this data?",
+          "a": "Leonardo writes it into PNG ancillary text chunks — tEXt for plain ASCII keys and iTXt for UTF-8 or compressed values — usually placed between the IHDR header and the IDAT image data. Typical keys hold the prompt, the model name and the generation_id. GhostMeta does not edit those chunks in place: it rebuilds the PNG from the canvas, so every tEXt and iTXt chunk is gone in the output."
+        },
+        {
+          "q": "If I downloaded a whole batch as a ZIP, do I clean each one?",
+          "a": "Yes. Leonardo's batch and ZIP exports embed the same tEXt chunks in every PNG inside the archive, including the upscaled and varied versions. Unzip first, then run each image through GhostMeta — there is no shared sidecar to clean, the metadata lives inside each individual file."
+        },
+        {
+          "q": "Does Leonardo add a C2PA manifest like DALL-E or Firefly?",
+          "a": "As of now Leonardo's standard PNG downloads rely on plaintext tEXt/iTXt chunks rather than a signed C2PA caBX chunk, so there is no cryptographic provenance to read — just readable text. GhostMeta strips these chunks the same way regardless; if a future export ever adds a caBX C2PA chunk, the canvas re-encode drops that too."
+        }
       ]
     },
     "fr": {
       "title": "Supprimer les métadonnées Leonardo.AI d'un PNG",
       "description": "Leonardo.AI embarque prompt, nom de modèle et ID de génération dans les métadonnées PNG. GhostMeta les retire avant publication. Gratuit.",
       "h1": "Supprimer les métadonnées Leonardo.AI d'un PNG",
-      "intro": "Leonardo.AI sauvegarde le prompt, le nom de modèle (PhotoReal, Anime XL, Flux Schnell, etc.), le generation_id et une référence marque Leonardo dans les chunks PNG tEXt de chaque téléchargement. Le generation_id relie l'image à votre compte Leonardo et est queryable via leur galerie publique si votre image était publique. GhostMeta drop chaque chunk text via re-encodage canvas et le fichier devient neutre.",
+      "intro": "Leonardo.AI sauvegarde le prompt, le nom de modèle (PhotoReal, Anime XL, Flux Schnell, etc.), le generation_id et une référence marque Leonardo dans les chunks PNG tEXt de chaque téléchargement. Le generation_id relie l'image à votre compte Leonardo et est queryable via leur galerie publique si votre image était publique. GhostMeta drop chaque chunk text via re-encodage canvas et le fichier devient neutre. Contrairement à un manifest C2PA signé, les chunks tEXt et iTXt de Leonardo sont du texte lisible en clair — n'importe quel inspecteur PNG gratuit affiche le prompt, le nom de modèle et le generation_id sans rien décoder. C'est un vrai sujet pour la livraison print-on-demand et stock : quand vous remettez le téléchargement brut à un client ou à un modérateur Redbubble/Etsy, votre prompt complet et la chaîne de marque Leonardo voyagent dans le fichier et se lisent en un clic. GhostMeta décode le PNG sur un canvas puis le ré-encode, en supprimant chaque chunk texte tout en gardant les pixels d'origine et le canal alpha intact, pour que les fonds transparents survivent au nettoyage.",
       "wedge": "supprimer métadonnées leonardo ai",
       "faq": [
-        { "q": "Peut-on retrouver mon prompt depuis le generation_id ?", "a": "Si votre génération était publique sur Leonardo, oui — l'ID suffit pour retrouver le prompt et les paramètres originaux via la galerie Leonardo." },
-        { "q": "Alchemy ou PhotoReal embarquent-ils des champs en plus ?", "a": "Oui, le preset Alchemy écrit le modèle d'upscale et le noise level. PhotoReal écrit la force de photoréalisme. Tout passe par le même chunk tEXt et est retiré ensemble." },
-        { "q": "Et les images Leonardo générées via API ?", "a": "Les sorties API portent les mêmes métadonnées que l'UI web. Strip-les de la même façon." }
+        {
+          "q": "Peut-on retrouver mon prompt depuis le generation_id ?",
+          "a": "Si votre génération était publique sur Leonardo, oui — l'ID suffit pour retrouver le prompt et les paramètres originaux via la galerie Leonardo."
+        },
+        {
+          "q": "Alchemy ou PhotoReal embarquent-ils des champs en plus ?",
+          "a": "Oui, le preset Alchemy écrit le modèle d'upscale et le noise level. PhotoReal écrit la force de photoréalisme. Tout passe par le même chunk tEXt et est retiré ensemble."
+        },
+        {
+          "q": "Et les images Leonardo générées via API ?",
+          "a": "Les sorties API portent les mêmes métadonnées que l'UI web. Strip-les de la même façon."
+        },
+        {
+          "q": "Où exactement dans le PNG Leonardo stocke-t-il ces données ?",
+          "a": "Leonardo les écrit dans les chunks texte annexes du PNG — tEXt pour les clés ASCII simples, iTXt pour les valeurs UTF-8 ou compressées — généralement placés entre l'en-tête IHDR et les données image IDAT. Les clés typiques contiennent le prompt, le nom de modèle et le generation_id. GhostMeta ne modifie pas ces chunks sur place : il reconstruit le PNG à partir du canvas, si bien que chaque chunk tEXt et iTXt disparaît du fichier de sortie."
+        },
+        {
+          "q": "Si j'ai téléchargé un batch entier en ZIP, dois-je nettoyer chaque image ?",
+          "a": "Oui. Les exports batch et ZIP de Leonardo embarquent les mêmes chunks tEXt dans chaque PNG de l'archive, y compris les versions upscalées et les variations. Dézippez d'abord, puis passez chaque image dans GhostMeta — il n'y a pas de fichier annexe commun à nettoyer, les métadonnées vivent à l'intérieur de chaque fichier."
+        },
+        {
+          "q": "Leonardo ajoute-t-il un manifest C2PA comme DALL-E ou Firefly ?",
+          "a": "À ce jour les téléchargements PNG standard de Leonardo reposent sur des chunks tEXt/iTXt en texte clair plutôt que sur un chunk C2PA caBX signé : il n'y a donc pas de provenance cryptographique à lire, juste du texte lisible. GhostMeta retire ces chunks de la même manière dans tous les cas ; si un export futur ajoutait un chunk caBX C2PA, le re-encodage canvas le supprimerait aussi."
+        }
       ]
     }
   },
@@ -268,24 +646,66 @@
       "title": "Strip Runway ML Watermark Metadata",
       "description": "Runway Gen-3 outputs (stills and frames) carry a C2PA manifest. GhostMeta strips the metadata layer in your browser, free, no upload.",
       "h1": "Strip Runway ML metadata watermark",
-      "intro": "Runway Gen-3 Alpha (and Gen-2 since the 2024 update) embeds a C2PA Content Credentials manifest in every still export and exported frame, plus a Runway-branded XMP block. If you extract a frame for a thumbnail or composite, both signals propagate into the JPEG. GhostMeta detects the Runway signature in the APP11 segment or PNG caBX chunk, displays it, and strips it via canvas re-encode. The visible Runway logo overlay (if your tier shows one) is pixel-burned and not removable by metadata strip.",
+      "intro": "Runway Gen-3 Alpha (and Gen-2 since the 2024 update) embeds a C2PA Content Credentials manifest in every still export and exported frame, plus a Runway-branded XMP block. If you extract a frame for a thumbnail or composite, both signals propagate into the JPEG. GhostMeta detects the Runway signature in the APP11 segment or PNG caBX chunk, displays it, and strips it via canvas re-encode. The visible Runway logo overlay (if your tier shows one) is pixel-burned and not removable by metadata strip. When you extract a Runway still and drop it into a composite, the C2PA `c2pa.actions` and ingredient assertions chain forward into the new file, so a marketplace or stock reviewer can trace the AI origin even through an edit. Sellers on Adobe Stock, Etsy, and print-on-demand stores can get listings auto-flagged because the JUMBF box in the JPEG APP11 segment still carries the Runway `claim_generator` after upload. GhostMeta scans that box plus the Runway-branded XMP block and drops both in one canvas re-encode, so the delivered still carries no provenance assertion at all.",
       "wedge": "strip runway watermark",
       "faq": [
-        { "q": "Does GhostMeta remove the visible Runway logo?", "a": "No. The visible logo is burned into pixels. GhostMeta strips metadata only. Upgrade to a Runway tier without the visible watermark or use a video editor for pixel-level removal." },
-        { "q": "What about the Runway video MP4 itself?", "a": "MP4 video metadata is separate from JPEG/PNG. GhostMeta v1 focuses on still images. For MP4, use a tool like ffmpeg with -map_metadata -1." },
-        { "q": "Does Gen-2 carry the same C2PA?", "a": "Gen-2 since mid-2024 yes. Older Gen-2 outputs may not — they pass through GhostMeta untouched if no manifest is found." }
+        {
+          "q": "Does GhostMeta remove the visible Runway logo?",
+          "a": "No. The visible logo is burned into pixels. GhostMeta strips metadata only. Upgrade to a Runway tier without the visible watermark or use a video editor for pixel-level removal."
+        },
+        {
+          "q": "What about the Runway video MP4 itself?",
+          "a": "MP4 video metadata is separate from JPEG/PNG. GhostMeta v1 focuses on still images. For MP4, use a tool like ffmpeg with -map_metadata -1."
+        },
+        {
+          "q": "Does Gen-2 carry the same C2PA?",
+          "a": "Gen-2 since mid-2024 yes. Older Gen-2 outputs may not — they pass through GhostMeta untouched if no manifest is found."
+        },
+        {
+          "q": "What exactly is inside the Runway C2PA box?",
+          "a": "The JUMBF box holds a manifest store: a claim with `claim_generator` set to a Runway string, a signature with the certificate chain, and an assertion list. That list typically includes a `c2pa.actions` assertion (created, opened) and a content-binding hash unique to the file. GhostMeta removes the entire box, not just the generator label, so no single assertion survives."
+        },
+        {
+          "q": "Does a Runway frame stay flagged after I edit it in Photoshop?",
+          "a": "Yes, unless you strip it. When a C2PA-aware editor opens the Runway still, it records the original as an `ingredient` assertion and chains a new manifest on top, so the AI origin propagates into your export. Run GhostMeta as the last step after editing, not before, to break that chain in the final JPEG or PNG."
+        },
+        {
+          "q": "Where does the Runway signature live in a PNG vs a JPEG?",
+          "a": "In a JPEG export the manifest sits in the APP11 marker segment as a JUMBF box; in a PNG it lives in the caBX chunk. Runway also writes a branded XMP block (often in an iTXt chunk on PNG or an APP1 segment on JPEG). GhostMeta detects all of these and the canvas re-encode produces a file with none of them."
+        }
       ]
     },
     "fr": {
       "title": "Retirer les métadonnées watermark Runway ML",
       "description": "Les sorties Runway Gen-3 (stills et frames) portent un manifest C2PA. GhostMeta retire la couche metadata en navigateur, gratuit.",
       "h1": "Retirer les métadonnées watermark Runway",
-      "intro": "Runway Gen-3 Alpha (et Gen-2 depuis l'update 2024) embarque un manifest C2PA Content Credentials dans chaque export still et frame exportée, plus un bloc XMP marqué Runway. Si vous extrayez une frame pour un thumbnail ou un composite, les deux signaux se propagent dans le JPEG. GhostMeta détecte la signature Runway dans le segment APP11 ou chunk PNG caBX, l'affiche, puis la retire via re-encodage canvas. Le logo Runway visible (si votre tier l'affiche) est pixel-burné et n'est pas retirable par strip metadata.",
+      "intro": "Runway Gen-3 Alpha (et Gen-2 depuis l'update 2024) embarque un manifest C2PA Content Credentials dans chaque export still et frame exportée, plus un bloc XMP marqué Runway. Si vous extrayez une frame pour un thumbnail ou un composite, les deux signaux se propagent dans le JPEG. GhostMeta détecte la signature Runway dans le segment APP11 ou chunk PNG caBX, l'affiche, puis la retire via re-encodage canvas. Le logo Runway visible (si votre tier l'affiche) est pixel-burné et n'est pas retirable par strip metadata. Quand vous extrayez une frame Runway pour l'intégrer dans un composite, les assertions C2PA `c2pa.actions` et ingredient se propagent dans le nouveau fichier : un relecteur de marketplace ou de banque d'images peut donc remonter à l'origine IA même après une retouche. Les vendeurs sur Adobe Stock, Etsy ou print-on-demand peuvent voir leurs listings flaggés automatiquement parce que la box JUMBF du segment APP11 du JPEG porte toujours le `claim_generator` Runway après upload. GhostMeta scanne cette box ainsi que le bloc XMP marqué Runway et retire les deux en un seul re-encodage canvas : la frame livrée ne porte plus aucune assertion de provenance.",
       "wedge": "retirer watermark runway",
       "faq": [
-        { "q": "GhostMeta retire-t-il le logo Runway visible ?", "a": "Non. Le logo visible est burné dans les pixels. GhostMeta retire les métadonnées uniquement. Upgrade vers un tier Runway sans watermark visible ou utilisez un éditeur vidéo pour retrait pixel." },
-        { "q": "Et la vidéo MP4 Runway elle-même ?", "a": "Les métadonnées MP4 sont séparées des JPEG/PNG. GhostMeta v1 cible les images fixes. Pour MP4, utilisez ffmpeg avec -map_metadata -1." },
-        { "q": "Gen-2 porte-t-il le même C2PA ?", "a": "Gen-2 depuis mi-2024 oui. Les anciennes sorties Gen-2 peuvent ne pas en avoir — elles passent par GhostMeta intactes si aucun manifest n'est trouvé." }
+        {
+          "q": "GhostMeta retire-t-il le logo Runway visible ?",
+          "a": "Non. Le logo visible est burné dans les pixels. GhostMeta retire les métadonnées uniquement. Upgrade vers un tier Runway sans watermark visible ou utilisez un éditeur vidéo pour retrait pixel."
+        },
+        {
+          "q": "Et la vidéo MP4 Runway elle-même ?",
+          "a": "Les métadonnées MP4 sont séparées des JPEG/PNG. GhostMeta v1 cible les images fixes. Pour MP4, utilisez ffmpeg avec -map_metadata -1."
+        },
+        {
+          "q": "Gen-2 porte-t-il le même C2PA ?",
+          "a": "Gen-2 depuis mi-2024 oui. Les anciennes sorties Gen-2 peuvent ne pas en avoir — elles passent par GhostMeta intactes si aucun manifest n'est trouvé."
+        },
+        {
+          "q": "Que contient exactement la box C2PA de Runway ?",
+          "a": "La box JUMBF contient un manifest store : un claim avec `claim_generator` réglé sur une chaîne Runway, une signature avec la chaîne de certificats, et une liste d'assertions. Cette liste inclut typiquement une assertion `c2pa.actions` (created, opened) et un hash de content-binding propre au fichier. GhostMeta retire la box entière, pas seulement le label générateur : aucune assertion ne survit."
+        },
+        {
+          "q": "Une frame Runway reste-t-elle flaggée après une édition dans Photoshop ?",
+          "a": "Oui, sauf si vous la nettoyez. Quand un éditeur compatible C2PA ouvre la frame Runway, il enregistre l'original comme assertion `ingredient` et chaîne un nouveau manifest par-dessus : l'origine IA se propage dans votre export. Lancez GhostMeta en dernière étape, après l'édition et non avant, pour casser cette chaîne dans le JPEG ou PNG final."
+        },
+        {
+          "q": "Où se trouve la signature Runway dans un PNG par rapport à un JPEG ?",
+          "a": "Dans un export JPEG le manifest se trouve dans le segment marqueur APP11 sous forme de box JUMBF ; dans un PNG il est dans le chunk caBX. Runway écrit aussi un bloc XMP marqué (souvent dans un chunk iTXt en PNG ou un segment APP1 en JPEG). GhostMeta détecte tout cela, et le re-encodage canvas produit un fichier qui n'en contient aucun."
+        }
       ]
     }
   },
@@ -297,24 +717,66 @@
       "title": "Clean Google Imagen Metadata & SynthID",
       "description": "Google Imagen and Gemini image outputs carry SynthID watermark plus C2PA. GhostMeta strips the C2PA metadata layer in your browser.",
       "h1": "Clean Google Imagen metadata",
-      "intro": "Google Imagen and Gemini image outputs ship with two provenance layers: a C2PA Content Credentials manifest in the JPEG APP11 segment, and an invisible SynthID watermark embedded at pixel level. GhostMeta strips the C2PA layer — what most viewers and platforms read — via canvas re-encode. SynthID is designed to survive re-encoding by Google's research and would require destructive editing or a dedicated remover to defeat.",
+      "intro": "Google Imagen and Gemini image outputs ship with two provenance layers: a C2PA Content Credentials manifest in the JPEG APP11 segment, and an invisible SynthID watermark embedded at pixel level. GhostMeta strips the C2PA layer — what most viewers and platforms read — via canvas re-encode. SynthID is designed to survive re-encoding by Google's research and would require destructive editing or a dedicated remover to defeat. Beyond the APP11 manifest, Imagen and Gemini exports often write an IPTC \"Digital Source Type\" value set to trainedAlgorithmicMedia into the image's XMP / IPTC photo-metadata — a plain-text AI flag that stock libraries and newsrooms increasingly scan on ingest, independent of C2PA. Because Imagen ships as JPEG, the file also carries a standard EXIF APP1 segment alongside the C2PA APP11 segment, so a clean strip has to clear both. GhostMeta wipes the EXIF, the IPTC AI marker and the C2PA manifest in a single canvas pass; the JPEG is re-encoded at a fixed high quality (92%), and the pixels — and the SynthID baked into them — are left untouched.",
       "wedge": "clean imagen metadata",
       "faq": [
-        { "q": "Does GhostMeta remove SynthID?", "a": "No. SynthID is a pixel-level steganographic watermark designed by Google DeepMind to survive standard re-encoding. GhostMeta strips the C2PA metadata layer only." },
-        { "q": "Are Gemini image outputs flagged the same?", "a": "Yes. Gemini's image generator pipes through the same Imagen backend and produces the same C2PA + SynthID combination." },
-        { "q": "Will my Google account be referenced in metadata?", "a": "The C2PA manifest names Google as producer. Account-level identifiers are not stored in clear text but the assertion list may include hashed session refs." }
+        {
+          "q": "Does GhostMeta remove SynthID?",
+          "a": "No. SynthID is a pixel-level steganographic watermark designed by Google DeepMind to survive standard re-encoding. GhostMeta strips the C2PA metadata layer only."
+        },
+        {
+          "q": "Are Gemini image outputs flagged the same?",
+          "a": "Yes. Gemini's image generator pipes through the same Imagen backend and produces the same C2PA + SynthID combination."
+        },
+        {
+          "q": "Will my Google account be referenced in metadata?",
+          "a": "The C2PA manifest names Google as producer. Account-level identifiers are not stored in clear text but the assertion list may include hashed session refs."
+        },
+        {
+          "q": "Imagen exports as JPEG — does the quality drop when GhostMeta re-encodes?",
+          "a": "GhostMeta decodes the JPEG to a canvas at full resolution, then re-exports at a fixed 92% quality, so any loss is a single generation and visually negligible for web or marketplace use. It is not lossless: each canvas re-encode is one JPEG pass. For a print master, keep your original and strip a working copy."
+        },
+        {
+          "q": "Which Google surfaces produce these C2PA + IPTC markers?",
+          "a": "The same Imagen backend powers Gemini image generation, ImageFX in AI Test Kitchen and the Whisk tool, so their outputs carry the APP11 C2PA manifest and, when present, the IPTC trainedAlgorithmicMedia source-type value. GhostMeta treats them identically — it strips by reading the actual JPEG segments and metadata blocks, not by trusting a generator name."
+        },
+        {
+          "q": "Will a stock or marketplace ingestion pipeline still see my image as AI after stripping?",
+          "a": "The metadata-based signals it reads — the C2PA APP11 manifest and the IPTC AI source-type field — are gone after GhostMeta, so a metadata scan comes back clean. But Google's SynthID lives in the pixels and survives the re-encode, and pixel-based AI classifiers analyze the image content directly. Stripping metadata removes the declared provenance, not the statistical fingerprint of the pixels."
+        }
       ]
     },
     "fr": {
       "title": "Nettoyer les métadonnées Google Imagen & SynthID",
       "description": "Les sorties Google Imagen et Gemini portent un watermark SynthID plus du C2PA. GhostMeta retire la couche metadata C2PA en navigateur.",
       "h1": "Nettoyer les métadonnées Google Imagen",
-      "intro": "Les sorties Google Imagen et Gemini shippent avec deux couches de provenance : un manifest C2PA Content Credentials dans le segment APP11 JPEG, et un watermark SynthID invisible embarqué au niveau pixel. GhostMeta retire la couche C2PA — ce que la plupart des viewers et plateformes lisent — via re-encodage canvas. SynthID est conçu par la recherche Google pour survivre au re-encodage et nécessiterait une édition destructive ou un remover dédié pour être défait.",
+      "intro": "Les sorties Google Imagen et Gemini shippent avec deux couches de provenance : un manifest C2PA Content Credentials dans le segment APP11 JPEG, et un watermark SynthID invisible embarqué au niveau pixel. GhostMeta retire la couche C2PA — ce que la plupart des viewers et plateformes lisent — via re-encodage canvas. SynthID est conçu par la recherche Google pour survivre au re-encodage et nécessiterait une édition destructive ou un remover dédié pour être défait. Au-dela du manifest APP11, les exports Imagen et Gemini ecrivent souvent une valeur IPTC « Digital Source Type » reglee sur trainedAlgorithmicMedia dans les metadonnees photo XMP / IPTC de l'image — un marqueur IA en clair que les banques d'images et les redactions scannent de plus en plus a l'ingestion, independamment du C2PA. Comme Imagen sort en JPEG, le fichier porte aussi un segment EXIF APP1 standard a cote du segment C2PA APP11 : un nettoyage propre doit donc vider les deux. GhostMeta efface l'EXIF, le marqueur IA IPTC et le manifest C2PA en une seule passe canvas ; le JPEG est re-encode a une haute qualite fixe (92 %), et les pixels — ainsi que le SynthID qui y est grave — restent intacts.",
       "wedge": "nettoyer métadonnées imagen",
       "faq": [
-        { "q": "GhostMeta retire-t-il SynthID ?", "a": "Non. SynthID est un watermark stéganographique pixel conçu par Google DeepMind pour survivre au re-encodage standard. GhostMeta retire la couche metadata C2PA uniquement." },
-        { "q": "Les sorties d'images Gemini sont-elles flaggées pareil ?", "a": "Oui. Le générateur d'image de Gemini passe par le même backend Imagen et produit la même combinaison C2PA + SynthID." },
-        { "q": "Mon compte Google sera-t-il référencé dans les métadonnées ?", "a": "Le manifest C2PA nomme Google comme producteur. Les identifiants compte ne sont pas stockés en clair mais la liste d'assertions peut inclure des refs de session hashées." }
+        {
+          "q": "GhostMeta retire-t-il SynthID ?",
+          "a": "Non. SynthID est un watermark stéganographique pixel conçu par Google DeepMind pour survivre au re-encodage standard. GhostMeta retire la couche metadata C2PA uniquement."
+        },
+        {
+          "q": "Les sorties d'images Gemini sont-elles flaggées pareil ?",
+          "a": "Oui. Le générateur d'image de Gemini passe par le même backend Imagen et produit la même combinaison C2PA + SynthID."
+        },
+        {
+          "q": "Mon compte Google sera-t-il référencé dans les métadonnées ?",
+          "a": "Le manifest C2PA nomme Google comme producteur. Les identifiants compte ne sont pas stockés en clair mais la liste d'assertions peut inclure des refs de session hashées."
+        },
+        {
+          "q": "Imagen sort en JPEG — la qualite baisse-t-elle quand GhostMeta re-encode ?",
+          "a": "GhostMeta decode le JPEG sur un canvas en pleine resolution puis re-exporte a une qualite fixe de 92 % : la perte se limite a une seule generation, visuellement negligeable pour un usage web ou marketplace. Ce n'est pas sans perte : chaque re-encodage canvas est une passe JPEG. Pour un master d'impression, gardez l'original et nettoyez une copie de travail."
+        },
+        {
+          "q": "Quelles surfaces Google produisent ces marqueurs C2PA + IPTC ?",
+          "a": "Le meme backend Imagen alimente la generation d'images Gemini, ImageFX dans AI Test Kitchen et l'outil Whisk : leurs sorties portent donc le manifest C2PA APP11 et, lorsqu'il est present, la valeur IPTC trainedAlgorithmicMedia. GhostMeta les traite de facon identique — il retire en lisant les vrais segments JPEG et blocs de metadonnees, pas en se fiant a un nom de generateur."
+        },
+        {
+          "q": "Une chaine d'ingestion stock ou marketplace verra-t-elle encore mon image comme IA apres strip ?",
+          "a": "Les signaux bases metadonnees qu'elle lit — le manifest C2PA APP11 et le champ IPTC de type source IA — disparaissent apres GhostMeta, donc un scan de metadonnees revient propre. Mais le SynthID de Google vit dans les pixels et survit au re-encodage, et les classifieurs IA bases pixel analysent directement le contenu de l'image. Retirer les metadonnees efface la provenance declaree, pas l'empreinte statistique des pixels."
+        }
       ]
     }
   },
@@ -326,24 +788,66 @@
       "title": "AI Image Anonymizer — Strip All Provenance",
       "description": "Anonymize any AI-generated image in one click: strip C2PA, EXIF, XMP, IPTC, generator signatures. 100% browser, free, no signup.",
       "h1": "AI image anonymizer",
-      "intro": "If you reuse AI-generated images for client work, marketing collateral, dropshipping listings or social posts, every embedded provenance signal is a leak vector. C2PA manifests announce the generator. EXIF reveals the editing chain. XMP carries the prompt. The cumulative fingerprint is enough for an automated platform to flag the image as AI-generated and demote, label, or reject it. GhostMeta is a one-click anonymizer: drop any image, get back a clean copy stripped of every metadata layer, all in your browser.",
+      "intro": "If you reuse AI-generated images for client work, marketing collateral, dropshipping listings or social posts, every embedded provenance signal is a leak vector. C2PA manifests announce the generator. EXIF reveals the editing chain. XMP carries the prompt. The cumulative fingerprint is enough for an automated platform to flag the image as AI-generated and demote, label, or reject it. GhostMeta is a one-click anonymizer: drop any image, get back a clean copy stripped of every metadata layer, all in your browser. A mixed batch is the hard case: a JPEG from Imagen hides its claim in an APP11 segment, a PNG from Stable Diffusion scatters it across tEXt and iTXt chunks, and a Firefly export wraps a JUMBF box — three different containers, one pass each. GhostMeta normalizes them all by decoding to a canvas and re-encoding, so the output carries no APP11, no caBX, no text chunk, regardless of which model made it. On a stock or print-on-demand marketplace, a single leftover Content Credentials manifest is enough for an automated intake filter to reject the listing or tag it as AI before a human ever reviews it.",
       "wedge": "ai image anonymizer",
       "faq": [
-        { "q": "Will Instagram or LinkedIn detect my image is AI?", "a": "Some platforms now read C2PA manifests and label images. After stripping with GhostMeta the C2PA signal is gone, but content-based AI detectors (which analyze pixels, not metadata) can still flag the image." },
-        { "q": "Is using this against any AI provider's terms?", "a": "Most providers' terms allow you to strip their metadata for downstream use. Check the specific TOS — Adobe, OpenAI and Google generally permit it for non-deceptive use." },
-        { "q": "What's the smallest file I can process?", "a": "Any valid image at least 12 bytes. Below 10 MB processes instantly. Above that the canvas re-encode may exceed mobile memory limits — use desktop." }
+        {
+          "q": "Will Instagram or LinkedIn detect my image is AI?",
+          "a": "Some platforms now read C2PA manifests and label images. After stripping with GhostMeta the C2PA signal is gone, but content-based AI detectors (which analyze pixels, not metadata) can still flag the image."
+        },
+        {
+          "q": "Is using this against any AI provider's terms?",
+          "a": "Most providers' terms allow you to strip their metadata for downstream use. Check the specific TOS — Adobe, OpenAI and Google generally permit it for non-deceptive use."
+        },
+        {
+          "q": "What's the smallest file I can process?",
+          "a": "Any valid image at least 12 bytes. Below 10 MB processes instantly. Above that the canvas re-encode may exceed mobile memory limits — use desktop."
+        },
+        {
+          "q": "I exported the same image to both JPEG and PNG — are they cleaned the same way?",
+          "a": "The cleaning is identical in result but targets different containers. In the JPEG, the provenance lives in an APP1 segment (EXIF/XMP) and an APP11 segment (the C2PA/JUMBF manifest). In the PNG, the same information sits in tEXt or iTXt chunks plus a caBX chunk for C2PA. GhostMeta decodes either format to a canvas and re-encodes, so both outputs come out with those segments and chunks absent."
+        },
+        {
+          "q": "After anonymizing, can anyone tell which tool removed the metadata?",
+          "a": "No. GhostMeta does not add a signature, a comment chunk, or its own XMP block. The re-encoded file simply lacks the original APP11/caBX manifest and any tEXt/iTXt entries — it looks like an ordinary canvas export. There is no GhostMeta marker to trace back, because nothing is written in; metadata is only removed."
+        },
+        {
+          "q": "Does stripping the manifest change the image dimensions or color?",
+          "a": "The pixel grid is preserved at its original resolution up to the 4096px cap, so dimensions are unchanged for typical generator outputs. Re-encoding to JPEG applies lossy compression like any save, while PNG stays lossless. Only the metadata layers — APP11, caBX, EXIF, XMP, IPTC, tEXt, iTXt — are dropped; the visible content is the same image."
+        }
       ]
     },
     "fr": {
       "title": "Anonymiseur d'images IA — Strip toute provenance",
       "description": "Anonymisez n'importe quelle image IA en un clic : C2PA, EXIF, XMP, IPTC, signatures. 100% navigateur, gratuit, sans compte.",
       "h1": "Anonymiseur d'images IA",
-      "intro": "Si vous réutilisez des images IA pour du travail client, du contenu marketing, des listings dropshipping ou des posts sociaux, chaque signal de provenance embarqué est un vecteur de fuite. Les manifests C2PA annoncent le générateur. L'EXIF révèle la chaîne d'édition. Le XMP porte le prompt. L'empreinte cumulée suffit à une plateforme automatisée pour flagger l'image comme IA et la démoter, labeller ou rejeter. GhostMeta est un anonymiseur un-clic : déposez n'importe quelle image, récupérez une copie propre dépouillée de toute couche metadata, tout dans votre navigateur.",
+      "intro": "Si vous réutilisez des images IA pour du travail client, du contenu marketing, des listings dropshipping ou des posts sociaux, chaque signal de provenance embarqué est un vecteur de fuite. Les manifests C2PA annoncent le générateur. L'EXIF révèle la chaîne d'édition. Le XMP porte le prompt. L'empreinte cumulée suffit à une plateforme automatisée pour flagger l'image comme IA et la démoter, labeller ou rejeter. GhostMeta est un anonymiseur un-clic : déposez n'importe quelle image, récupérez une copie propre dépouillée de toute couche metadata, tout dans votre navigateur. Le cas difficile, c'est le lot hétérogène : un JPEG d'Imagen cache sa revendication dans un segment APP11, un PNG de Stable Diffusion l'éparpille entre des chunks tEXt et iTXt, et un export Firefly l'enveloppe dans une box JUMBF — trois conteneurs différents, une passe chacun. GhostMeta les ramène tous au même point en décodant l'image sur un canvas puis en la ré-encodant : la sortie ne porte plus aucun APP11, aucun caBX, aucun chunk de texte, quel que soit le modèle d'origine. Sur un marketplace stock ou de print-on-demand, un seul manifest Content Credentials oublié suffit à faire rejeter l'annonce par un filtre d'ingestion automatique, ou à la marquer comme IA avant même qu'un humain la regarde.",
       "wedge": "anonymiseur image IA",
       "faq": [
-        { "q": "Instagram ou LinkedIn vont-ils détecter que mon image est IA ?", "a": "Certaines plateformes lisent maintenant les manifests C2PA et labellisent les images. Après strip avec GhostMeta le signal C2PA est parti, mais les détecteurs IA basés contenu (qui analysent les pixels, pas les métadonnées) peuvent encore flagger." },
-        { "q": "Est-ce contre les conditions d'usage des providers IA ?", "a": "La plupart des conditions des providers permettent de retirer leurs métadonnées pour usage downstream. Vérifiez les TOS spécifiques — Adobe, OpenAI et Google le permettent généralement pour usage non-trompeur." },
-        { "q": "Quelle est la taille minimum de fichier traitable ?", "a": "Toute image valide d'au moins 12 octets. Sous 10 MB traitement instantané. Au-dessus le re-encodage canvas peut dépasser les limites mémoire mobile — passez sur desktop." }
+        {
+          "q": "Instagram ou LinkedIn vont-ils détecter que mon image est IA ?",
+          "a": "Certaines plateformes lisent maintenant les manifests C2PA et labellisent les images. Après strip avec GhostMeta le signal C2PA est parti, mais les détecteurs IA basés contenu (qui analysent les pixels, pas les métadonnées) peuvent encore flagger."
+        },
+        {
+          "q": "Est-ce contre les conditions d'usage des providers IA ?",
+          "a": "La plupart des conditions des providers permettent de retirer leurs métadonnées pour usage downstream. Vérifiez les TOS spécifiques — Adobe, OpenAI et Google le permettent généralement pour usage non-trompeur."
+        },
+        {
+          "q": "Quelle est la taille minimum de fichier traitable ?",
+          "a": "Toute image valide d'au moins 12 octets. Sous 10 MB traitement instantané. Au-dessus le re-encodage canvas peut dépasser les limites mémoire mobile — passez sur desktop."
+        },
+        {
+          "q": "J'ai exporté la même image en JPEG et en PNG — sont-elles nettoyées de la même façon ?",
+          "a": "Le nettoyage donne le même résultat mais vise des conteneurs différents. Dans le JPEG, la provenance vit dans un segment APP1 (EXIF/XMP) et un segment APP11 (le manifest C2PA/JUMBF). Dans le PNG, la même information se trouve dans des chunks tEXt ou iTXt plus un chunk caBX pour le C2PA. GhostMeta décode l'un ou l'autre format sur un canvas puis le ré-encode, donc les deux sorties ressortent sans ces segments ni ces chunks."
+        },
+        {
+          "q": "Après anonymisation, peut-on savoir quel outil a retiré les métadonnées ?",
+          "a": "Non. GhostMeta n'ajoute ni signature, ni chunk de commentaire, ni bloc XMP qui lui serait propre. Le fichier ré-encodé est simplement dépourvu du manifest APP11/caBX d'origine et de toute entrée tEXt/iTXt — il ressemble à un export canvas ordinaire. Aucun marqueur GhostMeta n'est traçable, parce que rien n'est écrit : les métadonnées sont seulement retirées."
+        },
+        {
+          "q": "Retirer le manifest change-t-il les dimensions ou la couleur de l'image ?",
+          "a": "La grille de pixels est conservée à sa résolution d'origine jusqu'au plafond de 4096px, donc les dimensions restent inchangées pour des sorties de générateur classiques. Le ré-encodage en JPEG applique une compression avec perte comme toute sauvegarde, tandis que le PNG reste sans perte. Seules les couches de métadonnées — APP11, caBX, EXIF, XMP, IPTC, tEXt, iTXt — sont retirées ; le contenu visible reste la même image."
+        }
       ]
     }
   },
@@ -355,24 +859,66 @@
       "title": "Browser C2PA Remover — No Upload, No Signup",
       "description": "Remove C2PA Content Credentials from JPEG and PNG entirely in your browser. No upload, no signup, no Adobe Bridge needed.",
       "h1": "Browser-based C2PA remover",
-      "intro": "Most C2PA tooling is desktop-only and ships through Adobe Bridge, c2patool CLI, or commercial pipelines that re-upload your file. GhostMeta is the simple alternative: a pure-browser C2PA remover that detects the JUMBF box, identifies the claim_generator (Sora, Midjourney, Adobe, OpenAI, Google), and strips the manifest via canvas re-encode in milliseconds. No account, no upload, no install. Open the page, drop your image, download a clean copy.",
+      "intro": "Most C2PA tooling is desktop-only and ships through Adobe Bridge, c2patool CLI, or commercial pipelines that re-upload your file. GhostMeta is the simple alternative: a pure-browser C2PA remover that detects the JUMBF box, identifies the claim_generator (Sora, Midjourney, Adobe, OpenAI, Google), and strips the manifest via canvas re-encode in milliseconds. No account, no upload, no install. Open the page, drop your image, download a clean copy. Because everything runs client-side, the tool works fully offline — load the page once, switch on airplane mode, and you can still process files, which is the surest proof nothing is uploaded. This matters for the common case of cleaning a screenshot or marketplace listing image on a work laptop where a desktop install or an outbound upload is blocked by IT policy. After stripping, you can confirm the result by re-opening the clean file in any public Content Credentials viewer (contentcredentials.org/verify): a stripped image returns \"no Content Credentials found\" instead of the original manifest.",
       "wedge": "browser c2pa remover",
       "faq": [
-        { "q": "How does this differ from Adobe's c2patool?", "a": "c2patool is a CLI binary that runs locally but requires installation and a Rust toolchain. GhostMeta runs in any modern browser without install. For batch ops c2patool is faster; for one-off cleanup GhostMeta is friction-free." },
-        { "q": "Does the manifest reattach if I save the image again?", "a": "Only if the saving tool re-adds it (Photoshop with Content Credentials enabled, Adobe Bridge, etc). A normal Windows/macOS Save As keeps the file clean." },
-        { "q": "What formats are supported for C2PA strip?", "a": "JPEG (APP11 segment) and PNG (caBX chunk) in v1. WebP and HEIC support is in progress." }
+        {
+          "q": "How does this differ from Adobe's c2patool?",
+          "a": "c2patool is a CLI binary that runs locally but requires installation and a Rust toolchain. GhostMeta runs in any modern browser without install. For batch ops c2patool is faster; for one-off cleanup GhostMeta is friction-free."
+        },
+        {
+          "q": "Does the manifest reattach if I save the image again?",
+          "a": "Only if the saving tool re-adds it (Photoshop with Content Credentials enabled, Adobe Bridge, etc). A normal Windows/macOS Save As keeps the file clean."
+        },
+        {
+          "q": "What formats are supported for C2PA strip?",
+          "a": "JPEG (APP11 segment) and PNG (caBX chunk) in v1. WebP and HEIC support is in progress."
+        },
+        {
+          "q": "What exactly is inside the JUMBF box that gets removed?",
+          "a": "A C2PA manifest is stored in a JUMBF (JPEG Universal Metadata Box Format) container holding a claim, an assertion store, and a cryptographic signature. The claim references a content_binding hash of the image bytes; the assertions list the generator, edits, and timestamps; the signature is the producer's certificate chain. GhostMeta drops the whole JUMBF structure during canvas re-encode rather than editing individual boxes, so no partial manifest fragment is left behind."
+        },
+        {
+          "q": "Why is a browser tool more auditable than a desktop one?",
+          "a": "You can open your browser's developer tools, watch the Network tab while you process a file, and confirm zero outbound requests are made. With a desktop binary or a server-side API you have to trust a privacy policy instead of observing the behavior. The processing happens via the Canvas API on the page you already loaded, so the network panel staying empty is direct, reproducible evidence."
+        },
+        {
+          "q": "Will a stripped image still display and upload normally everywhere?",
+          "a": "Yes. Removing the C2PA manifest only deletes the metadata layer; the decoded pixels are re-encoded to a standard JPEG or PNG that opens, displays, and uploads like any ordinary image. Content Credentials are optional provenance data, not a format requirement, so a clean file is not rejected by viewers or upload forms — a C2PA viewer simply reports no credentials present instead of the original signature."
+        }
       ]
     },
     "fr": {
       "title": "Remover C2PA navigateur — sans upload, sans compte",
       "description": "Retirez les Content Credentials C2PA de JPEG et PNG entièrement dans votre navigateur. Sans upload, sans compte, sans Adobe Bridge.",
       "h1": "Remover C2PA en navigateur",
-      "intro": "La plupart des outils C2PA sont desktop-only et passent par Adobe Bridge, le CLI c2patool ou des pipelines commerciaux qui ré-uploadent votre fichier. GhostMeta est l'alternative simple : un remover C2PA pure-navigateur qui détecte la box JUMBF, identifie le claim_generator (Sora, Midjourney, Adobe, OpenAI, Google) et retire le manifest via re-encodage canvas en millisecondes. Pas de compte, pas d'upload, pas d'install. Ouvrez la page, déposez votre image, téléchargez une copie propre.",
+      "intro": "La plupart des outils C2PA sont desktop-only et passent par Adobe Bridge, le CLI c2patool ou des pipelines commerciaux qui ré-uploadent votre fichier. GhostMeta est l'alternative simple : un remover C2PA pure-navigateur qui détecte la box JUMBF, identifie le claim_generator (Sora, Midjourney, Adobe, OpenAI, Google) et retire le manifest via re-encodage canvas en millisecondes. Pas de compte, pas d'upload, pas d'install. Ouvrez la page, déposez votre image, téléchargez une copie propre. Comme tout s'exécute côté client, l'outil fonctionne entièrement hors ligne — chargez la page une fois, passez en mode avion, et vous pouvez toujours traiter vos fichiers : c'est la preuve la plus directe qu'aucun upload n'a lieu. Pratique pour nettoyer une capture d'écran ou une photo de listing depuis un poste de travail où une installation logicielle ou un envoi sortant est bloqué par la DSI. Après le strip, vérifiez le résultat en rouvrant le fichier propre dans n'importe quel viewer Content Credentials public (contentcredentials.org/verify) : une image nettoyée renvoie « aucun Content Credentials trouvé » au lieu du manifest d'origine.",
       "wedge": "remover c2pa navigateur",
       "faq": [
-        { "q": "En quoi diffère-t-il de c2patool d'Adobe ?", "a": "c2patool est un binaire CLI qui tourne localement mais nécessite installation et toolchain Rust. GhostMeta tourne dans tout navigateur moderne sans install. Pour le batch c2patool est plus rapide ; pour un nettoyage ponctuel GhostMeta est sans friction." },
-        { "q": "Le manifest se ré-attache-t-il si je sauve à nouveau l'image ?", "a": "Seulement si l'outil de sauvegarde le ré-ajoute (Photoshop avec Content Credentials activé, Adobe Bridge, etc.). Un Save As Windows/macOS standard garde le fichier propre." },
-        { "q": "Quels formats supportent le strip C2PA ?", "a": "JPEG (segment APP11) et PNG (chunk caBX) en v1. Support WebP et HEIC en cours." }
+        {
+          "q": "En quoi diffère-t-il de c2patool d'Adobe ?",
+          "a": "c2patool est un binaire CLI qui tourne localement mais nécessite installation et toolchain Rust. GhostMeta tourne dans tout navigateur moderne sans install. Pour le batch c2patool est plus rapide ; pour un nettoyage ponctuel GhostMeta est sans friction."
+        },
+        {
+          "q": "Le manifest se ré-attache-t-il si je sauve à nouveau l'image ?",
+          "a": "Seulement si l'outil de sauvegarde le ré-ajoute (Photoshop avec Content Credentials activé, Adobe Bridge, etc.). Un Save As Windows/macOS standard garde le fichier propre."
+        },
+        {
+          "q": "Quels formats supportent le strip C2PA ?",
+          "a": "JPEG (segment APP11) et PNG (chunk caBX) en v1. Support WebP et HEIC en cours."
+        },
+        {
+          "q": "Que contient exactement la box JUMBF qui est retirée ?",
+          "a": "Un manifest C2PA est stocké dans un conteneur JUMBF (JPEG Universal Metadata Box Format) regroupant un claim, un assertion store et une signature cryptographique. Le claim référence un hash content_binding des octets de l'image ; les assertions listent le générateur, les éditions et les horodatages ; la signature porte la chaîne de certificats du producteur. GhostMeta retire toute la structure JUMBF lors du re-encodage canvas plutôt que d'éditer les box une à une, donc aucun fragment de manifest partiel ne subsiste."
+        },
+        {
+          "q": "Pourquoi un outil navigateur est-il plus vérifiable qu'un outil desktop ?",
+          "a": "Vous pouvez ouvrir les outils développeur du navigateur, surveiller l'onglet Réseau pendant le traitement et confirmer qu'aucune requête sortante n'est émise. Avec un binaire desktop ou une API serveur, vous devez faire confiance à une politique de confidentialité au lieu d'observer le comportement. Le traitement passe par l'API Canvas sur la page déjà chargée : un panneau réseau qui reste vide est une preuve directe et reproductible."
+        },
+        {
+          "q": "Une image nettoyée s'affiche-t-elle et s'uploade-t-elle normalement partout ?",
+          "a": "Oui. Retirer le manifest C2PA supprime seulement la couche de métadonnées ; les pixels décodés sont ré-encodés en un JPEG ou PNG standard qui s'ouvre, s'affiche et s'uploade comme n'importe quelle image ordinaire. Les Content Credentials sont des données de provenance optionnelles, pas une exigence du format : un fichier propre n'est donc pas rejeté par les viewers ni les formulaires d'upload — un viewer C2PA indique simplement qu'aucun credential n'est présent au lieu de la signature d'origine."
+        }
       ]
     }
   }
