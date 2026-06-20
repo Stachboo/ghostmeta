@@ -56,11 +56,15 @@ function buildHtml(lang, base, { title, description, ogType = 'website', bodyCon
 
   const seoHead = [
     `<title>${escHtml(title)}</title>`,
-    `<meta name="description" content="${escAttr(description)}">`,
-    `<link rel="canonical" href="${escAttr(canonical)}">`,
-    `<link rel="alternate" hreflang="fr" href="${escAttr(frUrl)}">`,
-    `<link rel="alternate" hreflang="en" href="${escAttr(enUrl)}">`,
-    `<link rel="alternate" hreflang="x-default" href="${escAttr(frUrl)}">`,
+    // data-rh="true" : marque ces balises comme "possédées" par react-helmet-async.
+    // Au montage, Helmet remplace les [data-rh] existantes au lieu d'en ajouter une 2e
+    // série → supprime les doublons canonical/description/hreflang vus par les crawlers
+    // qui exécutent le JS (cf. audit SE Ranking 175207 : 46 pages canonical_multiple).
+    `<meta name="description" content="${escAttr(description)}" data-rh="true">`,
+    `<link rel="canonical" href="${escAttr(canonical)}" data-rh="true">`,
+    `<link rel="alternate" hreflang="fr" href="${escAttr(frUrl)}" data-rh="true">`,
+    `<link rel="alternate" hreflang="en" href="${escAttr(enUrl)}" data-rh="true">`,
+    `<link rel="alternate" hreflang="x-default" href="${escAttr(frUrl)}" data-rh="true">`,
     `<meta property="og:type" content="${escAttr(ogType)}">`,
     `<meta property="og:title" content="${escAttr(title)}">`,
     `<meta property="og:description" content="${escAttr(description)}">`,
