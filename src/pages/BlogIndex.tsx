@@ -7,7 +7,7 @@ import { BookOpen, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LocaleLink from "@/components/LocaleLink";
-import { seoUrls } from "@/lib/locale";
+import { seoUrls, localeFromPath } from "@/lib/locale";
 
 const BLOG_SLUGS = [
   "vinted-securite-photo-guide",
@@ -28,14 +28,23 @@ export default function BlogIndex() {
   const { pathname } = useLocation();
   const seo = seoUrls(pathname);
   const canonicalUrl = seo.canonical;
+  const isEn = localeFromPath(pathname) === "en";
 
   return (
     <div className="min-h-screen bg-ghost-dark text-foreground font-sans">
       <Helmet>
-        <title>Blog GhostMeta | Guides Confidentialit&eacute; Photo</title>
+        <title>
+          {isEn
+            ? "GhostMeta Blog | Image privacy, EXIF/GPS & C2PA guides"
+            : "Blog GhostMeta | Image privacy, EXIF/GPS & C2PA guides"}
+        </title>
         <meta
           name="description"
-          content="Guides pratiques pour prot&eacute;ger votre vie priv&eacute;e en ligne : supprimer les m&eacute;tadonn&eacute;es EXIF, s&eacute;curiser vos photos Vinted, comprendre les donn&eacute;es GPS cach&eacute;es."
+          content={
+            isEn
+              ? "Practical guides to protect your images: remove EXIF/GPS metadata, understand C2PA Content Credentials, clean AI fingerprints (Sora, Midjourney, DALL-E), secure your photos before publishing."
+              : "Guides pratiques pour protéger vos images : supprimer métadonnées EXIF/GPS, comprendre les Content Credentials C2PA, nettoyer les empreintes IA (Sora, Midjourney, DALL-E), sécuriser vos photos avant publication."
+          }
         />
         <link rel="canonical" href={seo.canonical} />
         <link rel="alternate" hrefLang="fr" href={seo.fr} />
@@ -44,11 +53,19 @@ export default function BlogIndex() {
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
-          content="Blog GhostMeta | Guides Confidentialit&eacute; Photo"
+          content={
+            isEn
+              ? "GhostMeta Blog | Image privacy, EXIF/GPS & C2PA guides"
+              : "Blog GhostMeta | Image privacy, EXIF/GPS & C2PA guides"
+          }
         />
         <meta
           property="og:description"
-          content="Guides pratiques pour prot&eacute;ger votre vie priv&eacute;e en ligne : supprimer les m&eacute;tadonn&eacute;es EXIF, s&eacute;curiser vos photos Vinted."
+          content={
+            isEn
+              ? "Practical guides to protect your images: remove EXIF/GPS metadata, understand C2PA Content Credentials, clean AI fingerprints."
+              : "Guides pratiques pour protéger vos images : supprimer métadonnées EXIF/GPS, comprendre les Content Credentials C2PA, nettoyer les empreintes IA."
+          }
         />
         <meta property="og:url" content={canonicalUrl} />
         <meta
@@ -58,11 +75,19 @@ export default function BlogIndex() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Blog GhostMeta | Guides Confidentialit&eacute; Photo"
+          content={
+            isEn
+              ? "GhostMeta Blog | Image privacy, EXIF/GPS & C2PA guides"
+              : "Blog GhostMeta | Image privacy, EXIF/GPS & C2PA guides"
+          }
         />
         <meta
           name="twitter:description"
-          content="Guides pratiques pour prot&eacute;ger votre vie priv&eacute;e en ligne."
+          content={
+            isEn
+              ? "Practical guides to protect your online privacy and your photos."
+              : "Guides pratiques pour protéger votre vie privée en ligne et vos photos."
+          }
         />
       </Helmet>
 
