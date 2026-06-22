@@ -135,16 +135,16 @@ const T = {
     en: 'Practical tips to protect your online privacy and secure your photos before publishing.',
   },
   toolsTitle: {
-    fr: 'Outils confidentialité image IA — Strip C2PA, métadonnées & watermarks | GhostMeta',
-    en: 'AI Image Privacy Tools — Strip C2PA, Metadata & Watermarks | GhostMeta',
+    fr: 'Outils confidentialité image IA — Strip C2PA, métadonnées & empreintes | GhostMeta',
+    en: 'AI Image Privacy Tools — Strip C2PA, Metadata & Fingerprints | GhostMeta',
   },
   toolsDesc: {
     fr: "13 outils gratuits en navigateur pour retirer les Content Credentials C2PA, l'EXIF/GPS et les empreintes IA de Sora, Midjourney, DALL-E, ChatGPT, Firefly, Flux et plus. Sans upload.",
     en: '13 free in-browser tools to remove C2PA Content Credentials, EXIF/GPS and AI fingerprints from Sora, Midjourney, DALL-E, ChatGPT, Firefly, Flux and more. No upload.',
   },
   toolsH1: {
-    fr: 'Outils confidentialité image IA — Strip C2PA, métadonnées &amp; watermarks',
-    en: 'AI image privacy tools — strip C2PA, metadata &amp; watermarks',
+    fr: 'Outils confidentialité image IA — Strip C2PA, métadonnées &amp; empreintes',
+    en: 'AI image privacy tools — strip C2PA, metadata &amp; fingerprints',
   },
   toolsIntro: {
     fr: "13 outils gratuits en navigateur pour retirer les Content Credentials C2PA, l'EXIF/GPS et les empreintes IA des images générées par Sora, Midjourney, DALL-E, ChatGPT, Firefly, Flux et plus. Sans upload.",

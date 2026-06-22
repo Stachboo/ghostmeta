@@ -50,6 +50,20 @@ async function lookupKey(keyHash) {
   return rows[0] || null;
 }
 
+// Entitlement serveur : l'accès API est réservé aux comptes Pro/premium (ou essai
+// actif), cohérent avec le gate UI (hasFullAccess). Empêche un compte gratuit
+// d'utiliser l'API B2B via une clé créée hors interface.
+async function isUserEntitled(userId) {
+  const url = `profiles?select=is_premium,trial_ends_at&id=eq.${userId}&limit=1`;
+  const res = await supabaseFetch(url);
+  if (!res.ok) return false;
+  const row = (await res.json())[0];
+  if (!row) return false;
+  if (row.is_premium === true) return true;
+  if (row.trial_ends_at && new Date(row.trial_ends_at) > new Date()) return true;
+  return false;
+}
+
 async function countCallsToday(userId, endpoint) {
   const since = new Date();
   since.setUTCHours(0, 0, 0, 0);
@@ -94,6 +108,9 @@ export async function authenticateRequest(req, endpoint) {
   }
   if (row.revoked_at) {
     return { ok: false, status: 401, error: 'API key has been revoked' };
+  }
+  if (!(await isUserEntitled(row.user_id))) {
+    return { ok: false, status: 403, error: 'API access requires an active Pro plan' };
   }
   const used = await countCallsToday(row.user_id, endpoint);
   const quota = endpoint === 'strip' ? DAILY_QUOTA_STRIP : DAILY_QUOTA_INSPECT;

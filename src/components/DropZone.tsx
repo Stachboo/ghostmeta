@@ -77,7 +77,7 @@ export default function DropZone({ onFilesAdded, hasImages, isProcessing }: Drop
 
         <div className="space-y-1">
           <p className="text-lg font-medium text-foreground">
-            {isDragActive ? 'Drop it like it\'s hot!' : t('upload.drop_title')}
+            {isDragActive ? t('upload.drop_active') : t('upload.drop_title')}
           </p>
           <p className="text-sm text-muted-foreground">
             {t('upload.drop_subtitle')}

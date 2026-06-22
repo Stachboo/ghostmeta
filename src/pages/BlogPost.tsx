@@ -15,10 +15,10 @@ import DOMPurify from 'dompurify';
 // Dates de publication par article (source : sitemap.xml)
 const BLOG_DATES: Record<string, string> = {
   'vinted-securite-photo-guide': '2026-02-17',
-  'supprimer-exif-iphone-android': '2026-02-17',
-  'comprendre-donnees-exif-gps': '2026-02-17',
-  'nettoyage-photo-local-vs-cloud': '2026-02-17',
-  'ghostmeta-manifeste-confidentialite': '2026-02-17',
+  'supprimer-exif-iphone-android': '2026-03-11',
+  'comprendre-donnees-exif-gps': '2026-04-02',
+  'nettoyage-photo-local-vs-cloud': '2026-04-24',
+  'ghostmeta-manifeste-confidentialite': '2026-05-19',
 };
 
 export default function BlogPost() {

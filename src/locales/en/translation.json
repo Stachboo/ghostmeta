@@ -123,6 +123,7 @@
   },
   "upload": {
     "drop_title": "Drop your photos here",
+    "drop_active": "Drop it like it's hot!",
     "drop_subtitle": "JPEG · PNG · WebP · HEIC — 100% Local Processing",
     "browse": "or browse your files",
     "processing": "Analyzing...",
@@ -285,7 +286,7 @@
       },
       "2": {
         "title": "2. Data",
-        "content": "No personal data collection."
+        "content": "Your images and their metadata are never collected (100% local processing). For an account, only your email is stored (Supabase authentication). Anonymous audience metrics (Vercel Analytics) subject to your consent. Data is never sold."
       },
       "3": {
         "title": "3. Storage",
@@ -312,7 +313,7 @@
     }
   },
   "consent": {
-    "text": "GhostMeta uses anonymous audience metrics (Vercel Analytics) to improve the service. No photos or personal data are collected.",
+    "text": "GhostMeta uses anonymous audience metrics (Vercel Analytics) to improve the service, subject to your consent. Your photos never leave your device.",
     "accept": "Accept",
     "refuse": "Decline",
     "learn_more": "Learn more"

@@ -115,6 +115,14 @@ function ScrollToTop() {
     document.documentElement.lang = loc;
   }, [pathname]);
 
+  // Retire les JSON-LD prérendus (data-prerender) au mount : Helmet réinjecte la
+  // version runtime → évite le schema en double pour les crawlers qui exécutent le JS.
+  useEffect(() => {
+    document
+      .querySelectorAll('script[type="application/ld+json"][data-prerender="true"]')
+      .forEach((el) => el.remove());
+  }, []);
+
   return null;
 }
 

@@ -123,6 +123,7 @@
   },
   "upload": {
     "drop_title": "Déposez vos photos ici",
+    "drop_active": "Lâchez tout, c'est parti !",
     "drop_subtitle": "JPEG · PNG · WebP · HEIC — Traitement 100% Local",
     "browse": "ou parcourir vos fichiers",
     "processing": "Analyse...",
@@ -285,7 +286,7 @@
       },
       "2": {
         "title": "2. Données",
-        "content": "Aucune collecte de données personnelles."
+        "content": "Vos images et leurs métadonnées ne sont jamais collectées (traitement 100% local). Pour un compte, seul votre email est conservé (authentification Supabase). Mesure d'audience anonyme (Vercel Analytics) soumise à votre consentement. Aucune revente de données."
       },
       "3": {
         "title": "3. Stockage",
@@ -312,7 +313,7 @@
     }
   },
   "consent": {
-    "text": "GhostMeta utilise des mesures d'audience anonymes (Vercel Analytics) pour améliorer le service. Aucune photo ni donnée personnelle n'est collectée.",
+    "text": "GhostMeta utilise des mesures d'audience anonymes (Vercel Analytics) pour améliorer le service, soumises à votre consentement. Vos photos ne quittent jamais votre appareil.",
     "accept": "Accepter",
     "refuse": "Refuser",
     "learn_more": "En savoir plus"

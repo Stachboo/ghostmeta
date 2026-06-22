@@ -100,7 +100,7 @@ export default function Home() {
       <Helmet>
         <title>{i18n.language === "fr" ? "GhostMeta — Supprimer les métadonnées EXIF, GPS & C2PA de vos images" : "GhostMeta | Strip EXIF, GPS & C2PA Content Credentials — 100% Browser"}</title>
         <meta name="description" content="Supprimez EXIF, GPS, Content Credentials C2PA et empreintes IA de vos images. Compatible Sora, Midjourney, DALL-E, ChatGPT, Adobe Firefly. 100% navigateur, zéro upload." />
-        <meta name="keywords" content="C2PA, Content Credentials, supprimer watermark IA, Sora, Midjourney, DALL-E, ChatGPT, supprimer EXIF, GPS photo, métadonnées image, AI image privacy, Vinted, Leboncoin" />
+        <meta name="keywords" content="C2PA, Content Credentials, supprimer métadonnées IA, Sora, Midjourney, DALL-E, ChatGPT, supprimer EXIF, GPS photo, métadonnées image, AI image privacy, Vinted, Leboncoin" />
         <link rel="canonical" href={seo.canonical} />
         <link rel="alternate" hrefLang="fr" href={seo.fr} />
         <link rel="alternate" hrefLang="en" href={seo.en} />

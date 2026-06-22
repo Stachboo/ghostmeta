@@ -26,6 +26,19 @@ export default function AuthButton() {
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) return;
+    // Applique réellement les règles annoncées (auth.password_rules) au signup
+    if (
+      isSignUp &&
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(password)
+    ) {
+      toast.error(
+        t(
+          "auth.password_rules",
+          "8+ caractères avec majuscule, minuscule, chiffre et caractère spécial"
+        )
+      );
+      return;
+    }
     setSubmitting(true);
 
     try {
