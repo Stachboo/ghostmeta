@@ -160,7 +160,7 @@ export default function AuthButton() {
                 <span className="w-full border-t border-zinc-800" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-zinc-950 px-2 text-zinc-500">
+                <span className="bg-zinc-950 px-2 text-zinc-400">
                   {t("auth.or", "ou")}
                 </span>
               </div>
@@ -195,7 +195,7 @@ export default function AuthButton() {
                   className="h-11 bg-zinc-900 border-zinc-700 text-white placeholder:text-zinc-500"
                 />
                 {isSignUp && (
-                  <p className="text-[10px] text-zinc-500 mt-1 px-1">
+                  <p className="text-[10px] text-zinc-400 mt-1 px-1">
                     {t(
                       "auth.password_rules",
                       "Min. 6 caractères : majuscule, minuscule, chiffre et caractère spécial"
@@ -218,7 +218,7 @@ export default function AuthButton() {
             </form>
 
             {/* Toggle inscription / connexion */}
-            <p className="text-center text-xs text-zinc-500">
+            <p className="text-center text-xs text-zinc-400">
               {isSignUp
                 ? t("auth.has_account", "Déjà un compte ?")
                 : t("auth.no_account", "Pas encore de compte ?")}{" "}

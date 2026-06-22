@@ -32,7 +32,7 @@ export default function Footer() {
       <footer className="border-t border-border/30 mt-20 py-8">
         <div className="container">
           {/* Barre de confiance — texte unifié */}
-          <p className="text-center text-[0.8rem] text-[#888] mb-6">
+          <p className="text-center text-[0.8rem] text-zinc-400 mb-6">
             {"SSL A+ · Security A · Mozilla B+ · 100% Client-Side · RGPD Conforme"}
           </p>
 
@@ -180,7 +180,7 @@ export default function Footer() {
             <h3 className="text-foreground font-semibold mt-4">{t('legal.notice_sections.3.title')}</h3>
             <p>{t('legal.notice_sections.3.content')}</p>
 
-            <p className="text-xs text-muted-foreground/60 mt-6">
+            <p className="text-xs text-muted-foreground/80 mt-6">
               TVA non applicable.
             </p>
           </div>

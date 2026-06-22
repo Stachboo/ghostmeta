@@ -9,9 +9,12 @@ import PWAInstallPrompt from './components/PWAInstallPrompt';
 import ConsentBanner from './components/ConsentBanner';
 import i18n from './i18n';
 import { localeFromPath } from '@/lib/locale';
+// Home chargé en statique (eager) : c'est la route d'entrée la plus visitée et
+// l'élément LCP (hero). L'extraire du lazy retire un aller-retour de chunk du
+// chemin critique → LCP mobile plus rapide. Les autres routes restent lazy.
+import Home from './pages/Home';
 
 // Imports dynamiques (Optimisation pour charger le site vite)
-const Home = lazy(() => import('./pages/Home'));
 const BlogIndex = lazy(() => import('./pages/BlogIndex'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const PricingPage = lazy(() => import('./pages/PricingPage'));
