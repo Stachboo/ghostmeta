@@ -9,8 +9,9 @@
  * téléchargent jamais.
  */
 
-import ExifReader from 'exifreader';
 import DOMPurify from 'dompurify';
+// ExifReader (lib lourde) chargé dynamiquement au 1er scan d'image (extractMetadata)
+// → retiré du chunk d'entrée boot-critique. Cf. fix LCP : Home reste eager mais léger.
 import { logSecurityEvent } from "@/lib/security-logger";
 import { detectC2PA, type C2PAInfo } from "@/lib/c2pa-detector";
 
@@ -91,6 +92,7 @@ export async function extractMetadata(file: File): Promise<MetadataInfo> {
   let raw: Record<string, unknown> = {};
 
   try {
+    const { default: ExifReader } = await import('exifreader');
     const tags = ExifReader.load(buffer, { expanded: true });
 
     if (tags.exif) Object.assign(raw, tags.exif);
