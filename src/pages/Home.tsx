@@ -98,7 +98,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-ghost-dark font-sans text-white">
       <Helmet>
-        <title>{i18n.language === "fr" ? "GhostMeta — Supprimer les métadonnées EXIF, GPS & C2PA de vos images" : "GhostMeta | Strip EXIF, GPS, C2PA & AI Watermarks — 100% Browser"}</title>
+        <title>{i18n.language === "fr" ? "GhostMeta — Supprimer les métadonnées EXIF, GPS & C2PA de vos images" : "GhostMeta | Strip EXIF, GPS & C2PA Content Credentials — 100% Browser"}</title>
         <meta name="description" content="Supprimez EXIF, GPS, Content Credentials C2PA et empreintes IA de vos images. Compatible Sora, Midjourney, DALL-E, ChatGPT, Adobe Firefly. 100% navigateur, zéro upload." />
         <meta name="keywords" content="C2PA, Content Credentials, supprimer watermark IA, Sora, Midjourney, DALL-E, ChatGPT, supprimer EXIF, GPS photo, métadonnées image, AI image privacy, Vinted, Leboncoin" />
         <link rel="canonical" href={seo.canonical} />
@@ -108,17 +108,17 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="GhostMeta" />
         <meta property="og:url" content={seo.canonical} />
-        <meta property="og:title" content="Strip EXIF, GPS, C2PA &amp; AI Watermarks from any image" />
+        <meta property="og:title" content="Strip EXIF, GPS &amp; C2PA Content Credentials from any image" />
         <meta property="og:description" content="GhostMeta supprime métadonnées EXIF/GPS et Content Credentials C2PA de vos images IA (Sora, Midjourney, DALL-E) — 100% dans votre navigateur." />
         <meta property="og:locale" content="fr_FR" />
         <meta property="og:image" content="https://www.ghostmeta.online/og-image-v2.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="image/jpeg" />
-        <meta property="og:image:alt" content="GhostMeta — Strip EXIF, GPS, C2PA Content Credentials and AI watermarks from any image" />
+        <meta property="og:image:alt" content="GhostMeta — Strip EXIF, GPS and C2PA Content Credentials from any image" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="GhostMeta — Image privacy &amp; AI fingerprint cleaner" />
-        <meta name="twitter:description" content="Strip EXIF, GPS, C2PA &amp; AI watermarks in 1 click. 100% browser, zero upload." />
+        <meta name="twitter:description" content="Strip EXIF, GPS &amp; C2PA Content Credentials in 1 click. 100% browser, zero upload." />
         <meta name="twitter:image" content="https://www.ghostmeta.online/og-image-v2.jpg" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",

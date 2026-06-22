@@ -42,8 +42,8 @@ export default function ToolsIndex() {
   const locale = localeFromPath(pathname);
   const canonicalUrl = seo.canonical;
   const title = isEn
-    ? "AI Image Privacy Tools — Strip C2PA, Metadata & Watermarks"
-    : "Outils confidentialité image IA — Strip C2PA, métadonnées & watermarks";
+    ? "AI Image Privacy Tools — Strip C2PA, Metadata & Fingerprints"
+    : "Outils confidentialité image IA — Strip C2PA, métadonnées & empreintes";
   const description = isEn
     ? "13 free in-browser tools to remove C2PA Content Credentials, EXIF/GPS and AI fingerprints from Sora, Midjourney, DALL-E, ChatGPT, Firefly, Flux and more. No upload, no signup."
     : "13 outils gratuits en navigateur pour retirer les Content Credentials C2PA, l'EXIF/GPS et les empreintes IA de Sora, Midjourney, DALL-E, ChatGPT, Firefly, Flux et plus. Sans upload.";

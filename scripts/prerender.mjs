@@ -238,18 +238,43 @@ for (const lang of ['fr', 'en']) {
           inLanguage: lang,
         },
         {
-          '@type': 'WebApplication',
+          '@type': ['WebApplication', 'SoftwareApplication'],
           '@id': `${urlFor(lang, '/')}#webapp`,
           name: 'GhostMeta',
           url: urlFor(lang, '/'),
-          applicationCategory: 'SecurityApplication',
-          operatingSystem: 'Any (browser-based)',
+          applicationCategory: ['SecurityApplication', 'UtilitiesApplication'],
+          operatingSystem: 'Web browser',
+          browserRequirements: 'Requires a modern browser with Canvas API support (Chrome, Firefox, Safari, Edge)',
           inLanguage: lang,
           isPartOf: { '@id': `${ORIGIN}/#website` },
+          description:
+            lang === 'en'
+              ? 'GhostMeta strips image metadata (EXIF, IPTC, XMP, GPS) and the C2PA Content Credentials manifest (JUMBF) from JPEG and PNG files, 100% in your browser via canvas re-encoding — no upload, no server. It does NOT remove visible or invisible pixel watermarks (e.g. SynthID), does not process video, and cannot undo server-side soft-binding fingerprints.'
+              : "GhostMeta retire les métadonnées image (EXIF, IPTC, XMP, GPS) et le manifest C2PA Content Credentials (JUMBF) des fichiers JPEG et PNG, 100% dans votre navigateur par ré-encodage canvas — sans upload, sans serveur. Il ne retire PAS les watermarks visibles ni invisibles au niveau pixel (ex. SynthID), ne traite pas la vidéo, et ne peut pas annuler les empreintes soft-binding côté serveur.",
+          featureList:
+            lang === 'en'
+              ? [
+                  'Strip EXIF, IPTC, XMP and GPS metadata',
+                  'Remove C2PA Content Credentials manifest (JUMBF) from JPEG and PNG',
+                  '100% in-browser processing via Canvas API (zero upload)',
+                  'Batch processing with ZIP download',
+                  'Threat classification of each metadata field (critical / warning / safe)',
+                ]
+              : [
+                  'Suppression des métadonnées EXIF, IPTC, XMP et GPS',
+                  'Retrait du manifest C2PA Content Credentials (JUMBF) sur JPEG et PNG',
+                  'Traitement 100% navigateur via Canvas API (zéro upload)',
+                  'Traitement par lot avec téléchargement ZIP',
+                  'Classification des menaces par champ de métadonnée (critique / warning / safe)',
+                ],
           offers: {
             '@type': 'Offer',
             price: '0',
             priceCurrency: 'USD',
+            description:
+              lang === 'en'
+                ? 'Free for personal use; Pro B2B plan for creators, agencies and resellers (unlimited batch, REST API).'
+                : 'Gratuit pour usage personnel ; offre Pro B2B pour créateurs, agences et revendeurs (batch illimité, API REST).',
           },
         },
         {

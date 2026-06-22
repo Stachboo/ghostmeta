@@ -118,7 +118,7 @@
     "title_start": "Effacez les",
     "title_color": "métadonnées",
     "title_end": "de toute image",
-    "subtitle": "EXIF, GPS, Content Credentials C2PA & watermarks IA — supprimés dans votre navigateur. Des photos smartphone aux images Sora, Midjourney & DALL-E.",
+    "subtitle": "EXIF, GPS, Content Credentials C2PA & empreintes IA — supprimés dans votre navigateur. Des photos smartphone aux images Sora, Midjourney & DALL-E.",
     "secure_badge": "100% Local"
   },
   "upload": {
@@ -161,7 +161,7 @@
     "vinted_title": "Vos images contiennent des empreintes invisibles.",
     "vinted_text_1": "Les photos smartphone intègrent vos coordonnées GPS, l'horodatage et le modèle d'appareil. Les images générées par IA portent des Content Credentials C2PA, des signatures de modèle et des manifests de provenance.",
     "vinted_text_2": "Dès que vous partagez une image — sur Vinted, Twitter, LinkedIn ou dans un dossier client — chaque destinataire peut extraire ces données avec un outil en ligne gratuit.",
-    "vinted_text_3": "GhostMeta supprime tout dans votre navigateur. EXIF, GPS, C2PA, watermarks IA. Rien n'est envoyé sur Internet.",
+    "vinted_text_3": "GhostMeta supprime tout dans votre navigateur. EXIF, GPS, C2PA, empreintes IA. Rien n'est envoyé sur Internet.",
     "batch_lock_title": "Mode Lot Verrouillé",
     "batch_lock_desc": "En mode gratuit, nettoyez les photos une par une (illimité). Le Pack Pro débloque le traitement par lots et l'export ZIP."
   },

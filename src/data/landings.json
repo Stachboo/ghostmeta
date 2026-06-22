@@ -4,9 +4,9 @@
     "generator": "generic",
     "format": "all",
     "en": {
-      "title": "Remove AI Watermark from Image — Free, In-Browser",
-      "description": "Strip C2PA watermarks, generator signatures and metadata from any AI image (Sora, Midjourney, DALL-E, ChatGPT). 100% browser, zero upload.",
-      "h1": "Remove AI watermarks from any image",
+      "title": "Remove AI Watermark Metadata (C2PA) from Image — Free",
+      "description": "Strip the C2PA Content Credentials, generator signatures and metadata from any AI image (Sora, Midjourney, DALL-E, ChatGPT). Metadata only — not visible or pixel watermarks. 100% browser, zero upload.",
+      "h1": "Remove AI watermark metadata from any image",
       "intro": "Every major AI image generator now embeds a Content Credentials (C2PA) manifest, an XMP block, or a JUMBF box that announces the image was AI-generated and identifies the model. GhostMeta strips all of that in your browser — the file never leaves your device. Drop a JPEG or PNG, see exactly which AI fingerprint was found, then download a clean copy. Where the fingerprint actually lives depends on the format: in a JPEG it rides inside an APP11 marker segment, while in a PNG the same C2PA manifest is wrapped in a caBX chunk, and any prompt or model string sits in separate tEXt or iTXt chunks. GhostMeta reads every container in one pass, so a mixed batch of JPEGs and PNGs from different tools all come out neutral without you having to know which generator made which file. The practical payoff is concrete: marketplaces and stock platforms that auto-scan for a C2PA claim_generator can demote or reject an AI-flagged listing, and clearing that single metadata layer removes the signal those scanners key on.",
       "wedge": "ai watermark remover",
       "faq": [
@@ -37,9 +37,9 @@
       ]
     },
     "fr": {
-      "title": "Supprimer les watermarks IA d'une image — gratuit, navigateur",
-      "description": "Strip C2PA, signatures de modèle et métadonnées de toute image IA (Sora, Midjourney, DALL-E, ChatGPT). 100% navigateur, zéro upload.",
-      "h1": "Supprimer les watermarks IA de toute image",
+      "title": "Supprimer les métadonnées de watermark IA (C2PA) — gratuit",
+      "description": "Retire le manifeste C2PA Content Credentials, les signatures de modèle et les métadonnées de toute image IA (Sora, Midjourney, DALL-E, ChatGPT). Métadonnées uniquement — pas les watermarks visibles ni pixel. 100% navigateur, zéro upload.",
+      "h1": "Supprimer les métadonnées de watermark IA de toute image",
       "intro": "Chaque générateur IA moderne embarque désormais un manifest C2PA Content Credentials, un bloc XMP ou une box JUMBF qui annonce que l'image a été générée par IA et identifie le modèle. GhostMeta retire tout ça dans votre navigateur — le fichier ne quitte jamais votre appareil. Déposez un JPEG ou un PNG, visualisez l'empreinte IA détectée, puis téléchargez une copie propre. L'empreinte ne se loge pas au même endroit selon le format : dans un JPEG elle voyage dans un segment marqueur APP11, alors que dans un PNG le même manifest C2PA est encapsulé dans un chunk caBX, et tout prompt ou nom de modèle réside dans des chunks tEXt ou iTXt distincts. GhostMeta lit chaque conteneur en une passe : un lot mélangeant des JPEG et des PNG issus d'outils différents ressort entièrement neutre sans que vous ayez à deviner quel générateur a produit quel fichier. Le bénéfice est concret : les marketplaces et banques d'images qui scannent automatiquement un claim_generator C2PA peuvent rétrograder ou rejeter une annonce taguée IA, et effacer cette seule couche de métadonnées retire le signal sur lequel ces scanners s'appuient.",
       "wedge": "supprimer watermark IA",
       "faq": [
@@ -643,11 +643,11 @@
     "generator": "runway",
     "format": "all",
     "en": {
-      "title": "Strip Runway ML Watermark Metadata",
-      "description": "Runway Gen-3 outputs (stills and frames) carry a C2PA manifest. GhostMeta strips the metadata layer in your browser, free, no upload.",
-      "h1": "Strip Runway ML metadata watermark",
+      "title": "Strip Runway ML Metadata & C2PA (Stills, Not Video)",
+      "description": "Runway Gen-3 stills/exported frames carry a C2PA manifest. GhostMeta strips the metadata layer in your browser, free, no upload. Still images only — not the MP4 or the visible logo.",
+      "h1": "Strip Runway ML metadata & C2PA from stills",
       "intro": "Runway Gen-3 Alpha (and Gen-2 since the 2024 update) embeds a C2PA Content Credentials manifest in every still export and exported frame, plus a Runway-branded XMP block. If you extract a frame for a thumbnail or composite, both signals propagate into the JPEG. GhostMeta detects the Runway signature in the APP11 segment or PNG caBX chunk, displays it, and strips it via canvas re-encode. The visible Runway logo overlay (if your tier shows one) is pixel-burned and not removable by metadata strip. When you extract a Runway still and drop it into a composite, the C2PA `c2pa.actions` and ingredient assertions chain forward into the new file, so a marketplace or stock reviewer can trace the AI origin even through an edit. Sellers on Adobe Stock, Etsy, and print-on-demand stores can get listings auto-flagged because the JUMBF box in the JPEG APP11 segment still carries the Runway `claim_generator` after upload. GhostMeta scans that box plus the Runway-branded XMP block and drops both in one canvas re-encode, so the delivered still carries no provenance assertion at all.",
-      "wedge": "strip runway watermark",
+      "wedge": "remove runway metadata",
       "faq": [
         {
           "q": "Does GhostMeta remove the visible Runway logo?",
@@ -676,11 +676,11 @@
       ]
     },
     "fr": {
-      "title": "Retirer les métadonnées watermark Runway ML",
-      "description": "Les sorties Runway Gen-3 (stills et frames) portent un manifest C2PA. GhostMeta retire la couche metadata en navigateur, gratuit.",
-      "h1": "Retirer les métadonnées watermark Runway",
+      "title": "Retirer les métadonnées & C2PA de Runway ML (images fixes)",
+      "description": "Les stills/frames exportées Runway Gen-3 portent un manifest C2PA. GhostMeta retire la couche metadata en navigateur, gratuit. Images fixes uniquement — ni le MP4, ni le logo visible.",
+      "h1": "Retirer les métadonnées & C2PA Runway (images fixes)",
       "intro": "Runway Gen-3 Alpha (et Gen-2 depuis l'update 2024) embarque un manifest C2PA Content Credentials dans chaque export still et frame exportée, plus un bloc XMP marqué Runway. Si vous extrayez une frame pour un thumbnail ou un composite, les deux signaux se propagent dans le JPEG. GhostMeta détecte la signature Runway dans le segment APP11 ou chunk PNG caBX, l'affiche, puis la retire via re-encodage canvas. Le logo Runway visible (si votre tier l'affiche) est pixel-burné et n'est pas retirable par strip metadata. Quand vous extrayez une frame Runway pour l'intégrer dans un composite, les assertions C2PA `c2pa.actions` et ingredient se propagent dans le nouveau fichier : un relecteur de marketplace ou de banque d'images peut donc remonter à l'origine IA même après une retouche. Les vendeurs sur Adobe Stock, Etsy ou print-on-demand peuvent voir leurs listings flaggés automatiquement parce que la box JUMBF du segment APP11 du JPEG porte toujours le `claim_generator` Runway après upload. GhostMeta scanne cette box ainsi que le bloc XMP marqué Runway et retire les deux en un seul re-encodage canvas : la frame livrée ne porte plus aucune assertion de provenance.",
-      "wedge": "retirer watermark runway",
+      "wedge": "supprimer métadonnées runway",
       "faq": [
         {
           "q": "GhostMeta retire-t-il le logo Runway visible ?",
@@ -714,7 +714,7 @@
     "generator": "imagen",
     "format": "jpeg",
     "en": {
-      "title": "Clean Google Imagen Metadata & SynthID",
+      "title": "Clean Google Imagen Metadata & C2PA (SynthID Stays)",
       "description": "Google Imagen and Gemini image outputs carry SynthID watermark plus C2PA. GhostMeta strips the C2PA metadata layer in your browser.",
       "h1": "Clean Google Imagen metadata",
       "intro": "Google Imagen and Gemini image outputs ship with two provenance layers: a C2PA Content Credentials manifest in the JPEG APP11 segment, and an invisible SynthID watermark embedded at pixel level. GhostMeta strips the C2PA layer — what most viewers and platforms read — via canvas re-encode. SynthID is designed to survive re-encoding by Google's research and would require destructive editing or a dedicated remover to defeat. Beyond the APP11 manifest, Imagen and Gemini exports often write an IPTC \"Digital Source Type\" value set to trainedAlgorithmicMedia into the image's XMP / IPTC photo-metadata — a plain-text AI flag that stock libraries and newsrooms increasingly scan on ingest, independent of C2PA. Because Imagen ships as JPEG, the file also carries a standard EXIF APP1 segment alongside the C2PA APP11 segment, so a clean strip has to clear both. GhostMeta wipes the EXIF, the IPTC AI marker and the C2PA manifest in a single canvas pass; the JPEG is re-encoded at a fixed high quality (92%), and the pixels — and the SynthID baked into them — are left untouched.",
@@ -747,7 +747,7 @@
       ]
     },
     "fr": {
-      "title": "Nettoyer les métadonnées Google Imagen & SynthID",
+      "title": "Nettoyer les métadonnées & C2PA de Google Imagen (SynthID reste)",
       "description": "Les sorties Google Imagen et Gemini portent un watermark SynthID plus du C2PA. GhostMeta retire la couche metadata C2PA en navigateur.",
       "h1": "Nettoyer les métadonnées Google Imagen",
       "intro": "Les sorties Google Imagen et Gemini shippent avec deux couches de provenance : un manifest C2PA Content Credentials dans le segment APP11 JPEG, et un watermark SynthID invisible embarqué au niveau pixel. GhostMeta retire la couche C2PA — ce que la plupart des viewers et plateformes lisent — via re-encodage canvas. SynthID est conçu par la recherche Google pour survivre au re-encodage et nécessiterait une édition destructive ou un remover dédié pour être défait. Au-dela du manifest APP11, les exports Imagen et Gemini ecrivent souvent une valeur IPTC « Digital Source Type » reglee sur trainedAlgorithmicMedia dans les metadonnees photo XMP / IPTC de l'image — un marqueur IA en clair que les banques d'images et les redactions scannent de plus en plus a l'ingestion, independamment du C2PA. Comme Imagen sort en JPEG, le fichier porte aussi un segment EXIF APP1 standard a cote du segment C2PA APP11 : un nettoyage propre doit donc vider les deux. GhostMeta efface l'EXIF, le marqueur IA IPTC et le manifest C2PA en une seule passe canvas ; le JPEG est re-encode a une haute qualite fixe (92 %), et les pixels — ainsi que le SynthID qui y est grave — restent intacts.",

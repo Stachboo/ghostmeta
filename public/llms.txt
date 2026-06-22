@@ -1,25 +1,34 @@
 # GhostMeta
 
-> Nettoyeur de métadonnées image et empreintes IA. Supprime EXIF, GPS, C2PA Content Credentials et watermarks d'images IA (Sora, Midjourney, DALL-E, ChatGPT). 100% navigateur, traitement local via Canvas API, zéro upload serveur.
+> Nettoyeur de métadonnées image et de manifestes de provenance, 100% dans le navigateur. GhostMeta retire les métadonnées EXIF, IPTC, XMP, GPS ET le manifest C2PA Content Credentials (boîte JUMBF) des fichiers JPEG et PNG. Traitement local via ré-encodage Canvas API, zéro upload serveur. L'honnêteté sur le périmètre est une fonctionnalité : voir « Ce que GhostMeta ne fait PAS » ci-dessous.
 
-## Fonctionnalités principales
+## Ce que GhostMeta fait
 
-- Suppression des métadonnées EXIF (appareil photo, date, coordonnées GPS)
-- Détection et strip des Content Credentials C2PA sur images IA (Sora, Midjourney, DALL-E, ChatGPT, Adobe Firefly)
-- Traitement 100% local dans le navigateur (Canvas API, aucun envoi serveur)
-- Gratuit pour usage personnel, Pro B2B pour créateurs/agences
-- Compatible avec photos smartphone (Vinted, Leboncoin, eBay) ET images générées par IA
-- Support des formats JPEG, PNG, WebP et HEIC (photos iPhone)
+- Suppression des métadonnées EXIF, IPTC, XMP et coordonnées GPS (appareil photo, date, lieu)
+- Retrait du manifest C2PA Content Credentials (JUMBF) sur JPEG et PNG : c'est l'étiquette de provenance que Sora, ChatGPT, DALL-E, Adobe Firefly, etc. embarquent pour signaler qu'une image est générée par IA
+- Retrait des chunks de texte PNG (tEXt/iTXt) contenant prompt, seed et nom de modèle (Stable Diffusion, Midjourney, Flux, Leonardo.AI…)
+- Traitement 100% local dans le navigateur (Canvas API : l'image est décodée puis ré-encodée à partir des pixels bruts, aucun envoi serveur)
+- Détection et classification des menaces : chaque champ de métadonnée est classé critique, warning ou safe avant suppression
+- Support des formats d'entrée JPEG, PNG, WebP et HEIC (photos iPhone, converties via heic2any)
 - Traitement par lot avec téléchargement ZIP
-- Analyse des menaces : chaque champ de métadonnée est classé critique, warning ou safe
 - Résolution maximale 4096px pour éviter les crashs mémoire sur mobile
-- PWA installable sur mobile et desktop
+- PWA installable sur mobile et desktop, utilisable hors-ligne
+- Gratuit pour usage personnel, Pro B2B pour créateurs/agences (batch illimité, API REST)
+
+## Ce que GhostMeta ne fait PAS (honnêteté du périmètre)
+
+- Ne retire PAS les watermarks visibles / incrustés dans les pixels (logos, bandeaux) — il faut un éditeur d'image
+- Ne retire PAS les watermarks invisibles au niveau pixel (ex. Google SynthID, watermark pixel de DALL-E) — ils sont encodés dans l'image elle-même, pas dans les métadonnées
+- Ne traite PAS la vidéo
+- Ne peut PAS annuler les empreintes « soft binding » côté serveur (fingerprint stocké chez le fournisseur, indépendant du fichier)
+- En clair : GhostMeta retire la couche de métadonnées / le manifeste C2PA, pas la marque inscrite dans les pixels.
 
 ## Public cible
 
-1. Créateurs et agences IA : retrait des Content Credentials C2PA et empreintes des images générées par Sora, Midjourney, DALL-E, ChatGPT, Adobe Firefly avant diffusion publique ou commerciale.
-2. Vendeurs sur marketplace (Vinted, Leboncoin, eBay, Etsy, Depop, Facebook Marketplace) protégeant leur vie privée et leur localisation avant publication de photos d'articles.
-3. Toute personne souhaitant supprimer les métadonnées de ses images avant de les partager en ligne.
+1. Créateurs et artistes IA : nettoyage du manifest C2PA Content Credentials et des métadonnées (prompt, seed, modèle) des images générées par Sora, Midjourney, DALL-E, ChatGPT, Adobe Firefly, Stable Diffusion, Flux avant diffusion publique ou commerciale (les marketplaces et banques d'images scannent le claim_generator C2PA).
+2. Journalistes et activistes : suppression des coordonnées GPS et de l'EXIF avant publication, pour protéger sources et localisation.
+3. Vendeurs sur marketplace (Vinted, Leboncoin, eBay, Etsy, Depop, Facebook Marketplace) : retrait de la vie privée et de la localisation des photos d'articles avant publication.
+4. Toute personne souhaitant supprimer les métadonnées de ses images avant de les partager en ligne.
 
 ## Sécurité et confidentialité
 

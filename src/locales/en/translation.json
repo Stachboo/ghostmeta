@@ -118,7 +118,7 @@
     "title_start": "Strip",
     "title_color": "metadata",
     "title_end": "from any image",
-    "subtitle": "EXIF, GPS, C2PA Content Credentials & AI watermarks — removed in your browser. From smartphone photos to Sora, Midjourney & DALL-E images.",
+    "subtitle": "EXIF, GPS, C2PA Content Credentials & AI fingerprints — removed in your browser. From smartphone photos to Sora, Midjourney & DALL-E images.",
     "secure_badge": "100% Local"
   },
   "upload": {
@@ -161,7 +161,7 @@
     "vinted_title": "Your images carry hidden fingerprints.",
     "vinted_text_1": "Smartphone photos embed GPS coordinates, timestamp and device model. AI-generated images carry C2PA Content Credentials, generator signatures and provenance manifests.",
     "vinted_text_2": "Once you share an image — on Vinted, Twitter, LinkedIn, or in a client deck — every recipient can extract that data with a free online tool.",
-    "vinted_text_3": "GhostMeta strips it all in your browser. EXIF, GPS, C2PA, AI watermarks. Nothing is sent to the internet.",
+    "vinted_text_3": "GhostMeta strips it all in your browser. EXIF, GPS, C2PA, AI fingerprints. Nothing is sent to the internet.",
     "batch_lock_title": "Batch Mode Locked",
     "batch_lock_desc": "In free mode, clean photos one by one (unlimited). The Pro Pack unlocks batch processing and ZIP export."
   },
