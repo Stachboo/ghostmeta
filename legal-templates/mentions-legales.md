@@ -21,6 +21,7 @@ Le site **GhostMeta** est édité par :
 - **Statut :** Entrepreneur individuel (EI), micro-entrepreneur (activité commerciale)
 - **Adresse :** 63 rue de l'Union, 16600 Ruelle-sur-Touvre, France
 - **Adresse e-mail :** contact@ghostmeta.online
+- **Téléphone :** 07 77 36 02 39
 - **SIRET :** 98489333900015
 - **RCS :** 984 893 339 R.C.S. Angoulême
 - **TVA intracommunautaire :** TVA non applicable, art. 293 B du CGI (franchise en base de TVA)

@@ -47,8 +47,9 @@ confirmée par un e-mail récapitulatif et une facture émise par Lemon Squeezy.
   les fonctionnalités premium restent actives jusqu'à cette date. Aucun remboursement au prorata sauf
   disposition légale impérative ou geste commercial.
 - _Reconduction tacite (art. L215-1 C. conso) :_ pour l'offre annuelle reconductible tacitement
-  proposée à des consommateurs, le client est informé par écrit de la faculté de ne pas reconduire,
-  au plus tôt 3 mois et au plus tard 1 mois avant le terme.
+  proposée à des consommateurs, le client est informé par écrit (e-mail) de la faculté de ne pas
+  reconduire, au plus tôt 3 mois et au plus tard 1 mois avant le terme. À défaut d'information dans ce
+  délai, le client peut résilier gratuitement et à tout moment à compter de la date de reconduction.
 
 ## Article 5 — Période d'essai
 
@@ -83,14 +84,15 @@ tout type de métadonnée ou marquage).
 ## Article 8 — Médiation de la consommation (art. L612-1, L616-1, R616-1)
 
 Conformément à l'article L612-1 du Code de la consommation, tout consommateur a le droit de recourir
-gratuitement à un médiateur de la consommation en vue de la résolution amiable d'un litige, après
-réclamation écrite préalable auprès de l'éditeur (contact@ghostmeta.online).
+gratuitement à un médiateur de la consommation en vue de la résolution amiable d'un litige, après une
+réclamation écrite préalable adressée à l'éditeur (contact@ghostmeta.online) restée sans réponse
+satisfaisante dans un délai de deux mois.
 
-Les abonnements étant vendus par **Lemon Squeezy** en qualité de **Merchant of Record** (vendeur
-légal, cf. article 1), le contrat de vente est conclu avec Lemon Squeezy ; le dispositif de médiation
-de la consommation applicable aux ventes relève de ce vendeur. En complément, le consommateur résidant
-dans l'Union européenne peut recourir à la plateforme européenne de règlement en ligne des litiges
-(RLL) : https://ec.europa.eu/consumers/odr.
+Le médiateur de la consommation dont relève l'éditeur est en cours de désignation ; ses coordonnées
+(nom, adresse postale et site internet) seront publiées dans le présent article dès sa désignation.
+
+Le consommateur résidant dans l'Union européenne peut par ailleurs recourir à la plateforme européenne
+de règlement en ligne des litiges (RLL) : https://ec.europa.eu/consumers/odr.
 
 ## Article 9 — Responsabilité
 

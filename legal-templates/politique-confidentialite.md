@@ -44,8 +44,8 @@ conformes à l'article 28 du RGPD :
 
 Certains sous-traitants sont situés aux **États-Unis**. Les transferts s'appuient sur les garanties
 prévues par le RGPD : clauses contractuelles types (CCT) de la Commission européenne et/ou adhésion au
-**EU-US Data Privacy Framework**, telles que prévues par les contrats de traitement (DPA) de chaque
-fournisseur.
+**EU-US Data Privacy Framework**, telles que précisées dans les accords de traitement (DPA)
+respectifs de Vercel, Supabase, Sentry et Lemon Squeezy, consultables sur leurs sites.
 
 ## 5. Durées de conservation
 
@@ -61,6 +61,10 @@ Conformément aux articles 15 à 22 du RGPD, vous disposez des droits suivants :
 rectification, effacement, limitation, opposition, portabilité**, et retrait du consentement à tout
 moment (sans effet rétroactif). Vous pouvez aussi définir des **directives post-mortem**.
 
+Pour les traitements fondés sur l'**intérêt légitime** (supervision technique via Sentry), vous
+pouvez **vous opposer à tout moment** au traitement pour des raisons tenant à votre situation
+particulière.
+
 Pour exercer ces droits : **contact@ghostmeta.online**. Nous répondons dans un délai d'un mois.
 
 ## 7. Réclamation auprès de la CNIL
@@ -68,7 +72,23 @@ Pour exercer ces droits : **contact@ghostmeta.online**. Nous répondons dans un 
 Vous pouvez introduire une réclamation auprès de la **CNIL** (Commission nationale de l'informatique
 et des libertés), 3 place de Fontenoy, 75007 Paris — https://www.cnil.fr/fr/plaintes.
 
-## 8. Modifications
+## 8. Cookies et traceurs
+
+Conformément à l'article 82 de la loi Informatique et Libertés :
+
+- **Traceurs strictement nécessaires** (exemptés de consentement) : stockage local (LocalStorage) des
+  préférences essentielles et de la session d'authentification (Supabase). Aucun cookie publicitaire.
+- **Mesure d'audience** (Vercel Analytics) : activée **uniquement après votre consentement**, recueilli
+  via le bandeau affiché à la première visite. **Refuser est aussi simple qu'accepter.**
+- **Supervision technique** (Sentry) : journalisation des erreurs, **sans adresse IP ni e-mail**
+  (intérêt légitime).
+
+Vous pouvez **retirer votre consentement à tout moment** (via le bandeau / les paramètres). Votre
+choix est conservé **13 mois maximum**, au-delà desquels il vous est redemandé (recommandation CNIL).
+
+> Source : https://www.cnil.fr/fr/cookies-et-autres-traceurs
+
+## 9. Modifications
 
 La présente politique peut être mise à jour. La date de dernière mise à jour figure en tête de
 document.
