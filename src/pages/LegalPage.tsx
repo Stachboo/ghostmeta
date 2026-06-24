@@ -3,8 +3,7 @@
  * CGV, CGU). Rend le Markdown source de `/legal-templates/*.md` via react-markdown.
  *
  * Route : /mentions-legales, /confidentialite, /cgv, /cgu (+ variantes /en).
- * SEO : `noindex` tant que les documents contiennent des `[À FOURNIR : …]`
- *       (versions de travail non encore validées par un juriste).
+ * SEO : indexables (documents renseignés le 2026-06-24).
  * i18n : titres/descriptions via clés legal.pages.* ; corps en français (langue
  *        du contrat) avec une note de langue pour les visiteurs anglophones.
  */
@@ -41,8 +40,7 @@ export default function LegalPage({ doc }: LegalPageProps) {
       <Helmet>
         <title>{`${title} — GhostMeta`}</title>
         <meta name="description" content={description} />
-        {/* Versions de travail (placeholders [À FOURNIR]) → ne pas indexer */}
-        <meta name="robots" content="noindex, follow" />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href={seo.canonical} />
         <link rel="alternate" hrefLang="fr" href={seo.fr} />
         <link rel="alternate" hrefLang="en" href={seo.en} />

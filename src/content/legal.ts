@@ -5,9 +5,9 @@
  * (générés/audités via le skill legal-compliance-fr-eu, sourcés Légifrance/CNIL).
  * Ils sont importés en `?raw` puis rendus par `LegalPage` (react-markdown).
  *
- * ⚠️ Tant que des marqueurs `[À FOURNIR : …]` subsistent (identité éditeur,
- * SIRET, médiateur…), ces pages NE sont PAS conformes et ne doivent pas être
- * indexées ni mises en avant. LegalPage les marque donc `noindex`.
+ * Renseignés le 2026-06-24 (identité éditeur, SIRET, RCS, prix, durées RGPD) →
+ * pages indexables. Médiation traitée sous l'angle Merchant of Record (Lemon
+ * Squeezy) — interprétation à confirmer par un juriste.
  */
 
 import mentionsLegales from "../../legal-templates/mentions-legales.md?raw";
