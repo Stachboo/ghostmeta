@@ -272,6 +272,8 @@
     "rights": "All rights reserved",
     "privacy_btn": "Privacy Policy",
     "legal_btn": "Legal Notice",
+    "cgv_btn": "Terms of Sale",
+    "cgu_btn": "Terms of Use",
     "tools_title": "AI Tools",
     "blog_index": "All articles"
   },
@@ -309,6 +311,26 @@
       "3": {
         "title": "3. Liability",
         "content": "User is solely responsible."
+      }
+    },
+    "lang_note": "These legal documents are authoritative in French, the language of the contract.",
+    "draft_notice": "Working document — provisional version pending legal review. Some details (editor identity, company registration, consumer mediator…) remain to be completed before any contractual value.",
+    "pages": {
+      "mentions-legales": {
+        "title": "Legal Notice",
+        "description": "GhostMeta legal notice: publisher, host and service responsibilities."
+      },
+      "confidentialite": {
+        "title": "Privacy Policy",
+        "description": "How GhostMeta handles your data: 100% local processing, no image or metadata collected."
+      },
+      "cgv": {
+        "title": "Terms of Sale",
+        "description": "Terms of sale for GhostMeta Pro: pricing, payment, right of withdrawal."
+      },
+      "cgu": {
+        "title": "Terms of Use",
+        "description": "Terms of use for the GhostMeta service."
       }
     }
   },

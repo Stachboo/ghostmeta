@@ -8,6 +8,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import LocaleLink from '@/components/LocaleLink';
 
 const CONSENT_KEY = 'ghostmeta-analytics-consent';
 
@@ -36,10 +37,6 @@ export default function ConsentBanner() {
     }, 300);
   };
 
-  const openPrivacy = () => {
-    window.dispatchEvent(new Event('open-privacy-policy'));
-  };
-
   if (!show) return null;
 
   return (
@@ -53,12 +50,12 @@ export default function ConsentBanner() {
           <p className="flex-1 text-xs text-muted-foreground leading-relaxed m-0">
             {t('consent.text')}
             {' '}
-            <button
-              onClick={openPrivacy}
+            <LocaleLink
+              to="/confidentialite"
               className="text-[#00ff41]/70 hover:text-[#00ff41] underline underline-offset-2 transition-colors"
             >
               {t('consent.learn_more')}
-            </button>
+            </LocaleLink>
           </p>
           <div className="flex items-center gap-2 shrink-0">
             <button

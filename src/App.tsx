@@ -22,6 +22,7 @@ const SecurityPage = lazy(() => import('./pages/SecurityPage'));
 const ToolsIndex = lazy(() => import('./pages/ToolsIndex'));
 const ToolLanding = lazy(() => import('./pages/ToolLanding'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
+const LegalPage = lazy(() => import('./pages/LegalPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 /**
@@ -190,7 +191,17 @@ function App() {
             {/* 6. Settings (Pro B2B API key management) */}
             <Route path="/settings" element={<SettingsPage />} />
 
-            {/* 7. Page 404 */}
+            {/* 7. Pages légales (FR + EN) */}
+            <Route path="/mentions-legales" element={<LegalPage doc="mentions-legales" />} />
+            <Route path="/en/mentions-legales" element={<LegalPage doc="mentions-legales" />} />
+            <Route path="/confidentialite" element={<LegalPage doc="confidentialite" />} />
+            <Route path="/en/confidentialite" element={<LegalPage doc="confidentialite" />} />
+            <Route path="/cgv" element={<LegalPage doc="cgv" />} />
+            <Route path="/en/cgv" element={<LegalPage doc="cgv" />} />
+            <Route path="/cgu" element={<LegalPage doc="cgu" />} />
+            <Route path="/en/cgu" element={<LegalPage doc="cgu" />} />
+
+            {/* 8. Page 404 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

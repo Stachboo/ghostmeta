@@ -272,6 +272,8 @@
     "rights": "Tous droits réservés",
     "privacy_btn": "Politique de confidentialité",
     "legal_btn": "Mentions légales",
+    "cgv_btn": "CGV",
+    "cgu_btn": "CGU",
     "tools_title": "Outils IA",
     "blog_index": "Tous les articles"
   },
@@ -309,6 +311,26 @@
       "3": {
         "title": "3. Responsabilité",
         "content": "L'utilisateur est seul responsable des fichiers traités."
+      }
+    },
+    "lang_note": "Ces documents juridiques font foi en français, langue du contrat.",
+    "draft_notice": "Document de travail — version provisoire en cours de validation juridique. Certaines mentions (identité de l'éditeur, SIRET, médiateur de la consommation…) restent à compléter avant toute valeur contractuelle.",
+    "pages": {
+      "mentions-legales": {
+        "title": "Mentions légales",
+        "description": "Mentions légales de GhostMeta : éditeur, hébergeur et responsabilités du service."
+      },
+      "confidentialite": {
+        "title": "Politique de confidentialité",
+        "description": "Comment GhostMeta traite vos données : traitement 100% local, aucune image ni métadonnée collectée."
+      },
+      "cgv": {
+        "title": "Conditions générales de vente",
+        "description": "Conditions générales de vente de l'offre GhostMeta Pro : prix, paiement, droit de rétractation."
+      },
+      "cgu": {
+        "title": "Conditions générales d'utilisation",
+        "description": "Conditions générales d'utilisation du service GhostMeta."
       }
     }
   },
