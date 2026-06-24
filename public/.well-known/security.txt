@@ -1,0 +1,12 @@
+Contact: mailto:contact@ghostmeta.online
+Expires: 2027-06-24T00:00:00.000Z
+Preferred-Languages: fr, en
+Canonical: https://www.ghostmeta.online/.well-known/security.txt
+Policy: https://www.ghostmeta.online/securite
+Acknowledgments: https://www.ghostmeta.online/
+
+# GhostMeta — responsible disclosure
+# Report any vulnerability or security concern (XSS, CSP bypass, supply-chain,
+# token leakage, dependency advisory) to contact@ghostmeta.online.
+# In-scope: www.ghostmeta.online and the Vercel-hosted app.
+# Out-of-scope: third-party providers (Supabase, Lemon Squeezy, Vercel infra).

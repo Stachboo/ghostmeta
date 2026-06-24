@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "strip-image-metadata",
+      "type": "skill-md",
+      "description": "Remove EXIF, IPTC, XMP and GPS metadata from JPEG, PNG, WebP and HEIC images entirely in the browser via Canvas re-encoding. No server upload. Explains exactly which fields are stripped and the scope limits (no pixel watermark removal).",
+      "url": "/.well-known/agent-skills/strip-image-metadata/SKILL.md",
+      "digest": "sha256:a2f00a8f3974a94ccc3668425fa6b7e6a983b6d1d11da555ae3d3a3a2262560d"
+    },
+    {
+      "name": "remove-c2pa-content-credentials",
+      "type": "skill-md",
+      "description": "Remove the C2PA Content Credentials provenance manifest (JUMBF box) and PNG text chunks (prompt/seed/model) embedded by Sora, ChatGPT, DALL-E, Adobe Firefly, Midjourney, Stable Diffusion and Flux. Clarifies that pixel-level watermarks (SynthID) and server-side soft-binding are out of scope.",
+      "url": "/.well-known/agent-skills/remove-c2pa-content-credentials/SKILL.md",
+      "digest": "sha256:5ee380d9e9d66b3a4b1936e5b016ab5c0632252d7dce3557759cf1f9a8031ee8"
+    },
+    {
+      "name": "detect-metadata-threats",
+      "type": "skill-md",
+      "description": "Classify image metadata fields as critical, warning or safe before removal (GPS coordinates, device serial, capture timestamp, AI provenance manifest). Reference for what personal/provenance data an image can leak.",
+      "url": "/.well-known/agent-skills/detect-metadata-threats/SKILL.md",
+      "digest": "sha256:5f7388fccd0d0047aac64d31af8d60c802f7bdd964c09d4f3bb5043a216e8760"
+    }
+  ]
+}

@@ -1,4 +1,9 @@
 User-agent: *
+# Content Signals (draft-romm-aipref-contentsignals) — declare AI usage preferences.
+# search=yes   : allow indexing in AI-powered search and answer products
+# ai-train=yes : allow training LLMs on this content (GhostMeta is a public privacy tool)
+# ai-input=yes : allow use as context/retrieval input in AI responses
+Content-Signal: search=yes, ai-train=yes, ai-input=yes
 Allow: /
 
 User-agent: Googlebot
@@ -47,6 +52,29 @@ User-agent: Bytespider
 Allow: /
 
 User-agent: YandexBot
+Allow: /
+
+# --- Additional AI crawlers (GEO best-practice allowlist) ---
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: DuckAssistBot
 Allow: /
 
 Sitemap: https://www.ghostmeta.online/sitemap.xml
