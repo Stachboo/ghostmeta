@@ -921,5 +921,360 @@
         }
       ]
     }
+  },
+  {
+    "slug": "remove-metadata-from-photo",
+    "generator": "generic",
+    "format": "all",
+    "en": {
+      "title": "Remove Metadata from a Photo — Free, In-Browser, No Upload",
+      "description": "Strip EXIF, GPS, IPTC and XMP metadata from any JPEG or PNG right in your browser. See exactly what your photo reveals, then download a clean copy. 100% local — the file never leaves your device.",
+      "h1": "Remove metadata from a photo",
+      "intro": "Every photo carries a hidden layer of metadata your eyes never see: the EXIF block records the camera model, lens, exposure and — most sensitive — the GPS coordinates where the shot was taken, while IPTC and XMP fields can hold your name, copyright, editing history and captions. GhostMeta reads all of it in your browser and shows you the full table before you strip anything, so you know precisely what you are about to erase. In a JPEG this data lives in APP marker segments (EXIF and XMP in APP1, IPTC in APP13); in a PNG the same information sits in tEXt, iTXt and eXIf chunks. GhostMeta parses each container in one pass and rebuilds a clean copy with the pixels re-encoded and every metadata field dropped — no camera trace, no coordinates, no author tag. Because the whole process runs on your device, the file is never uploaded to a server, so there is no copy to leak or log. Drop an image, review what was found, download the neutral version — that is the entire flow.",
+      "wedge": "photo metadata remover",
+      "faq": [
+        {
+          "q": "What metadata does GhostMeta remove?",
+          "a": "EXIF (camera, lens, timestamp, GPS coordinates), IPTC (author, copyright, captions), XMP (editing history, ratings) and any thumbnail embedded in those blocks. After processing, the downloaded copy carries none of them."
+        },
+        {
+          "q": "Does the photo get uploaded anywhere?",
+          "a": "No. Reading and stripping happen entirely in your browser using the Canvas API. The image never leaves your device, so there is no server-side copy to store, log or leak."
+        },
+        {
+          "q": "Which formats are supported?",
+          "a": "JPEG and PNG are handled directly. HEIC photos from iPhone are converted in-browser first, then cleaned. WebP is also supported."
+        },
+        {
+          "q": "Will removing metadata change how the image looks?",
+          "a": "The visible picture stays the same to the eye. GhostMeta re-encodes the pixels to guarantee no metadata survives, so a JPEG is re-compressed once — quality is kept high, but it is not a byte-for-byte copy of the original file."
+        },
+        {
+          "q": "Why remove photo metadata at all?",
+          "a": "The GPS tag alone can reveal your home address from a single picture posted online. Stripping metadata before sharing on marketplaces, forums or social networks removes the location, device and identity trail."
+        },
+        {
+          "q": "Is it really free?",
+          "a": "Yes — cleaning a photo and viewing its metadata is free, with no account required. Premium adds batch processing and extra convenience, not the core privacy feature."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Supprimer les métadonnées d'une photo — gratuit, sans upload",
+      "description": "Retirez les métadonnées EXIF, GPS, IPTC et XMP de n'importe quel JPEG ou PNG directement dans votre navigateur. Voyez ce que révèle votre photo, puis téléchargez une copie propre. 100% local — le fichier ne quitte jamais votre appareil.",
+      "h1": "Supprimer les métadonnées d'une photo",
+      "intro": "Chaque photo transporte une couche de métadonnées invisible à l'œil : le bloc EXIF enregistre le modèle d'appareil, l'objectif, l'exposition et — le plus sensible — les coordonnées GPS du lieu de prise de vue, tandis que les champs IPTC et XMP peuvent contenir votre nom, un copyright, l'historique de retouche et des légendes. GhostMeta lit tout ça dans votre navigateur et vous affiche le tableau complet des métadonnées photo avant de retirer quoi que ce soit : vous savez exactement ce que vous allez effacer. Dans un JPEG ces données logent dans des segments marqueurs APP (EXIF et XMP en APP1, IPTC en APP13) ; dans un PNG les mêmes informations résident dans des chunks tEXt, iTXt et eXIf. GhostMeta analyse chaque conteneur en une passe et reconstruit une copie propre : les pixels sont ré-encodés et tous les champs de métadonnées supprimés — aucune trace d'appareil, aucune coordonnée, aucune étiquette d'auteur. Comme tout le traitement s'exécute sur votre appareil, le fichier n'est jamais envoyé sur un serveur : il n'existe aucune copie à fuiter ou journaliser. Déposez une image, vérifiez ce qui a été détecté, téléchargez la version neutre — c'est tout le parcours.",
+      "wedge": "métadonnées photo",
+      "faq": [
+        {
+          "q": "Quelles métadonnées GhostMeta supprime-t-il ?",
+          "a": "L'EXIF (appareil, objectif, date, coordonnées GPS), l'IPTC (auteur, copyright, légendes), le XMP (historique de retouche, notes) et toute vignette intégrée dans ces blocs. Après traitement, la copie téléchargée n'en contient plus aucune."
+        },
+        {
+          "q": "La photo est-elle envoyée quelque part ?",
+          "a": "Non. La lecture et la suppression se font entièrement dans votre navigateur via l'API Canvas. L'image ne quitte jamais votre appareil : aucune copie serveur n'est stockée, journalisée ou exposée."
+        },
+        {
+          "q": "Quels formats sont pris en charge ?",
+          "a": "JPEG et PNG sont traités directement. Les photos HEIC d'iPhone sont d'abord converties dans le navigateur, puis nettoyées. Le WebP est également supporté."
+        },
+        {
+          "q": "Retirer les métadonnées change-t-il l'image ?",
+          "a": "L'image visible reste identique à l'œil. GhostMeta ré-encode les pixels pour garantir qu'aucune métadonnée ne subsiste : un JPEG est donc recompressé une fois — la qualité reste élevée, mais ce n'est pas une copie octet pour octet du fichier d'origine."
+        },
+        {
+          "q": "Pourquoi supprimer les métadonnées d'une photo ?",
+          "a": "Le seul tag GPS peut révéler votre adresse à partir d'une unique photo publiée en ligne. Retirer les métadonnées avant de partager sur une marketplace, un forum ou un réseau social efface la localisation, l'appareil et la trace d'identité."
+        },
+        {
+          "q": "Est-ce vraiment gratuit ?",
+          "a": "Oui — nettoyer une photo et consulter ses métadonnées est gratuit, sans compte. Le Premium ajoute le traitement par lot et du confort, pas la fonction de confidentialité de base."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "remove-exif-data-online",
+    "generator": "generic",
+    "format": "all",
+    "en": {
+      "title": "Remove EXIF Data Online — Free EXIF Cleaner, No Upload",
+      "description": "Delete EXIF data — GPS location, camera model, date and serial number — from JPEG and PNG online, free. Runs in your browser: nothing is uploaded. See the EXIF, then download a stripped copy.",
+      "h1": "Remove EXIF data online",
+      "intro": "EXIF is the structured record a camera or phone writes into every photo: date and time, camera and lens model, exposure settings, orientation, sometimes a serial number, and — when location services are on — a full GPS position stored in a dedicated GPS IFD. Posting a photo with its EXIF intact hands all of that to anyone who downloads it. GhostMeta removes EXIF data online without uploading anything: the file is decoded in your browser, the EXIF tags are listed so you can see the exposure, and a clean copy is rebuilt with the entire EXIF block removed. The GPS coordinates go first, along with the device identifiers that let someone fingerprint every photo you have ever shared. There is no server round-trip, no queue and no account — drop a JPEG or PNG, read what the camera recorded, and download a version that carries none of it. For a photo that has already been resized or screenshotted, GhostMeta still checks for residual EXIF and strips whatever remains.",
+      "wedge": "remove exif data online",
+      "faq": [
+        {
+          "q": "What is EXIF data exactly?",
+          "a": "EXIF (Exchangeable Image File Format) is metadata the camera embeds: timestamp, camera and lens model, exposure, orientation and — if geotagging is enabled — GPS latitude and longitude in a dedicated GPS IFD."
+        },
+        {
+          "q": "Is anything uploaded to remove the EXIF?",
+          "a": "No. The EXIF is read and stripped locally in your browser. The photo never touches a server, so removing EXIF online here is as private as doing it offline."
+        },
+        {
+          "q": "Does it remove GPS location too?",
+          "a": "Yes. The GPS IFD is part of the EXIF block and is removed with everything else, so the downloaded copy has no coordinates."
+        },
+        {
+          "q": "Which files can I clean?",
+          "a": "JPEG and PNG directly; HEIC (iPhone) is converted in-browser then cleaned; WebP is supported. Most photos people share online are JPEG, where EXIF is most common."
+        },
+        {
+          "q": "Can I check the EXIF before removing it?",
+          "a": "Yes — GhostMeta shows the full EXIF table first, flagging sensitive fields like GPS, so you can confirm what is there before downloading the stripped copy."
+        },
+        {
+          "q": "Is the EXIF cleaner free?",
+          "a": "Yes. Removing EXIF from a single photo is free with no sign-up. Batch cleaning of many files at once is a Premium convenience."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Supprimer les données EXIF en ligne — gratuit, sans upload",
+      "description": "Effacez les données EXIF — localisation GPS, modèle d'appareil, date, numéro de série — d'un JPEG ou PNG en ligne, gratuitement. Tout se passe dans votre navigateur : rien n'est envoyé. Voyez l'EXIF, puis téléchargez la copie nettoyée.",
+      "h1": "Supprimer les données EXIF en ligne",
+      "intro": "L'EXIF est l'enregistrement structuré qu'un appareil ou un téléphone inscrit dans chaque photo : date et heure, modèle d'appareil et d'objectif, réglages d'exposition, orientation, parfois un numéro de série, et — quand la localisation est active — une position GPS complète stockée dans une GPS IFD dédiée. Publier une photo avec son EXIF intact livre tout cela à quiconque la télécharge. GhostMeta supprime les données EXIF en ligne sans rien envoyer : le fichier est décodé dans votre navigateur, les tags EXIF sont listés pour que vous voyiez l'exposition, et une copie propre est reconstruite sans le moindre bloc EXIF. Les coordonnées GPS partent en premier, avec les identifiants d'appareil qui permettent de relier entre elles toutes les photos que vous avez partagées. Aucun aller-retour serveur, aucune file d'attente, aucun compte — déposez un JPEG ou un PNG, lisez ce que l'appareil a enregistré, et téléchargez une version qui n'en contient rien. Même pour une photo déjà redimensionnée ou capturée en screenshot, GhostMeta vérifie l'EXIF résiduel et retire ce qui reste.",
+      "wedge": "supprimer exif en ligne",
+      "faq": [
+        {
+          "q": "Qu'est-ce que les données EXIF exactement ?",
+          "a": "L'EXIF (Exchangeable Image File Format) est la métadonnée que l'appareil intègre : date, modèle d'appareil et d'objectif, exposition, orientation et — si le géotag est activé — latitude et longitude GPS dans une GPS IFD dédiée."
+        },
+        {
+          "q": "Faut-il envoyer la photo pour retirer l'EXIF ?",
+          "a": "Non. L'EXIF est lu et supprimé localement dans votre navigateur. La photo ne touche aucun serveur : supprimer l'EXIF en ligne ici est aussi privé que le faire hors-ligne."
+        },
+        {
+          "q": "La localisation GPS est-elle aussi retirée ?",
+          "a": "Oui. La GPS IFD fait partie du bloc EXIF et est retirée avec le reste : la copie téléchargée n'a aucune coordonnée."
+        },
+        {
+          "q": "Quels fichiers puis-je nettoyer ?",
+          "a": "JPEG et PNG directement ; le HEIC (iPhone) est converti dans le navigateur puis nettoyé ; le WebP est supporté. La plupart des photos partagées en ligne sont des JPEG, où l'EXIF est le plus fréquent."
+        },
+        {
+          "q": "Puis-je vérifier l'EXIF avant de le retirer ?",
+          "a": "Oui — GhostMeta affiche d'abord le tableau EXIF complet, en signalant les champs sensibles comme le GPS, pour que vous confirmiez ce qui s'y trouve avant de télécharger la copie nettoyée."
+        },
+        {
+          "q": "Le nettoyeur EXIF est-il gratuit ?",
+          "a": "Oui. Retirer l'EXIF d'une photo est gratuit, sans inscription. Le nettoyage par lot de plusieurs fichiers est un confort Premium."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "strip-metadata",
+    "generator": "generic",
+    "format": "all",
+    "en": {
+      "title": "Strip Metadata from Images — EXIF, IPTC, XMP, C2PA",
+      "description": "Strip every metadata container from an image — EXIF, IPTC, XMP, GPS and C2PA — in one browser-side pass. No upload, no server, no trace. Inspect the containers, then download a stripped file.",
+      "h1": "Strip metadata from images",
+      "intro": "Metadata is not a single field but a stack of separate containers, each written by a different tool along the image's life: the camera adds EXIF, an editor writes XMP and IPTC, a phone appends a GPS IFD, and modern AI generators bolt on a C2PA manifest. Stripping one does nothing for the others, which is why a single re-save often leaves half the trail behind. GhostMeta strips metadata by parsing every container in one pass — EXIF and XMP in the JPEG APP1 segment, IPTC in APP13, the C2PA/JUMBF box, and the tEXt, iTXt and eXIf chunks in PNG — then re-encoding a copy that carries none of them. Because it reads the file structurally rather than editing tags in place, a mixed set of formats all come out neutral without you knowing where each tool hid its data. The whole operation runs client-side: the image is never uploaded, so stripping metadata here is safe for confidential or work files that must not leave the machine.",
+      "wedge": "strip metadata",
+      "faq": [
+        {
+          "q": "Which metadata containers are stripped?",
+          "a": "EXIF, IPTC, XMP, the GPS IFD, embedded thumbnails, and C2PA/JUMBF manifests. GhostMeta targets the containers themselves, so unknown vendor tags inside them are removed too."
+        },
+        {
+          "q": "How is this different from 'save as' in an editor?",
+          "a": "A plain re-save often preserves EXIF or XMP. GhostMeta re-encodes the pixels and drops every metadata container, so nothing is silently carried over."
+        },
+        {
+          "q": "Does stripping run on a server?",
+          "a": "No. It runs in your browser via the Canvas API. Nothing is uploaded, which makes it suitable for sensitive or internal images."
+        },
+        {
+          "q": "Can I strip metadata from PNG as well as JPEG?",
+          "a": "Yes. PNG stores text and EXIF in tEXt, iTXt, zTXt and eXIf chunks; GhostMeta clears those just as it clears the APP segments in a JPEG."
+        },
+        {
+          "q": "Will C2PA Content Credentials be removed?",
+          "a": "The C2PA/JUMBF metadata manifest is stripped. Note this is the metadata layer — it does not touch any visible or pixel-embedded watermark."
+        },
+        {
+          "q": "Is there a batch mode?",
+          "a": "Cleaning one image is free. Stripping metadata from many files at once is available with Premium."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Effacer les métadonnées d'une image — EXIF, IPTC, XMP, C2PA",
+      "description": "Effacez tous les conteneurs de métadonnées d'une image — EXIF, IPTC, XMP, GPS et C2PA — en une passe côté navigateur. Sans upload, sans serveur, sans trace. Inspectez les conteneurs, puis téléchargez le fichier nettoyé.",
+      "h1": "Effacer les métadonnées d'une image",
+      "intro": "La métadonnée n'est pas un champ unique mais un empilement de conteneurs distincts, chacun écrit par un outil différent au fil de la vie de l'image : l'appareil ajoute l'EXIF, un logiciel de retouche inscrit le XMP et l'IPTC, un téléphone appose une GPS IFD, et les générateurs IA récents greffent un manifest C2PA. En effacer un ne fait rien pour les autres — c'est pourquoi un simple ré-enregistrement laisse souvent la moitié de la trace derrière lui. GhostMeta efface les métadonnées en analysant chaque conteneur en une passe — EXIF et XMP dans le segment APP1 du JPEG, IPTC en APP13, la box C2PA/JUMBF, et les chunks tEXt, iTXt et eXIf du PNG — puis ré-encode une copie qui n'en contient aucun. Comme il lit le fichier de façon structurelle plutôt que d'éditer les tags sur place, un lot de formats mélangés ressort entièrement neutre sans que vous ayez à savoir où chaque outil a caché ses données. Toute l'opération s'exécute côté client : l'image n'est jamais envoyée, ce qui rend l'effacement sûr pour des fichiers confidentiels ou professionnels qui ne doivent pas quitter la machine.",
+      "wedge": "effacer métadonnées photo",
+      "faq": [
+        {
+          "q": "Quels conteneurs de métadonnées sont effacés ?",
+          "a": "EXIF, IPTC, XMP, la GPS IFD, les vignettes intégrées, et les manifests C2PA/JUMBF. GhostMeta cible les conteneurs eux-mêmes : les tags propriétaires inconnus qu'ils contiennent sont donc retirés aussi."
+        },
+        {
+          "q": "En quoi est-ce différent d'un « enregistrer sous » ?",
+          "a": "Un simple ré-enregistrement préserve souvent l'EXIF ou le XMP. GhostMeta ré-encode les pixels et supprime chaque conteneur de métadonnées : rien n'est reporté en silence."
+        },
+        {
+          "q": "L'effacement se fait-il sur un serveur ?",
+          "a": "Non. Il s'exécute dans votre navigateur via l'API Canvas. Rien n'est envoyé, ce qui convient aux images sensibles ou internes."
+        },
+        {
+          "q": "Peut-on effacer les métadonnées d'un PNG comme d'un JPEG ?",
+          "a": "Oui. Le PNG stocke le texte et l'EXIF dans des chunks tEXt, iTXt, zTXt et eXIf ; GhostMeta les efface comme il efface les segments APP d'un JPEG."
+        },
+        {
+          "q": "Les Content Credentials C2PA sont-ils retirés ?",
+          "a": "Le manifest de métadonnées C2PA/JUMBF est effacé. À noter : c'est la couche métadonnées — cela ne touche aucun watermark visible ou incrusté dans les pixels."
+        },
+        {
+          "q": "Existe-t-il un mode par lot ?",
+          "a": "Nettoyer une image est gratuit. Effacer les métadonnées de plusieurs fichiers d'un coup est disponible avec le Premium."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "exif-viewer",
+    "generator": "generic",
+    "format": "all",
+    "en": {
+      "title": "EXIF Viewer — See a Photo's Hidden Metadata Online, Free",
+      "description": "Open any JPEG or PNG and read its full EXIF: camera, lens, exposure, date and GPS location on a map. Runs in your browser, nothing uploaded. Then strip it in one click if you want.",
+      "h1": "EXIF viewer — see what your photo reveals",
+      "intro": "An EXIF viewer answers a simple question: what does this photo secretly say about you? Drop a JPEG or PNG into GhostMeta and it decodes the EXIF block in your browser, laying out every field the camera recorded — make and model, lens, ISO, aperture and shutter, orientation, the exact capture timestamp, and, when present, the GPS latitude and longitude, which GhostMeta plots so you can see the location on a map. IPTC and XMP fields are shown too, revealing author names, copyright and editing software that photographers often forget are attached. Sensitive fields like GPS are flagged so the risk is obvious at a glance. Nothing is uploaded — the parsing happens entirely on your device, which means you can safely inspect private or client photos. And because GhostMeta is also a cleaner, the moment you have seen what a picture exposes, one click strips every field and gives you a copy that reveals nothing.",
+      "wedge": "exif viewer",
+      "faq": [
+        {
+          "q": "What does the EXIF viewer show?",
+          "a": "Camera make and model, lens, ISO, aperture, shutter speed, orientation, capture date and time, and GPS coordinates when present — plus IPTC and XMP fields like author and copyright."
+        },
+        {
+          "q": "Does it show the photo's location on a map?",
+          "a": "Yes. When a GPS tag is present in the EXIF, GhostMeta reads the coordinates and plots them so you can see exactly where the photo was taken."
+        },
+        {
+          "q": "Is my photo uploaded to view its EXIF?",
+          "a": "No. The EXIF is parsed locally in your browser. The image never leaves your device, so inspecting private or client photos is safe."
+        },
+        {
+          "q": "Which formats can I inspect?",
+          "a": "JPEG and PNG directly, HEIC after in-browser conversion, and WebP. JPEG carries EXIF most often; PNG stores comparable data in text and eXIf chunks."
+        },
+        {
+          "q": "Can I remove the EXIF after viewing it?",
+          "a": "Yes. GhostMeta is a viewer and a cleaner in one: after you inspect the fields, a single click strips them all and produces a metadata-free copy."
+        },
+        {
+          "q": "Is the EXIF viewer free?",
+          "a": "Yes, viewing a photo's EXIF is free with no account. Batch inspection and cleaning are Premium conveniences."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Voir les métadonnées d'une photo — EXIF viewer en ligne gratuit",
+      "description": "Ouvrez n'importe quel JPEG ou PNG et lisez son EXIF complet : appareil, objectif, exposition, date et localisation GPS sur une carte. Dans votre navigateur, rien n'est envoyé. Puis nettoyez-la en un clic si vous voulez.",
+      "h1": "Voir les métadonnées d'une photo",
+      "intro": "Voir les métadonnées d'une photo répond à une question simple : que révèle cette image sur vous en secret ? Déposez un JPEG ou un PNG dans GhostMeta : il décode le bloc EXIF dans votre navigateur et détaille chaque champ enregistré par l'appareil — marque et modèle, objectif, ISO, ouverture et vitesse, orientation, l'horodatage exact de prise de vue, et, s'ils sont présents, la latitude et la longitude GPS, que GhostMeta place sur une carte pour visualiser le lieu. Les champs IPTC et XMP sont affichés aussi, révélant noms d'auteur, copyright et logiciel de retouche que les photographes oublient souvent d'avoir laissés. Les champs sensibles comme le GPS sont signalés pour que le risque saute aux yeux. Rien n'est envoyé — l'analyse se fait entièrement sur votre appareil, ce qui vous permet d'inspecter en toute sécurité des photos privées ou clients. Et comme GhostMeta est aussi un nettoyeur, dès que vous avez vu ce qu'une image expose, un clic retire tous les champs et vous rend une copie qui ne révèle rien.",
+      "wedge": "voir métadonnées photo",
+      "faq": [
+        {
+          "q": "Qu'affiche l'EXIF viewer ?",
+          "a": "Marque et modèle d'appareil, objectif, ISO, ouverture, vitesse, orientation, date et heure de prise de vue, et coordonnées GPS si présentes — plus les champs IPTC et XMP comme l'auteur et le copyright."
+        },
+        {
+          "q": "Montre-t-il le lieu de la photo sur une carte ?",
+          "a": "Oui. Quand un tag GPS est présent dans l'EXIF, GhostMeta lit les coordonnées et les place sur une carte pour voir exactement où la photo a été prise."
+        },
+        {
+          "q": "Ma photo est-elle envoyée pour voir son EXIF ?",
+          "a": "Non. L'EXIF est analysé localement dans votre navigateur. L'image ne quitte jamais votre appareil : inspecter des photos privées ou clients est sûr."
+        },
+        {
+          "q": "Quels formats puis-je inspecter ?",
+          "a": "JPEG et PNG directement, HEIC après conversion dans le navigateur, et WebP. Le JPEG porte l'EXIF le plus souvent ; le PNG stocke des données comparables dans des chunks texte et eXIf."
+        },
+        {
+          "q": "Puis-je retirer l'EXIF après l'avoir vu ?",
+          "a": "Oui. GhostMeta est viewer et nettoyeur à la fois : après avoir inspecté les champs, un seul clic les retire tous et produit une copie sans métadonnées."
+        },
+        {
+          "q": "L'EXIF viewer est-il gratuit ?",
+          "a": "Oui, consulter l'EXIF d'une photo est gratuit, sans compte. L'inspection et le nettoyage par lot sont des conforts Premium."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "remove-gps-from-photo",
+    "generator": "generic",
+    "format": "all",
+    "en": {
+      "title": "Remove GPS Location from Photos — Free, In-Browser",
+      "description": "Delete the GPS coordinates hidden in a photo before you share it. GhostMeta finds the location tag, shows it on a map, and strips it — all in your browser, nothing uploaded.",
+      "h1": "Remove GPS location from photos",
+      "intro": "A single geotagged photo can expose where you live, work or spend your weekends. When location services are on, phones write precise latitude and longitude into a GPS IFD inside the photo's EXIF block, and most sharing platforms do not remove it reliably. GhostMeta finds that GPS tag, plots it on a map so you can see exactly what the picture would reveal, and strips the coordinates along with the rest of the metadata — producing a copy with no location trace. The work happens entirely in your browser: the photo is never uploaded, so the coordinates you are trying to hide are never sent anywhere. This matters most for the pictures people share without thinking — a marketplace listing shot at home, a photo of a child in a garden, a rental ad. Drop the image, confirm the flagged location, and download a version that keeps the picture and drops the map pin.",
+      "wedge": "remove gps from photo",
+      "faq": [
+        {
+          "q": "Where is GPS stored in a photo?",
+          "a": "In the GPS IFD, a sub-block of the EXIF metadata. It holds latitude, longitude and sometimes altitude and a timestamp — enough to pinpoint the exact spot."
+        },
+        {
+          "q": "Does GhostMeta show the location before removing it?",
+          "a": "Yes. If a GPS tag is present, GhostMeta reads the coordinates and plots them on a map, so you see precisely what the photo would reveal before you strip it."
+        },
+        {
+          "q": "Is the photo uploaded to remove the GPS?",
+          "a": "No. Detection and removal happen in your browser. The coordinates you want to hide are never transmitted to any server."
+        },
+        {
+          "q": "Does removing GPS delete other metadata too?",
+          "a": "By default GhostMeta strips the whole metadata layer, so the GPS tag goes along with camera, date and author fields — leaving a fully neutral copy."
+        },
+        {
+          "q": "Don't social networks already remove GPS?",
+          "a": "Some strip EXIF on upload, many do not, and marketplaces, email attachments and cloud links often keep it. Removing GPS yourself before sharing is the only reliable guarantee."
+        },
+        {
+          "q": "Is it free?",
+          "a": "Yes. Removing the GPS location from a photo is free with no account. Batch processing is a Premium feature."
+        }
+      ]
+    },
+    "fr": {
+      "title": "Supprimer la géolocalisation GPS d'une photo — gratuit",
+      "description": "Effacez les coordonnées GPS cachées dans une photo avant de la partager. GhostMeta trouve le tag de localisation, l'affiche sur une carte et le retire — dans votre navigateur, rien n'est envoyé.",
+      "h1": "Supprimer la géolocalisation GPS d'une photo",
+      "intro": "Une seule photo géotaguée peut révéler où vous habitez, travaillez ou passez vos week-ends. Quand la localisation est activée, les téléphones inscrivent une latitude et une longitude précises dans une GPS IFD à l'intérieur du bloc EXIF de la photo, et la plupart des plateformes de partage ne la retirent pas de façon fiable. GhostMeta trouve ce tag GPS, le place sur une carte pour que vous voyiez exactement ce que l'image révélerait, et supprime les coordonnées avec le reste des métadonnées — produisant une copie sans trace de localisation. Tout se passe dans votre navigateur : la photo n'est jamais envoyée, donc les coordonnées que vous cherchez à cacher ne partent nulle part. C'est crucial pour les images que l'on partage sans réfléchir — une annonce de marketplace prise à la maison, une photo d'enfant dans un jardin, une annonce de location. Déposez l'image, confirmez la localisation signalée, et téléchargez une version qui garde la photo et retire l'épingle sur la carte.",
+      "wedge": "supprimer géolocalisation photo",
+      "faq": [
+        {
+          "q": "Où le GPS est-il stocké dans une photo ?",
+          "a": "Dans la GPS IFD, un sous-bloc des métadonnées EXIF. Elle contient latitude, longitude et parfois altitude et horodatage — de quoi localiser l'endroit exact."
+        },
+        {
+          "q": "GhostMeta montre-t-il la localisation avant de la retirer ?",
+          "a": "Oui. Si un tag GPS est présent, GhostMeta lit les coordonnées et les place sur une carte : vous voyez précisément ce que la photo révélerait avant de la nettoyer."
+        },
+        {
+          "q": "La photo est-elle envoyée pour retirer le GPS ?",
+          "a": "Non. La détection et la suppression se font dans votre navigateur. Les coordonnées que vous voulez cacher ne sont transmises à aucun serveur."
+        },
+        {
+          "q": "Retirer le GPS supprime-t-il les autres métadonnées ?",
+          "a": "Par défaut GhostMeta retire toute la couche de métadonnées : le tag GPS part avec l'appareil, la date et l'auteur — il reste une copie entièrement neutre."
+        },
+        {
+          "q": "Les réseaux sociaux ne retirent-ils pas déjà le GPS ?",
+          "a": "Certains retirent l'EXIF à l'upload, beaucoup non, et les marketplaces, pièces jointes d'e-mail et liens cloud le conservent souvent. Retirer le GPS soi-même avant de partager est la seule garantie fiable."
+        },
+        {
+          "q": "Est-ce gratuit ?",
+          "a": "Oui. Supprimer la géolocalisation GPS d'une photo est gratuit, sans compte. Le traitement par lot est une fonction Premium."
+        }
+      ]
+    }
   }
 ]
