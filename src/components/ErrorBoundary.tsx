@@ -1,6 +1,7 @@
 import { Component, ReactNode } from "react";
 import ErrorFallback from "./ErrorFallback";
 import { logSecurityEvent } from "@/lib/security-logger";
+import { isChunkLoadError, reloadOnceForStaleChunk } from "@/lib/lazyWithRetry";
 
 interface Props {
   children: ReactNode;
@@ -22,6 +23,11 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, info: { componentStack: string }) {
+    // Filet de sécurité : une erreur de chunk périmé (import dynamique échoué
+    // après un déploiement) est récupérable → on recharge une fois plutôt que
+    // d'afficher l'écran d'erreur. Le garde-fou sessionStorage évite la boucle.
+    if (isChunkLoadError(error) && reloadOnceForStaleChunk()) return;
+
     // SEC-019 : Log structuré des crashes React
     logSecurityEvent("RENDER_CRASH", error.message, {
       name: error.name,

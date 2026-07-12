@@ -1,4 +1,4 @@
-import { Suspense, lazy, useLayoutEffect, useState, useEffect } from 'react';
+import { Suspense, useLayoutEffect, useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { MotionConfig } from "framer-motion";
 import { Analytics } from '@vercel/analytics/react';
@@ -9,21 +9,22 @@ import PWAInstallPrompt from './components/PWAInstallPrompt';
 import ConsentBanner from './components/ConsentBanner';
 import i18n from './i18n';
 import { localeFromPath } from '@/lib/locale';
+import { lazyWithRetry } from '@/lib/lazyWithRetry';
 // Home chargé en statique (eager) : c'est la route d'entrée la plus visitée et
 // l'élément LCP (hero). L'extraire du lazy retire un aller-retour de chunk du
 // chemin critique → LCP mobile plus rapide. Les autres routes restent lazy.
 import Home from './pages/Home';
 
 // Imports dynamiques (Optimisation pour charger le site vite)
-const BlogIndex = lazy(() => import('./pages/BlogIndex'));
-const BlogPost = lazy(() => import('./pages/BlogPost'));
-const PricingPage = lazy(() => import('./pages/PricingPage'));
-const SecurityPage = lazy(() => import('./pages/SecurityPage'));
-const ToolsIndex = lazy(() => import('./pages/ToolsIndex'));
-const ToolLanding = lazy(() => import('./pages/ToolLanding'));
-const SettingsPage = lazy(() => import('./pages/SettingsPage'));
-const LegalPage = lazy(() => import('./pages/LegalPage'));
-const NotFound = lazy(() => import('./pages/NotFound'));
+const BlogIndex = lazyWithRetry(() => import('./pages/BlogIndex'));
+const BlogPost = lazyWithRetry(() => import('./pages/BlogPost'));
+const PricingPage = lazyWithRetry(() => import('./pages/PricingPage'));
+const SecurityPage = lazyWithRetry(() => import('./pages/SecurityPage'));
+const ToolsIndex = lazyWithRetry(() => import('./pages/ToolsIndex'));
+const ToolLanding = lazyWithRetry(() => import('./pages/ToolLanding'));
+const SettingsPage = lazyWithRetry(() => import('./pages/SettingsPage'));
+const LegalPage = lazyWithRetry(() => import('./pages/LegalPage'));
+const NotFound = lazyWithRetry(() => import('./pages/NotFound'));
 
 /**
  * HideLoader — Masque le loader HTML uniquement après que React
