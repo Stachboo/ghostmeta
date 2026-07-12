@@ -22,6 +22,20 @@ const BLOG_DATES: Record<string, string> = {
   'ghostmeta-manifeste-confidentialite': '2026-05-19',
 };
 
+// Visuel du bloc illustratif par article — mix voulu de vraies photos (Pexels,
+// libre de droit) et de visuels générés, chaque article ayant une image unique.
+const BLOG_ILLU: Record<
+  string,
+  { variant: 'exif' | 'gps' | 'viewer' | 'c2pa' | 'shield'; image: string }
+> = {
+  'comprendre-donnees-exif-gps': { variant: 'gps', image: '/illu/illu-photo-map.jpg' }, // vraie photo
+  'supprimer-exif-iphone-android': { variant: 'exif', image: '/illu/illu-photo-camera.jpg' }, // vraie photo
+  'ghostmeta-manifeste-confidentialite': { variant: 'c2pa', image: '/illu/illu-photo-code.jpg' }, // vraie photo
+  'vinted-securite-photo-guide': { variant: 'shield', image: '/illu/illu-shield.jpg' }, // généré
+  'nettoyage-photo-local-vs-cloud': { variant: 'viewer', image: '/illu/illu-data.jpg' }, // généré
+};
+const DEFAULT_ILLU = { variant: 'exif' as const, image: '/illu/illu-exif.jpg' };
+
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const { t, i18n } = useTranslation();
@@ -190,7 +204,10 @@ export default function BlogPost() {
             </p>
           </div>
 
-          <MetaIllustration variant="exif" />
+          <MetaIllustration
+            variant={(BLOG_ILLU[slug!] ?? DEFAULT_ILLU).variant}
+            image={(BLOG_ILLU[slug!] ?? DEFAULT_ILLU).image}
+          />
 
           {/* Rendu du contenu HTML SANITISÉ */}
           <div

@@ -12,7 +12,7 @@
  */
 import type { ReactNode } from "react";
 
-type Variant = "exif" | "gps" | "viewer" | "c2pa";
+type Variant = "exif" | "gps" | "viewer" | "c2pa" | "shield";
 
 interface Chip {
   key: string;
@@ -46,6 +46,12 @@ const CHIPSETS: Record<Variant, Chip[]> = {
     { key: "c2pa.actions", value: "created", redacted: true },
     { key: "DateTimeOriginal", value: "2026:03:14 09:22" },
   ],
+  shield: [
+    { key: "GPS", value: "48.8566, 2.3522", redacted: true },
+    { key: "Make", value: "Samsung SM-G991B" },
+    { key: "Software", value: "Photo Editor", redacted: true },
+    { key: "OwnerName", value: "utilisateur", redacted: true },
+  ],
 };
 
 // Photo de fond par variante (libre de droit, Pexels — commercial, sans
@@ -55,7 +61,8 @@ const BG: Record<Variant, string> = {
   exif: "/illu/illu-exif.jpg",
   gps: "/illu/illu-gps.jpg",
   viewer: "/illu/illu-viewer.jpg",
-  c2pa: "/illu/illu-exif.jpg",
+  c2pa: "/illu/illu-data.jpg",
+  shield: "/illu/illu-shield.jpg",
 };
 
 const LABELS: Record<Variant, string> = {
@@ -63,6 +70,7 @@ const LABELS: Record<Variant, string> = {
   gps: "GPS IFD · localisation",
   viewer: "Lecture des métadonnées",
   c2pa: "C2PA · Content Credentials",
+  shield: "Vie privée · anti-traçage",
 };
 
 // Glyphe focal (SVG path, tracé sur une grille 24×24), discret en bas à droite.
@@ -87,6 +95,13 @@ function Glyph({ variant }: { variant: Variant }) {
         <g {...common}>
           <circle cx="10.5" cy="10.5" r="6.5" />
           <path d="M15.5 15.5 21 21" />
+        </g>
+      );
+    case "shield":
+      return (
+        <g {...common}>
+          <path d="M12 2.5 4.5 5.5v6c0 4.7 3.2 8.4 7.5 10 4.3-1.6 7.5-5.3 7.5-10v-6L12 2.5Z" />
+          <path d="M9 11.5 11.2 14 15 9.5" />
         </g>
       );
     case "c2pa":
@@ -114,6 +129,9 @@ function Glyph({ variant }: { variant: Variant }) {
 
 interface Props {
   variant?: Variant;
+  /** chemin d'image de fond ; par défaut celui de la variante. Permet de mixer
+      photos réelles et visuels générés selon la page. */
+  image?: string;
   /** overlay optionnel (future vraie image), rendu au-dessus de l'illustration */
   children?: ReactNode;
   className?: string;
@@ -121,10 +139,12 @@ interface Props {
 
 export default function MetaIllustration({
   variant = "exif",
+  image,
   children,
   className = "",
 }: Props) {
   const chips = CHIPSETS[variant];
+  const bg = image ?? BG[variant];
 
   return (
     <div
@@ -135,7 +155,7 @@ export default function MetaIllustration({
       {/* Photo de fond (texture) : très assombrie + désaturée pour ne pas
           concurrencer les chips. object-cover, lazy. */}
       <img
-        src={BG[variant]}
+        src={bg}
         alt=""
         aria-hidden="true"
         loading="lazy"
