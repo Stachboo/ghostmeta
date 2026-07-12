@@ -10,6 +10,7 @@ import Header from '@/components/Header';
 import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 import GhostLogo from '@/components/GhostLogo';
+import MetaIllustration from '@/components/MetaIllustration';
 import DOMPurify from 'dompurify';
 
 // Dates de publication par article (source : sitemap.xml)
@@ -189,10 +190,7 @@ export default function BlogPost() {
             </p>
           </div>
 
-          <div className="aspect-video rounded-xl bg-gradient-to-br from-white/5 to-white/10 border border-white/10 flex items-center justify-center relative overflow-hidden group">
-            <GhostLogo size={100} className="opacity-10 group-hover:opacity-20 transition-opacity" />
-            <div className="absolute inset-0 bg-grid-white/[0.02]" />
-          </div>
+          <MetaIllustration variant="exif" />
 
           {/* Rendu du contenu HTML SANITISÉ */}
           <div

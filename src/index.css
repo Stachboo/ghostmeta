@@ -1,7 +1,65 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
+/* ══════════════════════════════════════════════════════════════════
+   Rajdhani — SELF-HOSTÉ (RGPD : aucun appel à Google Fonts, l'IP du
+   visiteur ne fuite pas). Sous-ensemble latin (FR+EN). Utilisé par le
+   titre hero de la Home (.matrix-hero-title). display=swap : le texte
+   s'affiche en fallback puis swappe, zéro blocage du premier paint.
+   ══════════════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: "Rajdhani";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/fonts/rajdhani-300.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Rajdhani";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/rajdhani-700.woff2") format("woff2");
+}
+
+/* MetaIllustration : ligne de scan verte qui balaie le bloc (motif GhostMeta).
+   Animée uniquement en motion-safe ; statique et discrète sinon. */
+.meta-illu__scan {
+  top: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 65, 0.7) 20%,
+    rgba(0, 255, 65, 0.9) 50%,
+    rgba(0, 255, 65, 0.7) 80%,
+    transparent
+  );
+  box-shadow: 0 0 12px 1px rgba(0, 255, 65, 0.55);
+  opacity: 0.5;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .meta-illu__scan {
+    animation: meta-illu-scan 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+}
+@keyframes meta-illu-scan {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.55;
+  }
+  90% {
+    opacity: 0.55;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
 @layer base {
   :root {
     --background: 224 71% 4%;

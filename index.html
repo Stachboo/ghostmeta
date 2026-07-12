@@ -12,26 +12,16 @@
 
     <meta name="robots" content="index, follow, max-image-preview:large" />
 
-    <!-- Google Font : Rajdhani (titre hero matrice) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!--
-      PERF/LCP : le stylesheet Google Fonts est chargé en NON-bloquant
-      (media="print" puis swap onload). Sans ça, le navigateur bloque le
-      premier paint le temps du round-trip googleapis→gstatic, ce qui retarde
-      le LCP (le <h1> hero en Rajdhani) sur mobile.
-      display=swap garantit déjà que le texte s'affiche en fallback (sans-serif)
-      puis swappe vers Rajdhani — on supprime juste l'attente bloquante.
-    -->
+    <!-- Rajdhani : police SELF-HOSTÉE (voir @font-face dans src/index.css).
+         Aucun appel à Google Fonts → pas de fuite d'IP visiteur (RGPD), pas de
+         round-trip externe. Preload du poids 700 (titre hero = élément LCP). -->
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;800&display=swap"
-      media="print"
-      onload="this.media='all'"
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/rajdhani-700.woff2"
+      crossorigin
     />
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;800&display=swap" rel="stylesheet" />
-    </noscript>
 
     <!-- PRELOAD CRITIQUE : hero-bg.avif est le LCP element -->
     <!-- Sans preload, le navigateur découvre cette image trop tard (dans le JS) -->

@@ -9,6 +9,16 @@ import Header from '@/components/Header';
 import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 import landingsData from '@/data/landings.json';
+import MetaIllustration from '@/components/MetaIllustration';
+
+// Choisit la variante d'illustration selon le sujet de la page.
+function illuVariant(l: Landing): 'exif' | 'gps' | 'viewer' | 'c2pa' {
+  if (/gps|geoloc|location/i.test(l.slug)) return 'gps';
+  if (/viewer|voir|inspect/i.test(l.slug)) return 'viewer';
+  if (l.generator !== 'generic' || /c2pa|watermark|midjourney|sora|dalle|flux|firefly|imagen|runway|leonardo|stable/i.test(l.slug))
+    return 'c2pa';
+  return 'exif';
+}
 
 interface LandingFAQ {
   q: string;
@@ -168,6 +178,8 @@ export default function ToolLanding() {
               <span>{trustLabel3}</span>
             </div>
           </div>
+
+          <MetaIllustration variant={illuVariant(landing)} />
         </section>
 
         <section className="container max-w-4xl py-8 border-t border-white/10">
