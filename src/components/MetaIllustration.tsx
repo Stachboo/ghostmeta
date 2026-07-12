@@ -48,6 +48,16 @@ const CHIPSETS: Record<Variant, Chip[]> = {
   ],
 };
 
+// Photo de fond par variante (libre de droit, Pexels — commercial, sans
+// attribution). Affichée très assombrie + teintée pour rester texture, pas
+// sujet. c2pa réutilise le visuel code (thème génération IA).
+const BG: Record<Variant, string> = {
+  exif: "/illu/illu-exif.jpg",
+  gps: "/illu/illu-gps.jpg",
+  viewer: "/illu/illu-viewer.jpg",
+  c2pa: "/illu/illu-exif.jpg",
+};
+
 const LABELS: Record<Variant, string> = {
   exif: "EXIF · IPTC · XMP · GPS",
   gps: "GPS IFD · localisation",
@@ -122,6 +132,31 @@ export default function MetaIllustration({
       aria-label={`Illustration : métadonnées ${LABELS[variant]} d'une photo, révélées puis retirées par GhostMeta`}
       className={`meta-illu relative w-full aspect-video overflow-hidden rounded-xl border border-white/10 bg-ghost-dark ${className}`}
     >
+      {/* Photo de fond (texture) : très assombrie + désaturée pour ne pas
+          concurrencer les chips. object-cover, lazy. */}
+      <img
+        src={BG[variant]}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30"
+        style={{ filter: "grayscale(0.55) contrast(1.05) brightness(0.9)" }}
+      />
+      {/* Voile sombre dégradé pour garantir la lisibilité par-dessus la photo */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(10,10,12,0.72), rgba(10,10,12,0.88)), radial-gradient(120% 100% at 15% 20%, transparent, rgba(10,10,12,0.6) 70%)",
+        }}
+      />
+      {/* Teinte verte discrète (mélange multiply) pour cohérence de marque */}
+      <div
+        className="pointer-events-none absolute inset-0 mix-blend-overlay"
+        style={{ background: "rgba(0,255,65,0.12)" }}
+      />
+
       {/* Halo radial vert très discret */}
       <div
         className="pointer-events-none absolute inset-0"
