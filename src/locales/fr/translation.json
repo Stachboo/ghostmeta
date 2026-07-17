@@ -76,7 +76,8 @@
       "active": "Essai gratuit actif — {{days}} jour(s) restant(s)",
       "badge": "TRIAL",
       "cta_signup": "Créez un compte et profitez de 30 jours d'accès complet gratuit !",
-      "active_btn": "ESSAI ACTIF — {{days}}J RESTANTS"
+      "active_btn": "ESSAI ACTIF — {{days}}J RESTANTS",
+      "upgrade_hint": "Essai actif — {{days}}j restants. Activez l'accès complet maintenant pour ne jamais le perdre."
     },
     "standard": {
       "name": "OPÉRATEUR STANDARD",

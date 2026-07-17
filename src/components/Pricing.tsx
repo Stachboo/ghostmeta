@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth, CHECKOUT_PENDING_KEY } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
@@ -11,6 +12,9 @@ const LEMON_SQUEEZY_B2B_MONTHLY_ID = import.meta.env.VITE_LEMON_SQUEEZY_B2B_MONT
 export default function Pricing() {
   const { t } = useTranslation();
   const { user, loading, isTrialActive, trialDaysLeft, hasFullAccess, profile, signInWithGoogle } = useAuth();
+  // Verrou anti-double-checkout : empêche un 2e window.open (double-clic ou clic
+  // mensuel + annuel) qui créerait deux abonnements Lemon Squeezy = double facturation.
+  const [checkingOut, setCheckingOut] = useState(false);
 
   const handleAuth = async () => {
     await signInWithGoogle();
@@ -21,12 +25,17 @@ export default function Pricing() {
       toast.error(t('pricing.error.not_logged_in', 'Veuillez vous connecter pour continuer'));
       return;
     }
+    if (checkingOut) return;
+    setCheckingOut(true);
 
     const baseUrl = `https://ghostmeta.lemonsqueezy.com/checkout/buy/${variantId}`;
     const checkoutUrl = `${baseUrl}?checkout[custom][user_id]=${user.id}&checkout[email]=${encodeURIComponent(user.email || '')}`;
 
     localStorage.setItem(CHECKOUT_PENDING_KEY, 'true');
     window.open(checkoutUrl, '_blank');
+    // Ré-arme après 4s pour permettre une relance légitime si l'onglet checkout
+    // a été fermé sans payer, tout en bloquant les clics rapprochés.
+    setTimeout(() => setCheckingOut(false), 4000);
   };
 
   const handleMonthlyClick = () => {
@@ -184,32 +193,29 @@ export default function Pricing() {
                 </li>
               </ul>
               {!loading && user ? (
-                isTrialActive ? (
+                <div className="space-y-3">
+                  {isTrialActive && (
+                    <p className="text-xs text-ghost-green/80 text-center font-mono leading-relaxed">
+                      {t('pricing.trial.upgrade_hint', 'Essai actif — {{days}}j restants. Activez l\'accès complet maintenant pour ne jamais le perdre.', { days: trialDaysLeft })}
+                    </p>
+                  )}
                   <Button
-                    disabled
-                    className="w-full h-12 bg-ghost-green/20 text-ghost-green font-bold font-mono border border-ghost-green/30"
+                    onClick={handleMonthlyClick}
+                    disabled={checkingOut}
+                    className="w-full h-12 bg-ghost-green hover:bg-ghost-green/90 text-black font-bold font-mono"
                   >
-                    <Gift className="w-4 h-4 mr-2" />
-                    {t('pricing.trial.active_btn', 'ESSAI ACTIF — {{days}}J RESTANTS', { days: trialDaysLeft })}
+                    <Zap className="w-4 h-4 mr-2" />
+                    {t('pricing.cta.buy', 'OBTENIR LE FULL ACCESS')}
                   </Button>
-                ) : (
-                  <div className="space-y-3">
-                    <Button
-                      onClick={handleMonthlyClick}
-                      className="w-full h-12 bg-ghost-green hover:bg-ghost-green/90 text-black font-bold font-mono"
-                    >
-                      <Zap className="w-4 h-4 mr-2" />
-                      {t('pricing.cta.buy', 'OBTENIR LE FULL ACCESS')}
-                    </Button>
-                    <Button
-                      onClick={handleYearlyClick}
-                      variant="outline"
-                      className="w-full h-10 border-ghost-green/50 text-ghost-green hover:bg-ghost-green/10 font-mono text-xs"
-                    >
-                      {t('pricing.cta.yearly', 'Yearly Plan — Save 33%')}
-                    </Button>
-                  </div>
-                )
+                  <Button
+                    onClick={handleYearlyClick}
+                    disabled={checkingOut}
+                    variant="outline"
+                    className="w-full h-10 border-ghost-green/50 text-ghost-green hover:bg-ghost-green/10 font-mono text-xs"
+                  >
+                    {t('pricing.cta.yearly', 'Yearly Plan — Save 33%')}
+                  </Button>
+                </div>
               ) : (
                 <Button
                   onClick={handleAuth}
@@ -261,6 +267,7 @@ export default function Pricing() {
               {!loading && user ? (
                 <Button
                   onClick={handleB2BClick}
+                  disabled={checkingOut}
                   className="w-full h-12 bg-cyan-500 hover:bg-cyan-400 text-black font-bold font-mono"
                 >
                   <Briefcase className="w-4 h-4 mr-2" />

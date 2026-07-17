@@ -76,7 +76,8 @@
       "active": "Free trial active — {{days}} day(s) remaining",
       "badge": "TRIAL",
       "cta_signup": "Create an account and enjoy 30 days of full access for free!",
-      "active_btn": "TRIAL ACTIVE — {{days}}D REMAINING"
+      "active_btn": "TRIAL ACTIVE — {{days}}D REMAINING",
+      "upgrade_hint": "Trial active — {{days}}d left. Unlock full access now so you never lose it."
     },
     "standard": {
       "name": "STANDARD OPERATOR",
