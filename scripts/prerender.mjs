@@ -37,6 +37,23 @@ const escHtml = (s = '') =>
 // Helpers de chemin localisé (FR = nu, EN = préfixe /en)
 const LP = (lang, base) => (lang === 'en' ? (base === '/' ? '/en' : `/en${base}`) : base);
 const urlFor = (lang, base) => `${ORIGIN}${LP(lang, base)}`;
+
+/**
+ * Nav crawlable injectée dans le bot-content de CHAQUE page prérendue.
+ * Objectif : donner aux crawlers sans JS (SE Ranking, 1er passage Googlebot) de vrais
+ * <a href> vers toutes les sections — sinon chaque page prérendue est un cul-de-sac
+ * (0 lien interne) et l'indexation plafonne (constat 2026-07-17 : 10/56 pages indexées).
+ * Ces liens sont cachés (bot-content display:none, retiré par React au mount) et
+ * mirrorent la nav/footer React que voient les utilisateurs → pas de cloaking.
+ */
+const crawlNav = (lang) => {
+  const items =
+    lang === 'en'
+      ? [['/', 'Home'], ['/tools', 'AI image privacy tools'], ['/blog', 'Blog'], ['/securite', 'Security'], ['/pricing', 'Pricing']]
+      : [['/', 'Accueil'], ['/tools', 'Outils confidentialité image IA'], ['/blog', 'Blog'], ['/securite', 'Sécurité'], ['/pricing', 'Tarifs']];
+  const links = items.map(([base, label]) => `<a href="${LP(lang, base)}">${escHtml(label)}</a>`).join(' · ');
+  return `<nav aria-label="${lang === 'en' ? 'Site navigation' : 'Plan du site'}">${links}</nav>`;
+};
 const relFor = (lang, base) => {
   const p = LP(lang, base);
   return p === '/' ? 'dist/index.html' : `dist${p}/index.html`;
@@ -83,7 +100,7 @@ function buildHtml(lang, base, { title, description, ogType = 'website', bodyCon
   html = html.replace('</head>', `  ${seoHead}${jsonLdTag}\n</head>`);
 
   if (bodyContent) {
-    const botDiv = `<div id="bot-content" style="display:none">${bodyContent}</div>\n  `;
+    const botDiv = `<div id="bot-content" style="display:none">${bodyContent}\n${crawlNav(lang)}</div>\n  `;
     html = html.replace('<div id="root">', botDiv + '<div id="root">');
   }
   return html;
