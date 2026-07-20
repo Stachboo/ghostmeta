@@ -123,8 +123,41 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Bannière partenaire — M.E Expert Serrurier (Avignon).
+            Lien éditorial volontaire, non payant : pas de rel="nofollow"/"sponsored",
+            donc dofollow. Si l'emplacement devenait payant un jour, la règle Google
+            impose d'ajouter rel="sponsored". `noopener` est une protection navigateur
+            et n'a aucun effet SEO.
+            <picture> plutôt que deux <img> masqués : un seul fichier est téléchargé. */}
+        <div className="flex flex-col items-center gap-2 pt-6 border-t border-border/20">
+          <span className="text-[0.65rem] uppercase tracking-wider text-white/40">
+            {t('footer.partner_label')}
+          </span>
+          <a
+            href="https://me-expert-serrurier.com/?utm_source=ghostmeta&utm_medium=banner&utm_campaign=partenaires-2026"
+            target="_blank"
+            rel="noopener"
+            className="inline-block rounded-md overflow-hidden opacity-90 hover:opacity-100 transition-opacity"
+          >
+            <picture>
+              <source
+                media="(min-width: 640px)"
+                srcSet="/partners/me-expert-serrurier-728x90.png"
+              />
+              <img
+                src="/partners/me-expert-serrurier-320x100.png"
+                alt="Serrurier en Avignon 24h/24 — M.E Expert Serrurier — 06 24 30 97 13"
+                loading="lazy"
+                decoding="async"
+                /* hauteurs figées par breakpoint : réserve la place, évite le CLS */
+                className="h-[100px] w-auto max-w-full sm:h-[90px]"
+              />
+            </picture>
+          </a>
+        </div>
+
         {/* Barre copyright */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-border/20">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 mt-6 border-t border-border/20">
           <div className="flex items-center gap-2">
             <GhostLogo size={24} />
             <span className="text-sm text-muted-foreground">

@@ -52,7 +52,23 @@ const crawlNav = (lang) => {
       ? [['/', 'Home'], ['/tools', 'AI image privacy tools'], ['/blog', 'Blog'], ['/securite', 'Security'], ['/pricing', 'Pricing']]
       : [['/', 'Accueil'], ['/tools', 'Outils confidentialité image IA'], ['/blog', 'Blog'], ['/securite', 'Sécurité'], ['/pricing', 'Tarifs']];
   const links = items.map(([base, label]) => `<a href="${LP(lang, base)}">${escHtml(label)}</a>`).join(' · ');
-  return `<nav aria-label="${lang === 'en' ? 'Site navigation' : 'Plan du site'}">${links}</nav>`;
+  return `<nav aria-label="${lang === 'en' ? 'Site navigation' : 'Plan du site'}">${links}</nav>\n${partnerLink(lang)}`;
+};
+
+/**
+ * Bannière partenaire (M.E Expert Serrurier) en version crawlable.
+ * Miroir exact du lien rendu par React dans <Footer> — même URL, même alt —
+ * pour que les crawlers sans JS le voient : sinon le lien n'existe que dans
+ * l'arbre React et n'apparaît dans AUCUN des HTML prérendus (vérifié : #root
+ * est vide dans dist/).
+ * dofollow assumé : lien éditorial non payant, donc pas de rel nofollow/sponsored.
+ */
+const partnerLink = (lang) => {
+  const label = lang === 'en' ? 'Partner' : 'Partenaire';
+  const alt = 'Serrurier en Avignon 24h/24 — M.E Expert Serrurier — 06 24 30 97 13';
+  const href =
+    'https://me-expert-serrurier.com/?utm_source=ghostmeta&utm_medium=banner&utm_campaign=partenaires-2026';
+  return `<p>${label} : <a href="${escHtml(href)}" target="_blank" rel="noopener">${escHtml(alt)}</a></p>`;
 };
 const relFor = (lang, base) => {
   const p = LP(lang, base);
