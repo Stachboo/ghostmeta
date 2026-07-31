@@ -1,0 +1,137 @@
+# entrees conformes a schemas/error-entry.schema.md
+- id: fail-fast-dependance-critique-2026-07-14
+  trigger: "dependance, fail-fast, silencieux, startup"
+  rule: "Vérifier effectivement la dépendance critique avant d agir ou de déclarer un succès, et échouer bruyamment si elle est absente, au lieu de produire un résultat vide ou un ok trompeur."
+  provenance: { who: self, what: "minage des 30 memoires projet + refutation adversariale", context: "corrobore par >= 2 cadres independants ; chaque cadre verifie contre son fichier de preuve" }
+  helpful: 0
+  harmful: 0
+  seen: 2
+  added_at: "2026-07-14"
+  last_updated: "2026-07-14"
+  valid_at: "2026-07-14"
+- id: seo-skill-version-scripts-missing
+  trigger: "skill,seo-google,plugin,script-python,credentials"
+  symptom: "Le skill seo-google chargé documentait des scripts Python (scripts/, extensions/google/) mais le package installé ne contenait que la doc (SKILL.md, references/) ; aucun fichier scripts/ ni credentials Google Cloud n'existait sur disque."
+  rule: "Avant d'exécuter une commande qu'un skill documente, vérifier que les fichiers qu'elle référence (scripts, config, credentials) existent réellement sur disque dans le package installé ; ne pas supposer que la doc du skill reflète le contenu effectivement livré."
+  provenance: { who: self, context: "consolidation du sommeil (SessionEnd)" }
+  seen: 1
+  added_at: "2026-07-18"
+  last_updated: "2026-07-18"
+  valid_at: "2026-07-18"
+- id: webfetch-no-raw-http-headers
+  trigger: "webfetch,headers,http,curl,securite,csp,hsts"
+  symptom: "WebFetch a été utilisé pour vérifier les headers de sécurité HTTP d'une page mais ne montre que le contenu rendu en markdown, pas les headers bruts de la réponse."
+  rule: "Pour inspecter des headers HTTP bruts (CSP, HSTS, Content-Encoding, etc.), utiliser curl (ou équivalent bas niveau), jamais WebFetch qui ne restitue que le contenu rendu."
+  provenance: { who: self, context: "consolidation du sommeil (SessionEnd)" }
+  seen: 1
+  added_at: "2026-07-18"
+  last_updated: "2026-07-18"
+  valid_at: "2026-07-18"
+- id: stale-edge-cache-false-security-alarm
+  trigger: "cache,edge,age-header,curl,prod,headers-manquants,faux-positif"
+  symptom: "Deux premiers curl sur la prod montraient des headers de sécurité (HSTS, X-Frame-Options, etc.) absents alors qu'ils étaient bien configurés côté serveur ; la réponse portait un header Age non-nul (36 puis 394) signalant une réponse edge-cache périmée, ignoré au premier passage."
+  rule: "Avant d'affirmer qu'un header ou un comportement HTTP est absent en prod, vérifier le header Age (ou équivalent cache) de la réponse curl et refaire un test avec cache-buster ou sur une route fraîche ; un Age non-nul invalide la conclusion tirée de cette réponse."
+  provenance: { who: self, context: "consolidation du sommeil (SessionEnd)" }
+  seen: 1
+  added_at: "2026-07-18"
+  last_updated: "2026-07-18"
+  valid_at: "2026-07-18"
+- id: grep-oE-fails-on-minified-single-line-html
+  trigger: "grep,regex,minified,html,build,prerender,bundle-js"
+  symptom: "grep -oE a échoué silencieusement (ou n'a rien retourné) sur du HTML/JS minifié tenant sur une seule ligne très longue, faisant croire à une absence de contenu qui était en réalité présent."
+  rule: "Sur un fichier minifié tenant en une ligne géante, ne pas se fier à grep -oE pour confirmer présence/absence de contenu ; utiliser une recherche de chaîne fixe ou un script (Python) qui lit et parse le fichier explicitement."
+  provenance: { who: self, context: "consolidation du sommeil (SessionEnd)" }
+  seen: 1
+  added_at: "2026-07-18"
+  last_updated: "2026-07-18"
+  valid_at: "2026-07-18"
+- id: local-build-vs-prod-build-env-mismatch
+  trigger: "vite,build-local,env-vars,dead-code-elimination,bundle-hash,vercel"
+  symptom: "Un bundle JS buildé localement (sans les secrets d'environnement) a des hashes de chunk différents du bundle réellement servi en prod ; comparer les deux a conduit à deux fausses alertes successives (absence d'URL checkout, puis confusion sur quel fichier est le vrai chunk prod vs un fallback SPA)."
+  rule: "Ne jamais comparer un build local (sans secrets d'environnement) au bundle prod pour juger si une variable d'env est configurée : télécharger et inspecter directement les fichiers réellement servis par la prod (mêmes noms de hash que le build prod, pas ceux du build local), car les env vars absentes au build éliminent le code mort (dead-code elimination) et changent le contenu du bundle."
+  provenance: { who: self, context: "consolidation du sommeil (SessionEnd)" }
+  seen: 1
+  added_at: "2026-07-18"
+  last_updated: "2026-07-18"
+  valid_at: "2026-07-18"
+- id: bash-chain-silent-stop-on-grep-nomatch
+  trigger: "bash,grep,exit-code,chaine-de-commandes,&&"
+  symptom: "Une chaîne de commandes avec && s'est arrêtée silencieusement après le premier grep car ce grep n'a rien trouvé (exit code 1), empêchant l'exécution des commandes suivantes sans message d'erreur explicite."
+  rule: "Ne pas chaîner grep avec && quand un résultat vide est une issue normale possible ; séparer les commandes ou utiliser grep ... ; true / grep ... || echo none pour éviter qu'un exit non-zéro de grep coupe silencieusement la suite de la chaîne."
+  provenance: { who: self, context: "consolidation du sommeil (SessionEnd)" }
+  seen: 1
+  added_at: "2026-07-18"
+  last_updated: "2026-07-18"
+  valid_at: "2026-07-18"
+- id: gitbash-windows-quoting-mangling
+  trigger: "git-bash,windows,backtick,chemin,slash,variable,powershell"
+  symptom: "Des backticks et des ${...} dans une commande bash ont été altérés/expansés avant exécution, et des chemins commençant par / ont été mal interprétés (path mangling Git Bash sous Windows), causant des résultats faux ou tronqués."
+  rule: "Sous Git Bash sur Windows, éviter d'inliner des backticks, des ${...} ou des chemins commençant par / dans une commande shell complexe ; écrire le script dans un fichier (Python ou autre) et l'exécuter, pour éviter les mangling d'échappement et de conversion de chemin propres à Git Bash sur Windows."
+  provenance: { who: self, context: "consolidation du sommeil (SessionEnd)" }
+  seen: 1
+  added_at: "2026-07-18"
+  last_updated: "2026-07-18"
+  valid_at: "2026-07-18"
+- id: playwright-mcp-restricted-upload-dirs
+  trigger: "playwright,mcp,upload,file-chooser,fichier-test,input-file"
+  symptom: "Un upload de fichier via le MCP Playwright a échoué car le chemin du fichier test se trouvait hors des répertoires autorisés par le MCP."
+  rule: "Avant d'uploader un fichier via un navigateur piloté par le MCP Playwright, copier le fichier dans un répertoire explicitement autorisé par le MCP (ex. un dossier scratch dédié) plutôt que de référencer son chemin d'origine."
+  provenance: { who: self, context: "consolidation du sommeil (SessionEnd)" }
+  seen: 1
+  added_at: "2026-07-18"
+  last_updated: "2026-07-18"
+  valid_at: "2026-07-18"
+- id: seranking-crawler-no-accept-encoding-false-positive
+  trigger: "se-ranking,audit,compression,brotli,gzip,css_uncompressed"
+  symptom: "L'audit SE Ranking a signalé des ressources CSS "non compressées" alors que Brotli était bien actif en prod, parce que le crawler de l'audit n'envoie pas d'en-tête Accept-Encoding."
+  rule: "Avant de traiter un finding "ressource non compressée" d'un outil d'audit SEO comme réel, vérifier directement via curl avec Accept-Encoding: br/gzip explicite si la compression est effectivement servie ; l'absence de cet en-tête côté crawler produit un faux positif systématique."
+  provenance: { who: self, context: "consolidation du sommeil (SessionEnd)" }
+  seen: 1
+  added_at: "2026-07-18"
+  last_updated: "2026-07-18"
+  valid_at: "2026-07-18"
+- id: prerendered-nav-invisible-to-js-off-crawlers
+  trigger: "prerender,seo,indexation,crawlnav,react,nav,footer,liens-internes"
+  symptom: "Le HTML prérendu de chaque page ne contenait aucun lien de navigation interne (header/footer rendus uniquement côté client React), ce qui laissait les crawlers sans JS sur des pages culs-de-sac et limitait l'indexation à une fraction des pages du sitemap."
+  rule: "Pour un site avec prérendu statique + hydratation React, s'assurer que la navigation globale (header/footer) est reproduite en liens <a href> bruts dans le HTML prérendu lui-même, et pas seulement rendue côté client, sous peine de bloquer la découverte/indexation des pages par les crawlers qui n'exécutent pas le JS."
+  provenance: { who: self, context: "consolidation du sommeil (SessionEnd)" }
+  seen: 1
+  added_at: "2026-07-18"
+  last_updated: "2026-07-18"
+  valid_at: "2026-07-18"
+- id: ne-jamais-exprimer-un-override-resolution-de-d-2026-07-31
+  trigger: "pnpm overrides, npm resolutions, undici, jsdom, vitest, MODULE_NOT_FOUND, nodriver, websockets 13.1, undetected-chromedriver, dependance transitive, semver caret, majeure breaking, wrap-handler.js"
+  symptom: "L'override global undici >=7.28.0 a laisse pnpm resoudre undici 8.5.0, dont wrap-handler.js/unwrap-handler.js ont disparu, tuant jsdom@29 ; symetriquement websockets 15.0.1 tire en transitif a casse nodriver 0.48.1 (attribut closed sur objet non initialise) en affichant seulement 'Failed to connect to browser'."
+  rule: "Ne jamais exprimer un override/resolution de dependance transitive avec une borne ouverte (>=X) : le scoper au consommateur concerne (jsdom>undici) et le borner par caret sur la majeure — un consommateur qui touche aux modules internes d'une lib casse au premier saut de majeure, et le symptome remonte deguise (connexion impossible, MODULE_NOT_FOUND), jamais en erreur de version."
+  provenance: { who: self, context: "minage retrospectif claude-mem ; observations #8334, #8353, #8354, #2961 ; egalement observe dans : automate-binance" }
+  seen: 1
+  added_at: "2026-07-31"
+  last_updated: "2026-07-31"
+  valid_at: "2026-07-31"
+- id: sur-un-site-prerendu-puis-hydrate-par-un-gesti-2026-07-31
+  trigger: "prerender, react-helmet-async, data-rh, hydratation, canonical_multiple, hreflang, json-ld, application/ld+json, se ranking audit, ghostmeta, vite ssg, duplicate structured data, googlebot js"
+  symptom: "Le gestionnaire de head ne remplace que les balises qu'il reconnait comme siennes ; les balises injectees par le prerender lui sont invisibles, donc il ajoute les siennes en plus au lieu de les substituer, ce qui a produit 46 pages en canonical_multiple et du JSON-LD FAQ divergent entre prerender et runtime."
+  rule: "Sur un site prerendu puis hydrate par un gestionnaire de <head> cote client (react-helmet-async, vue-meta, next/head), marquer les balises SEO du HTML prerendu avec l'attribut de propriete du gestionnaire (data-rh) ou les retirer au montage : sinon canonical, description, hreflang et JSON-LD existent en double apres hydratation, et cela ne se voit ni dans le HTML statique ni dans le DOM avant hydratation."
+  provenance: { who: self, context: "minage retrospectif claude-mem ; observations #2128, #8184, #8188, #8458" }
+  seen: 1
+  added_at: "2026-07-31"
+  last_updated: "2026-07-31"
+  valid_at: "2026-07-31"
+- id: sur-une-spa-servie-par-une-regle-de-reecriture-2026-07-31
+  trigger: "vercel.json, rewrites, spa fallback, netlify redirects, nginx try_files, soft 404, /.env, /.git/HEAD, scan de securite, x-robots-tag, faux positif 200"
+  symptom: "La regle { source: "/((?!api/).*)", destination: "/index.html" } sert l'application pour n'importe quel chemin, donc /.env, /.git/HEAD, /admin, /wp-admin renvoient tous 200 : un fichier reellement deploye devient indiscernable d'une 404, et l'absence de vrai 404 cree des soft 404 cote moteurs."
+  rule: "Sur une SPA servie par une regle de reecriture attrape-tout (vercel.json rewrites, netlify _redirects, nginx try_files), ne jamais conclure a la presence ou a l'absence d'un fichier depuis le code HTTP : tout chemin inexistant rend 200 avec index.html ; exclure explicitement les chemins sensibles de la reecriture et verifier le corps de la reponse, pas son statut."
+  provenance: { who: self, context: "minage retrospectif claude-mem ; observations #2485" }
+  seen: 1
+  added_at: "2026-07-31"
+  last_updated: "2026-07-31"
+  valid_at: "2026-07-31"
+- id: pour-degrader-gracieusement-quand-une-configur-2026-07-31
+  trigger: "supabase createClient, VITE_SUPABASE_URL, graceful degradation, placeholder, vite preview, .env manquant, ErrorBoundary, render_crash, validation d'entree de sdk, nullish coalescing"
+  symptom: "createClient de @supabase/supabase-js leve « supabaseUrl is required » / « supabaseKey is required » sur chaine vide (dist/index.mjs lignes 150 et 200), donc le fallback '' plantait toujours a l'initialisation du module et faisait tomber toute la chaine d'imports jusqu'au RENDER_CRASH de l'ErrorBoundary."
+  rule: "Pour degrader gracieusement quand une configuration externe manque, ne pas remplacer la valeur absente par une chaine vide : lire le code source de la bibliotheque pour connaitre ses contraintes de validation et fournir un placeholder syntaxiquement valide (URL parsable, cle non vide) — sinon le crash est simplement deplace de l'absence de config vers la validation de la lib."
+  provenance: { who: self, context: "minage retrospectif claude-mem ; observations #8376, #8377" }
+  seen: 1
+  added_at: "2026-07-31"
+  last_updated: "2026-07-31"
+  valid_at: "2026-07-31"

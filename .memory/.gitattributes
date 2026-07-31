@@ -1,0 +1,3 @@
+# Fusion sans conflit des fichiers memoire (SPEC 7-C4). Requiert l'enregistrement du driver :
+#   git config merge.mem-merge.driver 'powershell -NoProfile -File <repo>/scripts/mem-merge.ps1 %O %A %B'
+*.yaml merge=mem-merge
