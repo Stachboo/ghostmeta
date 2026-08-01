@@ -11,6 +11,7 @@ import {
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabase';
 import { logSecurityEvent } from '@/lib/security-logger';
+import { trackEvent } from '@/lib/analytics';
 
 interface ProcessingStats {
   total: number;
@@ -178,11 +179,18 @@ export function useImageProcessor() {
     }
 
     if (cleanedCount > 0) {
+      // Un événement par lot nettoyé (pas par image) : c'est l'acte
+      // d'activation produit, la volumétrie va dans la propriété `count`.
+      trackEvent('image_cleaned', {
+        count: cleanedCount,
+        batch: cleanedCount > 1,
+        full_access: hasFullAccess,
+      });
       toast.success('Nettoyage terminé !');
     }
 
     setIsProcessing(false);
-  }, [images]);
+  }, [images, hasFullAccess]);
 
   const downloadImage = useCallback((id: string) => {
     const img = images.find(i => i.id === id);

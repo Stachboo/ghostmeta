@@ -6,6 +6,9 @@
  * - Ne s'affiche pas si déjà en mode standalone (app installée)
  * - Mémorise le refus en localStorage (clé ghostmeta_pwa_dismissed)
  * - Apparaît après 4s avec animation slide-up (Framer Motion)
+ * - Attend que le consentement RGPD soit tranché : les deux barres sont
+ *   `fixed bottom-0` et celle-ci (z-9999) recouvrait le bandeau de consentement
+ *   (z-50) sur 81 px des 145 px, rendant le choix RGPD à moitié inaccessible.
  */
 
 import { useState, useEffect, useRef } from 'react';
@@ -14,6 +17,7 @@ import { useTranslation } from 'react-i18next';
 import GhostLogo from './GhostLogo';
 
 const DISMISSED_KEY = 'ghostmeta_pwa_dismissed';
+const CONSENT_KEY = 'ghostmeta-analytics-consent';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -43,21 +47,37 @@ export default function PWAInstallPrompt() {
     const ios = isIOS();
     setIsIOSDevice(ios);
 
-    if (!ios) {
-      // Android/Chrome : capturer l'event
-      const handler = (e: Event) => {
-        e.preventDefault();
-        deferredPrompt.current = e as BeforeInstallPromptEvent;
-        const timer = setTimeout(() => setVisible(true), 4000);
-        return () => clearTimeout(timer);
-      };
-      window.addEventListener('beforeinstallprompt', handler);
-      return () => window.removeEventListener('beforeinstallprompt', handler);
-    } else {
-      // iOS : afficher après 4s sans event natif
-      const timer = setTimeout(() => setVisible(true), 4000);
-      return () => clearTimeout(timer);
-    }
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    // iOS n'émet pas `beforeinstallprompt` : rien à capturer, on est prêt.
+    let promptReady = ios;
+
+    // Une seule barre à la fois en bas d'écran : tant que le consentement
+    // RGPD n'est pas tranché, ce bandeau reste en retrait.
+    const consentGiven = () => Boolean(localStorage.getItem(CONSENT_KEY));
+
+    const maybeShow = () => {
+      if (timer || !promptReady || !consentGiven()) return;
+      timer = setTimeout(() => setVisible(true), 4000);
+    };
+
+    // La capture de l'event natif reste immédiate (le navigateur l'émet tôt,
+    // souvent avant le choix de consentement) ; seul l'affichage attend.
+    const installHandler = (e: Event) => {
+      e.preventDefault();
+      deferredPrompt.current = e as BeforeInstallPromptEvent;
+      promptReady = true;
+      maybeShow();
+    };
+
+    if (!ios) window.addEventListener('beforeinstallprompt', installHandler);
+    window.addEventListener('consent-changed', maybeShow);
+    maybeShow();
+
+    return () => {
+      if (timer) clearTimeout(timer);
+      if (!ios) window.removeEventListener('beforeinstallprompt', installHandler);
+      window.removeEventListener('consent-changed', maybeShow);
+    };
   }, []);
 
   function dismiss() {

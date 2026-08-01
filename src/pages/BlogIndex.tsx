@@ -89,6 +89,24 @@ export default function BlogIndex() {
               : "Guides pratiques pour protéger votre vie privée en ligne et vos photos."
           }
         />
+        {/* Miroir runtime du JSON-LD prérendu (App.tsx le retire au mount).
+            Les dates viennent de BLOG_DATES dans scripts/prerender.mjs. */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "@id": `${canonicalUrl}#blog`,
+            url: canonicalUrl,
+            inLanguage: isEn ? "en" : "fr",
+            isPartOf: { "@id": "https://www.ghostmeta.online/#website" },
+            blogPost: BLOG_SLUGS.map(slug => ({
+              "@type": "BlogPosting",
+              "@id": `${seo.canonical.replace(/\/blog$/, "")}/blog/${slug}#article`,
+              headline: t(`blog.posts.${slug}.title`),
+              url: `${seo.canonical.replace(/\/blog$/, "")}/blog/${slug}`,
+            })),
+          })}
+        </script>
       </Helmet>
 
       <Header />

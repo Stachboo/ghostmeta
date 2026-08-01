@@ -34,10 +34,10 @@
     "footer_note": "All processing remains local — zero network exposure"
   },
   "header": {
-    "upgrade": "Upgrade"
+    "upgrade": "Full Access"
   },
   "auth": {
-    "welcome_pro": "Welcome to Pro! ✨",
+    "welcome_pro": "Welcome to Full Access! ✨",
     "loading": "Initializing...",
     "login": "Secure Access",
     "logout": "Logout",
@@ -94,7 +94,7 @@
       "price": "5€",
       "period": "/month",
       "badge": "RECOMMENDED",
-      "yearly_note": "Or €40/year (2 months free)",
+      "yearly_note": "Or €40/year (4 months free)",
       "batch": "50 images per batch",
       "gps": "Unlimited GPS views",
       "priority": "Priority processing",
@@ -110,7 +110,7 @@
     },
     "cta": {
       "login": "LOGIN TO ACTIVATE",
-      "login_short": "SIGN IN TO UPGRADE",
+      "login_short": "SIGN IN FOR FULL ACCESS",
       "buy": "GET FULL ACCESS",
       "yearly": "Yearly Plan — Save 33%"
     }
@@ -126,6 +126,7 @@
     "drop_title": "Drop your photos here",
     "drop_active": "Drop it like it's hot!",
     "drop_subtitle": "JPEG · PNG · WebP · HEIC — 100% Local Processing",
+    "drop_cta": "Choose my photos",
     "browse": "or browse your files",
     "processing": "Analyzing...",
     "cleaning": "Cleaning...",
@@ -136,7 +137,7 @@
     "limit_title": "Limit Reached",
     "limit_desc": "In free mode, cleaning is limited to 1 session every 12 hours. Come back later or support the project.",
     "donate_btn": "Support Developer (PayPal)",
-    "pro_soon": "Pro Pack Coming Soon!",
+    "pro_soon": "Full Access coming soon!",
     "file_too_large": "file too large (max 10 MB)"
   },
   "card": {
@@ -165,7 +166,7 @@
     "vinted_text_2": "Once you share an image — on Vinted, Twitter, LinkedIn, or in a client deck — every recipient can extract that data with a free online tool.",
     "vinted_text_3": "GhostMeta strips it all in your browser. EXIF, GPS, C2PA, AI fingerprints. Nothing is sent to the internet.",
     "batch_lock_title": "Batch Mode Locked",
-    "batch_lock_desc": "In free mode, clean photos one by one (unlimited). The Pro Pack unlocks batch processing and ZIP export."
+    "batch_lock_desc": "In free mode, clean photos one by one (unlimited). Full Access unlocks batch processing and ZIP export."
   },
   "blog": {
     "section_title": "Expertise & Privacy",
@@ -246,7 +247,7 @@
     "a6": "Not always, and often only after storing the original on their servers."
   },
   "pro": {
-    "active": "PRO ACTIVE",
+    "active": "FULL ACCESS ACTIVE",
     "desc": "Unlock all GhostMeta features.",
     "price": "30 days free",
     "benefit_1": "50 images per batch",
@@ -261,7 +262,7 @@
     "free_2": "Metadata scan",
     "free_3": "Single download",
     "free_4": "100% Local & Private",
-    "pro_title": "Pro Pack",
+    "pro_title": "Full Access",
     "pro_price": "Soon",
     "pro_1": "Up to 100 images simultaneously",
     "pro_2": "Batch Mode (all at once)",

@@ -234,7 +234,9 @@ export default function Home() {
       </Helmet>
       {/* HEADER */}
       <header className="sticky top-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl">
-        <div className="container flex items-center justify-between h-14">
+        {/* px-4 sur mobile : le padding 2rem du container faisait déborder
+            la barre d'actions de 7 px (scrollWidth 382 > viewport 375). */}
+        <div className="container px-4 sm:px-8 flex items-center justify-between h-14">
           <div className="flex items-center gap-2.5">
             <GhostLogo size={32} glow />
             <span className="text-lg font-bold tracking-tight">Ghost<span className="text-ghost-green">Meta</span></span>
@@ -246,7 +248,7 @@ export default function Home() {
             <LocaleLink to="/securite" className="text-zinc-400 hover:text-white transition-colors">{t('nav.security')}</LocaleLink>
             <LocaleLink to="/pricing" className="text-zinc-400 hover:text-white transition-colors">{t('nav.pricing')}</LocaleLink>
           </nav>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 {/* MODIFICATION UNIQUE ICI : Ajout du aria-label pour Google */}
@@ -456,7 +458,7 @@ export default function Home() {
 
             {/* Colonne Verte (GhostMeta) */}
             <div className="relative border border-ghost-green/20 bg-ghost-green/5 p-8 rounded-xl h-full overflow-hidden">
-              <img src={SHIELD_IMG} width="320" height="320" loading="lazy" decoding="async" className="absolute -right-16 -bottom-16 w-80 h-80 opacity-10 pointer-events-none z-0 object-contain" alt="GhostMeta Technical Analysis View" />
+              <img src={SHIELD_IMG} width="320" height="320" loading="lazy" decoding="async" className="absolute right-0 -bottom-16 w-80 h-80 opacity-10 pointer-events-none z-0 object-contain" alt="GhostMeta Technical Analysis View" />
               
               <div className="relative z-10">
                 <h3 className="text-ghost-green font-bold mb-6 flex items-center gap-2 text-lg">

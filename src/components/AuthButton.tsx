@@ -95,10 +95,11 @@ export default function AuthButton() {
         variant="outline"
         size="sm"
         onClick={handleSignOut}
+        aria-label={t("auth.logout", "Déconnexion")}
         className="border-zinc-700/50 bg-zinc-900/50 text-emerald-400 hover:bg-zinc-800/50 hover:text-emerald-300 h-8 glass"
       >
-        <LogOut className="w-4 h-4 mr-1" />
-        <span className="text-xs">{t("auth.logout", "Déconnexion")}</span>
+        <LogOut className="w-4 h-4 sm:mr-1" />
+        <span className="text-xs hidden sm:inline">{t("auth.logout", "Déconnexion")}</span>
       </Button>
     );
   }
@@ -109,10 +110,13 @@ export default function AuthButton() {
         variant="outline"
         size="sm"
         onClick={() => setDialogOpen(true)}
+        aria-label={t("auth.login", "Accès Sécurisé")}
         className="border-zinc-700/50 bg-zinc-900/50 text-emerald-400 hover:bg-zinc-800/50 hover:text-emerald-300 h-8 glass"
       >
-        <LogIn className="w-4 h-4 mr-1" />
-        <span className="text-xs">
+        {/* Libellé masqué sous sm : il coûtait ~90 px et faisait déborder
+            la barre d'en-tête sur mobile (aria-label prend le relais). */}
+        <LogIn className="w-4 h-4 sm:mr-1" />
+        <span className="text-xs hidden sm:inline">
           {t("auth.login", "Accès Sécurisé")}
         </span>
       </Button>

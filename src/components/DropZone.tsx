@@ -54,7 +54,7 @@ export default function DropZone({ onFilesAdded, hasImages, isProcessing }: Drop
         relative group cursor-pointer
         rounded-2xl border-2 border-dashed
         transition-all duration-300 ease-in-out
-        ${isDragActive ? 'border-[#00ff41] bg-[#00ff41]/5' : 'border-border hover:border-[#00ff41]/50 hover:bg-[#00ff41]/5'}
+        ${isDragActive ? 'border-[#00ff41] bg-[#00ff41]/5' : 'border-[#00ff41]/40 bg-[#00ff41]/[0.03] hover:border-[#00ff41]/70 hover:bg-[#00ff41]/5'}
         ${hasImages ? 'h-32' : 'h-64 sm:h-80'}
       `}
     >
@@ -83,6 +83,15 @@ export default function DropZone({ onFilesAdded, hasImages, isProcessing }: Drop
             {t('upload.drop_subtitle')}
           </p>
         </div>
+
+        {/* Affordance principale : le <span> hérite du clic de la dropzone —
+            un <button> imbriqué déclencherait deux fois l'ouverture du picker.
+            Plein vert = l'action primaire domine enfin les CTA d'en-tête. */}
+        {!hasImages && (
+          <span className="inline-flex items-center rounded-lg bg-[#00ff41] px-5 py-2.5 text-sm font-bold text-black shadow-[0_0_20px_rgba(0,255,65,0.25)] transition-colors group-hover:bg-[#00dd38]">
+            {t('upload.drop_cta', 'Choisir mes photos')}
+          </span>
+        )}
       </div>
     </div>
   );

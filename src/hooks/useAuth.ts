@@ -3,6 +3,7 @@ import { supabase } from '@/lib/supabase';
 import type { User } from '@supabase/supabase-js';
 import { toast } from 'sonner';
 import i18next from 'i18next';
+import { trackEvent } from '@/lib/analytics';
 
 export const CHECKOUT_PENDING_KEY = 'ghostmeta_checkout_pending';
 const POLL_INTERVAL_MS = 3_000;
@@ -38,6 +39,9 @@ export function useAuth(): UseAuthReturn {
   const [error, setError] = useState<Error | null>(null);
   const pollIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const pollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // `onAuthStateChange` peut re-émettre SIGNED_IN (refresh de token, retour
+  // d'onglet) : sans ce garde, un même compte compterait plusieurs signups.
+  const signupTrackedRef = useRef<Set<string>>(new Set());
 
   const stopPolling = useCallback(() => {
     if (pollIntervalRef.current) {
@@ -145,6 +149,21 @@ export function useAuth(): UseAuthReturn {
         if (currentUser?.id) {
           const profileData = await fetchProfile(currentUser.id);
           setProfile(profileData);
+
+          // Un profil créé il y a moins de 2 min = inscription réelle,
+          // pas une reconnexion. Le trial est posé par le trigger SQL à
+          // la création du profil : il démarre donc au même instant.
+          const justCreated =
+            !!profileData?.created_at &&
+            Date.now() - new Date(profileData.created_at).getTime() < 120_000;
+
+          if (justCreated && !signupTrackedRef.current.has(currentUser.id)) {
+            signupTrackedRef.current.add(currentUser.id);
+            trackEvent('signup', {
+              provider: currentUser.app_metadata?.provider ?? 'unknown',
+            });
+            if (profileData?.trial_ends_at) trackEvent('trial_started');
+          }
         } else {
           setProfile(null);
           setError(null);

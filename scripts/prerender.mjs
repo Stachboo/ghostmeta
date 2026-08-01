@@ -194,6 +194,28 @@ const BLOG_DATES = {
 };
 const SLUGS = Object.keys(BLOG_DATES);
 
+/**
+ * Dernière modification ÉDITORIALE réelle des pages hors blog.
+ * À bumper à la main quand le contenu change — surtout pas la date de build :
+ * un `new Date()` ici ferait prétendre à chaque déploiement que les 56 pages
+ * ont été réécrites, ce qui est exactement le signal de fraîcheur bidon que
+ * les moteurs de réponse apprennent à ignorer.
+ */
+const PAGE_UPDATED = '2026-08-01';
+
+/**
+ * Tarifs publics, source unique pour le JSON-LD.
+ * Alignés sur les fichiers translation.json (clés pricing.premium).
+ * L'offre B2B est volontairement absente : son montant est libellé en dollars
+ * dans l'UI alors que le reste est en euros — tant que la devise réellement
+ * facturée par Lemon Squeezy n'est pas confirmée, on ne la déclare pas.
+ */
+const OFFERS = [
+  { name: 'Standard', price: '0', period: null },
+  { name: 'Full Access', price: '5', period: 'P1M' },
+  { name: 'Full Access (annuel)', price: '40', period: 'P1Y' },
+];
+
 // ─── Build ─────────────────────────────────────────────────────────────────────
 console.log('\n[prerender] ─── Démarrage bilingue (FR + EN) ─────────────────');
 
@@ -280,6 +302,7 @@ for (const lang of ['fr', 'en']) {
           browserRequirements: 'Requires a modern browser with Canvas API support (Chrome, Firefox, Safari, Edge)',
           inLanguage: lang,
           isPartOf: { '@id': `${ORIGIN}/#website` },
+          dateModified: PAGE_UPDATED,
           description:
             lang === 'en'
               ? 'GhostMeta strips image metadata (EXIF, IPTC, XMP, GPS) and the C2PA Content Credentials manifest (JUMBF) from JPEG and PNG files, 100% in your browser via canvas re-encoding — no upload, no server. It does NOT remove visible or invisible pixel watermarks (e.g. SynthID), does not process video, and cannot undo server-side soft-binding fingerprints.'
@@ -342,7 +365,42 @@ for (const lang of ['fr', 'en']) {
       `<h2>${escHtml(get(L, 'pro.pro_title'))}</h2>`,
       `<p>${escHtml(get(L, 'pro.pro_1'))}. ${escHtml(get(L, 'pro.pro_2'))}. ${escHtml(get(L, 'pro.pro_3'))}. ${escHtml(get(L, 'pro.pro_4'))}.</p>`,
     ].join('\n');
-    emit(lang, '/pricing', { title: T.pricingTitle[lang], description: T.pricingDesc[lang], bodyContent: body });
+    emit(lang, '/pricing', {
+      title: T.pricingTitle[lang],
+      description: T.pricingDesc[lang],
+      bodyContent: body,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        '@id': `${urlFor(lang, '/pricing')}#product`,
+        name: 'GhostMeta',
+        description: T.pricingDesc[lang],
+        url: urlFor(lang, '/pricing'),
+        inLanguage: lang,
+        brand: { '@type': 'Brand', name: 'GhostMeta' },
+        isPartOf: { '@id': `${ORIGIN}/#website` },
+        dateModified: PAGE_UPDATED,
+        offers: OFFERS.map((o) => ({
+          '@type': 'Offer',
+          name: o.name,
+          price: o.price,
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+          url: urlFor(lang, '/pricing'),
+          ...(o.period
+            ? {
+                priceSpecification: {
+                  '@type': 'UnitPriceSpecification',
+                  price: o.price,
+                  priceCurrency: 'EUR',
+                  billingDuration: 1,
+                  unitCode: o.period === 'P1Y' ? 'ANN' : 'MON',
+                },
+              }
+            : {}),
+        })),
+      },
+    });
   }
 
   // ── /blog (index) ──
@@ -356,7 +414,30 @@ for (const lang of ['fr', 'en']) {
         return `<h2><a href="${lp(`/blog/${slug}`)}">${escHtml(title)}</a></h2><p>${escHtml(desc)}</p>`;
       }),
     ].join('\n');
-    emit(lang, '/blog', { title: T.blogTitle[lang], description: T.blogDesc[lang], bodyContent: body });
+    emit(lang, '/blog', {
+      title: T.blogTitle[lang],
+      description: T.blogDesc[lang],
+      bodyContent: body,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'Blog',
+        '@id': `${urlFor(lang, '/blog')}#blog`,
+        url: urlFor(lang, '/blog'),
+        name: T.blogTitle[lang],
+        description: T.blogDesc[lang],
+        inLanguage: lang,
+        isPartOf: { '@id': `${ORIGIN}/#website` },
+        dateModified: PAGE_UPDATED,
+        blogPost: SLUGS.map((slug) => ({
+          '@type': 'BlogPosting',
+          '@id': `${urlFor(lang, `/blog/${slug}`)}#article`,
+          headline: get(L, `blog.posts.${slug}.title`),
+          url: urlFor(lang, `/blog/${slug}`),
+          datePublished: BLOG_DATES[slug],
+          dateModified: BLOG_DATES[slug],
+        })),
+      },
+    });
   }
 
   // ── /blog/:slug ──
@@ -374,9 +455,12 @@ for (const lang of ['fr', 'en']) {
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
+        '@id': `${canonical}#article`,
+        url: canonical,
         headline: title,
         description: desc,
         inLanguage: lang,
+        isPartOf: { '@id': `${ORIGIN}/#website` },
         author: { '@type': 'Organization', name: 'GhostMeta Labs' },
         publisher: {
           '@type': 'Organization',
@@ -421,6 +505,7 @@ for (const lang of ['fr', 'en']) {
         description: secDesc,
         inLanguage: lang,
         isPartOf: { '@id': `${ORIGIN}/#website` },
+        dateModified: PAGE_UPDATED,
       },
     });
   }
@@ -447,6 +532,7 @@ for (const lang of ['fr', 'en']) {
         description: T.toolsDesc[lang],
         inLanguage: lang,
         isPartOf: { '@id': `${ORIGIN}/#website` },
+        dateModified: PAGE_UPDATED,
         mainEntity: {
           '@type': 'ItemList',
           itemListElement: LANDINGS.map((l, i) => ({
@@ -476,7 +562,13 @@ for (const lang of ['fr', 'en']) {
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
+        '@id': `${urlFor(lang, `/tools/${l.slug}`)}#faq`,
+        url: urlFor(lang, `/tools/${l.slug}`),
+        name: c.title,
+        description: c.description,
         inLanguage: lang,
+        isPartOf: { '@id': `${ORIGIN}/#website` },
+        dateModified: PAGE_UPDATED,
         mainEntity: c.faq.map((f) => ({
           '@type': 'Question',
           name: f.q,

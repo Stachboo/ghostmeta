@@ -67,6 +67,33 @@ export default function PricingPage() {
               : 'Gratuit pour usage perso. Pro B2B avec API REST pour créateurs, agences & revendeurs IA.'
           }
         />
+        {/* App.tsx retire les JSON-LD prérendus au mount : sans ce miroir
+            runtime, /pricing perdrait son schema pour tout crawler qui
+            exécute le JS. Doit rester aligné sur OFFERS (prerender.mjs). */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            '@id': `${seo.canonical}#product`,
+            name: 'GhostMeta',
+            url: seo.canonical,
+            inLanguage: isEn ? 'en' : 'fr',
+            brand: { '@type': 'Brand', name: 'GhostMeta' },
+            isPartOf: { '@id': 'https://www.ghostmeta.online/#website' },
+            offers: [
+              { name: 'Standard', price: '0' },
+              { name: 'Full Access', price: '5' },
+              { name: 'Full Access (annuel)', price: '40' },
+            ].map(o => ({
+              '@type': 'Offer',
+              name: o.name,
+              price: o.price,
+              priceCurrency: 'EUR',
+              availability: 'https://schema.org/InStock',
+              url: seo.canonical,
+            })),
+          })}
+        </script>
       </Helmet>
       <Header />
       <Breadcrumb items={[{ label: t('breadcrumb.pricing') }]} />

@@ -4,6 +4,7 @@ import { useAuth, CHECKOUT_PENDING_KEY } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Check, Zap, Shield, Image, MapPin, Gift, Clock, Briefcase, Code2, Layers } from 'lucide-react';
 import { toast } from 'sonner';
+import { trackEvent } from '@/lib/analytics';
 
 const LEMON_SQUEEZY_MONTHLY_ID = import.meta.env.VITE_LEMON_SQUEEZY_MONTHLY_ID;
 const LEMON_SQUEEZY_YEARLY_ID = import.meta.env.VITE_LEMON_SQUEEZY_YEARLY_ID;
@@ -20,13 +21,17 @@ export default function Pricing() {
     await signInWithGoogle();
   };
 
-  const handleCheckout = (variantId: string) => {
+  const handleCheckout = (variantId: string, plan: string) => {
     if (!user) {
       toast.error(t('pricing.error.not_logged_in', 'Veuillez vous connecter pour continuer'));
       return;
     }
     if (checkingOut) return;
     setCheckingOut(true);
+
+    // Émis après le verrou anti-double-checkout : un double-clic ne doit pas
+    // produire deux événements alors qu'il ne produit qu'un seul checkout.
+    trackEvent('checkout_click', { plan, during_trial: isTrialActive });
 
     const baseUrl = `https://ghostmeta.lemonsqueezy.com/checkout/buy/${variantId}`;
     const checkoutUrl = `${baseUrl}?checkout[custom][user_id]=${user.id}&checkout[email]=${encodeURIComponent(user.email || '')}`;
@@ -43,7 +48,7 @@ export default function Pricing() {
       toast.error('Configuration error: Monthly plan not configured');
       return;
     }
-    handleCheckout(LEMON_SQUEEZY_MONTHLY_ID);
+    handleCheckout(LEMON_SQUEEZY_MONTHLY_ID, 'monthly');
   };
 
   const handleYearlyClick = () => {
@@ -51,7 +56,7 @@ export default function Pricing() {
       toast.error('Configuration error: Yearly plan not configured');
       return;
     }
-    handleCheckout(LEMON_SQUEEZY_YEARLY_ID);
+    handleCheckout(LEMON_SQUEEZY_YEARLY_ID, 'yearly');
   };
 
   const handleB2BClick = () => {
@@ -59,7 +64,7 @@ export default function Pricing() {
       toast.error(t('pricing.b2b.not_configured', 'Pro B2B coming soon — contact us for early access'));
       return;
     }
-    handleCheckout(LEMON_SQUEEZY_B2B_MONTHLY_ID);
+    handleCheckout(LEMON_SQUEEZY_B2B_MONTHLY_ID, 'b2b_monthly');
   };
 
   return (

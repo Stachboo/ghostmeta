@@ -40,8 +40,10 @@ export default function ConsentBanner() {
   if (!show) return null;
 
   return (
+    // z-[10001] : au-dessus du bandeau PWA (z-9999) et de son guide iOS
+    // (z-10000) — un choix RGPD ne doit jamais pouvoir être recouvert.
     <div
-      className={`fixed bottom-0 left-0 right-0 z-50 transition-transform duration-300 ease-out ${
+      className={`fixed bottom-0 left-0 right-0 z-[10001] transition-transform duration-300 ease-out ${
         animateIn ? 'translate-y-0' : 'translate-y-full'
       }`}
     >

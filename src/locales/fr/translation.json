@@ -34,10 +34,10 @@
     "footer_note": "Tout le traitement reste local — zéro exposition réseau"
   },
   "header": {
-    "upgrade": "Passer Pro"
+    "upgrade": "Accès Total"
   },
   "auth": {
-    "welcome_pro": "Bienvenue en Pro ! ✨",
+    "welcome_pro": "Bienvenue en Accès Total ! ✨",
     "loading": "Initialisation...",
     "login": "Accès Sécurisé",
     "logout": "Déconnexion",
@@ -94,7 +94,7 @@
       "price": "5€",
       "period": "/mois",
       "badge": "RECOMMANDÉ",
-      "yearly_note": "Ou 40€/an (2 mois offerts)",
+      "yearly_note": "Ou 40€/an (4 mois offerts)",
       "batch": "50 images par lot",
       "gps": "Vues GPS illimitées",
       "priority": "Traitement prioritaire",
@@ -110,7 +110,7 @@
     },
     "cta": {
       "login": "SE CONNECTER POUR ACTIVER",
-      "login_short": "SE CONNECTER POUR PASSER PRO",
+      "login_short": "SE CONNECTER POUR L'ACCÈS TOTAL",
       "buy": "OBTENIR L'ACCÈS TOTAL",
       "yearly": "Plan annuel — Économisez 33%"
     }
@@ -126,6 +126,7 @@
     "drop_title": "Déposez vos photos ici",
     "drop_active": "Lâchez tout, c'est parti !",
     "drop_subtitle": "JPEG · PNG · WebP · HEIC — Traitement 100% Local",
+    "drop_cta": "Choisir mes photos",
     "browse": "ou parcourir vos fichiers",
     "processing": "Analyse...",
     "cleaning": "Nettoyage...",
@@ -136,7 +137,7 @@
     "limit_title": "Limite atteinte",
     "limit_desc": "En mode gratuit, le nettoyage est limité à 1 session toutes les 12 heures. Revenez plus tard ou soutenez le projet.",
     "donate_btn": "Soutenir le développeur (PayPal)",
-    "pro_soon": "Pack Pro Bientôt Disponible !",
+    "pro_soon": "Accès Total bientôt disponible !",
     "file_too_large": "fichier trop volumineux (max 10 MB)"
   },
   "card": {
@@ -165,7 +166,7 @@
     "vinted_text_2": "Dès que vous partagez une image — sur Vinted, Twitter, LinkedIn ou dans un dossier client — chaque destinataire peut extraire ces données avec un outil en ligne gratuit.",
     "vinted_text_3": "GhostMeta supprime tout dans votre navigateur. EXIF, GPS, C2PA, empreintes IA. Rien n'est envoyé sur Internet.",
     "batch_lock_title": "Mode Lot Verrouillé",
-    "batch_lock_desc": "En mode gratuit, nettoyez les photos une par une (illimité). Le Pack Pro débloque le traitement par lots et l'export ZIP."
+    "batch_lock_desc": "En mode gratuit, nettoyez les photos une par une (illimité). L'Accès Total débloque le traitement par lots et l'export ZIP."
   },
   "blog": {
     "section_title": "Expertise & Confidentialité",
@@ -246,7 +247,7 @@
     "a6": "Pas toujours, et souvent après avoir stocké l'original sur leurs serveurs."
   },
   "pro": {
-    "active": "PRO ACTIF",
+    "active": "ACCÈS TOTAL ACTIF",
     "desc": "Débloquez toutes les fonctionnalités de GhostMeta.",
     "price": "30 jours gratuits",
     "benefit_1": "50 images par lot",
@@ -261,7 +262,7 @@
     "free_2": "Scan des métadonnées",
     "free_3": "Téléchargement unitaire",
     "free_4": "100% Local & Privé",
-    "pro_title": "Pack Pro",
+    "pro_title": "Accès Total",
     "pro_price": "Bientôt",
     "pro_1": "Jusqu'à 100 images simultanément",
     "pro_2": "Mode Batch (tout d'un coup)",
