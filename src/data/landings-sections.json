@@ -1,0 +1,2207 @@
+{
+  "_comment": "Sections longues + tableau extractable par landing, fusionnees dans landings.json a l'affichage. Fichier separe pour garder landings.json (titres/FAQ/SEO) lisible et diffable. Rendu a l'IDENTIQUE par scripts/prerender.mjs (bot-content) et src/pages/ToolLanding.tsx (React) : toute divergence serait du cloaking.",
+  "remove-exif-data-online": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Ce que contient l’EXIF d’une photo",
+          "p": [
+            "Une photo de smartphone transporte entre 40 et 150 tags EXIF selon l’appareil. Les plus parlants ne sont pas les réglages d’exposition mais les identifiants : le modèle exact du boîtier, parfois son numéro de série et la version du logiciel. Deux photos publiées à des endroits différents et à des mois d’intervalle se relient par ces seuls champs, sans qu’aucune coordonnée GPS ne soit nécessaire.",
+            "La date de prise de vue est stockée trois fois (DateTimeOriginal, DateTimeDigitized, DateTime) et les trois survivent au recadrage. Un logiciel de retouche ajoute sa propre trace dans le champ Software. C’est ainsi qu’on établit qu’une image a été modifiée, quand et avec quoi."
+          ]
+        },
+        {
+          "h2": "Pourquoi le retirer dans le navigateur",
+          "p": [
+            "Un service qui supprime l’EXIF côté serveur reçoit d’abord la photo intacte, EXIF compris. La suppression a lieu après la transmission, et vous n’avez aucun moyen de vérifier ce qui a été journalisé entre-temps. Le fichier existe, au minimum, en cache disque le temps du traitement.",
+            "GhostMeta décode l’image dans la mémoire de l’onglet et la réencode via l’API Canvas. Le canvas ne restitue que des pixels : tout bloc de métadonnée est perdu à l’écriture, par construction plutôt que par filtrage. Aucune requête réseau ne transporte la photo, ce qui est vérifiable dans l’onglet Réseau de votre navigateur."
+          ]
+        },
+        {
+          "h2": "Trois réflexes avant de publier",
+          "p": [
+            "Vérifiez d’abord sur une seule photo, pas sur le lot entier : lisez ses champs, nettoyez-la, relisez la copie. Vous saurez alors exactement ce que votre appareil inscrit, et vous n’aurez plus à vous poser la question pour les suivantes.",
+            "Gardez l’original si l’image a une valeur d’archive, puisque le nettoyage passe par un réencodage. Et souvenez-vous qu’une capture d’écran d’une photo ne supprime pas tout : elle crée un fichier neuf, sans EXIF d’origine, mais elle dégrade l’image et laisse parfois des métadonnées d’écran."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Groupes de tags EXIF, ce qu’ils révèlent et leur niveau de risque",
+        "headers": [
+          "Groupe de tags",
+          "Ce qu’il révèle",
+          "Risque"
+        ],
+        "rows": [
+          [
+            "GPS IFD",
+            "Latitude, longitude, altitude, cap, parfois le nom du lieu",
+            "Critique"
+          ],
+          [
+            "Make, Model, SerialNumber",
+            "Appareil précis, réutilisable pour relier vos photos entre elles",
+            "Critique"
+          ],
+          [
+            "DateTimeOriginal",
+            "Date et heure exactes de la prise de vue",
+            "Élevé"
+          ],
+          [
+            "Software, ProcessingSoftware",
+            "Outil de retouche employé, donc trace de modification",
+            "Moyen"
+          ],
+          [
+            "ExposureTime, FNumber, ISO",
+            "Réglages photographiques, sans portée personnelle",
+            "Faible"
+          ],
+          [
+            "Orientation, ColorSpace",
+            "Affichage correct de l’image",
+            "Aucun"
+          ]
+        ]
+      },
+      "summary": "Déposez un JPEG ou un PNG, GhostMeta liste ses tags EXIF puis rend une copie qui n’en contient aucun. La position GPS, le modèle d’appareil, le numéro de série et les horodatages partent ensemble. Tout se passe dans votre navigateur : le fichier n’est envoyé nulle part, et vous pouvez le vérifier dans l’onglet Réseau. Gratuit, sans compte."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "What EXIF actually holds",
+          "p": [
+            "A smartphone photo carries between 40 and 150 EXIF tags depending on the device. The revealing ones are not the exposure settings but the identifiers: the exact camera model, sometimes its serial number, and the firmware version. Two photos published in different places months apart can be linked through those fields alone, with no GPS coordinate involved.",
+            "Capture time is stored three times over — DateTimeOriginal, DateTimeDigitized, DateTime — and all three survive cropping. Editing software writes its own trace into the Software field. That is how an image is shown to have been altered, when, and with what."
+          ]
+        },
+        {
+          "h2": "Why stripping it in the browser matters",
+          "p": [
+            "A service that strips EXIF server-side receives the intact photo first, EXIF included. Removal happens after transmission, and you have no way to audit what was logged in between. The file exists, at minimum, in disk cache for the duration of processing.",
+            "GhostMeta decodes the image in tab memory and re-encodes it through the Canvas API. A canvas gives back pixels and nothing else: every metadata block is lost on write, by construction rather than by filtering. No network request carries the photo, which you can confirm in your browser's Network tab."
+          ]
+        },
+        {
+          "h2": "Three habits before publishing",
+          "p": [
+            "Test on a single photo first, not on the whole batch: read its fields, clean it, read the copy back. You will then know exactly what your device writes, and you will stop wondering about the next ones.",
+            "Keep the original if the image has archival value, since cleaning goes through a re-encode. And remember that screenshotting a photo does not remove everything: it creates a fresh file with no original EXIF, but it degrades the image and sometimes leaves screen metadata behind."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "EXIF tag groups, what they expose and how risky they are",
+        "headers": [
+          "Tag group",
+          "What it exposes",
+          "Risk"
+        ],
+        "rows": [
+          [
+            "GPS IFD",
+            "Latitude, longitude, altitude, heading, sometimes a place name",
+            "Critical"
+          ],
+          [
+            "Make, Model, SerialNumber",
+            "Exact device, reusable to link your photos together",
+            "Critical"
+          ],
+          [
+            "DateTimeOriginal",
+            "Exact capture date and time",
+            "High"
+          ],
+          [
+            "Software, ProcessingSoftware",
+            "Editing tool used, therefore evidence of modification",
+            "Medium"
+          ],
+          [
+            "ExposureTime, FNumber, ISO",
+            "Photographic settings, nothing personal",
+            "Low"
+          ],
+          [
+            "Orientation, ColorSpace",
+            "Correct display of the image",
+            "None"
+          ]
+        ]
+      },
+      "summary": "Drop a JPEG or a PNG, GhostMeta lists its EXIF tags then returns a copy holding none of them. GPS position, camera model, serial number and timestamps all go together. Everything happens in your browser: the file is sent nowhere, and you can confirm that in the Network tab. Free, no account."
+    }
+  },
+  "remove-metadata-from-photo": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Quatre couches de métadonnées, pas une",
+          "p": [
+            "« Métadonnée » désigne au moins quatre formats distincts qui cohabitent dans le même fichier. L’EXIF vient de l’appareil. L’IPTC vient de la chaîne éditoriale et transporte l’auteur, le copyright, la légende, parfois la ville et le pays. Le XMP est le conteneur d’Adobe, souvent le plus bavard, qui conserve l’historique des retouches. Le C2PA, plus récent, embarque un manifeste signé de provenance.",
+            "Un outil qui ne traite que l’EXIF laisse donc trois couches derrière lui. C’est le cas le plus fréquent : la position GPS peut être dupliquée en XMP, et l’effacer côté EXIF seulement ne l’efface pas."
+          ]
+        },
+        {
+          "h2": "Ce que le réencodage supprime, et ce qu’il coûte",
+          "p": [
+            "GhostMeta reconstruit l’image à partir de ses pixels. Les quatre couches disparaissent ensemble, y compris les champs propriétaires qu’aucune liste blanche n’aurait anticipés. L’avantage sur un effacement tag par tag est là : on ne peut pas oublier un champ qu’on ne connaît pas.",
+            "Le coût est un réencodage. Un JPEG est recompressé, ce qui est visuellement neutre à qualité élevée mais n’est pas une opération sans perte. Les images sont par ailleurs ramenées à 4 096 pixels sur leur plus grand côté, une limite qui évite les plantages mémoire sur mobile. Pour archiver un original, gardez-en une copie avant de nettoyer."
+          ]
+        },
+        {
+          "h2": "Quand le nettoyage ne suffit pas",
+          "p": [
+            "Une photo nettoyée peut rester identifiante par son contenu. Avant publication, regardez ce qui est dans le cadre : une enveloppe avec une adresse, un écran allumé, un badge, un reflet dans une vitre ou une fenêtre. Aucune suppression de métadonnée ne traite cela.",
+            "Pensez aussi au nom du fichier, qui n’est pas une métadonnée mais voyage avec l’image sur la plupart des plateformes. IMG_4821.jpg ne dit rien ; devis-dupont-mars.jpg dit beaucoup."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Couches de métadonnées présentes dans une photo et traitement appliqué",
+        "headers": [
+          "Couche",
+          "Contenu typique",
+          "Retirée"
+        ],
+        "rows": [
+          [
+            "EXIF",
+            "GPS, appareil, date, réglages",
+            "Oui"
+          ],
+          [
+            "IPTC",
+            "Auteur, copyright, légende, ville",
+            "Oui"
+          ],
+          [
+            "XMP",
+            "Historique de retouche, mots-clés, GPS dupliqué",
+            "Oui"
+          ],
+          [
+            "C2PA (JUMBF)",
+            "Manifeste de provenance signé",
+            "Oui, sur JPEG et PNG"
+          ],
+          [
+            "Chunks texte PNG",
+            "Prompt, seed, nom du modèle",
+            "Oui"
+          ],
+          [
+            "Filigrane visible",
+            "Logo ou mention incrustée dans les pixels",
+            "Non"
+          ],
+          [
+            "Filigrane au niveau pixel",
+            "SynthID et équivalents",
+            "Non"
+          ]
+        ]
+      },
+      "summary": "Une photo transporte quatre couches de métadonnées : EXIF, IPTC, XMP et, de plus en plus, un manifeste de provenance C2PA. GhostMeta les retire toutes en une passe, par réencodage dans le navigateur, sans envoyer le fichier. Ce qui reste, ce sont les pixels : un visage, une plaque ou un filigrane visible ne sont pas concernés."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "Four metadata layers, not one",
+          "p": [
+            "\"Metadata\" covers at least four distinct formats living in the same file. EXIF comes from the camera. IPTC comes from the editorial chain and carries author, copyright, caption, sometimes city and country. XMP is Adobe's container, usually the most talkative, and it keeps the editing history. C2PA, the newest, embeds a signed provenance manifest.",
+            "A tool that handles EXIF only therefore leaves three layers behind. That is the common case: a GPS position can be duplicated in XMP, and clearing it on the EXIF side does not clear it."
+          ]
+        },
+        {
+          "h2": "What re-encoding removes, and what it costs",
+          "p": [
+            "GhostMeta rebuilds the image from its pixels. All four layers go together, including proprietary fields no allowlist would have anticipated. That is the advantage over tag-by-tag deletion: you cannot forget a field you do not know about.",
+            "The cost is a re-encode. A JPEG is recompressed, which is visually neutral at high quality but is not a lossless operation. Images are also capped at 4,096 pixels on their longest side, a limit that prevents memory crashes on mobile. If you need to archive an original, keep a copy before cleaning."
+          ]
+        },
+        {
+          "h2": "When cleaning is not enough",
+          "p": [
+            "A cleaned photo can still identify you through its content. Before publishing, look at what is in frame: an envelope with an address, a lit screen, a badge, a reflection in glass or a window. No metadata removal touches any of that.",
+            "Think about the filename too, which is not metadata but travels with the image on most platforms. IMG_4821.jpg says nothing; quote-smith-march.jpg says a great deal."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Metadata layers found in a photo and how each is handled",
+        "headers": [
+          "Layer",
+          "Typical content",
+          "Removed"
+        ],
+        "rows": [
+          [
+            "EXIF",
+            "GPS, camera, date, settings",
+            "Yes"
+          ],
+          [
+            "IPTC",
+            "Author, copyright, caption, city",
+            "Yes"
+          ],
+          [
+            "XMP",
+            "Edit history, keywords, duplicated GPS",
+            "Yes"
+          ],
+          [
+            "C2PA (JUMBF)",
+            "Signed provenance manifest",
+            "Yes, on JPEG and PNG"
+          ],
+          [
+            "PNG text chunks",
+            "Prompt, seed, model name",
+            "Yes"
+          ],
+          [
+            "Visible watermark",
+            "Logo or caption burned into pixels",
+            "No"
+          ],
+          [
+            "Pixel-level watermark",
+            "SynthID and equivalents",
+            "No"
+          ]
+        ]
+      },
+      "summary": "A photo carries four metadata layers: EXIF, IPTC, XMP and, increasingly, a C2PA provenance manifest. GhostMeta removes all of them in one pass, by re-encoding in the browser, without sending the file anywhere. What remains is the pixels: a face, a licence plate or a visible watermark are not affected."
+    }
+  },
+  "remove-gps-from-photo": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "La position ne se cache pas qu’à un seul endroit",
+          "p": [
+            "Retirer la géolocalisation d’une photo suppose de savoir où elle est écrite. Le cas courant est la GPS IFD de l’EXIF, avec latitude, longitude, altitude et parfois le cap. Mais la même position peut être recopiée en XMP par un logiciel de retouche, et un champ IPTC peut porter la ville, la région et le pays en clair, sans la moindre coordonnée.",
+            "Un outil qui vide la seule GPS IFD laisse donc le lieu lisible ailleurs dans le fichier. Le réencodage employé ici supprime les trois emplacements en même temps, parce qu’il ne conserve aucun conteneur de métadonnée."
+          ]
+        },
+        {
+          "h2": "Ce qu’une coordonnée permet de reconstituer",
+          "p": [
+            "Une latitude et une longitude EXIF sont précises à quelques mètres. Croisées avec l’horodatage, elles ne disent pas seulement un lieu : elles disent votre présence à cet endroit à cette heure. Sur une série de photos, elles dessinent un domicile, un lieu de travail, un trajet régulier.",
+            "Les grandes plateformes sociales suppriment l’EXIF à la publication, ce qui rassure à tort. Cette suppression ne s’applique ni aux fichiers envoyés par messagerie en pièce jointe, ni aux photos déposées sur une petite annonce, un forum, un service de partage ou un stockage cloud partagé, c’est-à-dire précisément les cas où l’image part vers un inconnu."
+          ]
+        },
+        {
+          "h2": "Couper le problème à la source",
+          "p": [
+            "Retirer le GPS après coup fonctionne, mais le plus simple reste de ne pas l’enregistrer. Sur iPhone, l’accès à la position pour l’appareil photo se règle dans les réglages de confidentialité ; sur Android, dans les permissions de l’application appareil photo, ou via l’option de géolocalisation de l’application elle-même.",
+            "Gardez le nettoyage pour vos photos déjà prises et pour celles qui viennent d’ailleurs : une image reçue puis repartagée transporte le GPS de la personne qui l’a prise, pas le vôtre."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Emplacements possibles de la localisation dans un fichier image",
+        "headers": [
+          "Emplacement",
+          "Forme",
+          "Retiré"
+        ],
+        "rows": [
+          [
+            "EXIF GPS IFD",
+            "Latitude, longitude, altitude, cap",
+            "Oui"
+          ],
+          [
+            "XMP exif :GPSLatitude",
+            "Copie de la position par un logiciel de retouche",
+            "Oui"
+          ],
+          [
+            "IPTC City, Sublocation, Country",
+            "Nom de lieu en clair, sans coordonnée",
+            "Oui"
+          ],
+          [
+            "Manifeste C2PA",
+            "Lieu éventuellement inclus dans les assertions",
+            "Oui, sur JPEG et PNG"
+          ],
+          [
+            "Contenu de l’image",
+            "Plaque de rue, façade, numéro visible",
+            "Non"
+          ]
+        ]
+      },
+      "summary": "La localisation d’une photo peut être écrite à trois endroits : la GPS IFD de l’EXIF, une copie en XMP et un champ IPTC nommant la ville. GhostMeta efface les trois d’un coup, dans votre navigateur. Une latitude EXIF est précise à quelques mètres et, croisée avec l’horodatage, elle atteste votre présence en un lieu à une heure donnée."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "Location does not hide in a single place",
+          "p": [
+            "Removing geolocation from a photo means knowing where it is written. The common case is the EXIF GPS IFD, with latitude, longitude, altitude and sometimes heading. But the same position can be copied into XMP by editing software, and an IPTC field may carry city, region and country in plain text, with no coordinate at all.",
+            "A tool that empties the GPS IFD alone therefore leaves the place readable elsewhere in the file. The re-encoding used here clears all three locations at once, because it preserves no metadata container."
+          ]
+        },
+        {
+          "h2": "What a single coordinate reconstructs",
+          "p": [
+            "An EXIF latitude and longitude are accurate to within a few metres. Cross-referenced with the timestamp, they do not merely state a place: they state your presence there at that hour. Across a series of photos they outline a home, a workplace, a regular commute.",
+            "Large social platforms strip EXIF on upload, which is falsely reassuring. That stripping applies neither to files sent as email attachments, nor to photos posted on a classified ad, a forum, a file-sharing service or shared cloud storage — precisely the cases where the image travels to a stranger.",
+            "Screenshots deserve a special mention. Capturing a photo on screen produces a new file with no original GPS, which is why the trick circulates as a privacy tip. It works, but it degrades the image, and on some systems the capture carries its own metadata: device, timestamp, sometimes the application in use."
+          ]
+        },
+        {
+          "h2": "Cut the problem off at the source",
+          "p": [
+            "Stripping GPS afterwards works, but the simplest fix is not recording it. On iPhone, camera location access sits in the privacy settings; on Android, in the camera app permissions, or through the app's own location toggle.",
+            "Keep cleaning for photos you have already taken, and for those coming from elsewhere: an image you received and reshare carries the GPS of whoever shot it, not yours."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Where location can sit inside an image file",
+        "headers": [
+          "Location",
+          "Form",
+          "Removed"
+        ],
+        "rows": [
+          [
+            "EXIF GPS IFD",
+            "Latitude, longitude, altitude, heading",
+            "Yes"
+          ],
+          [
+            "XMP exif:GPSLatitude",
+            "Position copied by editing software",
+            "Yes"
+          ],
+          [
+            "IPTC City, Sublocation, Country",
+            "Plain place name, no coordinate",
+            "Yes"
+          ],
+          [
+            "C2PA manifest",
+            "Location possibly included in assertions",
+            "Yes, on JPEG and PNG"
+          ],
+          [
+            "Image content",
+            "Street sign, façade, visible number",
+            "No"
+          ]
+        ]
+      },
+      "summary": "A photo's location can be written in three places: the EXIF GPS IFD, a copy in XMP, and an IPTC field naming the city. GhostMeta clears all three at once, in your browser. An EXIF latitude is accurate to a few metres and, cross-referenced with the timestamp, it evidences your presence somewhere at a given hour."
+    }
+  },
+  "exif-viewer": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Lire avant d’effacer",
+          "p": [
+            "Un lecteur d’EXIF sert d’abord à constater. Beaucoup de gens découvrent à cette occasion que leurs photos portent une position GPS, parce que l’autorisation de localisation a été accordée une fois à l’application appareil photo et jamais revue depuis.",
+            "GhostMeta liste les champs trouvés et les classe en trois niveaux : critique, avertissement, sans risque. Le classement porte sur ce que le champ permet de déduire, pas sur son nom. Une date seule est un avertissement ; la même date associée à un numéro de série d’appareil devient un identifiant durable."
+          ]
+        },
+        {
+          "h2": "Ce que le lecteur affiche selon le fichier",
+          "p": [
+            "Sur un JPEG d’appareil photo ou de smartphone, attendez-vous à l’ensemble EXIF complet, avec la GPS IFD si la localisation était active. Sur un PNG issu d’un générateur d’images, l’EXIF est en général absent, remplacé par des chunks de texte tEXt ou iTXt qui contiennent le prompt, la graine et le nom du modèle.",
+            "Sur une capture d’écran, il ne reste souvent qu’une dimension et un espace colorimétrique. Sur une image déjà passée par un réseau social, la plupart des champs ont disparu, mais pas toujours le XMP. La lecture est locale : le fichier n’est pas envoyé pour être analysé."
+          ]
+        },
+        {
+          "h2": "Lire une image qui vient d’ailleurs",
+          "p": [
+            "Le lecteur sert autant sur vos photos que sur celles qu’on vous envoie. Sur une image reçue d’un inconnu, les champs présents disent d’où elle vient : un appareil photo, un téléphone, une capture d’écran ou un rendu généré.",
+            "Une image sans le moindre champ n’est pas suspecte en soi : la plupart des réseaux sociaux nettoient à la publication. C’est la combinaison qui informe, par exemple un horodatage récent associé à un logiciel de retouche."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Classement des champs par niveau de risque",
+        "headers": [
+          "Niveau",
+          "Exemples de champs",
+          "Pourquoi"
+        ],
+        "rows": [
+          [
+            "Critique",
+            "GPS IFD, SerialNumber, LensSerialNumber",
+            "Localise ou identifie durablement"
+          ],
+          [
+            "Avertissement",
+            "DateTimeOriginal, Software, Artist, Copyright",
+            "Situe dans le temps ou nomme un auteur"
+          ],
+          [
+            "Sans risque",
+            "ExposureTime, FNumber, ISO, Orientation",
+            "Décrit la prise de vue, sans portée personnelle"
+          ]
+        ]
+      },
+      "summary": "Déposez une image pour voir ce qu’elle contient réellement : coordonnées GPS, modèle d’appareil, numéro de série, dates, logiciel de retouche. Chaque champ est classé critique, avertissement ou sans risque selon ce qu’il permet de déduire. La lecture est locale, aucune image n’est transmise, et vous pouvez ensuite nettoyer le fichier depuis la même page."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "Look before you erase",
+          "p": [
+            "An EXIF viewer exists first to let you see. Many people discover on this occasion that their photos carry a GPS position, because location permission was granted once to the camera app and never revisited.",
+            "GhostMeta lists the fields it finds and sorts them into three levels: critical, warning, harmless. The sorting is based on what a field lets someone infer, not on its name. A date alone is a warning; that same date paired with a camera serial number becomes a durable identifier."
+          ]
+        },
+        {
+          "h2": "What the viewer shows, by file type",
+          "p": [
+            "On a JPEG from a camera or a smartphone, expect the full EXIF set, including the GPS IFD if location was on. On a PNG produced by an image generator, EXIF is usually absent and replaced by tEXt or iTXt text chunks holding the prompt, the seed and the model name.",
+            "On a screenshot, often only dimensions and a colour space remain. On an image that has already been through a social network, most fields are gone — though not always the XMP. Reading is local: the file is not uploaded to be analysed.",
+            "One reading habit helps more than any tool: check a file before sending it, not after. Once an image has left, through a message, a form or an upload, whatever it carried has already been delivered. Reading takes a few seconds and it is the only step that happens while you can still change your mind."
+          ]
+        },
+        {
+          "h2": "Reading an image that came from elsewhere",
+          "p": [
+            "The viewer is as useful on photos you receive as on your own. On an image from a stranger, the fields present tell you where it came from: a camera, a phone, a screenshot, or a generated render.",
+            "An image with no fields at all is not suspicious in itself: most social networks clean on upload. It is the combination that informs, for instance a recent timestamp paired with an editing tool.",
+            "Make it a reflex on anything you are about to forward: a file you did not create can carry the metadata of whoever did, and passing it on passes that along with it."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "How fields are graded by risk",
+        "headers": [
+          "Level",
+          "Example fields",
+          "Why"
+        ],
+        "rows": [
+          [
+            "Critical",
+            "GPS IFD, SerialNumber, LensSerialNumber",
+            "Locates or durably identifies"
+          ],
+          [
+            "Warning",
+            "DateTimeOriginal, Software, Artist, Copyright",
+            "Places in time or names an author"
+          ],
+          [
+            "Harmless",
+            "ExposureTime, FNumber, ISO, Orientation",
+            "Describes the shot, nothing personal"
+          ]
+        ]
+      },
+      "summary": "Drop an image to see what it actually contains: GPS coordinates, camera model, serial number, dates, editing software. Each field is graded critical, warning or harmless according to what it lets someone infer. Reading is local, no image is transmitted, and you can then clean the file from the same page."
+    }
+  },
+  "strip-metadata": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Ce qui reste après le nettoyage",
+          "p": [
+            "Une image nettoyée n’est pas une image anonyme. Il reste les pixels, et ils parlent. Un filigrane visible reste visible. Une plaque de rue reste lisible. Un reflet dans une vitre reste un reflet. Le nettoyage de métadonnées traite le fichier, pas la scène photographiée.",
+            "Restent aussi les traces au niveau pixel, comme SynthID chez Google, conçues précisément pour survivre à une recompression. GhostMeta ne les retire pas et n’en donne pas l’illusion. Le périmètre annoncé est le périmètre réel, ce qui est la seule position tenable pour un outil de confidentialité.",
+            "La limite de 4 096 pixels sur le plus grand côté mérite d’être connue avant de traiter une série : au-delà, l’image est redimensionnée. C’est un compromis assumé, destiné à éviter les plantages mémoire sur téléphone, où le navigateur dispose de bien moins de marge qu’un ordinateur. Pour une photo destinée à l’impression, nettoyez plutôt une copie et conservez l’original de côté."
+          ]
+        },
+        {
+          "h2": "Formats acceptés et ce qu’ils impliquent",
+          "p": [
+            "JPEG, PNG et WebP sont traités directement. Le HEIC des iPhone est converti avant traitement, ce qui charge une bibliothèque supplémentaire au premier usage : c’est le seul cas où la première opération est sensiblement plus lente.",
+            "La sortie est un JPEG ou un PNG selon l’entrée. Un PNG reste sans perte pour les pixels ; un JPEG est recompressé. La taille de fichier change presque toujours à la baisse : les métadonnées ont disparu, et le reencodage applique en plus ses propres parametres de compression."
+          ]
+        },
+        {
+          "h2": "Nettoyer une série sans en oublier",
+          "p": [
+            "Le traitement par lot accepte plusieurs fichiers d’un coup et rend une archive ZIP. C’est le mode à privilégier dès qu’il y a plus de deux images : nettoyer un fichier à la fois finit toujours par en laisser passer un.",
+            "Chaque image de la série est traitée dans votre navigateur, l’une après l’autre. Le lot ne change ni la méthode ni le périmètre, il change seulement le nombre d’aller-retours que vous avez à faire."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Formats en entrée, traitement et sortie",
+        "headers": [
+          "Format d’entrée",
+          "Traitement",
+          "Sortie"
+        ],
+        "rows": [
+          [
+            "JPEG",
+            "Réencodage direct par canvas",
+            "JPEG recompressé"
+          ],
+          [
+            "PNG",
+            "Réencodage direct, chunks texte supprimés",
+            "PNG sans perte de pixels"
+          ],
+          [
+            "WebP",
+            "Réencodage direct",
+            "Selon l’encodeur du navigateur"
+          ],
+          [
+            "HEIC, HEIF",
+            "Conversion préalable, puis réencodage",
+            "JPEG"
+          ]
+        ]
+      },
+      "summary": "GhostMeta retire les métadonnées d’un JPEG, d’un PNG, d’un WebP ou d’un HEIC en les réencodant dans votre navigateur. Aucune liste blanche à maintenir : puisque l’image est reconstruite à partir de ses pixels, aucun conteneur ne survit, y compris les champs propriétaires. Le traitement par lot rend une archive ZIP des copies nettoyées."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "What survives the cleaning",
+          "p": [
+            "A cleaned image is not an anonymous image. The pixels remain, and they talk. A visible watermark stays visible. A street sign stays readable. A reflection in a window stays a reflection. Metadata cleaning treats the file, not the scene that was photographed.",
+            "Pixel-level traces also remain, such as Google's SynthID, designed precisely to survive recompression. GhostMeta does not remove them and does not pretend to. The stated scope is the real scope, which is the only defensible position for a privacy tool.",
+            "The 4,096-pixel cap on the longest side is worth knowing before processing a series: beyond it, the image is resized. That is a deliberate trade-off, meant to avoid memory crashes on phones, where the browser has far less headroom than a desktop. For a photo destined for print, clean a copy and keep the original aside."
+          ]
+        },
+        {
+          "h2": "Accepted formats and what they imply",
+          "p": [
+            "JPEG, PNG and WebP are handled directly. iPhone HEIC is converted before processing, which loads an extra library on first use: that is the one case where the first operation is noticeably slower.",
+            "Output is a JPEG or a PNG depending on the input. A PNG stays pixel-lossless; a JPEG is recompressed. File size almost always drops, not merely because metadata is gone, but because the re-encode applies its own compression settings.",
+            "One consequence often surprises people: two runs on the same JPEG do not produce byte-identical files. Each re-encode applies compression afresh, so the output differs slightly even though the visible result does not. If you need reproducibility, work from the original each time rather than re-cleaning an already cleaned file."
+          ]
+        },
+        {
+          "h2": "Cleaning a series without missing one",
+          "p": [
+            "Batch processing takes several files at once and returns a ZIP. It is the mode to prefer as soon as there are more than two images: cleaning one file at a time always ends up letting one slip through.",
+            "Every image in the series is processed in your browser, one after another. Batching changes neither the method nor the scope, only the number of round trips you have to make."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Input formats, processing and output",
+        "headers": [
+          "Input format",
+          "Processing",
+          "Output"
+        ],
+        "rows": [
+          [
+            "JPEG",
+            "Direct canvas re-encode",
+            "Recompressed JPEG"
+          ],
+          [
+            "PNG",
+            "Direct re-encode, text chunks dropped",
+            "Pixel-lossless PNG"
+          ],
+          [
+            "WebP",
+            "Direct re-encode",
+            "Depends on the browser encoder"
+          ],
+          [
+            "HEIC, HEIF",
+            "Converted first, then re-encoded",
+            "JPEG"
+          ]
+        ]
+      },
+      "summary": "GhostMeta strips metadata from a JPEG, PNG, WebP or HEIC by re-encoding it in your browser. There is no allowlist to maintain: since the image is rebuilt from its pixels, no container survives, proprietary fields included. Batch processing returns a ZIP of the cleaned copies."
+    }
+  },
+  "browser-c2pa-remover": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Ce qu’est réellement un manifeste C2PA",
+          "p": [
+            "Le C2PA est une norme de provenance portée par Adobe, Microsoft, OpenAI et d’autres. Concrètement, un bloc JUMBF est inséré dans le fichier : il contient des assertions signées (outil de création, date, éventuelles modifications successives) et une signature cryptographique qui les authentifie.",
+            "Ce bloc est une métadonnée, pas une marque dans l’image. Il se retire donc comme une métadonnée. C’est ce que fait GhostMeta sur les JPEG et les PNG : le réencodage ne réécrit pas le conteneur JUMBF, et l’image sortante ne présente plus de Content Credentials à un vérificateur."
+          ]
+        },
+        {
+          "h2": "Les limites, dites clairement",
+          "p": [
+            "Le C2PA prévoit un mécanisme de soft binding : une empreinte de l’image est enregistrée côté serveur, chez l’émetteur. Retirer le manifeste local n’efface pas cette empreinte. Une recherche par similarité peut donc encore rattacher l’image à son origine, et aucun traitement effectué dans votre navigateur n’y changera quoi que ce soit.",
+            "S’ajoutent les filigranes au niveau pixel, invisibles et résistants à la recompression, hors de portée d’un réencodage. Un outil qui promet l’anonymat complet d’une image générée par IA promet ce qu’il ne peut pas tenir."
+          ]
+        },
+        {
+          "h2": "Vérifier ce qui a changé",
+          "p": [
+            "Le manifeste C2PA n’est pas visible à l’œil : rien ne distingue une image qui en porte un d’une image qui n’en porte pas. La seule façon de constater le résultat est de relire le fichier.",
+            "Déposez la copie nettoyée dans le lecteur de métadonnées et comparez avec la lecture faite avant. Les champs disparus s’y voient directement, et vous n’avez pas à nous croire sur parole."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Composants de provenance et ce qu’un traitement navigateur peut faire",
+        "headers": [
+          "Composant",
+          "Où il vit",
+          "Retiré ici"
+        ],
+        "rows": [
+          [
+            "Manifeste C2PA (JUMBF)",
+            "Dans le fichier",
+            "Oui, sur JPEG et PNG"
+          ],
+          [
+            "Chunks texte PNG",
+            "Dans le fichier",
+            "Oui"
+          ],
+          [
+            "EXIF, IPTC, XMP",
+            "Dans le fichier",
+            "Oui"
+          ],
+          [
+            "Soft binding",
+            "Sur le serveur de l’émetteur",
+            "Non, hors de portée"
+          ],
+          [
+            "Filigrane pixel type SynthID",
+            "Dans les pixels",
+            "Non"
+          ],
+          [
+            "Filigrane visible",
+            "Dans les pixels",
+            "Non"
+          ]
+        ]
+      },
+      "summary": "Le C2PA insère dans le fichier un bloc JUMBF signé qui déclare l’outil de création et la chaîne des modifications. C’est une métadonnée : GhostMeta la retire des JPEG et des PNG par réencodage, dans le navigateur. En revanche l’empreinte conservée côté serveur par l’émetteur et les filigranes au niveau pixel restent hors de portée."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "What a C2PA manifest actually is",
+          "p": [
+            "C2PA is a provenance standard backed by Adobe, Microsoft, OpenAI and others. In practice a JUMBF block is inserted into the file: it holds signed assertions — creation tool, date, any successive edits — and a cryptographic signature authenticating them.",
+            "That block is metadata, not a mark in the image. It is therefore removed the way metadata is removed. That is what GhostMeta does on JPEG and PNG: the re-encode does not rewrite the JUMBF container, and the resulting image no longer presents Content Credentials to a verifier."
+          ]
+        },
+        {
+          "h2": "The limits, stated plainly",
+          "p": [
+            "C2PA also defines soft binding: a fingerprint of the image is stored server-side, at the issuer. Removing the local manifest does not erase that fingerprint. A similarity lookup can therefore still tie the image back to its origin, and nothing done inside your browser will change that.",
+            "Then there are pixel-level watermarks, invisible and resistant to recompression, beyond the reach of a re-encode. A tool promising complete anonymity for an AI-generated image is promising what it cannot deliver."
+          ]
+        },
+        {
+          "h2": "Checking what changed",
+          "p": [
+            "A C2PA manifest is not visible to the eye: nothing distinguishes an image carrying one from an image that does not. The only way to observe the result is to read the file again.",
+            "Drop the cleaned copy into the metadata viewer and compare with the reading you took beforehand. The missing fields show up directly, and you do not have to take our word for it."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Provenance components and what browser-side processing can reach",
+        "headers": [
+          "Component",
+          "Where it lives",
+          "Removed here"
+        ],
+        "rows": [
+          [
+            "C2PA manifest (JUMBF)",
+            "In the file",
+            "Yes, on JPEG and PNG"
+          ],
+          [
+            "PNG text chunks",
+            "In the file",
+            "Yes"
+          ],
+          [
+            "EXIF, IPTC, XMP",
+            "In the file",
+            "Yes"
+          ],
+          [
+            "Soft binding",
+            "On the issuer's server",
+            "No, out of reach"
+          ],
+          [
+            "SynthID-style pixel watermark",
+            "In the pixels",
+            "No"
+          ],
+          [
+            "Visible watermark",
+            "In the pixels",
+            "No"
+          ]
+        ]
+      },
+      "summary": "C2PA inserts a signed JUMBF block into the file, declaring the creation tool and the chain of edits. It is metadata: GhostMeta removes it from JPEG and PNG by re-encoding, in the browser. The fingerprint kept server-side by the issuer and pixel-level watermarks, however, stay out of reach."
+    }
+  },
+  "remove-sora-c2pa": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Images fixes seulement",
+          "p": [
+            "Sora produit d’abord de la vidéo. GhostMeta ne traite pas la vidéo : ni MP4, ni MOV, ni WebM. Ce que cette page couvre, ce sont les images fixes issues de l’écosystème : une exportation d’image, une capture de vignette, une trame extraite par vos soins et enregistrée en JPEG ou en PNG.",
+            "Si votre fichier est une vidéo, aucun traitement effectué ici ne s’y applique. Le dire d’emblée évite une perte de temps, et un outil qui laisse croire le contraire vous rendrait un mauvais service."
+          ]
+        },
+        {
+          "h2": "Ce qui est retiré d’une image fixe",
+          "p": [
+            "OpenAI attache des Content Credentials C2PA à ses sorties d’images, sous la forme d’un bloc JUMBF signé inséré dans le fichier. Ce bloc est une métadonnée : le réencodage par canvas ne le reconduit pas, et l’image obtenue ne présente plus de manifeste à un vérificateur de provenance.",
+            "Ce retrait ne touche ni les empreintes conservées côté serveur par l’émetteur, ni un éventuel marquage au niveau pixel. Les pratiques des éditeurs évoluent d’une version à l’autre : la seule garantie tenable porte sur ce que contient le fichier que vous déposez, et vous pouvez le constater avant nettoyage avec le lecteur de métadonnées."
+          ]
+        },
+        {
+          "h2": "Extraire une image d’une vidéo",
+          "p": [
+            "Si vous partez d’une vidéo, il faut d’abord en tirer une image fixe : une capture d’écran ou une extraction de trame avec un lecteur ou un utilitaire vidéo. Le fichier obtenu est un JPEG ou un PNG, donc traitable ici.",
+            "Attention toutefois : une trame extraite hérite du rendu, filigrane visible compris s’il y en avait un. Le nettoyage retire ce que porte le nouveau fichier en métadonnées, pas ce qui était imprimé dans l’image."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Périmètre couvert pour un fichier issu de Sora",
+        "headers": [
+          "Type de fichier",
+          "Traité",
+          "Remarque"
+        ],
+        "rows": [
+          [
+            "JPEG, PNG",
+            "Oui",
+            "Métadonnées et manifeste C2PA retirés"
+          ],
+          [
+            "WebP",
+            "Oui",
+            "Réencodage navigateur"
+          ],
+          [
+            "MP4, MOV, WebM",
+            "Non",
+            "La vidéo est hors périmètre"
+          ],
+          [
+            "Empreinte côté serveur",
+            "Non",
+            "Hors du fichier"
+          ]
+        ]
+      },
+      "summary": "Cette page concerne les images fixes, pas la vidéo : GhostMeta ne traite ni MP4, ni MOV, ni WebM. Sur un JPEG ou un PNG issu de l’écosystème Sora, le manifeste C2PA et les couches EXIF, IPTC et XMP sont retirés par réencodage dans le navigateur. L’empreinte détenue par l’émetteur n’est pas affectée."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "Still images only",
+          "p": [
+            "Sora produces video first. GhostMeta does not process video: no MP4, no MOV, no WebM. What this page covers is still images from that ecosystem — an image export, a thumbnail capture, a frame you extracted yourself and saved as JPEG or PNG.",
+            "If your file is a video, nothing done here applies to it. Saying so upfront saves you time, and a tool implying otherwise would be doing you a disservice."
+          ]
+        },
+        {
+          "h2": "What gets removed from a still",
+          "p": [
+            "OpenAI attaches C2PA Content Credentials to its image outputs, as a signed JUMBF block inserted into the file. That block is metadata: a canvas re-encode does not carry it over, and the resulting image no longer presents a manifest to a provenance verifier.",
+            "This removal touches neither fingerprints kept server-side by the issuer nor any pixel-level marking. Vendor practices shift from one release to the next: the only defensible guarantee concerns what the file you drop actually contains, and you can check that before cleaning with the metadata viewer."
+          ]
+        },
+        {
+          "h2": "Pulling a still out of a video",
+          "p": [
+            "If you start from a video, you first need a still: a screenshot, or a frame extraction with a player or a video utility. The resulting file is a JPEG or a PNG, so it can be processed here.",
+            "One caveat: an extracted frame inherits the render, including any visible watermark that was there. Cleaning removes what the new file carries as metadata, not what was printed into the image."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Scope covered for a file coming from Sora",
+        "headers": [
+          "File type",
+          "Handled",
+          "Note"
+        ],
+        "rows": [
+          [
+            "JPEG, PNG",
+            "Yes",
+            "Metadata and C2PA manifest removed"
+          ],
+          [
+            "WebP",
+            "Yes",
+            "Browser re-encode"
+          ],
+          [
+            "MP4, MOV, WebM",
+            "No",
+            "Video is out of scope"
+          ],
+          [
+            "Server-side fingerprint",
+            "No",
+            "Lives outside the file"
+          ]
+        ]
+      },
+      "summary": "This page covers still images, not video: GhostMeta handles no MP4, MOV or WebM. On a JPEG or PNG from the Sora ecosystem, the C2PA manifest and the EXIF, IPTC and XMP layers are removed by re-encoding in the browser. The fingerprint held by the issuer is not affected."
+    }
+  },
+  "strip-runway-ml-watermark": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Ce que cette page ne fait pas",
+          "p": [
+            "Runway est un outil de génération vidéo. Deux choses sortent donc du périmètre de GhostMeta : les fichiers vidéo, qui ne sont pas traités, et les filigranes visibles incrustés dans l’image, qui sont déssines dans les pixels.",
+            "Un filigrane visible ne se retire pas par un nettoyage de métadonnées. Il faudrait retoucher les pixels, ce que cet outil ne fait pas et ne prétend pas faire. Si votre besoin est celui-là, aucune des fonctions décrites ici n’y répond."
+          ]
+        },
+        {
+          "h2": "Ce qui reste utile sur une image fixe",
+          "p": [
+            "Sur une image fixe exportée depuis un projet, le nettoyage garde son sens : EXIF, XMP, IPTC, chunks de texte PNG et manifeste de provenance partent ensemble au réencodage.",
+            "C’est le cas d’usage réel : préparer une planche, une vignette ou une capture avant publication, sans emporter l’historique d’édition ni les informations d’outil. Déposez le fichier, lisez ce qu’il contient, téléchargez la copie nettoyée."
+          ]
+        },
+        {
+          "h2": "Ce qu’il faut faire à la place",
+          "p": [
+            "Si le filigrane visible est votre problème, la réponse n’est pas un nettoyeur de métadonnées. Selon les conditions d’utilisation de la plateforme, une offre payante retire le filigrane à la source : c’est la voie propre, et la seule qui ne dégrade pas l’image.",
+            "Retoucher les pixels pour effacer une marque est techniquement possible, mais cela sort du périmètre de cet outil et peut contrevenir aux conditions du service qui a produit l’image."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Ce qui est traité et ce qui ne l’est pas",
+        "headers": [
+          "Élément",
+          "Nature",
+          "Traité"
+        ],
+        "rows": [
+          [
+            "EXIF, XMP, IPTC",
+            "Métadonnée",
+            "Oui"
+          ],
+          [
+            "Manifeste C2PA",
+            "Métadonnée",
+            "Oui, sur JPEG et PNG"
+          ],
+          [
+            "Chunks texte PNG",
+            "Métadonnée",
+            "Oui"
+          ],
+          [
+            "Filigrane visible",
+            "Pixels",
+            "Non"
+          ],
+          [
+            "Fichier vidéo",
+            "Format non pris en charge",
+            "Non"
+          ]
+        ]
+      },
+      "summary": "À dire d’emblée : un filigrane visible est dans les pixels et cet outil ne le retire pas, et la vidéo n’est pas prise en charge. Sur une image fixe, en revanche, GhostMeta retire les métadonnées EXIF, IPTC et XMP, les chunks de texte PNG et le manifeste de provenance, par réencodage dans votre navigateur."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "What this page does not do",
+          "p": [
+            "Runway is a video generation tool. Two things therefore fall outside GhostMeta's scope: video files, which are not processed, and visible watermarks burned into the image, which belong to the pixels rather than the metadata.",
+            "A visible watermark cannot be removed by cleaning metadata. It would require retouching pixels, which this tool does not do and does not claim to do. If that is your need, nothing described here answers it."
+          ]
+        },
+        {
+          "h2": "What still helps on a still image",
+          "p": [
+            "On a still exported from a project, cleaning keeps its point: EXIF, XMP, IPTC, PNG text chunks and any provenance manifest all go together in the re-encode.",
+            "That is the real use case: preparing a board, a thumbnail or a capture before publishing, without carrying along the edit history or tool information. Drop the file, read what it holds, download the cleaned copy."
+          ]
+        },
+        {
+          "h2": "What to do instead",
+          "p": [
+            "If a visible watermark is your problem, a metadata cleaner is not the answer. Depending on the platform's terms, a paid tier removes the watermark at the source: that is the clean route, and the only one that does not degrade the image.",
+            "Retouching pixels to erase a mark is technically possible, but it falls outside this tool's scope and may breach the terms of the service that produced the image."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "What is handled and what is not",
+        "headers": [
+          "Item",
+          "Nature",
+          "Handled"
+        ],
+        "rows": [
+          [
+            "EXIF, XMP, IPTC",
+            "Metadata",
+            "Yes"
+          ],
+          [
+            "C2PA manifest",
+            "Metadata",
+            "Yes, on JPEG and PNG"
+          ],
+          [
+            "PNG text chunks",
+            "Metadata",
+            "Yes"
+          ],
+          [
+            "Visible watermark",
+            "Pixels",
+            "No"
+          ],
+          [
+            "Video file",
+            "Unsupported format",
+            "No"
+          ]
+        ]
+      },
+      "summary": "Said upfront: a visible watermark lives in the pixels and this tool does not remove it, and video is not supported. On a still image, however, GhostMeta removes EXIF, IPTC and XMP metadata, PNG text chunks and the provenance manifest, by re-encoding in your browser."
+    }
+  },
+  "clean-google-imagen-metadata": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "SynthID n’est pas une métadonnée",
+          "p": [
+            "Google marque ses images générées avec SynthID, un filigrane inscrit dans les pixels eux-mêmes. Il est conçu pour rester détectable après un recadrage, un changement de format ou une recompression. Un nettoyage de métadonnées ne l’atteint pas, et le réencodage par canvas employé ici est précisément le genre de transformation à laquelle SynthID résiste.",
+            "Il faut donc énoncer la limite avant tout le reste : une image Imagen nettoyée ici reste porteuse de son marquage pixel. Cette page ne vend pas le contraire."
+          ]
+        },
+        {
+          "h2": "Ce que le nettoyage retire quand même",
+          "p": [
+            "Ce qui part, ce sont les couches de métadonnées du fichier : EXIF, XMP, IPTC, et le manifeste de provenance quand il est présent. Sur un JPEG, ces blocs disparaissent au réencodage.",
+            "L’utilité est réelle mais bornée : vous retirez l’historique d’outil, les horodatages et les informations d’export. Vous ne retirez pas la signature dans les pixels. Pour savoir ce que votre fichier contient exactement avant de décider, déposez-le dans le lecteur de métadonnées : la liste des champs trouvés s’affiche sans qu’aucune donnée ne quitte l’appareil."
+          ]
+        },
+        {
+          "h2": "Ce que le nettoyage change quand même",
+          "p": [
+            "Même si le marquage pixel demeure, retirer les métadonnées a un effet concret : le fichier ne déclare plus l’outil qui l’a produit, ni la date, ni les identifiants d’export. Un lecteur de métadonnées n’y trouve plus rien.",
+            "C’est une réduction de surface, pas une disparition. Elle vaut pour les usages courants, où personne ne lance de détecteur spécialisé, et elle ne vaut pas face à un vérificateur outillé."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Marquages associés à une image Imagen et portée du nettoyage",
+        "headers": [
+          "Marquage",
+          "Support",
+          "Retiré"
+        ],
+        "rows": [
+          [
+            "EXIF, XMP, IPTC",
+            "Métadonnée du fichier",
+            "Oui"
+          ],
+          [
+            "Manifeste C2PA",
+            "Métadonnée du fichier",
+            "Oui, quand présent"
+          ],
+          [
+            "SynthID",
+            "Pixels",
+            "Non, par conception"
+          ],
+          [
+            "Empreinte côté serveur",
+            "Hors du fichier",
+            "Non"
+          ]
+        ]
+      },
+      "summary": "SynthID est inscrit dans les pixels et survit à un réencodage : GhostMeta ne le retire pas et ne le prétend pas. Ce que l’outil retire, ce sont les métadonnées du fichier : EXIF, XMP, IPTC et le manifeste de provenance quand il est présent. L’opération est locale et le fichier n’est envoyé nulle part."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "SynthID is not metadata",
+          "p": [
+            "Google marks its generated images with SynthID, a watermark written into the pixels themselves. It is designed to stay detectable after cropping, format changes or recompression. Cleaning metadata does not reach it, and the canvas re-encode used here is exactly the kind of transformation SynthID resists.",
+            "So the limit has to be stated before anything else: an Imagen image cleaned here still carries its pixel marking. This page does not sell you the opposite."
+          ]
+        },
+        {
+          "h2": "What cleaning does remove",
+          "p": [
+            "What goes is the file's metadata layers: EXIF, XMP, IPTC, and the provenance manifest when present. On a JPEG, those blocks disappear in the re-encode.",
+            "The benefit is real but bounded: you remove tool history, timestamps and export information. You do not remove the signature in the pixels. To see exactly what your file holds before deciding, drop it into the metadata viewer: the list of fields appears without any data leaving the device."
+          ]
+        },
+        {
+          "h2": "What cleaning still changes",
+          "p": [
+            "Even with the pixel marking in place, removing metadata has a concrete effect: the file no longer declares the tool that produced it, nor the date, nor the export identifiers. A metadata reader finds nothing left.",
+            "That is a reduction in surface, not a disappearance. It holds for everyday use, where nobody runs a specialised detector, and it does not hold against a properly equipped verifier."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Markings on an Imagen image and the reach of cleaning",
+        "headers": [
+          "Marking",
+          "Carrier",
+          "Removed"
+        ],
+        "rows": [
+          [
+            "EXIF, XMP, IPTC",
+            "File metadata",
+            "Yes"
+          ],
+          [
+            "C2PA manifest",
+            "File metadata",
+            "Yes, when present"
+          ],
+          [
+            "SynthID",
+            "Pixels",
+            "No, by design"
+          ],
+          [
+            "Server-side fingerprint",
+            "Outside the file",
+            "No"
+          ]
+        ]
+      },
+      "summary": "SynthID is written into the pixels and survives a re-encode: GhostMeta does not remove it and does not claim to. What the tool does remove is the file's metadata — EXIF, XMP, IPTC and the provenance manifest when present. The operation is local and the file is sent nowhere."
+    }
+  },
+  "remove-firefly-content-credentials": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Les Content Credentials d’Adobe",
+          "p": [
+            "Adobe est à l’origine de la Content Authenticity Initiative et attache des Content Credentials à ce que produit Firefly. Techniquement, il s’agit d’un manifeste C2PA : un bloc JUMBF signé, inséré dans le fichier, qui déclare l’outil de création et la chaîne des modifications.",
+            "Les fichiers Adobe cumulent souvent deux couches, le manifeste et un XMP fourni. Le XMP est le plus bavard des deux : il conserve l’historique des opérations, les identifiants de document et parfois le nom de l’auteur."
+          ]
+        },
+        {
+          "h2": "Retirer les deux couches d’un coup",
+          "p": [
+            "Le réencodage par canvas ne conserve aucun conteneur de métadonnée. Le manifeste et le XMP partent donc ensemble, sans qu’il faille les traiter séparément ni connaître à l’avance les champs employés.",
+            "Reste ce qui n’est pas dans le fichier : les empreintes que l’émetteur peut détenir de son côté. Un manifeste retiré n’est pas une origine effacée, et c’est vrai de tous les systèmes de provenance, pas seulement de celui d’Adobe."
+          ]
+        },
+        {
+          "h2": "Le cas des fichiers passés par Photoshop",
+          "p": [
+            "Une image Firefly reprise dans Photoshop ressort avec davantage de métadonnées qu’elle n’en avait : l’historique d’édition s’allonge, un identifiant de document apparaît, et le manifeste peut enregistrer les opérations successives.",
+            "Nettoyez donc en dernier, après la retouche et juste avant la publication. Nettoyer au milieu de la chaîne ne sert à rien, puisque chaque outil suivant réinscrit les siennes."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Couches présentes sur un export Firefly",
+        "headers": [
+          "Couche",
+          "Contenu",
+          "Retirée"
+        ],
+        "rows": [
+          [
+            "Manifeste C2PA (JUMBF)",
+            "Outil de création, chaîne d’édition, signature",
+            "Oui"
+          ],
+          [
+            "XMP Adobe",
+            "Historique d’opérations, identifiants de document",
+            "Oui"
+          ],
+          [
+            "EXIF, IPTC",
+            "Date, auteur, copyright",
+            "Oui"
+          ],
+          [
+            "Empreinte côté serveur",
+            "Hors du fichier",
+            "Non"
+          ],
+          [
+            "Filigrane pixel",
+            "Dans les pixels",
+            "Non"
+          ]
+        ]
+      },
+      "summary": "Les Content Credentials d’Adobe sont un manifeste C2PA inséré dans le fichier, souvent accompagné d’un XMP qui conserve l’historique d’édition. GhostMeta retire les deux couches d’un coup, par réencodage dans le navigateur, sans transmission. L’origine détenue côté serveur par l’émetteur, elle, n’est pas effacée par cette opération."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "Adobe's Content Credentials",
+          "p": [
+            "Adobe started the Content Authenticity Initiative and attaches Content Credentials to what Firefly produces. Technically this is a C2PA manifest: a signed JUMBF block inserted into the file, declaring the creation tool and the chain of edits.",
+            "Adobe files often carry two layers, the manifest and a rich XMP packet. XMP is the more talkative of the two: it keeps the operation history, document identifiers and sometimes the author's name."
+          ]
+        },
+        {
+          "h2": "Removing both layers at once",
+          "p": [
+            "A canvas re-encode preserves no metadata container. Manifest and XMP therefore go together, with no need to handle them separately or to know in advance which fields were used.",
+            "What remains is what is not in the file: fingerprints the issuer may hold on its own side. A removed manifest is not an erased origin, and that is true of every provenance system, not only Adobe's."
+          ]
+        },
+        {
+          "h2": "Files that went through Photoshop",
+          "p": [
+            "A Firefly image edited in Photoshop comes out with more metadata than it had: the edit history grows, a document identifier appears, and the manifest can record the successive operations.",
+            "So clean last, after retouching and just before publishing. Cleaning mid-chain achieves nothing, since every later tool writes its own back in."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Layers present on a Firefly export",
+        "headers": [
+          "Layer",
+          "Content",
+          "Removed"
+        ],
+        "rows": [
+          [
+            "C2PA manifest (JUMBF)",
+            "Creation tool, edit chain, signature",
+            "Yes"
+          ],
+          [
+            "Adobe XMP",
+            "Operation history, document identifiers",
+            "Yes"
+          ],
+          [
+            "EXIF, IPTC",
+            "Date, author, copyright",
+            "Yes"
+          ],
+          [
+            "Server-side fingerprint",
+            "Outside the file",
+            "No"
+          ],
+          [
+            "Pixel watermark",
+            "In the pixels",
+            "No"
+          ]
+        ]
+      },
+      "summary": "Adobe's Content Credentials are a C2PA manifest inserted into the file, usually alongside an XMP packet holding the edit history. GhostMeta removes both layers at once, by re-encoding in the browser, with no transmission. The origin held server-side by the issuer is not erased by this operation."
+    }
+  },
+  "clean-chatgpt-image-metadata": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Ce qu’emporte une image téléchargée depuis ChatGPT",
+          "p": [
+            "Une image récupérée depuis une conversation arrive en PNG ou en JPEG selon le mode d’export. OpenAI attache des Content Credentials C2PA à ses sorties : le fichier contient donc un manifeste signé déclarant qu’il a été produit par un modèle.",
+            "Selon le chemin d’export, un PNG peut aussi porter des chunks de texte tEXt ou iTXt. Ces chunks sont du texte libre : c’est là que se retrouvent, le cas échéant, des éléments de génération. Le lecteur de métadonnées affiche ce que votre fichier contient réellement, ce qui vaut mieux que de supposer."
+          ]
+        },
+        {
+          "h2": "Nettoyer avant de réutiliser",
+          "p": [
+            "Le cas courant est simple : vous voulez publier ou intégrer l’image sans transporter son historique de génération. Le réencodage retire le manifeste, les chunks de texte et toute couche EXIF ou XMP résiduelle, en une opération.",
+            "La limite est celle de toutes les pages de ce site : ce qui vit dans les pixels reste dans les pixels, et ce qui vit sur les serveurs de l’émetteur n’est pas accessible depuis un navigateur. Le nettoyage traite le fichier que vous avez en main."
+          ]
+        },
+        {
+          "h2": "Avant de réutiliser l’image ailleurs",
+          "p": [
+            "Le cas typique est une illustration d’article, une vignette ou un visuel de présentation. L’image part alors sur un site, dans un document ou dans une pièce jointe, souvent sans repasser par personne.",
+            "Nettoyez à ce moment-là, pas avant : si vous recadrez ou compressez après coup, l’outil employé réinscrira ses propres champs. Le nettoyage est la dernière étape utile de la chaîne."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Éléments possibles dans une image issue de ChatGPT",
+        "headers": [
+          "Élément",
+          "Support",
+          "Retiré"
+        ],
+        "rows": [
+          [
+            "Manifeste C2PA",
+            "Métadonnée du fichier",
+            "Oui"
+          ],
+          [
+            "Chunks tEXt, iTXt",
+            "Métadonnée PNG",
+            "Oui"
+          ],
+          [
+            "EXIF, XMP résiduels",
+            "Métadonnée du fichier",
+            "Oui"
+          ],
+          [
+            "Empreinte côté serveur",
+            "Hors du fichier",
+            "Non"
+          ],
+          [
+            "Marquage pixel éventuel",
+            "Pixels",
+            "Non"
+          ]
+        ]
+      },
+      "summary": "Une image téléchargée depuis ChatGPT porte des Content Credentials C2PA, et parfois des chunks de texte PNG. GhostMeta retire le manifeste, les chunks et les couches EXIF ou XMP résiduelles en une opération, dans votre navigateur. Nettoyez en dernier, juste avant publication : tout recadrage ultérieur réinscrira les champs de l’outil employé."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "What a ChatGPT download carries",
+          "p": [
+            "An image pulled from a conversation arrives as PNG or JPEG depending on the export path. OpenAI attaches C2PA Content Credentials to its outputs, so the file contains a signed manifest declaring it was produced by a model.",
+            "Depending on the export path, a PNG may also carry tEXt or iTXt text chunks. Those chunks are free text: that is where generation details end up when they are present. The metadata viewer shows what your file actually holds, which beats assuming."
+          ]
+        },
+        {
+          "h2": "Clean before reusing",
+          "p": [
+            "The common case is simple: you want to publish or embed the image without carrying its generation history. The re-encode removes the manifest, the text chunks and any residual EXIF or XMP layer, in one operation.",
+            "The limit is the same as on every page of this site: what lives in the pixels stays in the pixels, and what lives on the issuer's servers is not reachable from a browser. Cleaning handles the file in your hands."
+          ]
+        },
+        {
+          "h2": "Before reusing the image elsewhere",
+          "p": [
+            "The typical case is an article illustration, a thumbnail or a slide visual. The image then goes onto a site, into a document or into an attachment, often without passing anyone else.",
+            "Clean at that point, not before: if you crop or compress afterwards, the tool you use will write its own fields back in. Cleaning is the last useful step in the chain."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Possible items in a ChatGPT image",
+        "headers": [
+          "Item",
+          "Carrier",
+          "Removed"
+        ],
+        "rows": [
+          [
+            "C2PA manifest",
+            "File metadata",
+            "Yes"
+          ],
+          [
+            "tEXt, iTXt chunks",
+            "PNG metadata",
+            "Yes"
+          ],
+          [
+            "Residual EXIF, XMP",
+            "File metadata",
+            "Yes"
+          ],
+          [
+            "Server-side fingerprint",
+            "Outside the file",
+            "No"
+          ],
+          [
+            "Any pixel marking",
+            "Pixels",
+            "No"
+          ]
+        ]
+      },
+      "summary": "An image downloaded from ChatGPT carries C2PA Content Credentials, and sometimes PNG text chunks. GhostMeta removes the manifest, the chunks and any residual EXIF or XMP layer in one operation, in your browser. Clean last, just before publishing: any later crop will write the editing tool's fields back in."
+    }
+  },
+  "strip-dalle-fingerprint": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Le mot « empreinte » recouvre trois choses",
+          "p": [
+            "Employé à propos d’une image générée, le mot désigne trois mécanismes qu’il vaut mieux ne pas confondre. Le manifeste C2PA est une métadonnée inscrite dans le fichier. Le filigrane pixel est une modification discrète des pixels. L’empreinte de similarité est un condensé conservé chez l’émetteur, qui ne voyage pas avec le fichier.",
+            "Seul le premier relève d’un traitement navigateur. C’est celui que GhostMeta retire, avec les couches EXIF, XMP et les chunks de texte PNG qui l’accompagnent."
+          ]
+        },
+        {
+          "h2": "Ce que vous pouvez vérifier vous-même",
+          "p": [
+            "Plutôt que de faire confiance à une promesse, déposez le fichier dans le lecteur avant nettoyage : les champs trouvés s’affichent, classés par niveau de risque. Vous voyez ce que contient réellement votre image, plutot que ce qu’une page marketing suppose.",
+            "Refaites la lecture sur la copie nettoyée pour constater ce qui a disparu. Cette vérification est locale, elle ne coûte rien, et c’est la seule manière honnête d’établir le périmètre d’un outil de ce genre."
+          ]
+        },
+        {
+          "h2": "Ce que vous ne pourrez pas vérifier",
+          "p": [
+            "La lecture locale vous montre les métadonnées du fichier. Elle ne vous dit rien de ce qui est conservé ailleurs : un condensé d’image chez l’émetteur reste invisible depuis votre poste, et aucun outil navigateur ne peut le constater.",
+            "C’est la frontière honnête de l’exercice. Ce qui est dans le fichier se vérifie ; ce qui est sur un serveur tiers ne se vérifie pas, et personne ne devrait affirmer le contraire."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Trois mécanismes distincts derrière le mot « empreinte »",
+        "headers": [
+          "Mécanisme",
+          "Où il se trouve",
+          "Retiré ici"
+        ],
+        "rows": [
+          [
+            "Manifeste C2PA",
+            "Dans le fichier",
+            "Oui"
+          ],
+          [
+            "Chunks texte PNG",
+            "Dans le fichier",
+            "Oui"
+          ],
+          [
+            "Filigrane au niveau pixel",
+            "Dans les pixels",
+            "Non"
+          ],
+          [
+            "Empreinte de similarité",
+            "Chez l’émetteur",
+            "Non"
+          ]
+        ]
+      },
+      "summary": "Trois mécanismes se cachent derrière le mot « empreinte » : le manifeste C2PA, dans le fichier ; le filigrane pixel, dans l’image ; l’empreinte de similarité, chez l’émetteur. Seul le premier relève d’un traitement navigateur, et c’est celui que GhostMeta retire, avec les couches EXIF, XMP et les chunks de texte PNG."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "The word \"fingerprint\" covers three things",
+          "p": [
+            "Applied to a generated image, the word points at three mechanisms best kept apart. The C2PA manifest is metadata written into the file. A pixel watermark is a subtle modification of the pixels. A similarity fingerprint is a digest kept by the issuer, and it does not travel with the file.",
+            "Only the first is within reach of browser-side processing. That is the one GhostMeta removes, along with the EXIF and XMP layers and the PNG text chunks that come with it."
+          ]
+        },
+        {
+          "h2": "What you can verify yourself",
+          "p": [
+            "Rather than trusting a promise, drop the file into the viewer before cleaning: the fields found are listed and graded by risk. You see what your image actually contains, not what a marketing page assumes it contains.",
+            "Read it again on the cleaned copy to confirm what disappeared. That check is local, it costs nothing, and it is the only honest way to establish the scope of a tool like this."
+          ]
+        },
+        {
+          "h2": "What you will not be able to verify",
+          "p": [
+            "Reading locally shows you the file's metadata. It tells you nothing about what is kept elsewhere: an image digest held by the issuer stays invisible from your machine, and no browser tool can observe it.",
+            "That is the honest boundary of the exercise. What is in the file can be checked; what sits on a third-party server cannot, and nobody should claim otherwise."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Three distinct mechanisms behind the word \"fingerprint\"",
+        "headers": [
+          "Mechanism",
+          "Where it sits",
+          "Removed here"
+        ],
+        "rows": [
+          [
+            "C2PA manifest",
+            "In the file",
+            "Yes"
+          ],
+          [
+            "PNG text chunks",
+            "In the file",
+            "Yes"
+          ],
+          [
+            "Pixel-level watermark",
+            "In the pixels",
+            "No"
+          ],
+          [
+            "Similarity fingerprint",
+            "At the issuer",
+            "No"
+          ]
+        ]
+      },
+      "summary": "Three mechanisms hide behind the word \"fingerprint\": the C2PA manifest, in the file; the pixel watermark, in the image; the similarity fingerprint, at the issuer. Only the first is within reach of browser-side processing, and that is the one GhostMeta removes, along with EXIF, XMP layers and PNG text chunks."
+    }
+  },
+  "clean-stable-diffusion-metadata": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Le prompt voyage avec le PNG",
+          "p": [
+            "Les interfaces courantes de Stable Diffusion écrivent les paramètres de génération dans les chunks de texte du PNG. On y retrouve le prompt complet, le prompt négatif, la graine, le nombre d’étapes, l’échantillonneur, l’échelle CFG et le nom du modèle ou du LoRA employé.",
+            "C’est du texte lisible par n’importe quel éditeur capable d’ouvrir les métadonnées PNG. Partager l’image, c’est partager la recette : quiconque la récupère peut reproduire le rendu, et déduire de la liste des modèles ce que contient votre installation."
+          ]
+        },
+        {
+          "h2": "Une génération locale n’est pas une image discrète",
+          "p": [
+            "Faire tourner un modèle sur sa propre machine protège du côté serveur : rien n’est envoyé nulle part pendant la génération. Cela ne rend pas le fichier discret pour autant, puisque c’est l’interface locale elle-même qui inscrit les paramètres dans le PNG.",
+            "Le nettoyage supprime ces chunks avec les autres couches. Vérifiez d’abord avec le lecteur : sur un PNG issu d’une interface locale, les paramètres apparaissent en clair, ce qui est le meilleur argument pour prendre l’habitude de nettoyer avant publication."
+          ]
+        },
+        {
+          "h2": "Garder ses paramètres sans les publier",
+          "p": [
+            "Effacer les chunks du PNG efface aussi votre mémoire de travail : la graine et le prompt disparaissent du fichier, et avec eux la possibilité de refaire l’image plus tard.",
+            "Nettoyez donc la copie destinée à la publication, pas votre original. La bonne habitude est de conserver le fichier brut dans un dossier local, et de ne diffuser que des copies nettoyées."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Paramètres couramment inscrits dans un PNG de génération locale",
+        "headers": [
+          "Donnée",
+          "Ce qu’elle révèle",
+          "Retirée"
+        ],
+        "rows": [
+          [
+            "Prompt et prompt négatif",
+            "Votre formulation exacte",
+            "Oui"
+          ],
+          [
+            "Graine (seed)",
+            "Permet de reproduire l’image",
+            "Oui"
+          ],
+          [
+            "Modèle, VAE, LoRA",
+            "Contenu de votre installation",
+            "Oui"
+          ],
+          [
+            "Étapes, échantillonneur, CFG",
+            "Réglages de génération",
+            "Oui"
+          ],
+          [
+            "Graphe de workflow (ComfyUI)",
+            "Toute la chaîne de traitement",
+            "Oui"
+          ]
+        ]
+      },
+      "summary": "Les interfaces Stable Diffusion écrivent le prompt, le prompt négatif, la graine, l’échantillonneur et le nom du modèle dans les chunks de texte du PNG. Partager l’image revient à partager la recette. GhostMeta efface ces chunks avec les autres couches, dans le navigateur : nettoyez la copie publiée, gardez votre original."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "The prompt travels with the PNG",
+          "p": [
+            "Common Stable Diffusion front-ends write generation parameters into the PNG text chunks. You will find the full prompt, the negative prompt, the seed, the step count, the sampler, the CFG scale and the name of the checkpoint or LoRA used.",
+            "This is plain text, readable by any editor able to open PNG metadata. Sharing the image means sharing the recipe: whoever picks it up can reproduce the render, and infer from the model list what your setup contains."
+          ]
+        },
+        {
+          "h2": "Local generation is not a discreet file",
+          "p": [
+            "Running a model on your own machine protects you on the server side: nothing is sent anywhere during generation. It does not make the file discreet, because the local front-end itself writes the parameters into the PNG.",
+            "Cleaning removes those chunks along with the other layers. Check with the viewer first: on a PNG from a local interface, the parameters show up in plain text, which is the best argument for making a habit of cleaning before publishing."
+          ]
+        },
+        {
+          "h2": "Keeping your parameters without publishing them",
+          "p": [
+            "Wiping the PNG chunks also wipes your working memory: the seed and the prompt vanish from the file, and with them the ability to reproduce the image later.",
+            "So clean the copy meant for publication, not your original. The sound habit is to keep the raw file in a local folder and to distribute cleaned copies only."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Parameters commonly written into a locally generated PNG",
+        "headers": [
+          "Data",
+          "What it reveals",
+          "Removed"
+        ],
+        "rows": [
+          [
+            "Prompt and negative prompt",
+            "Your exact wording",
+            "Yes"
+          ],
+          [
+            "Seed",
+            "Allows the image to be reproduced",
+            "Yes"
+          ],
+          [
+            "Checkpoint, VAE, LoRA",
+            "What your setup contains",
+            "Yes"
+          ],
+          [
+            "Steps, sampler, CFG",
+            "Generation settings",
+            "Yes"
+          ],
+          [
+            "Workflow graph (ComfyUI)",
+            "The whole processing chain",
+            "Yes"
+          ]
+        ]
+      },
+      "summary": "Stable Diffusion front-ends write the prompt, negative prompt, seed, sampler and checkpoint name into the PNG text chunks. Sharing the image means sharing the recipe. GhostMeta wipes those chunks along with the other layers, in the browser: clean the published copy, keep your original."
+    }
+  },
+  "remove-flux-image-metadata": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Le graphe de workflow, cas particulier de Flux",
+          "p": [
+            "Flux s’utilise beaucoup dans des chaînes nodales. Or ces interfaces enregistrent volontiers le graphe complet dans les métadonnées du PNG : chaque nœud, chaque paramètre, chaque chemin de fichier local traversé par la génération.",
+            "Un chemin de fichier est plus indiscret qu’un prompt. Il contient souvent un nom d’utilisateur système, une arborescence de projet, parfois un nom de client. Ces informations partent avec l’image sans que personne y pense, parce qu’elles ne sont visibles dans aucune interface d’aperçu."
+          ]
+        },
+        {
+          "h2": "Nettoyer sans altérer le rendu",
+          "p": [
+            "Un PNG est réencodé sans perte de pixels : l’image obtenue est identique à l’œil comme au comparateur, seules les métadonnées ont disparu. C’est le format à privilégier quand la fidélité compte.",
+            "Le fichier ressort en général plus léger, parce qu’un graphe de workflow sérialisé pèse parfois plusieurs dizaines de kilo-octets. Déposez le PNG, lisez ce qu’il transporte, téléchargez la copie propre."
+          ]
+        },
+        {
+          "h2": "Le risque spécifique du travail client",
+          "p": [
+            "Sur une prestation, un chemin de fichier inscrit dans le PNG peut révéler le nom d’un autre client, une arborescence interne ou un intitulé de projet confidentiel. C’est le genre de fuite qui ne se remarque qu’une fois l’image livrée.",
+            "Vérifiez donc avant livraison plutôt qu’après. Une lecture prend quelques secondes et évite d’avoir à expliquer pourquoi un nom apparaît dans un fichier qui n’aurait jamais dû le porter."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Ce qu’une chaîne nodale peut inscrire dans le PNG",
+        "headers": [
+          "Donnée",
+          "Risque",
+          "Retirée"
+        ],
+        "rows": [
+          [
+            "Chemins de fichiers locaux",
+            "Nom d’utilisateur, arborescence, nom de client",
+            "Oui"
+          ],
+          [
+            "Graphe de nœuds complet",
+            "Reproduction de la chaîne entière",
+            "Oui"
+          ],
+          [
+            "Prompt et graine",
+            "Reproduction du rendu",
+            "Oui"
+          ],
+          [
+            "Noms de modèles et de LoRA",
+            "Contenu de l’installation",
+            "Oui"
+          ],
+          [
+            "Pixels de l’image",
+            "Inchangés",
+            "Non concerné"
+          ]
+        ]
+      },
+      "summary": "Les chaînes nodales enregistrent volontiers le graphe complet dans le PNG : chaque nœud, chaque paramètre, et les chemins de fichiers locaux traversés, donc parfois un nom d’utilisateur ou un nom de client. GhostMeta retire ces chunks par un réencodage sans perte de pixels, dans votre navigateur, et le fichier ressort généralement plus léger."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "The workflow graph, Flux's particular case",
+          "p": [
+            "Flux is heavily used inside node-based pipelines. Those interfaces readily store the entire graph in the PNG metadata: every node, every parameter, every local file path the generation touched.",
+            "A file path is more revealing than a prompt. It often contains a system username, a project tree, sometimes a client name. That information leaves with the image without anyone thinking about it, because it shows up in no preview interface."
+          ]
+        },
+        {
+          "h2": "Cleaning without altering the render",
+          "p": [
+            "A PNG is re-encoded pixel-lossless: the resulting image is identical to the eye and to a comparator, only the metadata is gone. It is the format to prefer when fidelity matters.",
+            "The file usually comes out lighter, because a serialised workflow graph can weigh tens of kilobytes. Drop the PNG, read what it carries, download the clean copy.",
+            "Team workflows deserve particular care. A shared node graph often references paths from the machine that built it, so an image rendered by one person can expose another person's directory structure. Cleaning before the file leaves the team removes that, and it costs nothing once it becomes a habit."
+          ]
+        },
+        {
+          "h2": "The specific risk in client work",
+          "p": [
+            "On a commission, a file path written into the PNG can reveal another client's name, an internal directory tree or a confidential project title. That is the kind of leak nobody notices until the image has shipped.",
+            "So check before delivery rather than after. A read takes seconds and spares you having to explain why a name appears in a file that should never have carried it."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "What a node pipeline can write into the PNG",
+        "headers": [
+          "Data",
+          "Risk",
+          "Removed"
+        ],
+        "rows": [
+          [
+            "Local file paths",
+            "Username, directory tree, client name",
+            "Yes"
+          ],
+          [
+            "Full node graph",
+            "Reproduction of the whole chain",
+            "Yes"
+          ],
+          [
+            "Prompt and seed",
+            "Reproduction of the render",
+            "Yes"
+          ],
+          [
+            "Model and LoRA names",
+            "What the setup contains",
+            "Yes"
+          ],
+          [
+            "Image pixels",
+            "Unchanged",
+            "Not applicable"
+          ]
+        ]
+      },
+      "summary": "Node pipelines readily store the whole graph in the PNG: every node, every parameter, and the local file paths touched — sometimes a username or a client name. GhostMeta removes those chunks with a pixel-lossless re-encode, in your browser, and the file usually comes out lighter."
+    }
+  },
+  "remove-midjourney-metadata": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Vérifier plutôt que supposer",
+          "p": [
+            "Ce qu’un fichier Midjourney contient dépend du mode de récupération : téléchargement depuis le site, enregistrement d’une image affichée dans un navigateur, ou export passé par un logiciel intermédiaire. Chacun de ces chemins produit un fichier différent, et le dernier ajoute souvent ses propres traces.",
+            "Plutôt que d’affirmer ce que vous avez, lisez-le. Le lecteur de métadonnées liste les champs présents dans votre fichier précis, en local. C’est plus fiable qu’une page qui généraliserait à partir d’une version antérieure de la plateforme."
+          ]
+        },
+        {
+          "h2": "Ce que le nettoyage traite dans tous les cas",
+          "p": [
+            "Quel que soit le chemin d’export, le réencodage retire l’ensemble des conteneurs : EXIF, IPTC, XMP, chunks de texte PNG et manifeste de provenance quand il y en a un. Il n’y a pas de liste blanche à tenir à jour, donc pas de champ propriétaire oublié.",
+            "Le logiciel intermédiaire est le point souvent négligé. Un simple passage par un éditeur pour recadrer ajoute un champ Software, un horodatage de modification et parfois un identifiant de document XMP, sur une image qui n’en portait aucun au départ."
+          ]
+        },
+        {
+          "h2": "Le cas des images repartagées",
+          "p": [
+            "Une image qui a circulé porte souvent les traces de son parcours plus que celles de sa création : passages par une messagerie, une conversion de format, un recadrage. Chaque étape peut ajouter ou retirer des champs.",
+            "C’est pourquoi la lecture prime sur la supposition. Deux fichiers issus de la même image d’origine peuvent contenir des métadonnées complètement différentes selon le chemin qu’ils ont suivi."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Selon le chemin d’export, ce qui se retrouve dans le fichier",
+        "headers": [
+          "Chemin",
+          "Traces fréquentes",
+          "Retirées"
+        ],
+        "rows": [
+          [
+            "Téléchargement direct",
+            "Métadonnées de la plateforme",
+            "Oui"
+          ],
+          [
+            "Enregistrement depuis le navigateur",
+            "Conteneurs souvent réduits",
+            "Oui"
+          ],
+          [
+            "Passage par un éditeur",
+            "Software, date de modification, XMP",
+            "Oui"
+          ],
+          [
+            "Filigrane visible éventuel",
+            "Dans les pixels",
+            "Non"
+          ]
+        ]
+      },
+      "summary": "Ce qu’un fichier Midjourney contient dépend du chemin d’export, et un passage par un éditeur ajoute ses propres champs. Plutôt que de supposer, lisez-le : GhostMeta liste les métadonnées présentes puis les retire toutes (EXIF, IPTC, XMP, chunks PNG et manifeste de provenance) par réencodage local, sans transmission."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "Check rather than assume",
+          "p": [
+            "What a Midjourney file contains depends on how you retrieved it: downloaded from the site, saved from an image shown in a browser, or exported through an intermediate application. Each of those paths produces a different file, and the last one usually adds traces of its own.",
+            "Rather than asserting what you have, read it. The metadata viewer lists the fields present in your specific file, locally. That is more reliable than a page generalising from an earlier version of the platform."
+          ]
+        },
+        {
+          "h2": "What cleaning handles in every case",
+          "p": [
+            "Whatever the export path, the re-encode strips every container: EXIF, IPTC, XMP, PNG text chunks and a provenance manifest when there is one. There is no allowlist to keep current, so no proprietary field gets forgotten.",
+            "The intermediate application is the commonly overlooked part. Simply passing through an editor to crop adds a Software field, a modification timestamp and sometimes an XMP document identifier — on an image that carried none to begin with."
+          ]
+        },
+        {
+          "h2": "The case of reshared images",
+          "p": [
+            "An image that has circulated often carries the traces of its journey more than those of its creation: trips through messaging apps, a format conversion, a crop. Each step can add or remove fields.",
+            "That is why reading beats assuming. Two files from the same original image can hold completely different metadata depending on the path they took."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "What ends up in the file, by export path",
+        "headers": [
+          "Path",
+          "Frequent traces",
+          "Removed"
+        ],
+        "rows": [
+          [
+            "Direct download",
+            "Platform metadata",
+            "Yes"
+          ],
+          [
+            "Saved from the browser",
+            "Often reduced containers",
+            "Yes"
+          ],
+          [
+            "Through an editor",
+            "Software, modification date, XMP",
+            "Yes"
+          ],
+          [
+            "Any visible watermark",
+            "In the pixels",
+            "No"
+          ]
+        ]
+      },
+      "summary": "What a Midjourney file contains depends on the export path, and passing through an editor adds fields of its own. Rather than assuming, read it: GhostMeta lists the metadata present then removes all of it — EXIF, IPTC, XMP, PNG chunks and provenance manifest — by local re-encode, with no transmission."
+    }
+  },
+  "remove-leonardo-ai-metadata": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Les images de plateforme portent deux histoires",
+          "p": [
+            "Une image téléchargée depuis une plateforme de génération porte l’histoire de sa création (modèle, réglages, parfois le prompt) et l’histoire de son passage par la plateforme : identifiants internes, horodatages, informations d’export.",
+            "La seconde est la plus facile à oublier. Elle ne dit rien de spectaculaire prise isolément, mais elle relie l’image à un compte, ce qui suffit quand on cherche justement à ne pas être relié."
+          ]
+        },
+        {
+          "h2": "Un traitement par lot pour les séries",
+          "p": [
+            "Générer produit rarement une image seule. On en garde cinq ou dix sur une planche, et nettoyer les fichiers un par un finit par se perdre en route.",
+            "GhostMeta accepte plusieurs fichiers d’un coup et rend une archive ZIP des copies nettoyées. Le traitement reste local pour chaque image de la série : c’est le même réencodage, répété, sans qu’aucun fichier ne quitte l’appareil."
+          ]
+        },
+        {
+          "h2": "Avant de mettre une série en ligne",
+          "p": [
+            "Une planche publiée d’un coup expose la même information autant de fois qu’il y a d’images. Si un identifiant de compte figure dans les métadonnées, il figure dans chaque fichier, et il suffit d’un seul pour faire le lien.",
+            "Le nettoyage par lot répond exactement à ce cas : toutes les images de la série passent par le même traitement, et l’archive ZIP rendue ne contient que des copies propres."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Deux familles de traces sur une image de plateforme",
+        "headers": [
+          "Famille",
+          "Exemples",
+          "Retirée"
+        ],
+        "rows": [
+          [
+            "Traces de génération",
+            "Prompt, graine, modèle, réglages",
+            "Oui"
+          ],
+          [
+            "Traces de plateforme",
+            "Identifiants internes, horodatages d’export",
+            "Oui"
+          ],
+          [
+            "Traces d’édition ultérieure",
+            "Software, XMP, date de modification",
+            "Oui"
+          ],
+          [
+            "Marquage dans les pixels",
+            "Filigrane visible ou invisible",
+            "Non"
+          ]
+        ]
+      },
+      "summary": "Une image de plateforme porte deux histoires : celle de sa génération (modèle, réglages, parfois le prompt) et celle de son passage par le service, avec ses identifiants et ses horodatages. GhostMeta retire les deux, dans le navigateur. Le traitement par lot accepte toute une série et rend une archive ZIP de copies nettoyées."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "Platform images carry two histories",
+          "p": [
+            "An image downloaded from a generation platform carries the history of its creation — model, settings, sometimes the prompt — and the history of its trip through the platform: internal identifiers, timestamps, export information.",
+            "The second is the easier one to forget. Taken alone it says nothing dramatic, but it ties the image to an account, which is enough when not being tied is precisely the point."
+          ]
+        },
+        {
+          "h2": "Batch processing for series",
+          "p": [
+            "Generating rarely produces a single image. You keep five or ten on a board, and cleaning files one at a time eventually gets dropped along the way.",
+            "GhostMeta accepts several files at once and returns a ZIP of the cleaned copies. Processing stays local for every image in the series: it is the same re-encode, repeated, with no file leaving the device.",
+            "Worth checking before a batch: platforms change their export formats without notice. A file downloaded today may not carry the same fields as one saved six months ago, so read one image from the current batch rather than relying on what you observed last time. The viewer answers that in seconds, locally."
+          ]
+        },
+        {
+          "h2": "Before putting a series online",
+          "p": [
+            "A board published all at once exposes the same information as many times as there are images. If an account identifier sits in the metadata, it sits in every file, and one is enough to make the connection.",
+            "Batch cleaning answers exactly that case: every image in the series goes through the same processing, and the returned ZIP contains cleaned copies only."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Two families of traces on a platform image",
+        "headers": [
+          "Family",
+          "Examples",
+          "Removed"
+        ],
+        "rows": [
+          [
+            "Generation traces",
+            "Prompt, seed, model, settings",
+            "Yes"
+          ],
+          [
+            "Platform traces",
+            "Internal identifiers, export timestamps",
+            "Yes"
+          ],
+          [
+            "Later editing traces",
+            "Software, XMP, modification date",
+            "Yes"
+          ],
+          [
+            "Marking in the pixels",
+            "Visible or invisible watermark",
+            "No"
+          ]
+        ]
+      },
+      "summary": "A platform image carries two histories: its generation — model, settings, sometimes the prompt — and its trip through the service, with identifiers and timestamps. GhostMeta removes both, in the browser. Batch processing takes a whole series and returns a ZIP of cleaned copies."
+    }
+  },
+  "remove-ai-watermark-from-image": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Filigrane et métadonnée sont deux choses",
+          "p": [
+            "Le mot « filigrane » désigne deux réalités techniques opposées. Un filigrane visible est dessiné dans les pixels : un logo, une mention, une trame. Un filigrane invisible modifie discrètement les valeurs des pixels pour rester détectable après recompression. Aucun des deux n’est une métadonnée.",
+            "Ce que retire un outil comme celui-ci, ce sont les métadonnées : EXIF, IPTC, XMP, chunks de texte PNG, manifeste C2PA. C’est utile, c’est mesurable, et ce n’est pas la même chose que retirer un filigrane. Beaucoup de pages entretiennent la confusion ; celle-ci ne le fait pas."
+          ]
+        },
+        {
+          "h2": "Ce qui relève quand même de ce nettoyage",
+          "p": [
+            "L’étiquette de provenance des images générées par IA est, elle, bien une métadonnée. Le manifeste C2PA que joignent plusieurs éditeurs est un bloc inséré dans le fichier, et il disparaît au réencodage sur les JPEG et les PNG.",
+            "Autrement dit : la marque dans l’image reste, l’étiquette attachée au fichier part. Si votre besoin porte sur la seconde, cet outil y répond. S’il porte sur la première, il faut un logiciel de retouche, et il vaut mieux le savoir avant d’essayer."
+          ]
+        },
+        {
+          "h2": "Savoir ce que vous avez en main",
+          "p": [
+            "Avant de chercher à retirer quoi que ce soit, déterminez de quoi il s’agit. Si la marque se voit à l’œil, c’est un filigrane visible et cet outil n’y peut rien. Si rien ne se voit, il reste deux possibilités : une métadonnée, que la lecture révèle, ou un marquage pixel, qui ne se révèle pas.",
+            "Cette distinction évite de perdre du temps. Elle évite surtout de croire une image nettoyée alors qu’elle porte encore une marque intacte."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Types de marquage et ce que cet outil atteint",
+        "headers": [
+          "Type",
+          "Support",
+          "Retiré"
+        ],
+        "rows": [
+          [
+            "Métadonnées EXIF, IPTC, XMP",
+            "Fichier",
+            "Oui"
+          ],
+          [
+            "Manifeste C2PA",
+            "Fichier",
+            "Oui, sur JPEG et PNG"
+          ],
+          [
+            "Chunks texte PNG",
+            "Fichier",
+            "Oui"
+          ],
+          [
+            "Filigrane visible",
+            "Pixels",
+            "Non"
+          ],
+          [
+            "Filigrane invisible type SynthID",
+            "Pixels",
+            "Non"
+          ]
+        ]
+      },
+      "summary": "Un filigrane et une métadonnée sont deux choses distinctes. Un filigrane, visible ou non, vit dans les pixels : cet outil ne le retire pas. L’étiquette de provenance C2PA, elle, est une métadonnée inscrite dans le fichier, et GhostMeta la retire des JPEG et des PNG avec l’EXIF, l’IPTC, le XMP et les chunks de texte."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "A watermark and a metadata field are two things",
+          "p": [
+            "The word \"watermark\" covers two opposite technical realities. A visible watermark is drawn into the pixels: a logo, a caption, a pattern. An invisible watermark subtly alters pixel values so it stays detectable after recompression. Neither one is metadata.",
+            "What a tool like this removes is metadata: EXIF, IPTC, XMP, PNG text chunks, C2PA manifest. That is useful, it is measurable, and it is not the same as removing a watermark. Many pages keep that confusion alive; this one does not."
+          ]
+        },
+        {
+          "h2": "What this cleaning does cover",
+          "p": [
+            "The provenance label on AI-generated images, on the other hand, is metadata. The C2PA manifest several vendors attach is a block inserted into the file, and it disappears in the re-encode on JPEG and PNG.",
+            "Put plainly: the mark in the image stays, the label attached to the file goes. If your need is the second one, this tool answers it. If it is the first, you need image-editing software, and it is better to know that before trying."
+          ]
+        },
+        {
+          "h2": "Know what you are holding",
+          "p": [
+            "Before trying to remove anything, work out what it is. If the mark is visible to the eye, it is a visible watermark and this tool can do nothing about it. If nothing shows, two possibilities remain: metadata, which a read reveals, or a pixel marking, which does not reveal itself.",
+            "That distinction saves time. Above all it stops you believing an image is clean while it still carries an intact mark."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Marking types and what this tool reaches",
+        "headers": [
+          "Type",
+          "Carrier",
+          "Removed"
+        ],
+        "rows": [
+          [
+            "EXIF, IPTC, XMP metadata",
+            "File",
+            "Yes"
+          ],
+          [
+            "C2PA manifest",
+            "File",
+            "Yes, on JPEG and PNG"
+          ],
+          [
+            "PNG text chunks",
+            "File",
+            "Yes"
+          ],
+          [
+            "Visible watermark",
+            "Pixels",
+            "No"
+          ],
+          [
+            "SynthID-style invisible watermark",
+            "Pixels",
+            "No"
+          ]
+        ]
+      },
+      "summary": "A watermark and a metadata field are two different things. A watermark, visible or not, lives in the pixels: this tool does not remove it. The C2PA provenance label, on the other hand, is metadata written into the file, and GhostMeta removes it from JPEG and PNG along with EXIF, IPTC, XMP and text chunks."
+    }
+  },
+  "ai-image-anonymizer": {
+    "fr": {
+      "sections": [
+        {
+          "h2": "Ce que « anonymiser » veut dire ici",
+          "p": [
+            "Anonymiser une image, au sens de cet outil, signifie retirer les données qui accompagnent le fichier et permettent de remonter à un appareil, un compte, un logiciel ou un moment précis. C’est un périmètre net, et il s’arrête au bord des pixels.",
+            "Ce qui est photographié n’est pas anonymisé : un visage reste un visage, une plaque reste lisible, un intérieur reste reconnaissable. Confondre les deux sens du mot conduit à publier une image qu’on croyait neutre."
+          ]
+        },
+        {
+          "h2": "Une méthode vérifiable, pas une promesse",
+          "p": [
+            "Le traitement se déroule dans l’onglet : l’image est décodée en mémoire, redessinée sur un canvas, puis réexportée. Un canvas ne transporte que des pixels, donc aucune couche de métadonnée ne survit à l’opération.",
+            "Vous pouvez le vérifier sans nous croire sur parole. Ouvrez l’onglet Réseau de votre navigateur pendant le nettoyage : aucune requête ne part avec le fichier. Relisez ensuite la copie nettoyée dans le lecteur pour constater les champs disparus."
+          ]
+        },
+        {
+          "h2": "Ce qui compte selon votre situation",
+          "p": [
+            "Le niveau d’exigence n’est pas le même pour tout le monde. Publier une photo de vacances sur un forum et transmettre une pièce à un dossier sensible n’appellent pas les mêmes précautions, même si l’opération technique est identique.",
+            "Si votre sécurité dépend du résultat, ne vous fiez pas au seul nettoyage de métadonnées : traitez aussi le contenu de l’image, le nom du fichier et le canal par lequel elle transite. Cet outil couvre une partie du problème, pas sa totalité."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "Ce que l’anonymisation couvre et ce qu’elle laisse",
+        "headers": [
+          "Élément",
+          "Couvert"
+        ],
+        "rows": [
+          [
+            "Identifiants d’appareil et numéros de série",
+            "Oui"
+          ],
+          [
+            "Position GPS et noms de lieux",
+            "Oui"
+          ],
+          [
+            "Horodatages de prise de vue et d’édition",
+            "Oui"
+          ],
+          [
+            "Prompt, graine, nom de modèle",
+            "Oui"
+          ],
+          [
+            "Manifeste de provenance C2PA",
+            "Oui, sur JPEG et PNG"
+          ],
+          [
+            "Visages, plaques, lieux reconnaissables",
+            "Non, ce sont des pixels"
+          ],
+          [
+            "Filigrane visible ou au niveau pixel",
+            "Non"
+          ]
+        ]
+      },
+      "summary": "Anonymiser signifie ici retirer ce qui accompagne le fichier et permet de remonter à un appareil, un compte, un logiciel ou un moment : EXIF, GPS, IPTC, XMP, chunks PNG, manifeste C2PA. Le périmètre s’arrête au bord des pixels : un visage reste un visage. Le traitement a lieu dans l’onglet, sans transmission."
+    },
+    "en": {
+      "sections": [
+        {
+          "h2": "What \"anonymise\" means here",
+          "p": [
+            "Anonymising an image, in this tool's sense, means removing the data travelling with the file that could lead back to a device, an account, a piece of software or a precise moment. That is a clear scope, and it stops at the edge of the pixels.",
+            "What was photographed is not anonymised: a face stays a face, a plate stays readable, an interior stays recognisable. Confusing the two senses of the word leads to publishing an image you believed was neutral."
+          ]
+        },
+        {
+          "h2": "A verifiable method, not a promise",
+          "p": [
+            "Processing happens inside the tab: the image is decoded in memory, redrawn onto a canvas, then exported again. A canvas carries pixels only, so no metadata layer survives the operation.",
+            "You can verify this without taking our word for it. Open your browser's Network tab during cleaning: no request leaves with the file. Then read the cleaned copy back in the viewer to see which fields are gone."
+          ]
+        },
+        {
+          "h2": "What matters depends on your situation",
+          "p": [
+            "The bar is not the same for everyone. Posting a holiday photo on a forum and submitting a document to a sensitive case do not call for the same care, even though the technical operation is identical.",
+            "If your safety depends on the outcome, do not rely on metadata cleaning alone: deal with the image content, the filename and the channel it travels through as well. This tool covers part of the problem, not all of it."
+          ]
+        }
+      ],
+      "table": {
+        "caption": "What anonymising covers and what it leaves",
+        "headers": [
+          "Item",
+          "Covered"
+        ],
+        "rows": [
+          [
+            "Device identifiers and serial numbers",
+            "Yes"
+          ],
+          [
+            "GPS position and place names",
+            "Yes"
+          ],
+          [
+            "Capture and editing timestamps",
+            "Yes"
+          ],
+          [
+            "Prompt, seed, model name",
+            "Yes"
+          ],
+          [
+            "C2PA provenance manifest",
+            "Yes, on JPEG and PNG"
+          ],
+          [
+            "Faces, plates, recognisable places",
+            "No, those are pixels"
+          ],
+          [
+            "Visible or pixel-level watermark",
+            "No"
+          ]
+        ]
+      },
+      "summary": "Anonymising here means removing what travels with the file and leads back to a device, an account, a piece of software or a moment: EXIF, GPS, IPTC, XMP, PNG chunks, C2PA manifest. The scope stops at the edge of the pixels — a face stays a face. Processing happens in the tab, with no transmission."
+    }
+  }
+}

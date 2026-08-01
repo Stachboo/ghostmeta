@@ -9,6 +9,7 @@ import Header from '@/components/Header';
 import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 import landingsData from '@/data/landings.json';
+import sectionsData from '@/data/landings-sections.json';
 import MetaIllustration from '@/components/MetaIllustration';
 
 // Choisit la variante d'illustration selon le sujet de la page.
@@ -44,6 +45,30 @@ interface Landing {
 
 const ALL: readonly Landing[] = landingsData as Landing[];
 
+interface LandingSection {
+  h2: string;
+  p: string[];
+}
+
+interface LandingTable {
+  caption: string;
+  headers: string[];
+  rows: string[][];
+}
+
+interface LandingExtra {
+  summary?: string;
+  sections: LandingSection[];
+  table?: LandingTable;
+}
+
+// Miroir exact du bot-content produit par scripts/prerender.mjs (landingSections).
+// Les deux rendus doivent afficher le meme texte : sinon, cloaking.
+const EXTRA = sectionsData as unknown as Record<
+  string,
+  Record<'fr' | 'en', LandingExtra> | undefined
+>;
+
 export default function ToolLanding() {
   const { slug } = useParams<{ slug: string }>();
   const { i18n } = useTranslation();
@@ -61,6 +86,7 @@ export default function ToolLanding() {
 
   const c = lang === 'en' ? landing.en : landing.fr;
   const otherLocale = lang === 'en' ? landing.fr : landing.en;
+  const extra = EXTRA[landing.slug]?.[lang];
   const { pathname } = useLocation();
   const seo = seoUrls(pathname);
   const locale = localeFromPath(pathname);
@@ -146,6 +172,14 @@ export default function ToolLanding() {
           </div>
 
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">{c.h1}</h1>
+
+          {/* Resume extractable : miroir du <p> place en tete du bot-content. */}
+          {extra?.summary && (
+            <p className="text-lg text-white/90 leading-relaxed mb-6 border-l-2 border-ghost-green/50 pl-4">
+              {extra.summary}
+            </p>
+          )}
+
           <p className="text-lg text-white/80 leading-relaxed mb-8">{c.intro}</p>
 
           <div className="flex flex-wrap items-center gap-3 mb-10">
@@ -181,6 +215,56 @@ export default function ToolLanding() {
 
           <MetaIllustration variant={illuVariant(landing)} />
         </section>
+
+        {extra && (
+          <section className="container max-w-4xl py-8 border-t border-white/10">
+            {extra.sections.map((s, i) => (
+              <div key={i} className="mb-10">
+                <h2 className="text-2xl font-bold mb-4">{s.h2}</h2>
+                {s.p.map((text, j) => (
+                  <p key={j} className="text-white/75 leading-relaxed mb-4">
+                    {text}
+                  </p>
+                ))}
+              </div>
+            ))}
+
+            {extra.table && (
+              /* overflow-x-auto : un tableau de 3 colonnes deborde sur mobile ;
+                 il doit defiler dans son cadre, jamais faire defiler la page. */
+              <div className="overflow-x-auto -mx-4 px-4">
+                <table className="w-full text-sm border-collapse min-w-[32rem]">
+                  <caption className="text-left text-white/50 text-xs mb-3">
+                    {extra.table.caption}
+                  </caption>
+                  <thead>
+                    <tr>
+                      {extra.table.headers.map((h, i) => (
+                        <th
+                          key={i}
+                          className="text-left font-semibold text-ghost-green border-b border-white/15 py-2 pr-4"
+                        >
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {extra.table.rows.map((row, i) => (
+                      <tr key={i} className="border-b border-white/5">
+                        {row.map((cell, j) => (
+                          <td key={j} className="py-2 pr-4 text-white/70 align-top">
+                            {cell}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
+        )}
 
         <section className="container max-w-4xl py-8 border-t border-white/10">
           <h2 className="text-2xl font-bold mb-8">{faqLabel}</h2>

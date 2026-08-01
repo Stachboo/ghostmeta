@@ -1,7 +1,7 @@
 /**
  * ToolsIndex — Page hub des landings /tools
  * ──────────────────────────────────────────
- * Liste les 13 outils de confidentialité image IA et distribue le maillage
+ * Liste les 18 outils de confidentialité image IA et distribue le maillage
  * interne vers chaque /tools/:slug (corrige les pages orphelines).
  * Le prerender génère dist/tools/index.html avec des <a> visibles aux crawlers ;
  * React retire #bot-content au mount.
@@ -45,8 +45,8 @@ export default function ToolsIndex() {
     ? "AI Image Privacy Tools — Strip C2PA, Metadata & Fingerprints"
     : "Outils confidentialité image IA — Strip C2PA, métadonnées & empreintes";
   const description = isEn
-    ? "13 free in-browser tools to remove C2PA Content Credentials, EXIF/GPS and AI fingerprints from Sora, Midjourney, DALL-E, ChatGPT, Firefly, Flux and more. No upload, no signup."
-    : "13 outils gratuits en navigateur pour retirer les Content Credentials C2PA, l'EXIF/GPS et les empreintes IA de Sora, Midjourney, DALL-E, ChatGPT, Firefly, Flux et plus. Sans upload.";
+    ? "18 free in-browser tools to remove C2PA Content Credentials, EXIF/GPS and AI fingerprints from Sora, Midjourney, DALL-E, ChatGPT, Firefly, Flux and more. No upload, no signup."
+    : "18 outils gratuits en navigateur pour retirer les Content Credentials C2PA, l'EXIF/GPS et les empreintes IA de Sora, Midjourney, DALL-E, ChatGPT, Firefly, Flux et plus. Sans upload.";
 
   return (
     <div className="min-h-screen bg-ghost-dark text-foreground font-sans">
