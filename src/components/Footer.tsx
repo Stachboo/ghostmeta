@@ -146,7 +146,9 @@ export default function Footer() {
               />
               <img
                 src="/partners/me-expert-serrurier-320x100.png"
-                alt="Serrurier en Avignon 24h/24 — M.E Expert Serrurier — 06 24 30 97 13"
+                /* Sur une image liée, l'alt EST le texte d'ancre pour Google :
+                   il reste la marque seule, sans service/ville/téléphone. */
+                alt="M.E Expert Serrurier"
                 loading="lazy"
                 decoding="async"
                 /* hauteurs figées par breakpoint : réserve la place, évite le CLS */

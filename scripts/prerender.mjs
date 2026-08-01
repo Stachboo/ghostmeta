@@ -57,18 +57,25 @@ const crawlNav = (lang) => {
 
 /**
  * Bannière partenaire (M.E Expert Serrurier) en version crawlable.
- * Miroir exact du lien rendu par React dans <Footer> — même URL, même alt —
+ * Miroir exact du lien rendu par React dans <Footer> — même URL, même ancre —
  * pour que les crawlers sans JS le voient : sinon le lien n'existe que dans
  * l'arbre React et n'apparaît dans AUCUN des HTML prérendus (vérifié : #root
  * est vide dans dist/).
  * dofollow assumé : lien éditorial non payant, donc pas de rel nofollow/sponsored.
+ *
+ * L'ancre est la MARQUE SEULE. L'ancienne version reprenait le service, la ville,
+ * « 24h/24 » et le numéro de téléphone : dans la Search Console du site partenaire,
+ * cette chaîne était devenue le texte de lien n°1 de tout son profil. Une ancre
+ * exact-match depuis un site hors thématique, dans un bloc masqué, c'est
+ * l'empreinte d'un lien manipulé — le descriptif appartient à la page de
+ * destination, pas à l'ancre.
  */
 const partnerLink = (lang) => {
   const label = lang === 'en' ? 'Partner' : 'Partenaire';
-  const alt = 'Serrurier en Avignon 24h/24 — M.E Expert Serrurier — 06 24 30 97 13';
+  const anchor = 'M.E Expert Serrurier';
   const href =
     'https://me-expert-serrurier.com/?utm_source=ghostmeta&utm_medium=banner&utm_campaign=partenaires-2026';
-  return `<p>${label} : <a href="${escHtml(href)}" target="_blank" rel="noopener">${escHtml(alt)}</a></p>`;
+  return `<p>${label} : <a href="${escHtml(href)}" target="_blank" rel="noopener">${escHtml(anchor)}</a></p>`;
 };
 const relFor = (lang, base) => {
   const p = LP(lang, base);
