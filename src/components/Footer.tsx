@@ -123,12 +123,16 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bannière partenaire — M.E Expert Serrurier (Avignon).
-            Lien éditorial volontaire, non payant : pas de rel="nofollow"/"sponsored",
-            donc dofollow. Si l'emplacement devenait payant un jour, la règle Google
+        {/* Bannières partenaires — M.E Expert Serrurier (Avignon), MCF Agency
+            (Pernes-les-Fontaines) et A'dvenir Eco (Le Pontet).
+            Liens éditoriaux volontaires, non payants : pas de rel="nofollow"/"sponsored",
+            donc dofollow. Si un emplacement devenait payant un jour, la règle Google
             impose d'ajouter rel="sponsored". `noopener` est une protection navigateur
             et n'a aucun effet SEO.
-            <picture> plutôt que deux <img> masqués : un seul fichier est téléchargé. */}
+            <picture> plutôt que deux <img> masqués : un seul fichier est téléchargé.
+            Les trois blocs sont volontairement identiques dans leur technique ; seuls
+            l'URL, le fichier et l'alt changent. Toute modification doit être répercutée
+            à l'identique dans le miroir crawlable de scripts/prerender.mjs. */}
         <div className="flex flex-col items-center gap-2 pt-6 border-t border-border/20">
           <span className="text-[0.65rem] uppercase tracking-wider text-white/40">
             {t('footer.partner_label')}
@@ -152,6 +156,42 @@ export default function Footer() {
                 loading="lazy"
                 decoding="async"
                 /* hauteurs figées par breakpoint : réserve la place, évite le CLS */
+                className="h-[100px] w-auto max-w-full sm:h-[90px]"
+              />
+            </picture>
+          </a>
+
+          <a
+            href="https://mcf-agency.fr/formations?utm_source=ghostmeta&utm_medium=banner&utm_campaign=partenaires-2026"
+            target="_blank"
+            rel="noopener"
+            className="inline-block rounded-md overflow-hidden opacity-90 hover:opacity-100 transition-opacity"
+          >
+            <picture>
+              <source media="(min-width: 640px)" srcSet="/partners/mcf-agency-728x90.png" />
+              <img
+                src="/partners/mcf-agency-320x100.png"
+                alt="MCF Agency"
+                loading="lazy"
+                decoding="async"
+                className="h-[100px] w-auto max-w-full sm:h-[90px]"
+              />
+            </picture>
+          </a>
+
+          <a
+            href="https://advenireco.fr/simulateur/?utm_source=ghostmeta&utm_medium=banner&utm_campaign=partenaires-2026"
+            target="_blank"
+            rel="noopener"
+            className="inline-block rounded-md overflow-hidden opacity-90 hover:opacity-100 transition-opacity"
+          >
+            <picture>
+              <source media="(min-width: 640px)" srcSet="/partners/advenir-eco-728x90.png" />
+              <img
+                src="/partners/advenir-eco-320x100.png"
+                alt="A'dvenir Eco"
+                loading="lazy"
+                decoding="async"
                 className="h-[100px] w-auto max-w-full sm:h-[90px]"
               />
             </picture>

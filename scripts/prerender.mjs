@@ -95,12 +95,27 @@ const crawlNav = (lang) => {
  * l'empreinte d'un lien manipulé — le descriptif appartient à la page de
  * destination, pas à l'ancre.
  */
+/**
+ * Cibles choisies page par page, et non toutes vers l'accueil : la valeur d'un
+ * lien se compte par domaine référent, pas par lien, donc ce pied de page ne
+ * vaut qu'un vote quelle que soit la page. Autant le poser là où il sert, et
+ * viser une autre page depuis stabilityprotocol.space pour couvrir deux cibles.
+ * DOIT rester le miroir exact des href de src/components/Footer.tsx.
+ */
+const PARTNERS = [
+  ['M.E Expert Serrurier', 'https://me-expert-serrurier.com/'],
+  ['MCF Agency', 'https://mcf-agency.fr/formations'],
+  ["A'dvenir Eco", 'https://advenireco.fr/simulateur/'],
+];
+
 const partnerLink = (lang) => {
-  const label = lang === 'en' ? 'Partner' : 'Partenaire';
-  const anchor = 'M.E Expert Serrurier';
-  const href =
-    'https://me-expert-serrurier.com/?utm_source=ghostmeta&utm_medium=banner&utm_campaign=partenaires-2026';
-  return `<p>${label} : <a href="${escHtml(href)}" target="_blank" rel="noopener">${escHtml(anchor)}</a></p>`;
+  const label = lang === 'en' ? 'Partners' : 'Partenaires';
+  const utm = '?utm_source=ghostmeta&utm_medium=banner&utm_campaign=partenaires-2026';
+  const links = PARTNERS.map(
+    ([anchor, url]) =>
+      `<a href="${escHtml(url + utm)}" target="_blank" rel="noopener">${escHtml(anchor)}</a>`
+  ).join(' · ');
+  return `<p>${label} : ${links}</p>`;
 };
 const relFor = (lang, base) => {
   const p = LP(lang, base);
