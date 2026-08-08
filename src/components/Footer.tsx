@@ -8,6 +8,8 @@
 import LocaleLink from '@/components/LocaleLink';
 import GhostLogo from './GhostLogo';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
+import { basePath } from '@/lib/locale';
 import landingsData from '@/data/landings.json';
 
 type FooterTool = { slug: string; en: { h1: string }; fr: { h1: string } };
@@ -16,6 +18,14 @@ const TOOLS = landingsData as unknown as FooterTool[];
 export default function Footer() {
   const { t, i18n } = useTranslation();
   const lang: 'en' | 'fr' = i18n.language === 'en' ? 'en' : 'fr';
+
+  // Les bannières partenaires ne vivent que sur l'accueil, FR et EN. Les
+  // afficher sur les 57 pages n'ajoutait rien : la valeur d'un lien se compte
+  // par domaine référent, pas par page. Cette condition doit rester le miroir
+  // de celle de scripts/prerender.mjs, sinon le rendu et le HTML prérendu
+  // divergeraient, ce qui serait du cloaking.
+  const { pathname } = useLocation();
+  const estAccueil = basePath(pathname) === '/';
 
   return (
     <footer className="border-t border-border/30 mt-20 py-8">
@@ -132,7 +142,9 @@ export default function Footer() {
             <picture> plutôt que deux <img> masqués : un seul fichier est téléchargé.
             Les trois blocs sont volontairement identiques dans leur technique ; seuls
             l'URL, le fichier et l'alt changent. Toute modification doit être répercutée
-            à l'identique dans le miroir crawlable de scripts/prerender.mjs. */}
+            à l'identique dans le miroir crawlable de scripts/prerender.mjs.
+            Affichées sur l'accueil uniquement. */}
+        {estAccueil && (
         <div className="flex flex-col items-center gap-2 pt-6 border-t border-border/20">
           <span className="text-[0.65rem] uppercase tracking-wider text-white/40">
             {t('footer.partner_label')}
@@ -197,6 +209,7 @@ export default function Footer() {
             </picture>
           </a>
         </div>
+        )}
 
         {/* Barre copyright */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 mt-6 border-t border-border/20">

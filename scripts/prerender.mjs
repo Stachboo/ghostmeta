@@ -71,13 +71,13 @@ const urlFor = (lang, base) => `${ORIGIN}${LP(lang, base)}`;
  * Ces liens sont cachés (bot-content display:none, retiré par React au mount) et
  * mirrorent la nav/footer React que voient les utilisateurs → pas de cloaking.
  */
-const crawlNav = (lang) => {
+const crawlNav = (lang, base = '/') => {
   const items =
     lang === 'en'
       ? [['/', 'Home'], ['/tools', 'AI image privacy tools'], ['/blog', 'Blog'], ['/securite', 'Security'], ['/pricing', 'Pricing']]
       : [['/', 'Accueil'], ['/tools', 'Outils confidentialité image IA'], ['/blog', 'Blog'], ['/securite', 'Sécurité'], ['/pricing', 'Tarifs']];
-  const links = items.map(([base, label]) => `<a href="${LP(lang, base)}">${escHtml(label)}</a>`).join(' · ');
-  return `<nav aria-label="${lang === 'en' ? 'Site navigation' : 'Plan du site'}">${links}</nav>\n${partnerLink(lang)}`;
+  const links = items.map(([b, label]) => `<a href="${LP(lang, b)}">${escHtml(label)}</a>`).join(' · ');
+  return `<nav aria-label="${lang === 'en' ? 'Site navigation' : 'Plan du site'}">${links}</nav>\n${partnerLink(lang, base)}`;
 };
 
 /**
@@ -108,7 +108,11 @@ const PARTNERS = [
   ["A'dvenir Eco", 'https://advenireco.fr/simulateur/'],
 ];
 
-const partnerLink = (lang) => {
+const partnerLink = (lang, base = '/') => {
+  // Accueil uniquement, FR et EN. Miroir exact de la condition estAccueil dans
+  // src/components/Footer.tsx : toute divergence entre le rendu utilisateur et
+  // le HTML prérendu serait du cloaking.
+  if (base !== '/') return '';
   const label = lang === 'en' ? 'Partners' : 'Partenaires';
   const utm = '?utm_source=ghostmeta&utm_medium=banner&utm_campaign=partenaires-2026';
   const links = PARTNERS.map(
@@ -163,7 +167,7 @@ function buildHtml(lang, base, { title, description, ogType = 'website', bodyCon
   html = html.replace('</head>', `  ${seoHead}${jsonLdTag}\n</head>`);
 
   if (bodyContent) {
-    const botDiv = `<div id="bot-content" style="display:none">${bodyContent}\n${crawlNav(lang)}</div>\n  `;
+    const botDiv = `<div id="bot-content" style="display:none">${bodyContent}\n${crawlNav(lang, base)}</div>\n  `;
     html = html.replace('<div id="root">', botDiv + '<div id="root">');
   }
   return html;
